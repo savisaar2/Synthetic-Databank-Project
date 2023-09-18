@@ -15,7 +15,7 @@ To set up this application, follow these simple steps:
 
 2. Navigate to the project directory:
     ```bash
-    cd unisa_capstone_project
+    cd official-capstone-group-a
 
 3. Install the required python modules using pip:
     ```bash
