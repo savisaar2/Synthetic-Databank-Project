@@ -1,0 +1,9 @@
+controllers/__pycache__
+datastore/__pycache__
+models/__pycache__
+share/__pycache__
+tests/__pycache__
+views/__pycache__
+utils/__pycache__
+.vscode/
+.DS_Store
