@@ -1,4 +1,4 @@
-# UniSA Capstone Project: Dataset Generation Application
+# UniSA Capstone Project: Synthetic Databank Application
 
 ## Overview
 
