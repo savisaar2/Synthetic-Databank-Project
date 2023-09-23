@@ -1,0 +1,22 @@
+{
+    "Airline Customer Holiday Booking Dataset": {
+        "Source": "https://www.kaggle.com/datasets/",
+        "Description": "Unveiling Customer Preferences and Booking Patterns in the Airline Holiday Indus"
+    },
+    "Australia - Census data 2021": {
+        "Source": "https://abs.gov.au",
+        "Description": "Census information Australia wide - 2023"
+    },
+    "Bitcoin Blockchain Historical Price Data 2011 to 2023": {
+        "Source": "https://www.bitcoin.com",
+        "Description": "Bitcoin is a protocol which implements a public, permanent, and decentralized ledger. Bitcoin transactions are verified by network nodes through cryptography and recorded."
+    },
+    "COVID 19 - data - 2022": {
+        "Source": "https://abs.gov.au",
+        "Description": "COVID 19 infections, vaccinations by state - 2022"
+    },
+    "Wheat Data of Last 12 Years in Punjab Pakistan": {
+        "Source": "https://www.kaggle.com/datasets/mhaiderali37/wheat-data-of-last-12-years-in-punjab-pakistan",
+        "Description": "Data sheet has simple and refined dataset of wheat crop from Punjab, Pakistan. Anyone can analyse it for future predictions of acreage, production and yield of crop in this region. Moreover, you can compare the average yield of wheat crop with other regions."
+    }
+}
