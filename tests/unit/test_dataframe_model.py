@@ -1,7 +1,8 @@
 import pytest
 import pandas as pd
-from models.dataframe import DataFrameModel 
-
+import sys
+sys.path.append('../../')
+from models.dataframe import DataFrameModel
 
 @pytest.fixture
 def empty_dataframe_model():
