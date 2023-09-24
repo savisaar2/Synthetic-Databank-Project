@@ -69,19 +69,18 @@ class DataFrameModel:
         column = self._snapshots[0]["data_frame"].iloc[:,column]
         return column
     
-    def get_column_datatype(self, column: int):
+    def get_column_datatype(self, column_index):
         """Method to obtain the datatype of a defined column in the 
         current dataframe.
 
         Args:
-            column (int): Column index position.
+            column_index (int): Column index position.
 
         Returns:
             dtype: Datatype of defined column in current dataframe.
         """
-        column = self.get_column_data(column)
-        data_type = column.dtypes
-        return data_type
+        column_data_type = self.get_column_data(column_index)
+        return column_data_type.dtypes
 
     def rollback(self, index: int):
         """Method to move a user defined dataset at specifed index within
@@ -102,8 +101,8 @@ class DataFrameModel:
         Returns:
            dataFrame: A dataframe with a specified row range.
         """
-        columns = self._snapshots[0]["data_frame"].iloc[start_row:end_row]
-        return columns
+        df = self._snapshots[0]["data_frame"].iloc[start_row:end_row]
+        return df
 
     def get_df_row_count(self) -> int:
         """Method to obtain number of rows in the current dataset.
