@@ -24,6 +24,9 @@ class View:
         self.root = Root()
         self.frames = {}
 
+        # Hide root during page rendering.
+        self.root.withdraw()
+
         # Add our pages into self.frames.
         self._add_frame(AccountsView, "accounts")
         self._add_frame(AnalyseView, "analyse")
@@ -41,6 +44,9 @@ class View:
         self._add_frame(AccountEditorView, "accounts_editor")
 
         self.current_view = None
+
+        # Display application after rendering completed.
+        self.root.deiconify()
 
     def _add_frame(self, view_class, name):
         """
