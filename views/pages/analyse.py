@@ -120,6 +120,27 @@ class AnalyseView(BaseView):
         self.pivot_round_value_label = CTkLabel(self.po_frame_col1_row1, text="Rounding:", anchor="w")
         self.pivot_round_value_input = CTkEntry(self.po_frame_col1_row1, corner_radius=5, width=50)
 
+        # Pivot table
+        self.pt_frame = CTkFrame(self.parent_frame, fg_color="transparent", height=55)
+        self.pt_frame.pack(side="top", fill="both", pady=(0, 0), padx=20, expand=True)
+        self.pt_table_frame = CTkFrame(self.pt_frame)
+        self.pt_table_frame.pack(side="left", fill="both")
+        self.pivot_table = self.build_table(self.pt_table_frame, ("Categories", "------"), 1)
+        
+        self.pivot_table_y_scroll = CTkScrollbar(
+            self.pt_table_frame, orientation="vertical", height=59, fg_color="gray30", command=self.pivot_table.yview
+            )
+        self.pivot_table_y_scroll.pack(side="right")
+        self.pivot_table.configure(yscrollcommand=self.pivot_table_y_scroll.set)
+        
+        self.pivot_table.pack(side="top", fill="x", expand=True)
+        self.pt_button_frame = CTkFrame(self.pt_frame, fg_color="transparent")
+        self.pt_button_frame.pack(side="right", fill="both")
+        self.pivot_button = CTkButton(
+            self.pt_button_frame, text="Pivot", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
+            )
+        self.pivot_button.pack(side="right", padx=(8, 8))
+
     def build_table(self, root, tuple_of_col_names, height, width=None): 
         """Build a table of data for either pivot summary or for raw data view. 
         To be used specificially for treeview widget with horizontal and or vertical scrollbar. 
