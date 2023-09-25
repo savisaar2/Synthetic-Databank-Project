@@ -171,6 +171,15 @@ class AnalyseView(BaseView):
         self.tt_frame.pack(side="top", fill="both", expand=True, padx=20, pady=(0, 20))
         self.raw_table = ttk.Treeview(self.tt_frame) # stub
 
+    def refresh_analyse_widgets(self, column_headers):
+        """_summary_
+
+        Args:
+            column_headers (_type_): _description_
+        """
+        ...
+        
+
     def build_table(self, root, tuple_of_col_names, height, width=None): 
         """Build a table of data for either pivot summary or for raw data view. 
         To be used specificially for treeview widget with horizontal and or vertical scrollbar. 
