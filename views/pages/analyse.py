@@ -92,6 +92,34 @@ class AnalyseView(BaseView):
         )
         self.basic_summary_tree_view.pack(side="bottom", fill="both", pady=(0, 10), expand=True)
 
+        # Pivot options
+        self.po_frame_col1_row1 = CTkFrame(self.parent_frame, fg_color="transparent")
+        self.po_frame_col1_row1.pack(side="top", fill="x", pady=(0, 20), padx=20)
+        self.categories_label = CTkLabel(self.po_frame_col1_row1, text="Categories:", anchor="w")
+        self.categories_label.pack(side="left", expand=False, padx=(8, 0))        
+        self.categories_option_menu = CTkOptionMenu(
+            self.po_frame_col1_row1, fg_color="gray10", width=3, values=("------",), 
+            command=lambda option: self.reconfig_widgets(option, "categories")
+            )
+        self.categories_option_menu.pack(side="left", padx=(8, 0))
+        self.values_label = CTkLabel(self.po_frame_col1_row1, text="Values:", anchor="w")
+        self.values_label.pack(side="left", expand=False, padx=(8, 0))        
+        self.values_option_menu = CTkOptionMenu(
+            self.po_frame_col1_row1, fg_color="gray10", width=3, values=("------",), state="disabled", 
+            command=lambda option: self.reconfig_widgets(option, "values")
+            )
+        self.values_option_menu.pack(side="left", padx=(8, 0))
+        self.agg_func_list = [
+            "------", "count", "min", "max", "mean", "median", "mode", "sum", "std", "var"
+            ]
+        self.aggregate_function_label = CTkLabel(self.po_frame_col1_row1, text="Aggregate:", anchor="w")
+        self.aggfunc_option_menu = CTkOptionMenu(
+            self.po_frame_col1_row1, fg_color="gray10", width=3, values=self.agg_func_list, state="disabled", 
+            command=lambda option: self.reconfig_widgets(option, "aggfunc")
+            )
+        self.pivot_round_value_label = CTkLabel(self.po_frame_col1_row1, text="Rounding:", anchor="w")
+        self.pivot_round_value_input = CTkEntry(self.po_frame_col1_row1, corner_radius=5, width=50)
+
     def build_table(self, root, tuple_of_col_names, height, width=None): 
         """Build a table of data for either pivot summary or for raw data view. 
         To be used specificially for treeview widget with horizontal and or vertical scrollbar. 
@@ -118,7 +146,7 @@ class AnalyseView(BaseView):
         return table
 
     def reconfig_widgets(self, option, option_set): 
-        """Toggle (disable or enable) the appropriate button based on whether a valid option is selected.
+        """Toggle (disable or enable) the appropriate widget based on predefined conditions.
 
         Args:
             option (str): selected item of an options menu
