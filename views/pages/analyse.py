@@ -42,17 +42,17 @@ class AnalyseView(BaseView):
         self.variable_a_label = CTkLabel(self.v_frame, text="Variable:", anchor="w")
         self.variable_a_label.pack(side="left", padx=(8, 0))
         self.variable_a_option_menu = CTkOptionMenu(
-            self.v_frame, fg_color="gray10", width=3, state="disabled", values=("------",), 
+            self.v_frame, fg_color="gray10", width=3, state="normal", values=("------",), 
             command=lambda option: self.reconfig_widgets(option, "var_a")
             )
         self.variable_a_option_menu.pack(side="left", padx=(8, 0))
         self.variable_b_label = CTkLabel(self.v_frame, text="Variable:", anchor="w")
         self.variable_b_option_menu = CTkOptionMenu(
-            self.v_frame, fg_color="gray10", width=3, state="disabled", values=("------",), 
+            self.v_frame, fg_color="gray10", width=3, state="normal", values=("------",), 
             command=lambda option: self.reconfig_widgets(option, "var_b")
             )
         self.plot_button = CTkButton(
-            self.v_frame, text="Plot", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
+            self.v_frame, text="Plot", corner_radius=5, border_spacing=5, anchor="center", state="normal"
             )
         self.plot_button.pack(side="right", padx=(8, 8))
 
@@ -68,14 +68,14 @@ class AnalyseView(BaseView):
         self.summary_option_menu.pack(side="left", padx=(8, 0))
         self.summary_round_value_label = CTkLabel(self.so_frame, text="Rounding:", anchor="w")
         self.summary_round_value_label.pack(side="left", expand=False, padx=(8, 0))
-        self.summary_round_value_input = CTkEntry(self.so_frame, corner_radius=5, width=50, state="disabled")
+        self.summary_round_value_input = CTkEntry(self.so_frame, corner_radius=5, width=50, state="normal")
         self.summary_round_value_input.pack(side="left", padx=(5, 0))
         self.null_value_label = CTkLabel(self.so_frame, text="Null Value:", anchor="w")
         self.null_value_label.pack(side="left", expand=False, padx=(8, 0))        
-        self.null_value_input = CTkEntry(self.so_frame, corner_radius=5, width=50, state="disabled")
+        self.null_value_input = CTkEntry(self.so_frame, corner_radius=5, width=50, state="normal")
         self.null_value_input.pack(side="left", padx=(5, 0))
         self.summarise_button = CTkButton(
-            self.so_frame, text="Summarise", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
+            self.so_frame, text="Summarise", corner_radius=5, border_spacing=5, anchor="center", state="normal"
             )
         self.summarise_button.pack(side="right", padx=(8, 8))
 
@@ -105,7 +105,7 @@ class AnalyseView(BaseView):
         self.values_label = CTkLabel(self.po_frame_col1_row1, text="Values:", anchor="w")
         self.values_label.pack(side="left", expand=False, padx=(8, 0))        
         self.values_option_menu = CTkOptionMenu(
-            self.po_frame_col1_row1, fg_color="gray10", width=3, values=("------",), state="disabled", 
+            self.po_frame_col1_row1, fg_color="gray10", width=3, values=("------",), state="normal", 
             command=lambda option: self.reconfig_widgets(option, "values")
             )
         self.values_option_menu.pack(side="left", padx=(8, 0))
@@ -114,11 +114,16 @@ class AnalyseView(BaseView):
             ]
         self.aggregate_function_label = CTkLabel(self.po_frame_col1_row1, text="Aggregate:", anchor="w")
         self.aggfunc_option_menu = CTkOptionMenu(
-            self.po_frame_col1_row1, fg_color="gray10", width=3, values=self.agg_func_list, state="disabled", 
+            self.po_frame_col1_row1, fg_color="gray10", width=3, values=self.agg_func_list, state="normal", 
             command=lambda option: self.reconfig_widgets(option, "aggfunc")
             )
+        self.aggregate_function_label.pack(side="left", padx=(8, 8))
+        self.aggfunc_option_menu.pack(side="left", padx=(8, 0))
+
         self.pivot_round_value_label = CTkLabel(self.po_frame_col1_row1, text="Rounding:", anchor="w")
+        self.pivot_round_value_label.pack(side="left", padx=(8, 0))
         self.pivot_round_value_input = CTkEntry(self.po_frame_col1_row1, corner_radius=5, width=50)
+        self.pivot_round_value_input.pack(side="left", padx=(8, 0))
 
         # Pivot table
         self.pt_frame = CTkFrame(self.parent_frame, fg_color="transparent", height=55)
@@ -137,7 +142,7 @@ class AnalyseView(BaseView):
         self.pt_button_frame = CTkFrame(self.pt_frame, fg_color="transparent")
         self.pt_button_frame.pack(side="right", fill="both")
         self.pivot_button = CTkButton(
-            self.pt_button_frame, text="Pivot", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
+            self.pt_button_frame, text="Pivot", corner_radius=5, border_spacing=5, anchor="center", state="normal"
             )
         self.pivot_button.pack(side="right", padx=(8, 8))
 
