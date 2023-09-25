@@ -141,6 +141,31 @@ class AnalyseView(BaseView):
             )
         self.pivot_button.pack(side="right", padx=(8, 8))
 
+        # Tabulate options
+        self.to_frame = CTkFrame(self.table_frame, fg_color="transparent")
+        self.to_frame.pack(fill="x", pady=(20, 10), padx=20)
+        self.row_count_label = CTkLabel(self.to_frame, text="Row Count:", anchor="w")
+        self.row_count_label.pack(side="left", expand=False, padx=(8, 0))
+        self.row_count_value_label = CTkLabel(self.to_frame, text="", anchor="w")
+        self.row_count_value_label.pack(side="left", expand=False, padx=(8, 0))
+        self.tabulate_button = CTkButton(
+            self.to_frame, text="Tabulate", corner_radius=5, border_spacing=5, anchor="center"
+            )
+        self.tabulate_button.pack(side="right", padx=(8, 8))
+        self.end_row_input = CTkEntry(self.to_frame, corner_radius=5, width=50)
+        self.end_row_input.pack(side="right", padx=(5, 0))
+        self.end_row_label = CTkLabel(self.to_frame, text="End Row:", anchor="w")
+        self.end_row_label.pack(side="right", expand=False, padx=(8, 0))
+        self.start_row_input = CTkEntry(self.to_frame, corner_radius=5, width=50)
+        self.start_row_input.pack(side="right", padx=(5, 0))
+        self.start_row_label = CTkLabel(self.to_frame, text="Start Row:", anchor="w")
+        self.start_row_label.pack(side="right", expand=False, padx=(8, 0))
+
+        # Tabulate table
+        self.tt_frame = CTkFrame(self.table_frame, fg_color="gray10", height=30)
+        self.tt_frame.pack(side="top", fill="both", expand=True, padx=20, pady=(0, 20))
+        self.raw_table = ttk.Treeview(self.tt_frame) # stub
+
     def build_table(self, root, tuple_of_col_names, height, width=None): 
         """Build a table of data for either pivot summary or for raw data view. 
         To be used specificially for treeview widget with horizontal and or vertical scrollbar. 
