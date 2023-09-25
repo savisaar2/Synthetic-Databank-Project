@@ -20,4 +20,14 @@ class LibraryView(BaseView):
 
     def _render_page(self):
         """Renders widgets on the LibraryView page."""
-        pass
+        content_frame = self._create_frame(parent_frame=self, padx=20, pady=(0, 20))
+        
+        row_1 = self._create_frame(parent_frame=content_frame)
+        row_2 = self._create_frame(parent_frame=content_frame)
+        row_3 = self._create_frame(parent_frame=content_frame)
+        row_4 = self._create_frame(parent_frame=content_frame)
+
+    def _create_frame(self, parent_frame, padx=0, pady=0):
+        frame = CTkFrame(parent_frame)
+        frame.pack(fill="x", padx=padx, pady=pady)
+        return frame
