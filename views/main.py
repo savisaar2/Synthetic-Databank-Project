@@ -25,13 +25,15 @@ class View:
         self.frames = {}
 
         # Add our pages into self.frames.
-        self._add_frame(LibraryView, "library")
         self._add_frame(AccountsView, "accounts")
         self._add_frame(AnalyseView, "analyse")
         self._add_frame(ManipulateView, "manipulate")
         self._add_frame(MenuView, "menu")
         self._add_frame(SampleView, "sample")
         self._add_frame(SaveView, "save")
+        self._add_frame(LibraryView, "library") # Last rendered sits on top of stack.
+
+        # Add our overlays into self.frames.
         self._add_frame(LoginView, "login")
         self._add_frame(ImportView, "import")
         self._add_frame(ChangePwView, "change_password")
