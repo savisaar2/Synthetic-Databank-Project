@@ -60,8 +60,31 @@ class AnalyseView(BaseView):
             )
         self.plot_button.pack(side="right", padx=(8, 8))
 
+        # Summary options
+        self.so_frame = CTkFrame(self.parent_frame, fg_color="transparent")
+        self.so_frame.pack(fill="x", pady=(20, 20), padx=20)
+        self.summary_label = CTkLabel(self.so_frame, text="Summarise:", anchor="w")
+        self.summary_label.pack(side="left", expand=False, padx=(8, 0))        
+        self.summary_option_menu = CTkOptionMenu(
+            self.so_frame, fg_color="gray10", width=3, values=("------",),
+            command=lambda option: self.reconfig_widgets(option, "summarise")
+            )
+        self.summary_option_menu.pack(side="left", padx=(8, 0))
+        self.summary_round_value_label = CTkLabel(self.so_frame, text="Rounding:", anchor="w")
+        self.summary_round_value_label.pack(side="left", expand=False, padx=(8, 0))
+        self.summary_round_value_input = CTkEntry(self.so_frame, corner_radius=5, width=50, state="disabled")
+        self.summary_round_value_input.pack(side="left", padx=(5, 0))
+        self.null_value_label = CTkLabel(self.so_frame, text="Null Value:", anchor="w")
+        self.null_value_label.pack(side="left", expand=False, padx=(8, 0))        
+        self.null_value_input = CTkEntry(self.so_frame, corner_radius=5, width=50, state="disabled")
+        self.null_value_input.pack(side="left", padx=(5, 0))
+        self.summarise_button = CTkButton(
+            self.so_frame, text="Summarise", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
+            )
+        self.summarise_button.pack(side="right", padx=(8, 8))
+
     def reconfig_widgets(self, option, option_set): 
-        """Tottle (disable or enable) the appropriate button based on whether a valid option is selected.
+        """Toggle (disable or enable) the appropriate button based on whether a valid option is selected.
 
         Args:
             option (str): selected item of an options menu
