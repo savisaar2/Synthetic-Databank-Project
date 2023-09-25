@@ -1,26 +1,26 @@
 import pytest
 import pandas as pd
-from models.dataframe import DataFrameModel
+from models.dataset import DatasetModel
 
 @pytest.fixture
 def empty_dataframe_model():
-    return DataFrameModel()
+    return DatasetModel()
 
 @pytest.fixture
 def empty_dataframe_model_dup():
-    return DataFrameModel()
+    return DatasetModel()
 
 # Test to check singleton pattern for dataframe model object.
 def test_singleton(empty_dataframe_model, empty_dataframe_model_dup):
     assert empty_dataframe_model == empty_dataframe_model_dup
 
 # Test to create an empty dataframe.
-def test_new_dataframe(empty_dataframe_model):
+def test_new_dataset(empty_dataframe_model):
     empty_dataframe_model.new_dataframe('file_path', 'dataset_name')
     assert len(empty_dataframe_model._snapshots) == 1
 
 # Test to load data from datastore csv file.
-def test_load_dataframe(empty_dataframe_model):
+def test_load_dataset(empty_dataframe_model):
     empty_dataframe_model.load_dataframe('db/databank/breast-cancer.csv', 'test_dataset')
     assert len(empty_dataframe_model._snapshots) == 1
     assert empty_dataframe_model._snapshots[0]["df_file_path"] == 'db/databank/breast-cancer.csv'

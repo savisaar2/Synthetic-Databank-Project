@@ -1,11 +1,11 @@
 import pandas as pd
 
-class DataFrameModel:
-    """Singleton. Working collection of Pandas dataframes, i.e. either new or loaded dataset
-    that will be manipulated / configured prior to saving or exporting to CSV file.
+class DatasetModel:
+    """Singleton. Working collection of datasets. _SNAPSHOTS is a list of dictionaries with keys representing 
+    information about the dataset that will be manipulated / configured prior to saving or exporting to CSV file. 
 
-    SNAPSHOTS: Important data structure / collection holding dataframes for both analysis, manipulation and 
-    rollback functionality. Each pandas dataframe is embedded in a dictionary with the keys as shown below.
+    Pandas dataframe will hold in memory the actual loaded dataset from disk. This object is to be stored under
+    the "Dataframe" key of each dictionary. Structure as follows:
 
     SNAPSHOTS is a [
         {
@@ -34,7 +34,7 @@ class DataFrameModel:
 
     def __new__(cls):
         if cls._instance is None:
-            cls._instance = super(DataFrameModel, cls).__new__(cls)
+            cls._instance = super(DatasetModel, cls).__new__(cls)
             cls._instance._SNAPSHOTS = []
         return cls._instance
         
@@ -51,7 +51,7 @@ class DataFrameModel:
             "Dataframe": pd.DataFrame()
             }
         )
-        print("New dataframe:", self._SNAPSHOTS[-1])
+        print("New dataset:", self._SNAPSHOTS[-1])
 
     def load_dataset(self, file_path, dataset_name):
         """Loads a csv file stored in the databank into memory i.e. _SNAPSHOTS list.
@@ -103,13 +103,13 @@ class DataFrameModel:
     
     def get_column_datatype(self, column_index):
         """Method to obtain the datatype of a defined column in the 
-        current dataframe.
+        current dataset's dataframe object.
 
         Args:
             column_index (int): Column index position.
 
         Returns:
-            dtype: Datatype of defined column in current dataframe.
+            dtype: Datatype of defined column in current dataset's dataframe.
         """
         column_data_type = self.get_column_data(column_index)
         return column_data_type.dtypes

@@ -1,4 +1,4 @@
-from models.dataframe import DataFrameModel
+from models.dataset import DatasetModel
 
 class SaveController:
     def __init__(self, model, view):
