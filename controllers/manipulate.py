@@ -23,4 +23,5 @@ class ManipulateController:
         Implement this method to set up event handlers and connections
         for user interactions with widgets on the view related to the manipulate page.
         """
-        pass
+        self.frame.schedule_button.bind("<Button-1>", lambda _: self.frame.add_manipulation_to_scheduler())
+
