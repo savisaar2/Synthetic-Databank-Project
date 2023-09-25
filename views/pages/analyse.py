@@ -20,4 +20,23 @@ class AnalyseView(BaseView):
 
     def _render_page(self):
         """Renders widgets on the AnalyseView page."""
-        pass
+        
+        self._render_page()
+
+    def _render_page(self): 
+        """Render the widgets! 
+        """
+        self.parent_frame = CTkFrame(self, fg_color="gray20")
+        self.parent_frame.pack(fill="both", pady=(0, 20), padx=20, expand=False)
+
+        self.table_frame = CTkFrame(self, fg_color="gray20")
+        self.table_frame.pack(fill="both", padx=20, pady=(0, 20), expand=True)
+
+    def reconfig_widgets(self, option, option_set): 
+        """Tottle (disable or enable) the appropriate button based on whether a valid option is selected.
+
+        Args:
+            option (str): selected item of an options menu
+            option_set (str): the specific options menu
+        """
+        ...
