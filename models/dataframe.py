@@ -9,7 +9,7 @@ class DataFrameModel:
 
     SNAPSHOTS is a [
         {
-                # If new dataset, will be "Blank Dataset". If loaded dataset will be name of loaded dataset. 
+                # If new dataset, will be "New Dataset". If loaded dataset will be name of loaded dataset. 
                 # If new snapshot as a result of successful Manipulations > Generate i.e. will be arbitrary name 
                 # provided by user to name the snapshot in Manipulations:Rollback section.
             "Name": "", 
@@ -38,14 +38,14 @@ class DataFrameModel:
             cls._instance._SNAPSHOTS = []
         return cls._instance
         
-    def new_dataframe(self):
+    def new_dataset(self):
         """Method to generate a blank frame for the purpose of creating a user
         defined dataset from scratch. 
         """
         self._clear_all_snapshots() # Clear first!
         self._SNAPSHOTS.append(
             {
-            "Name": "Blank Dataset",
+            "Name": "New Dataset",
             "Description": "",
             "Schedule Set": "",
             "Dataframe": pd.DataFrame()
@@ -53,7 +53,7 @@ class DataFrameModel:
         )
         print("New dataframe:", self._SNAPSHOTS[-1])
 
-    def load_dataframe(self, file_path, dataset_name):
+    def load_dataset(self, file_path, dataset_name):
         """Loads a csv file stored in the databank into memory i.e. _SNAPSHOTS list.
         """
         if file_path: 
@@ -69,7 +69,7 @@ class DataFrameModel:
             )
             print("Loaded data set:", self._SNAPSHOTS[-1])
         
-    def get_column_headers(self) -> list:
+    def get_column_headers(self):
         """Method to obtain column names for the current dataset in _SNAPSHOTS list.
 
         Returns:
@@ -92,6 +92,14 @@ class DataFrameModel:
             or otherwise). Data type akin to SQL query result.
         """
         return self._SNAPSHOTS[-1]["Dataframe"][column]
+    
+    def get_dataset_name(self): 
+        """Method to get current dataset's name i.e _SNAPSHOTS[-1]. 
+
+        Returns: 
+            str: Name of loaded dataset. 
+        """
+        return self._SNAPSHOTS[-1]["Name"]
     
     def get_column_datatype(self, column_index):
         """Method to obtain the datatype of a defined column in the 
