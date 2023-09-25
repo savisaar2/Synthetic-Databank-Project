@@ -190,6 +190,21 @@ class AnalyseView(BaseView):
                 table.column(column, stretch=True)
         
         return table
+    
+    def clear_table(self):
+        ...
+    
+    def populate_summary_tables(self): 
+        ...
+
+    def populate_pivot_table(self): 
+        ...
+
+    def create_and_populate_raw_table(self): 
+        ...
+
+    def change_table_heading(self): 
+        ...
 
     def reconfig_widgets(self, option, option_set): 
         """Toggle (disable or enable) the appropriate widget based on predefined conditions.
