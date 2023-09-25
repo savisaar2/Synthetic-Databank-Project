@@ -178,7 +178,13 @@ class AnalyseView(BaseView):
         Args:
             dataset_attributes (tuple): A tuple consisting of row count and list of column headers (str).
         """
-        ...  
+        row_count, column_headers = dataset_attributes
+        self.row_count_value_label.configure(text=row_count) # row count
+        self.variable_a_option_menu.configure(values=column_headers) # visualisations var_a
+        self.variable_b_option_menu.configure(values=column_headers) # visualisations var_b
+        self.summary_option_menu.configure(values=column_headers) # summarise
+        self.categories_option_menu.configure(values=column_headers) # pivot category
+        self.values_option_menu.configure(values=column_headers) # pivot value
 
     def build_table(self, root, tuple_of_col_names, height, width=None): 
         """Build a table of data for either pivot summary or for raw data view. 

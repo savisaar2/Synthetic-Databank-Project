@@ -64,7 +64,7 @@ class DatasetModel:
                     "Name": f"{dataset_name}", 
                     "Description": "Initial load.", 
                     "Schedule Set": "", 
-                    "Dataframe:": df
+                    "Dataframe": df
                 }
             )
             print("Loaded data set:", self._SNAPSHOTS[-1])
