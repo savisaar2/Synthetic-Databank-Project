@@ -46,7 +46,7 @@ class View:
         self.current_view = None
 
         # Display application after rendering completed.
-        self.root.deiconify()
+        self.root.after(100, self.root.deiconify)
 
     def _add_frame(self, view_class, name):
         """
