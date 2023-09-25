@@ -1,4 +1,5 @@
 from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkOptionMenu, CTkEntry, CTkScrollbar
+from tkinter import ttk
 from .base import BaseView
 
 class AnalyseView(BaseView):
@@ -18,13 +19,8 @@ class AnalyseView(BaseView):
         super().__init__(root, "Analyse", "Descriptive Statistics and Visualisations.", *args, **kwargs)
         self._render_page()
 
-    def _render_page(self):
-        """Renders widgets on the AnalyseView page."""
-        
-        self._render_page()
-
     def _render_page(self): 
-        """Render the widgets! 
+        """Renders widgets on the AnalyseView page.
         """
         self.parent_frame = CTkFrame(self, fg_color="gray20")
         self.parent_frame.pack(fill="both", pady=(0, 20), padx=20, expand=False)
@@ -82,6 +78,44 @@ class AnalyseView(BaseView):
             self.so_frame, text="Summarise", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
             )
         self.summarise_button.pack(side="right", padx=(8, 8))
+
+        # Summary table
+        self.st_frame = CTkFrame(self.parent_frame, fg_color="transparent")
+        self.st_frame.pack(fill="x", pady=(0, 20), padx=20, expand=True)
+        self.adv_summary_tree_view = self.build_table(
+            self.st_frame, ("SD", "Variance", "IQR", "Outlier Count", "Skew", "Kurtosis"), 1, 10
+            )
+        self.adv_summary_tree_view.pack(side="bottom", fill="both", expand=True)
+        
+        self.basic_summary_tree_view = self.build_table(
+            self.st_frame, ("Min", "Max", "Mean", "Median", "Mode", "Null Count"), 1, 10
+        )
+        self.basic_summary_tree_view.pack(side="bottom", fill="both", pady=(0, 10), expand=True)
+
+    def build_table(self, root, tuple_of_col_names, height, width=None): 
+        """Build a table of data for either pivot summary or for raw data view. 
+        To be used specificially for treeview widget with horizontal and or vertical scrollbar. 
+        Returns unpacked treeview widget.
+
+        Args:
+            root (CTkFrame): Parent frame in which the table will be embedded in.
+            tuple_of_col_names (tuple): Tuple of strings to be used as column headers. 
+            height (int): Height of the table.
+            width (int, optional): Width of the table.
+
+        Returns:
+            ttk.Treeview: Returns the Treeview widget! Objects objects everywhere, first class objects FTW!
+        """
+        table = ttk.Treeview(root, columns=tuple_of_col_names, show="headings", selectmode="browse", height=height)
+        
+        for column in tuple_of_col_names: # Build headers
+            table.heading(column, text=column)
+            if width != None: 
+                table.column(column, width=width, stretch=True)
+            else: 
+                table.column(column, stretch=True)
+        
+        return table
 
     def reconfig_widgets(self, option, option_set): 
         """Toggle (disable or enable) the appropriate button based on whether a valid option is selected.
