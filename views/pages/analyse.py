@@ -28,7 +28,7 @@ class AnalyseView(BaseView):
         self.table_frame = CTkFrame(self, fg_color="gray20")
         self.table_frame.pack(fill="both", padx=20, pady=(0, 20), expand=True)
 
-        # Visualisation options 
+        # Visualisations options
         self.v_frame = CTkFrame(self.parent_frame, fg_color="transparent")
         self.v_frame.pack(fill='x', pady=(20, 0), padx=20)
         self.graph_label = CTkLabel(self.v_frame, text="Graph Style:", anchor="w")
@@ -42,17 +42,17 @@ class AnalyseView(BaseView):
         self.variable_a_label = CTkLabel(self.v_frame, text="Variable:", anchor="w")
         self.variable_a_label.pack(side="left", padx=(8, 0))
         self.variable_a_option_menu = CTkOptionMenu(
-            self.v_frame, fg_color="gray10", width=3, state="normal", values=("------",), 
+            self.v_frame, fg_color="gray10", width=3, state="disabled", values=("------",), 
             command=lambda option: self.reconfig_widgets(option, "var_a")
             )
         self.variable_a_option_menu.pack(side="left", padx=(8, 0))
         self.variable_b_label = CTkLabel(self.v_frame, text="Variable:", anchor="w")
         self.variable_b_option_menu = CTkOptionMenu(
-            self.v_frame, fg_color="gray10", width=3, state="normal", values=("------",), 
+            self.v_frame, fg_color="gray10", width=3, state="disabled", values=("------",), 
             command=lambda option: self.reconfig_widgets(option, "var_b")
             )
         self.plot_button = CTkButton(
-            self.v_frame, text="Plot", corner_radius=5, border_spacing=5, anchor="center", state="normal"
+            self.v_frame, text="Plot", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
             )
         self.plot_button.pack(side="right", padx=(8, 8))
 
@@ -68,14 +68,14 @@ class AnalyseView(BaseView):
         self.summary_option_menu.pack(side="left", padx=(8, 0))
         self.summary_round_value_label = CTkLabel(self.so_frame, text="Rounding:", anchor="w")
         self.summary_round_value_label.pack(side="left", expand=False, padx=(8, 0))
-        self.summary_round_value_input = CTkEntry(self.so_frame, corner_radius=5, width=50, state="normal")
+        self.summary_round_value_input = CTkEntry(self.so_frame, corner_radius=5, width=50, state="disabled")
         self.summary_round_value_input.pack(side="left", padx=(5, 0))
         self.null_value_label = CTkLabel(self.so_frame, text="Null Value:", anchor="w")
         self.null_value_label.pack(side="left", expand=False, padx=(8, 0))        
-        self.null_value_input = CTkEntry(self.so_frame, corner_radius=5, width=50, state="normal")
+        self.null_value_input = CTkEntry(self.so_frame, corner_radius=5, width=50, state="disabled")
         self.null_value_input.pack(side="left", padx=(5, 0))
         self.summarise_button = CTkButton(
-            self.so_frame, text="Summarise", corner_radius=5, border_spacing=5, anchor="center", state="normal"
+            self.so_frame, text="Summarise", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
             )
         self.summarise_button.pack(side="right", padx=(8, 8))
 
@@ -105,7 +105,7 @@ class AnalyseView(BaseView):
         self.values_label = CTkLabel(self.po_frame_col1_row1, text="Values:", anchor="w")
         self.values_label.pack(side="left", expand=False, padx=(8, 0))        
         self.values_option_menu = CTkOptionMenu(
-            self.po_frame_col1_row1, fg_color="gray10", width=3, values=("------",), state="normal", 
+            self.po_frame_col1_row1, fg_color="gray10", width=3, values=("------",), state="disabled", 
             command=lambda option: self.reconfig_widgets(option, "values")
             )
         self.values_option_menu.pack(side="left", padx=(8, 0))
@@ -114,16 +114,11 @@ class AnalyseView(BaseView):
             ]
         self.aggregate_function_label = CTkLabel(self.po_frame_col1_row1, text="Aggregate:", anchor="w")
         self.aggfunc_option_menu = CTkOptionMenu(
-            self.po_frame_col1_row1, fg_color="gray10", width=3, values=self.agg_func_list, state="normal", 
+            self.po_frame_col1_row1, fg_color="gray10", width=3, values=self.agg_func_list, state="disabled", 
             command=lambda option: self.reconfig_widgets(option, "aggfunc")
             )
-        self.aggregate_function_label.pack(side="left", padx=(8, 8))
-        self.aggfunc_option_menu.pack(side="left", padx=(8, 0))
-
         self.pivot_round_value_label = CTkLabel(self.po_frame_col1_row1, text="Rounding:", anchor="w")
-        self.pivot_round_value_label.pack(side="left", padx=(8, 0))
         self.pivot_round_value_input = CTkEntry(self.po_frame_col1_row1, corner_radius=5, width=50)
-        self.pivot_round_value_input.pack(side="left", padx=(8, 0))
 
         # Pivot table
         self.pt_frame = CTkFrame(self.parent_frame, fg_color="transparent", height=55)
@@ -142,7 +137,7 @@ class AnalyseView(BaseView):
         self.pt_button_frame = CTkFrame(self.pt_frame, fg_color="transparent")
         self.pt_button_frame.pack(side="right", fill="both")
         self.pivot_button = CTkButton(
-            self.pt_button_frame, text="Pivot", corner_radius=5, border_spacing=5, anchor="center", state="normal"
+            self.pt_button_frame, text="Pivot", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
             )
         self.pivot_button.pack(side="right", padx=(8, 8))
 
@@ -233,4 +228,143 @@ class AnalyseView(BaseView):
             option (str): selected item of an options menu
             option_set (str): the specific options menu
         """
-        ...
+        def bulk_toggle(mode, list_of_widgets): 
+            if mode == "off": 
+                for w in list_of_widgets: 
+                    w.configure(state="disabled")
+            elif mode == "on": 
+                for w in list_of_widgets: 
+                    w.configure(state="normal")
+            elif mode == "hide": 
+                for w in list_of_widgets: 
+                    w.pack_forget()
+            elif mode == "show": 
+                for w in list_of_widgets: 
+                    w.pack(side="left", padx=(8, 0))
+            elif mode == "reset_menu": 
+                for w in list_of_widgets: 
+                    w.set("------") 
+
+        if option == "------":
+            match option_set: 
+                case "summarise":
+                    bulk_toggle("off", [
+                        self.summarise_button, self.summary_round_value_input, 
+                        self.null_value_input
+                        ])
+                case "graph":
+                    bulk_toggle("reset_menu", [
+                        self.variable_a_option_menu, self.variable_b_option_menu]
+                        )
+                    bulk_toggle("off", [
+                        self.variable_a_option_menu, self.variable_b_option_menu, 
+                        self.plot_button
+                        ])
+                    bulk_toggle("hide", [
+                        self.variable_b_label, self.variable_b_option_menu
+                        ])
+                case "var_a":
+                    bulk_toggle("reset_menu", [
+                        self.variable_b_option_menu
+                        ])
+                    bulk_toggle("off", [
+                        self.plot_button
+                    ])
+                case "var_b": 
+                    bulk_toggle("off", [
+                        self.plot_button
+                    ])
+                case "categories":
+                    bulk_toggle("reset_menu", [
+                        self.values_option_menu, self.aggfunc_option_menu]
+                        )
+                    bulk_toggle("off", [
+                        self.values_option_menu, self.aggfunc_option_menu, 
+                        self.pivot_button
+                        ])
+                    bulk_toggle("hide", [
+                        self.aggregate_function_label, self.aggfunc_option_menu, 
+                        self.pivot_round_value_label, self.pivot_round_value_input
+                        ])
+                case "values":
+                    bulk_toggle("reset_menu", [
+                        self.aggfunc_option_menu]
+                        )
+                    bulk_toggle("off", [
+                        self.aggfunc_option_menu, self.pivot_button
+                        ])
+                    bulk_toggle("hide", [
+                        self.aggregate_function_label, self.aggfunc_option_menu, 
+                        self.pivot_round_value_label, self.pivot_round_value_input
+                        ])
+                case "aggfunc":
+                    bulk_toggle("off", [
+                        self.pivot_button
+                    ])
+                    bulk_toggle("hide", [
+                        self.pivot_round_value_label, self.pivot_round_value_input
+                    ])
+        else: 
+            match option_set: 
+                case "summarise":
+                    bulk_toggle("on", [
+                        self.summarise_button, self.summary_round_value_input, 
+                        self.null_value_input
+                    ])
+                case "graph":
+                    if self.graph_option_menu.get() == "Scatter":
+                        bulk_toggle("on", [
+                            self.variable_b_option_menu
+                        ])
+                        bulk_toggle("show", [
+                           self.variable_b_label, self.variable_b_option_menu
+                        ])
+                        bulk_toggle("off", [
+                            self.plot_button
+                        ])
+                    else: 
+                        bulk_toggle("off", [
+                            self.variable_b_option_menu
+                        ])
+                        bulk_toggle("hide", [
+                            self.variable_b_label, self.variable_b_option_menu
+                        ])
+                    bulk_toggle("on", [
+                        self.variable_a_option_menu
+                        ])
+                case "var_a":
+                    if self.graph_option_menu.get() != "Scatter": 
+                        bulk_toggle("on", [
+                            self.plot_button
+                            ])
+                    else: 
+                        if self.variable_b_option_menu.get() != "------": 
+                            bulk_toggle("on", [
+                                self.plot_button
+                                ])
+                case "var_b": 
+                    if self.variable_a_option_menu.get() != "------": 
+                        bulk_toggle("on", [
+                            self.plot_button
+                            ])
+                case "categories":
+                    bulk_toggle("on", [
+                        self.values_option_menu
+                        ])
+                case "values":
+                    bulk_toggle("on", [
+                        self.aggfunc_option_menu
+                    ])
+                    bulk_toggle("show", [
+                        self.aggregate_function_label, self.aggfunc_option_menu
+                        ])
+                case "aggfunc":
+                    bulk_toggle("on", [
+                        self.pivot_button
+                    ])
+                    bulk_toggle("show", [
+                        self.pivot_round_value_label, self.pivot_round_value_input
+                    ])
+        
+            
+                
