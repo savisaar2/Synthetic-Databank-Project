@@ -95,6 +95,7 @@ class DatasetModel:
     
     def get_dataset_name(self): 
         """Method to get current dataset's name i.e _SNAPSHOTS[-1]. 
+        Should be stored here as opposed to grabbing directly from label state in Library view.
 
         Returns: 
             str: Name of loaded dataset. 

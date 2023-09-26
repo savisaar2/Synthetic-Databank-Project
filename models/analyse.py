@@ -1,3 +1,6 @@
+import plotly.express as px
+import plotly.graph_objects as go
+from pandas import pivot_table as pt
 class AnalyseModel():
     def __init__(self):
         """
@@ -17,7 +20,33 @@ class AnalyseModel():
             var_a (_type_): _description_
             var_b (_type_): _description_
         """
-        ...
+        # Configure styles
+        match mode: 
+            case "Box":
+                plot = px.box(y=var_a, title=title)
+            case "Histogram": 
+                plot = go.Figure(data=[go.Histogram(x=var_a, nbinsx=20)])
+                plot.update_layout(title=title)
+            case "Line": 
+                plot = px.line(y=var_a, title=title)
+            case "Scatter": 
+                plot = px.scatter(x=var_a, y=var_b, title=title)
+            case "Violin": 
+                plot = px.violin(y=var_a, box=True, title=title)
+
+        # Configure plot attributes
+        if mode in ["Box", "Violin"]: 
+            plot.update_traces(marker=dict(size=2)) # size of dots
+        elif mode in ["Scatter"]: 
+            plot.update_traces(marker=dict(size=3))
+
+        plot.update_xaxes(title_text=var_a.name)
+        if mode == "Scatter": 
+            plot.update_yaxes(title_text=var_b.name)
+        else: 
+            plot.update_yaxes(title_text="")
+        
+        plot.show()
 
     def summarise(self, var, rounding, null_val): 
         """Descriptive statistics using pandas methods for speed! Bwazingly fwast!

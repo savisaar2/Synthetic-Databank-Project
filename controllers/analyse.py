@@ -38,8 +38,18 @@ class AnalyseController:
         """
         Plot selected visualisation based on selected Graph Style and variable(s). 
         """
-        ... # TODO - use plotly module and add the processing to the Model
-        print("Plot visualisation clicked!")
+        dataset_name = self.model.DATASET.get_dataset_name()
+        graph_option = self.frame.graph_option_menu.get()
+        var_a_column = self.model.DATASET.get_column_data(column=self.frame.variable_a_option_menu.get())
+        
+        if graph_option == "Scatter": 
+            var_b_column = self.model.DATASET.get_column_data(column=self.frame.variable_b_option_menu.get())
+        else:
+            var_b_column = None
+
+        self.model.analyse.plot_visualisation(
+            mode=graph_option, title=dataset_name, var_a=var_a_column, var_b=var_b_column
+            )
 
     def _summarise(self, event): 
         """
