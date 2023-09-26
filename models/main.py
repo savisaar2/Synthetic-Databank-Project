@@ -1,4 +1,4 @@
-from .dataframe import DataFrameModel
+from .dataset import DatasetModel
 
 class Model:
     def __init__(self):
@@ -8,4 +8,4 @@ class Model:
         This class represents the Model component of the application's MVC (Model-View-Controller) architecture.
         It initialises the models to be consumed by the controllers of this applicaiton.
         """
-        self.DF = DataFrameModel()
+        self.DATASET = DatasetModel()
