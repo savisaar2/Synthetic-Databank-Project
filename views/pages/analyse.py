@@ -206,8 +206,14 @@ class AnalyseView(BaseView):
         
         return table
     
-    def clear_table(self):
-        ...
+    def clear_table(self, table):
+        """Remove data values from table. 
+
+        Args:
+            table (ttk.Treeview): Table on which to perform action.
+        """
+        for item in table.get_children(): 
+            table.delete(item)
     
     def populate_summary_tables(self): 
         ...
