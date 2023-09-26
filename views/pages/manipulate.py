@@ -92,7 +92,7 @@ class ManipulateView(BaseView):
 
         # Variable label
         self.variable_label = CTkLabel(self.scheduler_frame, text="Variable", anchor="w", font=("Arial", 14))
-        self.variable_label.pack(side="left", padx=(100, 0))
+        self.variable_label.pack(side="left", padx=(150, 0))
 
         # Outcome label
         self.outcome_label = CTkLabel(self.scheduler_frame, text="Outcome", anchor="w", font=("Arial", 14))
@@ -138,6 +138,17 @@ class ManipulateView(BaseView):
         # Entry text box
         self.user_input_box = CTkEntry(self.manipulations_frame, corner_radius=5, width=50)
 
+        # Manipulate variable drop down menu
+        self.manipulate_variable_menu_var = StringVar(value="Select Variable") # Manipulate varible
+        self.manipulate_variable_selector = ["Single", "Multiple", "Entire Set"] # manipulate variable dropdown options
+        self.manipulate_variable_selection_menu = CTkOptionMenu(
+            self.manipulations_frame, 
+            fg_color="gray10", 
+            width=3, 
+            values=self.manipulate_variable_selector, 
+            command=self.manipulate_variable_menu_callback,
+            variable=self.manipulate_variable_menu_var
+        )
 
     def add_manipulation_to_scheduler(self):
         self.scheduler_item_frame = CTkFrame(self, fg_color="gray20")
@@ -168,6 +179,9 @@ class ManipulateView(BaseView):
         # Clear user input box on schedule
         self._clear_entry()
 
+        # Reset action menu
+        self.action_selection_menu.set("Select Action")
+
     def dataset_name_select_callback(self, choice):
         self.scheduler_var = choice
 
@@ -179,7 +193,6 @@ class ManipulateView(BaseView):
             widget.pack_forget()
 
         if self.action_menu_var == "Add Column":
-
             # Show column name label
             self.add_column_name_label.pack(side="left", padx=(10, 0))
             self.action_widget_list.append(self.add_column_name_label)
@@ -190,7 +203,6 @@ class ManipulateView(BaseView):
             self.action_widget_list.append(self.user_input_box)
 
         elif self.action_menu_var == "Reduce Dataset":
-            
             # Show method label
             self.method_label.pack(side="left", padx=(10, 0))
             self.action_widget_list.append(self.method_label)
@@ -198,6 +210,15 @@ class ManipulateView(BaseView):
             # Show method menu drop down
             self.method_selection_menu.pack(side="left", padx=(10, 10), fill='x')
             self.action_widget_list.append(self.method_selection_menu)
+
+        elif self.action_menu_var == "Manipulate Dataset":
+            # Show variable label
+            self.variable_label = self._label_template("Variable:")
+            self.action_widget_list.append(self.variable_label)
+
+            # Show method menu drop down
+            self.manipulate_variable_selection_menu.pack(side="left", padx=(10, 10), fill='x')
+            self.action_widget_list.append(self.manipulate_variable_selection_menu)
 
     def reduce_method_select_callback(self, choice):
         self.method_menu_var = choice
@@ -231,5 +252,18 @@ class ManipulateView(BaseView):
         self.technique_menu_var = choice
         self.scheduler_var = self.scheduler_var + " (" + self.technique_menu_var + ")"
 
+    def manipulate_variable_menu_callback(self, choice):
+        self.manipulate_variable_menu_var = choice
+        self.scheduler_var = choice
+
     def _clear_entry(self):
         self.user_input_box.delete(0, 'end')
+
+    def _label_template(self, text):
+        self.label = CTkLabel(
+            self.manipulations_frame, 
+            text=text, 
+            anchor="w")
+        self.label.pack(side="left", padx=(10, 0))
+        return self.label
+    
