@@ -1,4 +1,4 @@
-from customtkinter import CTkFrame, CTkButton, CTkLabel, CTkOptionMenu, StringVar, CTkCheckBox, CTkTextbox
+from customtkinter import CTkFrame, CTkButton, CTkLabel, CTkOptionMenu, StringVar, CTkCheckBox, CTkTextbox, CTkEntry
 from .base import BaseView
 
 class ManipulateView(BaseView):
@@ -17,6 +17,7 @@ class ManipulateView(BaseView):
         # Pass some base title and description to our BaseView class.
         super().__init__(root, "Manipulate", "Configure your Dataset.", *args, **kwargs)
         self._render_page()
+        self.action_widget_list =[]
 
     def _render_page(self):
         """Renders widgets on the ManipulateView page."""
@@ -50,31 +51,16 @@ class ManipulateView(BaseView):
         self.action_label = CTkLabel(self.manipulations_frame, text="Action:", anchor="w")
         self.action_label.pack(side="left", padx=(10, 10))
         self.action_menu_var = StringVar(value="Select Action")
-        self.action_selector = ["Add Column", "Remove Column", "Manipulate Dataset"]
+        self.action_selector = ["Add Column", "Reduce Dataset", "Manipulate Dataset"]
         self.action_selection_menu = CTkOptionMenu(
             self.manipulations_frame, 
             fg_color="gray10", 
             width=3, 
             values=self.action_selector, 
-            command=self.manipulation_action_callback,
+            command=self.action_callback,
             variable=self.action_menu_var
             )
         self.action_selection_menu.pack(side="left", padx=(10, 10), fill='x')
-
-
-
-        # # Dataset Name selection in manipulate frame
-        # self.dataset_name_menu_var = StringVar(value="Select Dataset")
-        # self.dataset_name_selector = ["Current Dataset"]
-        # self.dataset_name_menu = CTkOptionMenu(
-        #     self.manipulations_frame, 
-        #     fg_color="gray10", 
-        #     width=3, 
-        #     values=self.dataset_name_selector, 
-        #     command=self.dataset_name_select_callback,
-        #     variable=self.dataset_name_menu_var
-        #     )
-        # self.dataset_name_menu.pack(side="left", padx=(10, 0))
 
         # Scheduler frame
         self.scheduler_frame = CTkFrame(self, fg_color="gray20")
@@ -98,7 +84,7 @@ class ManipulateView(BaseView):
         self.step_label.pack(side="left", padx=(10, 0))
 
         # Manipulation label
-        self.scheduler_manipulation_label = CTkLabel(self.scheduler_frame, text="Manipulation", anchor="w", font=("Arial", 14))
+        self.scheduler_manipulation_label = CTkLabel(self.scheduler_frame, text="Action", anchor="w", font=("Arial", 14))
         self.scheduler_manipulation_label.pack(side="left", padx=(70, 0))
 
         # Variable label
@@ -109,6 +95,30 @@ class ManipulateView(BaseView):
         self.outcome_label = CTkLabel(self.scheduler_frame, text="Outcome", anchor="w", font=("Arial", 14))
         self.outcome_label.pack(side="left", padx=(100, 0))
 
+        # Column name label
+        self.add_column_name_label = CTkLabel(self.manipulations_frame, text="Column Name:", anchor="w")
+
+        # Column name text box
+        self.column_name_textbox = CTkTextbox(
+            self.manipulations_frame, 
+            fg_color="gray10", 
+            height=1,
+        )
+
+        # Method drop down menu
+        self.method_menu_var = StringVar(value="Select Method") # Method varible
+        self.method_selector = ["Algorithmic", "Manual"] # method dropdown options
+        self.method_selection_menu = CTkOptionMenu(
+            self.manipulations_frame, 
+            fg_color="gray10", 
+            width=3, 
+            values=self.method_selector, 
+            command=self.reduce_method_select_callback,
+            variable=self.method_menu_var
+        )
+
+        # Method label
+        self.method_label = CTkLabel(self.manipulations_frame, text="Method:", anchor="w")
 
     def add_manipulation_to_scheduler(self):
         self.scheduler_item_frame = CTkFrame(self, fg_color="gray20")
@@ -124,39 +134,45 @@ class ManipulateView(BaseView):
         self.manipulation_label_for_scheduler.pack(side="left")
 
         # Varible name for scheduled manipulation
-        self.variable_label_for_scheduler = CTkLabel(self.scheduler_item_frame, text=str(self.dataset_name_menu_var), anchor="w", font=("Arial", 14))
+        self.variable_label_for_scheduler = CTkLabel(self.scheduler_item_frame, text=str(self.scheduler_var), anchor="w", font=("Arial", 14))
         self.variable_label_for_scheduler.pack(side="left", padx=(116, 0))
 
     def dataset_name_select_callback(self, choice):
-        self.dataset_name_menu_var = choice
+        self.scheduler_var = choice
 
-    def manipulation_action_callback(self, choice):
+    def reduce_method_select_callback(self, choice):
+        self.scheduler_var = choice
+
+    def action_callback(self, choice):
         self.action_menu_var = choice
 
+        # Pack forget for all previously packed widgets for action menu.
+        for widget in self.action_widget_list:
+            widget.pack_forget()
+
         if self.action_menu_var == "Add Column":
-            self.add_column_name_label = CTkLabel(self.manipulations_frame, text="Column Name:", anchor="w")
+
+            # Show column name label
             self.add_column_name_label.pack(side="left", padx=(10, 0))
+            self.action_widget_list.append(self.add_column_name_label)
 
-            self.dataset_name_textbox = CTkTextbox(
-                self.manipulations_frame, 
-                fg_color="gray10", 
-                height=1,
-            )
-            self.dataset_name_textbox.pack(side="left", padx=(10, 0))
+            # Show Column name text box
+            self.column_name_textbox.pack(side="left", padx=(10, 0))
+            self.action_widget_list.append(self.column_name_textbox)
 
-            # Column index selection in manipulate frame
-            self.column_label = CTkLabel(self.manipulations_frame, text="Column Position:", anchor="w")
-            self.column_label.pack(side="left", padx=(10, 0))
-            self.column_menu_var = StringVar(value="Column Position")
-            self.column_selector = ["Col1", "Col2", "Col3", "Col4", "Col5"]
-            self.column_selection_menu = CTkOptionMenu(
-                self.manipulations_frame, 
-                fg_color="gray10", 
-                width=3, 
-                values=self.column_selector, 
-                variable=self.column_menu_var
-            )
-        self.column_selection_menu.pack(side="left", padx=(10, 0))
+        elif self.action_menu_var == "Reduce Dataset":
+            
+            # Show method label
+            self.method_label.pack(side="left", padx=(10, 0))
+            self.action_widget_list.append(self.method_label)
 
-    def add_option_menu_on_add_selection(self):
+            # Show method menu drop down
+            self.method_selection_menu.pack(side="left", padx=(10, 10), fill='x')
+            self.action_widget_list.append(self.method_selection_menu)
+
+    def reduce_algorithmically_callback(self, choice):
         pass
+
+    def reduce_manually_callback(self, choice):
+        pass
+
