@@ -1,4 +1,4 @@
-from customtkinter import CTkFrame, CTkButton, CTkLabel, CTkOptionMenu, StringVar, CTkCheckBox
+from customtkinter import CTkFrame, CTkButton, CTkLabel, CTkOptionMenu, StringVar, CTkCheckBox, CTkTextbox
 from .base import BaseView
 
 class ManipulateView(BaseView):
@@ -31,13 +31,26 @@ class ManipulateView(BaseView):
         self.manipulations_frame = CTkFrame(self, fg_color="gray20")
         self.manipulations_frame.pack(fill="both", pady=(0, 20), padx=20, expand=False)
         self.manipulations_label = CTkLabel(self.manipulations_frame, text="Manipulations", anchor="w", font=("Arial", 14, "bold"))
-        self.manipulations_label.pack(padx=(8, 0), pady=(0, 20), fill="both")
+        self.manipulations_label.pack(padx=(8, 0), pady=(0, 10), fill='both')
+
+        # Schedule button in manipulate frame.
+        self.schedule_button = CTkButton(
+            self.manipulations_frame, 
+            text="Schedule", 
+            corner_radius=5, 
+            border_spacing=5, 
+            anchor="center", 
+            state="normal",
+            width=30,
+            height=10
+            )
+        self.schedule_button.pack(padx=(8, 0), pady=(0, 10), anchor='w')
 
         # Action selection in manipulate frame
         self.action_label = CTkLabel(self.manipulations_frame, text="Action:", anchor="w")
-        self.action_label.pack(side="left", padx=(10, 0))
-        self.action_menu_var = StringVar(value="Select Manipulation")
-        self.action_selector = ["Action1", "Action2", "Action3"]
+        self.action_label.pack(side="left", padx=(10, 10))
+        self.action_menu_var = StringVar(value="Select Action")
+        self.action_selector = ["Add Column", "Remove Column", "Manipulate Dataset"]
         self.action_selection_menu = CTkOptionMenu(
             self.manipulations_frame, 
             fg_color="gray10", 
@@ -46,48 +59,22 @@ class ManipulateView(BaseView):
             command=self.manipulation_action_callback,
             variable=self.action_menu_var
             )
-        self.action_selection_menu.pack(side="left", padx=(10, 0))
+        self.action_selection_menu.pack(side="left", padx=(10, 10), fill='x')
 
-        # 'to' label
-        self.to_label = CTkLabel(self.manipulations_frame, text="to -->", anchor="w")
-        self.to_label.pack(side="left", padx=(10, 0))   
 
-        # Dataset Name selection in manipulate frame
-        self.dataset_name_menu_var = StringVar(value="Select Dataset")
-        self.dataset_name_selector = ["Current Dataset"]
-        self.dataset_name_menu = CTkOptionMenu(
-            self.manipulations_frame, 
-            fg_color="gray10", 
-            width=3, 
-            values=self.dataset_name_selector, 
-            command=self.dataset_name_select_callback,
-            variable=self.dataset_name_menu_var
-            )
-        self.dataset_name_menu.pack(side="left", padx=(10, 0))
 
-        # 'or' label
-        self.or_label = CTkLabel(self.manipulations_frame, text="(OR)", anchor="w")
-        self.or_label.pack(side="left", padx=(10, 0))       
-
-        # Column index selection in manipulate frame
-        self.column_label = CTkLabel(self.manipulations_frame, text="Column:", anchor="w")
-        self.column_label.pack(side="left", padx=(10, 0))
-        self.column_menu_var = StringVar(value="Select Column")
-        self.column_selector = ["Col1", "Col2", "Col3", "Col4", "Col5"]
-        self.column_selection_menu = CTkOptionMenu(
-            self.manipulations_frame, 
-            fg_color="gray10", 
-            width=3, 
-            values=self.column_selector, 
-            variable=self.column_menu_var
-            )
-        self.column_selection_menu.pack(side="left", padx=(10, 0))
-
-        # Schedule button in manipulate frame.
-        self.schedule_button = CTkButton(
-            self.manipulations_frame, text="Schedule", corner_radius=5, border_spacing=5, anchor="center", state="normal"
-            )
-        self.schedule_button.pack(side="right", padx=(8, 8), pady=(8,8))
+        # # Dataset Name selection in manipulate frame
+        # self.dataset_name_menu_var = StringVar(value="Select Dataset")
+        # self.dataset_name_selector = ["Current Dataset"]
+        # self.dataset_name_menu = CTkOptionMenu(
+        #     self.manipulations_frame, 
+        #     fg_color="gray10", 
+        #     width=3, 
+        #     values=self.dataset_name_selector, 
+        #     command=self.dataset_name_select_callback,
+        #     variable=self.dataset_name_menu_var
+        #     )
+        # self.dataset_name_menu.pack(side="left", padx=(10, 0))
 
         # Scheduler frame
         self.scheduler_frame = CTkFrame(self, fg_color="gray20")
@@ -145,3 +132,31 @@ class ManipulateView(BaseView):
 
     def manipulation_action_callback(self, choice):
         self.action_menu_var = choice
+
+        if self.action_menu_var == "Add Column":
+            self.add_column_name_label = CTkLabel(self.manipulations_frame, text="Column Name:", anchor="w")
+            self.add_column_name_label.pack(side="left", padx=(10, 0))
+
+            self.dataset_name_textbox = CTkTextbox(
+                self.manipulations_frame, 
+                fg_color="gray10", 
+                height=1,
+            )
+            self.dataset_name_textbox.pack(side="left", padx=(10, 0))
+
+            # Column index selection in manipulate frame
+            self.column_label = CTkLabel(self.manipulations_frame, text="Column Position:", anchor="w")
+            self.column_label.pack(side="left", padx=(10, 0))
+            self.column_menu_var = StringVar(value="Column Position")
+            self.column_selector = ["Col1", "Col2", "Col3", "Col4", "Col5"]
+            self.column_selection_menu = CTkOptionMenu(
+                self.manipulations_frame, 
+                fg_color="gray10", 
+                width=3, 
+                values=self.column_selector, 
+                variable=self.column_menu_var
+            )
+        self.column_selection_menu.pack(side="left", padx=(10, 0))
+
+    def add_option_menu_on_add_selection(self):
+        pass
