@@ -1,1 +1,3 @@
 customtkinter
+pandas
+plotly

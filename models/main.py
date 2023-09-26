@@ -1,4 +1,5 @@
 from .dataset import DatasetModel
+from .analyse import AnalyseModel
 
 class Model:
     def __init__(self):
@@ -9,3 +10,4 @@ class Model:
         It initialises the models to be consumed by the controllers of this applicaiton.
         """
         self.DATASET = DatasetModel()
+        self.analyse = AnalyseModel()

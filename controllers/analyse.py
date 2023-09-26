@@ -38,15 +38,47 @@ class AnalyseController:
         """
         Plot selected visualisation based on selected Graph Style and variable(s). 
         """
-        ... # TODO - use plotly module and add the processing to the Model
-        print("Plot visualisation clicked!")
+        dataset_name = self.model.DATASET.get_dataset_name()
+        graph_option = self.frame.graph_option_menu.get()
+        var_a_column = self.model.DATASET.get_column_data(column=self.frame.variable_a_option_menu.get())
+        
+        if graph_option == "Scatter": 
+            var_b_column = self.model.DATASET.get_column_data(column=self.frame.variable_b_option_menu.get())
+        else:
+            var_b_column = None
+
+        self.model.analyse.plot_visualisation(
+            mode=graph_option, title=dataset_name, var_a=var_a_column, var_b=var_b_column
+            )
 
     def _summarise(self, event): 
         """
         Generate descriptive statistics based on chosen variable (column of data) in the view.
         """
-        ... # TODO
-        print("Summarise clicked!")
+        rounding_val = self._convert_to_number(mode="round", val=self.frame.summary_round_value_input.get())
+
+        if type(rounding_val) == int: 
+            summary = self.model.analyse.summarise(
+                var=self.model.DATASET.get_column_data(column=self.frame.summary_option_menu.get()), 
+                rounding=rounding_val,
+                null_val=self.frame.null_value_input.get()
+                )
+            self.frame.populate_summary_tables(d=summary)
+
+    def _convert_to_number(self, mode, val): 
+        """Convert 
+
+        Args:
+            mode (_type_): _description_
+            val (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        try: 
+            return int(val)
+        except (ValueError, TypeError):
+            print("error! to be handled with overlay later")
 
     def _pivot(self, event): 
         """
