@@ -18,6 +18,7 @@ class ManipulateView(BaseView):
         super().__init__(root, "Manipulate", "Configure your Dataset.", *args, **kwargs)
         self._render_page()
         self.action_widget_list =[]
+        self.method_widget_list =[]
 
     def _render_page(self):
         """Renders widgets on the ManipulateView page."""
@@ -47,9 +48,11 @@ class ManipulateView(BaseView):
             )
         self.schedule_button.pack(padx=(8, 0), pady=(0, 10), anchor='w')
 
-        # Action selection in manipulate frame
+        # Action label
         self.action_label = CTkLabel(self.manipulations_frame, text="Action:", anchor="w")
         self.action_label.pack(side="left", padx=(10, 10))
+
+        # Action menu selector
         self.action_menu_var = StringVar(value="Select Action")
         self.action_selector = ["Add Column", "Reduce Dataset", "Manipulate Dataset"]
         self.action_selection_menu = CTkOptionMenu(
@@ -120,6 +123,22 @@ class ManipulateView(BaseView):
         # Method label
         self.method_label = CTkLabel(self.manipulations_frame, text="Method:", anchor="w")
 
+        # Technique drop down menu
+        self.technique_menu_var = StringVar(value="Select Technique") # Method varible
+        self.technique_selector = ["a", "b"] # Technique dropdown options
+        self.technique_selection_menu = CTkOptionMenu(
+            self.manipulations_frame, 
+            fg_color="gray10", 
+            width=3, 
+            values=self.technique_selector, 
+            command=self.technique_menu_callback,
+            variable=self.technique_menu_var
+        )
+
+        # Entry text box
+        self.user_input_box = CTkEntry(self.manipulations_frame, corner_radius=5, width=50)
+
+
     def add_manipulation_to_scheduler(self):
         self.scheduler_item_frame = CTkFrame(self, fg_color="gray20")
         self.scheduler_item_frame.pack(fill="both", pady=(0, 20), padx=20, expand=False)
@@ -134,13 +153,22 @@ class ManipulateView(BaseView):
         self.manipulation_label_for_scheduler.pack(side="left")
 
         # Varible name for scheduled manipulation
-        self.variable_label_for_scheduler = CTkLabel(self.scheduler_item_frame, text=str(self.scheduler_var), anchor="w", font=("Arial", 14))
+        self.variable_label_for_scheduler = CTkLabel(
+            self.scheduler_item_frame, 
+            text=str(self.scheduler_var) + self.user_input_box.get(), 
+            anchor="w", 
+            font=("Arial", 14)
+            )
         self.variable_label_for_scheduler.pack(side="left", padx=(116, 0))
 
-    def dataset_name_select_callback(self, choice):
-        self.scheduler_var = choice
+        # Pack forget for all previously packed widgets for action menu.
+        for widget in self.action_widget_list:
+            widget.pack_forget()
 
-    def reduce_method_select_callback(self, choice):
+        # Clear user input box on schedule
+        self._clear_entry()
+
+    def dataset_name_select_callback(self, choice):
         self.scheduler_var = choice
 
     def action_callback(self, choice):
@@ -157,8 +185,9 @@ class ManipulateView(BaseView):
             self.action_widget_list.append(self.add_column_name_label)
 
             # Show Column name text box
-            self.column_name_textbox.pack(side="left", padx=(10, 0))
-            self.action_widget_list.append(self.column_name_textbox)
+            self.scheduler_var = "Column: "
+            self.user_input_box.pack(side="left", padx=(5, 0))
+            self.action_widget_list.append(self.user_input_box)
 
         elif self.action_menu_var == "Reduce Dataset":
             
@@ -170,9 +199,37 @@ class ManipulateView(BaseView):
             self.method_selection_menu.pack(side="left", padx=(10, 10), fill='x')
             self.action_widget_list.append(self.method_selection_menu)
 
-    def reduce_algorithmically_callback(self, choice):
-        pass
+    def reduce_method_select_callback(self, choice):
+        self.method_menu_var = choice
+        self.scheduler_var = choice
+
+        for widget in self.method_widget_list:
+            widget.pack_forget()
+
+        if self.method_menu_var == "Algorithmic":
+            # Add technique selection drop down menu
+            self.technique_selection_menu.pack(side="left", padx=(10, 10), fill='x')
+            self.action_widget_list.append(self.technique_selection_menu)
+            self.method_widget_list.append(self.technique_selection_menu)
+
+        elif self.method_menu_var == "Manual":
+            # Add column name label
+            self.add_column_name_label.pack(side="left", padx=(10, 0))
+            self.action_widget_list.append(self.add_column_name_label)
+            self.method_widget_list.append(self.add_column_name_label)
+
+            # Add user input for column selection
+            self.scheduler_var = "Column: "
+            self.user_input_box.pack(side="left", padx=(5, 0))
+            self.action_widget_list.append(self.user_input_box)
+            self.method_widget_list.append(self.user_input_box)
 
     def reduce_manually_callback(self, choice):
         pass
 
+    def technique_menu_callback(self, choice):
+        self.technique_menu_var = choice
+        self.scheduler_var = self.scheduler_var + " (" + self.technique_menu_var + ")"
+
+    def _clear_entry(self):
+        self.user_input_box.delete(0, 'end')
