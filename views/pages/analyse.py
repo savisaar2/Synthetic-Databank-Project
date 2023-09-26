@@ -215,8 +215,24 @@ class AnalyseView(BaseView):
         for item in table.get_children(): 
             table.delete(item)
     
-    def populate_summary_tables(self): 
-        ...
+    def populate_summary_tables(self, d): 
+        """Populate the summary table with descriptive statistics. 
+
+        Args:
+            d (dictionary): dictionary of values returned from calculations of model and 
+            passed through by controller.
+        """
+        self.clear_table(self.basic_summary_tree_view)
+        self.clear_table(self.adv_summary_tree_view)
+        self.basic_summary_tree_view.insert("", "end", values=(
+            d["Min"], d["Max"], d["Mean"], d["Median"], d["Mode"], d["Null Count"]
+            )
+        )
+        self.adv_summary_tree_view.insert("", "end", values=(
+            d["SD"], d["Variance"], d["IQR"], d["Outlier Count"], d["Skew"], d["Kurtosis"]
+            )
+        )
+        self.restyle_widgets()
 
     def populate_pivot_table(self): 
         ...

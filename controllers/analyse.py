@@ -55,8 +55,30 @@ class AnalyseController:
         """
         Generate descriptive statistics based on chosen variable (column of data) in the view.
         """
-        ... # TODO
-        print("Summarise clicked!")
+        rounding_val = self._convert_to_number(mode="round", val=self.frame.summary_round_value_input.get())
+
+        if type(rounding_val) == int: 
+            summary = self.model.analyse.summarise(
+                var=self.model.DATASET.get_column_data(column=self.frame.summary_option_menu.get()), 
+                rounding=rounding_val,
+                null_val=self.frame.null_value_input.get()
+                )
+            self.frame.populate_summary_tables(d=summary)
+
+    def _convert_to_number(self, mode, val): 
+        """Convert 
+
+        Args:
+            mode (_type_): _description_
+            val (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        try: 
+            return int(val)
+        except (ValueError, TypeError):
+            print("error! to be handled with overlay later")
 
     def _pivot(self, event): 
         """

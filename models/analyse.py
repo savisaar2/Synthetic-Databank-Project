@@ -59,7 +59,98 @@ class AnalyseModel():
         Returns:
             dict: dictionary of case to value mappings
         """
-        ...
+        q1 = self._q1(var=var)
+        q3 = self._q3(var=var)
+        iqr = self._iqr(q3=q3, q1=q1)
+        lower_bound = self._lower_bound(q1=q1, iqr=iqr)
+        upper_bound = self._upper_bound(q3=q3, iqr=iqr)
+        identified_outliers = (var < lower_bound) | (var > upper_bound)
+        outlier_count = identified_outliers.sum()
+        null_series = var == self.typify(null_val) # pandas series of Boolean values
+
+        summary = {
+            "Min": var.min(), 
+            "Max": var.max(),
+            "Mean": var.mean(),
+            "Median": var.median(),
+            "Mode": var.mode()[0], # Mode returns dataframe, index 0 is actual value
+            "Null Count": null_series.sum(), # counts all True values in series
+            "SD": var.std(),
+            "Variance": var.var(),
+            "IQR": iqr,
+            "Outlier Count": outlier_count,
+            "Skew": var.skew(),
+            "Kurtosis": var.kurt()
+        }
+        return {key: round(value, rounding) for key, value in summary.items()} # rounding
+    
+    def typify(self, null_val): 
+        """
+        Convert null_val as specified by user into the correct type. 
+        """
+        try: 
+            converted = float(null_val)
+            return converted
+        except Exception as e: 
+            return null_val # likely string or empty?
+
+    def _iqr(self, q3, q1):
+        """IQR - inter quartile range
+
+        Args:
+            q3 (float): first quartile
+            q1 (float): third quartile
+
+        Returns:
+            float: IQR value
+        """
+        return q3 - q1
+        
+    def _q1(self, var): 
+        """1st quartile
+
+        Args:
+            var (str): selected column
+
+        Returns:
+            float: Returns calculated value of 1st quartile of a given column of data.
+        """
+        return var.quantile(0.75)
+    
+    def _q3(self, var): 
+        """3rd quartile
+
+        Args:
+            var (str): selected column
+
+        Returns:
+            float: Returns calculated value of 3rd quartile of a given column of data.
+        """
+        return var.quantile(0.75)
+    
+    def _lower_bound(self, q1, iqr):
+        """Lower bound calculation
+
+        Args:
+            q1 (float): first quartile value
+            iqr (float): IQR value
+
+        Returns:
+            float: lower bound value
+        """
+        return q1 - 1.5 * iqr
+
+    def _upper_bound(self, q3, iqr):
+        """Upper bound calculation
+
+        Args:
+            q3 (float): third quartile value
+            iqr (float): IQR value
+
+        Returns:
+            float: upper bound value
+        """
+        return q3 + 1.5 * iqr
         
     def pivot(self, df, vals, cat, agg, rounding):
         """Pivot table. 
