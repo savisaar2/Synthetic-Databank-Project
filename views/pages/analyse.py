@@ -232,7 +232,7 @@ class AnalyseView(BaseView):
             d["SD"], d["Variance"], d["IQR"], d["Outlier Count"], d["Skew"], d["Kurtosis"]
             )
         )
-        self.restyle_widgets()
+        self._restyle_widgets()
 
     def populate_pivot_table(self, d): 
         """Populate the pivot table with appropriate information.
@@ -248,7 +248,7 @@ class AnalyseView(BaseView):
         for key, value in d.items():
             self.pivot_table.insert("", "end", values=(key, value))
 
-        self.restyle_widgets()
+        self._restyle_widgets()
 
     def create_and_populate_raw_table(self): 
         ...
@@ -262,6 +262,13 @@ class AnalyseView(BaseView):
             new_header (str): Name of new header i.e. used for aggregate functionality e.g. "Median".
         """
         table.heading(f"{target_header}", text=f"{new_header}")
+
+    def _restyle_widgets(self): 
+        """Update style of widget for Treeview (table) - TODO: place elsewhere to ensure all 
+        Treeviews throughout app look the same! I.e. Change default values of Treeview widgets.
+        """
+        self.style = ttk.Style()
+        self.style.configure("Treeview", foreground="white", rowheight=30)
 
     def reconfig_widgets(self, option, option_set): 
         """Toggle (disable or enable) the appropriate widget based on predefined conditions.
