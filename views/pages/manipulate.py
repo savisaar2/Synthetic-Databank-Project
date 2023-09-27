@@ -21,6 +21,7 @@ class ManipulateView(BaseView):
         self.pos2_widget_list =[]
         self.pos3_widget_list =[]
         self.scheduler_var = ""
+        self.scheduler_items = []
 
     def _render_page(self):
         """Renders widgets on the ManipulateView page."""
@@ -104,21 +105,35 @@ class ManipulateView(BaseView):
         self.outcome_label = CTkLabel(self.scheduler_frame, text="Outcome", anchor="w", font=("Arial", 14))
         self.outcome_label.pack(side="left", padx=(100, 0))
 
+        # Delete All button
+        self.delete_all_button = CTkButton(
+            self.scheduler_frame, 
+            text="Delete All", 
+            corner_radius=5, 
+            border_spacing=5, 
+            anchor="center", 
+            state="normal"
+            )
+        self.delete_all_button.pack(side="right", padx=(8, 8), pady=(8,8))
+
     def add_manipulation_to_scheduler(self):
 
         if self.schedule_button._state == "normal":
             try:
                 self.scheduler_item_frame = CTkFrame(self, fg_color="gray20")
                 self.scheduler_item_frame.pack(fill="both", pady=(0, 20), padx=20, expand=False)
+                self.scheduler_items.append(self.scheduler_item_frame)
 
                 # Checkbox
                 self.step_checkbox = CTkCheckBox(self.scheduler_item_frame, text="", )
                 self.step_checkbox.pack(side="left", padx=(10, 0))
                 self.step_checkbox.select()
+                self.scheduler_items.append(self.step_checkbox)
 
                 # Name of scheduled manipulation
                 self.manipulation_label_for_scheduler = CTkLabel(self.scheduler_item_frame, text=str(self.action_menu_var), anchor="w", font=("Arial", 14))
                 self.manipulation_label_for_scheduler.pack(side="left")
+                self.scheduler_items.append(self.manipulation_label_for_scheduler)
 
                 if self.action_menu_var == "Add Column":
                     # Get user input for col name
@@ -132,6 +147,7 @@ class ManipulateView(BaseView):
                     font=("Arial", 14)
                     )
                 self.variable_label_for_scheduler.pack(side="left", padx=(116, 0))
+                self.scheduler_items.append(self.variable_label_for_scheduler)
 
                 # Delete button
                 self.delete_button = CTkButton(
@@ -143,7 +159,7 @@ class ManipulateView(BaseView):
                     state="normal"
                     )
                 self.delete_button.pack(side="right", padx=(8, 8), pady=(8,8))
-                self.delete_button_ref = self.delete_button
+                self.scheduler_items.append(self.delete_button)
 
             finally:
                 # Pack forget for all previously packed widgets for action menu.

@@ -32,8 +32,12 @@ class ManipulateController:
         """
         self.view.frames["menu"].manipulate_button.bind("<Button-1>", self._refresh_manipulate_widgets)
         
+        # Add manipulations to scheduler
         self.frame.schedule_button.bind("<Button-1>", lambda _: self.frame.add_manipulation_to_scheduler(), add="+")
         self.frame.schedule_button.bind("<Button-1>", lambda _: self._populate_scheduler_list(), add="+")
+
+        # Delete all sceduled manipulations
+        self.frame.delete_all_button.bind("<Button-1>", lambda _: self._delete_all_scheduled_manipulations())
 
     def _refresh_manipulate_widgets(self, event): 
         """
@@ -59,4 +63,8 @@ class ManipulateController:
             self.frame.action_selection_menu.configure(state="disabled")
 
     def _delete_all_scheduled_manipulations(self):
-        pass
+        for widgets in self.frame.scheduler_items:
+            widgets.pack_forget()
+        self.frame.scheduler_items = []
+        self.scheduler_actions = []
+        self.step_count = 0
