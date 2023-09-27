@@ -219,7 +219,7 @@ class AnalyseView(BaseView):
         """Populate the summary table with descriptive statistics. 
 
         Args:
-            d (dictionary): dictionary of values returned from calculations of model and 
+            d (dict): dictionary of values returned from calculations of model and 
             passed through by controller.
         """
         self.clear_table(self.basic_summary_tree_view)
@@ -234,14 +234,34 @@ class AnalyseView(BaseView):
         )
         self.restyle_widgets()
 
-    def populate_pivot_table(self): 
-        ...
+    def populate_pivot_table(self, d): 
+        """Populate the pivot table with appropriate information.
+
+        Args:
+            d (dict): dictionary of pivot related keys and values
+        """
+        self._change_table_heading( # Change name of aggregate function column header to selected
+            table=self.pivot_table, target_header="#2", new_header=self.aggfunc_option_menu.get()
+            )
+        self.clear_table(self.pivot_table) # Clear
+        
+        for key, value in d.items():
+            self.pivot_table.insert("", "end", values=(key, value))
+
+        self.restyle_widgets()
 
     def create_and_populate_raw_table(self): 
         ...
 
-    def change_table_heading(self): 
-        ...
+    def _change_table_heading(self, table, target_header, new_header): 
+        """Change heading of table (specifically used for pivot feature. 
+        
+        Args:
+            table (ttk.Treeview): Targeted table to change header for.
+            target_header (str): Target_header a single value e.g. "#1", "#2" etc. 
+            new_header (str): Name of new header i.e. used for aggregate functionality e.g. "Median".
+        """
+        table.heading(f"{target_header}", text=f"{new_header}")
 
     def reconfig_widgets(self, option, option_set): 
         """Toggle (disable or enable) the appropriate widget based on predefined conditions.

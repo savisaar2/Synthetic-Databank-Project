@@ -85,8 +85,17 @@ class AnalyseController:
         Create pivot table based on selected variable (column) of data, i.e. categorical column, related values
         and the selected aggregate function. 
         """
-        ... # TODO
-        print("Pivot clicked!")
+        rounding_val = self._convert_to_number(mode="round", val=self.frame.pivot_round_value_input.get())
+
+        if type(rounding_val) == int: 
+            pivot_data = self.model.analyse.pivot(
+                df=self.model.DATASET.get_reference_to_current_snapshot(),
+                vals=self.frame.values_option_menu.get(),
+                cat=self.frame.categories_option_menu.get(), 
+                agg=self.frame.aggfunc_option_menu.get(),
+                rounding=rounding_val
+            )
+            self.frame.populate_pivot_table(d=pivot_data)
         
 
     def _tabulate(self, event):
