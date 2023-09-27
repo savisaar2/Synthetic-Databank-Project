@@ -81,7 +81,7 @@ class AnalyseView(BaseView):
 
         # Summary table
         self.st_frame = CTkFrame(self.parent_frame, fg_color="transparent")
-        self.st_frame.pack(fill="x", pady=(0, 20), padx=20, expand=True)
+        self.st_frame.pack(fill="x", pady=(0, 10), padx=20, expand=True)
         self.adv_summary_tree_view = self.build_table(
             self.st_frame, ("SD", "Variance", "IQR", "Outlier Count", "Skew", "Kurtosis"), 1, 10
             )
@@ -94,7 +94,7 @@ class AnalyseView(BaseView):
 
         # Pivot options
         self.po_frame_col1_row1 = CTkFrame(self.parent_frame, fg_color="transparent")
-        self.po_frame_col1_row1.pack(side="top", fill="x", pady=(0, 20), padx=20)
+        self.po_frame_col1_row1.pack(side="top", fill="x", pady=(0, 10), padx=20)
         self.categories_label = CTkLabel(self.po_frame_col1_row1, text="Categories:", anchor="w")
         self.categories_label.pack(side="left", expand=False, padx=(8, 0))        
         self.categories_option_menu = CTkOptionMenu(
@@ -449,6 +449,4 @@ class AnalyseView(BaseView):
                     bulk_toggle("show", [
                         self.pivot_round_value_label, self.pivot_round_value_input
                     ])
-        
-            
-                
+                    
