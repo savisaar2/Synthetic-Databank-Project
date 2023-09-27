@@ -169,4 +169,4 @@ class AnalyseModel():
         temp_dict = pivot_calculation.to_dict()[vals] # return in following sample format {"cat1": 333, "cat2": 444}
         return {key: round(value, rounding) for key, value in temp_dict.items()} # rounding
     
-
+    

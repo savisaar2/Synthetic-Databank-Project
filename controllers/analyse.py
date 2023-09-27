@@ -102,11 +102,16 @@ class AnalyseController:
         """Facilitate tabulation of dataset using start_row, end_row values in the view
         and obtaining the specified rows from the loaded dataset before refreshing the 
         widgets in the view. 
-
-        Args:
-            event (_type_): _description_
         """
-        print("Tabulate clicked!")
+        start_row = self._convert_to_number(mode="start_row", val=self.frame.start_row_input.get())
+        end_row = self._convert_to_number(mode="end_row", val=self.frame.end_row_input.get())
+        headers = self.model.DATASET.get_column_headers()
+        rows = self.model.DATASET.get_df_row_by_range(start_row=start_row, end_row=end_row)
+        self.frame.create_and_populate_raw_table(
+            container_frame=self.frame.tt_frame,
+            column_headers=headers, 
+            rows=rows
+        )
 
     def _bind(self):
         """

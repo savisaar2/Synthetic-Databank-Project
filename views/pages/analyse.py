@@ -232,8 +232,7 @@ class AnalyseView(BaseView):
             d["SD"], d["Variance"], d["IQR"], d["Outlier Count"], d["Skew"], d["Kurtosis"]
             )
         )
-        self._restyle_widgets()
-
+        
     def populate_pivot_table(self, d): 
         """Populate the pivot table with appropriate information.
 
@@ -248,11 +247,40 @@ class AnalyseView(BaseView):
         for key, value in d.items():
             self.pivot_table.insert("", "end", values=(key, value))
 
-        self._restyle_widgets()
+    def create_and_populate_raw_table(self, container_frame, column_headers, rows): 
+        """Populate tabulate section with raw table data from the loaded dataset. 
+        
+        Args:
+            container_frame (CTkFrame): Frame that will hold this widget
+            column_headers (list): List of strings which contain column headers
+            rows (pandas DataFrame): Specific row range.
+        """
+        self._delete_child_widgets_refresh_container(parent=self.tt_frame) # Refresh
 
-    def create_and_populate_raw_table(self): 
-        ...
+        # Create tabulate table
+        self.raw_table = self.build_table(root=container_frame, tuple_of_col_names=column_headers, height=4, width=None)
+        self.raw_table_x_scroll = CTkScrollbar(container_frame, orientation="horizontal", fg_color="gray30", command=self.raw_table.xview)
+        self.raw_table_x_scroll.pack(side="bottom", fill="x")
+        self.raw_table.configure(yscrollcommand=self.raw_table_x_scroll.set)
+        self.raw_table_y_scroll = CTkScrollbar(container_frame, orientation="vertical", fg_color="gray30", command=self.raw_table.yview)
+        self.raw_table_y_scroll.pack(side="right", fill="y")
+        self.raw_table.configure(yscrollcommand=self.raw_table_y_scroll.set)
+        self.raw_table.pack(side="top", fill="both", expand=True)
 
+        # Populate table with rows
+        for index, row in rows.iterrows():
+            self.raw_table.insert('', 'end', values=row.tolist())
+
+    def _delete_child_widgets_refresh_container(self, parent):
+        """Used for purposes of clearing contents of an entire container object for re-rendering.
+
+        Args:
+            parent (CTkFrame): Parent frame (container) of which the child widgets need
+            to be removed. 
+        """
+        for widget in parent.winfo_children():
+            widget.destroy()
+        
     def _change_table_heading(self, table, target_header, new_header): 
         """Change heading of table (specifically used for pivot feature. 
         
@@ -263,12 +291,13 @@ class AnalyseView(BaseView):
         """
         table.heading(f"{target_header}", text=f"{new_header}")
 
-    def _restyle_widgets(self): 
+    def restyle_widgets(self): 
         """Update style of widget for Treeview (table) - TODO: place elsewhere to ensure all 
         Treeviews throughout app look the same! I.e. Change default values of Treeview widgets.
         """
         self.style = ttk.Style()
-        self.style.configure("Treeview", foreground="white", rowheight=30)
+        self.style.configure("Treeview", foreground="white", rowheight=20)
+        self.style.configure('Treeview.Heading', font=("Arial", 10))
 
     def reconfig_widgets(self, option, option_set): 
         """Toggle (disable or enable) the appropriate widget based on predefined conditions.
