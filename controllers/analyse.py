@@ -33,6 +33,7 @@ class AnalyseController:
         column_headers.insert(0, "------")
         row_count = self.model.DATASET.get_df_row_count()
         self.frame.refresh_analyse_widgets(dataset_attributes=(row_count, column_headers))
+        self.frame.restyle_widgets()
 
     def _plot_visualisation(self, event): 
         """
