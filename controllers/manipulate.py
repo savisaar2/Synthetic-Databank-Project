@@ -17,6 +17,7 @@ class ManipulateController:
         self.frame = self.view.frames["manipulate"]
         self._bind()
         self.scheduler_actions = []
+        self.step_count = 0 
 
         # TODO - to be removed once Alex has finished feature which loads chosen dataset from Library component.
         # Once Alex is finished, the methods should work natively with obtaining information directly from 
@@ -32,8 +33,7 @@ class ManipulateController:
         self.view.frames["menu"].manipulate_button.bind("<Button-1>", self._refresh_manipulate_widgets)
         
         self.frame.schedule_button.bind("<Button-1>", lambda _: self.frame.add_manipulation_to_scheduler(), add="+")
-        self.frame.schedule_button.bind("<Button-1>", lambda _: self.populate_scheduler_list(), add="+")
-        
+        self.frame.schedule_button.bind("<Button-1>", lambda _: self._populate_scheduler_list(), add="+")
 
     def _refresh_manipulate_widgets(self, event): 
         """
@@ -44,9 +44,19 @@ class ManipulateController:
         column_headers = self.model.DATASET.get_column_headers()
         self.frame.refresh_manipulate_widgets(column_headers)
 
-    def populate_scheduler_list(self):
-        self.scheduler_actions.append({
-            "action": self.frame.action_menu_var,
-            "variable": self.frame.scheduler_var
-        })
-        print(self.scheduler_actions)
+    def _populate_scheduler_list(self):
+        if self.frame.schedule_button._state == "normal" and self.step_count < 4:
+            self.step_count +=1
+            self.scheduler_actions.append({
+                "step": self.step_count,
+                "action": self.frame.action_menu_var,
+                "variable": self.frame.scheduler_var,
+            })
+            print(self.scheduler_actions)
+            self.frame.schedule_button.configure(state="disabled")
+        elif self.step_count == 4:
+            self.frame.schedule_button.configure(state="disabled")
+            self.frame.action_selection_menu.configure(state="disabled")
+
+    def _delete_all_scheduled_manipulations(self):
+        pass
