@@ -258,11 +258,17 @@ class AnalyseView(BaseView):
         self._delete_child_widgets_refresh_container(parent=self.tt_frame) # Refresh
 
         # Create tabulate table
-        self.raw_table = self.build_table(root=container_frame, tuple_of_col_names=column_headers, height=4, width=None)
-        self.raw_table_x_scroll = CTkScrollbar(container_frame, orientation="horizontal", fg_color="gray30", command=self.raw_table.xview)
+        self.raw_table = self.build_table(
+            root=container_frame, tuple_of_col_names=column_headers, height=4, width=None
+            )
+        self.raw_table_x_scroll = CTkScrollbar(
+            container_frame, orientation="horizontal", fg_color="gray30", command=self.raw_table.xview
+            )
         self.raw_table_x_scroll.pack(side="bottom", fill="x")
         self.raw_table.configure(yscrollcommand=self.raw_table_x_scroll.set)
-        self.raw_table_y_scroll = CTkScrollbar(container_frame, orientation="vertical", fg_color="gray30", command=self.raw_table.yview)
+        self.raw_table_y_scroll = CTkScrollbar(
+            container_frame, orientation="vertical", fg_color="gray30", command=self.raw_table.yview
+            )
         self.raw_table_y_scroll.pack(side="right", fill="y")
         self.raw_table.configure(yscrollcommand=self.raw_table_y_scroll.set)
         self.raw_table.pack(side="top", fill="both", expand=True)
