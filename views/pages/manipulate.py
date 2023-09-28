@@ -1,5 +1,6 @@
-from customtkinter import CTkFrame, CTkButton, CTkLabel, CTkOptionMenu, StringVar, CTkCheckBox, CTkTextbox, CTkEntry
+from customtkinter import CTkFrame, CTkButton, CTkLabel, CTkOptionMenu, StringVar, CTkCheckBox, CTkScrollableFrame, CTkEntry
 from .base import BaseView
+
 
 class ManipulateView(BaseView):
     def __init__(self, root, *args, **kwargs):
@@ -34,51 +35,56 @@ class ManipulateView(BaseView):
         self.rollback_label = CTkLabel(self.rollback_frame, text="Rollback", anchor="w", font=("Arial", 14, "bold"))
         self.rollback_label.pack(side="left", padx=(8, 0))
 
-        # Manipulations frame and label
-        self.manipulations_frame = CTkFrame(self, fg_color="gray20")
-        self.manipulations_frame.pack(fill="both", pady=(0, 20), padx=20, expand=False)
+        # Manipulations frames and label
+        self.manipulations_frame_1 = CTkFrame(self, fg_color="gray20")
+        self.manipulations_frame_1.pack(fill="both", padx=20)
+
+        self.manipulations_frame_2 = CTkFrame(self, fg_color="gray20")
+        self.manipulations_frame_2.pack(fill="both", pady=(2, 20), padx=20)
 
         self.manipulations_label = CTkLabel(
-            self.manipulations_frame, 
+            self.manipulations_frame_1, 
             text="Manipulations", 
-            font=("Arial", 14, "bold"))
-        self.manipulations_label.pack(padx=(8, 0), pady=(0, 10), anchor='w')
+            anchor="w", 
+            font=("Arial", 14, "bold")
+            )
+        self.manipulations_label.pack(side="left",padx=(8, 0), pady=(0, 0))
 
         # Schedule button in manipulate frame.
         self.schedule_button = CTkButton(
-            self.manipulations_frame, 
+            self.manipulations_frame_1, 
             text="Schedule", 
             corner_radius=5, 
             border_spacing=5, 
             anchor="center", 
             state="disabled",
             )
-        self.schedule_button.pack(padx=(8, 8), pady=(8, 8), anchor='e')
+        self.schedule_button.pack(fill="both",side="right", padx=(8, 8), pady=(8,8))
 
         # Action label
-        self.action_label = CTkLabel(self.manipulations_frame, text="Action:", anchor="w")
-        self.action_label.pack(side="left", padx=(10, 10))
+        self.action_label = CTkLabel(self.manipulations_frame_2, text="Action:", anchor="w")
+        self.action_label.pack(fill="both", side="left", padx=(10, 10))
 
         # Action menu selector
         self.action_menu_var = StringVar(value="Select Action")
         self.action_selector = ["Add Column", "Reduce Dataset", "Manipulate Dataset"]
         self.action_selection_menu = CTkOptionMenu(
-            self.manipulations_frame, 
+            self.manipulations_frame_2, 
             fg_color="gray10", 
             width=3, 
             values=self.action_selector, 
             command=self.action_callback,
             variable=self.action_menu_var
             )
-        self.action_selection_menu.pack(side="left", padx=(10, 10), fill='x')
+        self.action_selection_menu.pack(side="left", padx=(10, 10), pady=8, fill='x')
 
         # Scheduler frame
         self.scheduler_frame = CTkFrame(self, fg_color="gray20")
-        self.scheduler_frame.pack(fill="both", pady=(0, 20), padx=20, expand=False)
+        self.scheduler_frame.pack(fill="both", pady=(0, 2), padx=20, expand=False)
 
         # Scheduler Label
         self.scheduler_label = CTkLabel(self.scheduler_frame, text="Scheduler", anchor="w", font=("Arial", 14, "bold"))
-        self.scheduler_label.pack(padx=(8, 0), pady=(0, 10), fill="both")
+        self.scheduler_label.pack(side="left", padx=(8, 0))
 
         # Generate button
         self.generate_button = CTkButton(
@@ -91,21 +97,25 @@ class ManipulateView(BaseView):
             )
         self.generate_button.pack(side="right", padx=(8, 8), pady=(8,8))
 
-        # Step label
-        self.step_label = CTkLabel(self.scheduler_frame, text="Step", anchor="w", font=("Arial", 14))
-        self.step_label.pack(side="left", padx=(10, 0))
+        # Scrollable frame for manipulations
+        self.scheduler_scroll_frame = CTkScrollableFrame(self, fg_color="gray20")
+        self.scheduler_scroll_frame.pack(fill="both", pady=(0, 20), padx=20, expand=True)
 
-        # Manipulation label
-        self.scheduler_manipulation_label = CTkLabel(self.scheduler_frame, text="Action", anchor="w", font=("Arial", 14))
-        self.scheduler_manipulation_label.pack(side="left", padx=(70, 0))
+        # Step label
+        self.step_label = CTkLabel(self.scheduler_scroll_frame, text="Step", font=("Arial", 14))
+        self.step_label.grid(row=0, column=0, padx=(8, 50), pady=(0, 10), sticky="w")
+
+        # Action label
+        self.sched_action_label = CTkLabel(self.scheduler_scroll_frame, text="Action", font=("Arial", 14))
+        self.sched_action_label.grid(row=0, column=1, padx=(0, 150), pady=(0, 10), sticky="w")
 
         # Variable label
-        self.variable_label = CTkLabel(self.scheduler_frame, text="Variable", anchor="w", font=("Arial", 14))
-        self.variable_label.pack(side="left", padx=(150, 0))
+        self.variable_label = CTkLabel(self.scheduler_scroll_frame, text="Variable", font=("Arial", 14))
+        self.variable_label.grid(row=0, column=2, padx=(0, 200), pady=(0, 10), sticky="w")
 
         # Outcome label
-        self.outcome_label = CTkLabel(self.scheduler_frame, text="Outcome", anchor="w", font=("Arial", 14))
-        self.outcome_label.pack(side="left", padx=(100, 0))
+        self.outcome_label = CTkLabel(self.scheduler_scroll_frame, text="Outcome", font=("Arial", 14))
+        self.outcome_label.grid(row=0, column=3, padx=(0, 0), pady=(0, 10), sticky='w')
 
         # Delete All button
         self.delete_all_button = CTkButton(
@@ -118,29 +128,26 @@ class ManipulateView(BaseView):
             )
         self.delete_all_button.pack(side="right", padx=(8, 8), pady=(8,8))
 
+
+
         # Save column name button
-        self.save_column_name_button = self.button_template(self.manipulations_frame,"Save")
-        
+        self.save_column_name_button = self.button_template(self.manipulations_frame_2,"Save")
+ 
     def add_manipulation_to_scheduler(self):
 
         if self.schedule_button._state == "normal":
             try:
                 self.step_count +=1 # Increase step count
 
-                # Scheduler item frame
-                self.scheduler_item_frame = CTkFrame(self, fg_color="gray20")
-                self.scheduler_item_frame.pack(fill="both", pady=(0, 20), padx=20, expand=False)
-                self.scheduler_items.append(self.scheduler_item_frame)
-
                 # Checkbox
-                self.step_checkbox = CTkCheckBox(self.scheduler_item_frame, text="("+str(self.step_count)+")")
-                self.step_checkbox.pack(side="left", padx=(10, 0))
+                self.step_checkbox = CTkCheckBox(self.scheduler_scroll_frame, text="("+str(self.step_count)+")")
+                self.step_checkbox.grid(row=self.step_count, column=0, padx=(10, 0), pady=(10, 0), sticky='w')
                 self.step_checkbox.select()
                 self.scheduler_items.append(self.step_checkbox)
 
                 # Name of scheduled manipulation
-                self.manipulation_label_for_scheduler = CTkLabel(self.scheduler_item_frame, text=str(self.action_menu_var), anchor="w", font=("Arial", 14))
-                self.manipulation_label_for_scheduler.pack(side="left")
+                self.manipulation_label_for_scheduler = CTkLabel(self.scheduler_scroll_frame, text=str(self.action_menu_var), font=("Arial", 14))
+                self.manipulation_label_for_scheduler.grid(row=self.step_count, column=1, padx=(0, 0), pady=(10, 0), sticky='w')
                 self.scheduler_items.append(self.manipulation_label_for_scheduler)
 
                 if self.action_menu_var == "Add Column":
@@ -149,25 +156,24 @@ class ManipulateView(BaseView):
 
                 # Varible name for scheduled manipulation
                 self.variable_label_for_scheduler = CTkLabel(
-                    self.scheduler_item_frame, 
-                    text=str(self.variable_1), 
-                    anchor="w", 
+                    self.scheduler_scroll_frame, 
+                    text=self.variable_1 + " " + self.variable_2,  
                     font=("Arial", 14)
                     )
-                self.variable_label_for_scheduler.pack(side="left", padx=(116, 0))
+                self.variable_label_for_scheduler.grid(row=self.step_count, column=2, padx=(0, 0), pady=(10, 0), sticky='w')
                 self.scheduler_items.append(self.variable_label_for_scheduler)
 
-                # Delete button
-                self.delete_button = CTkButton(
-                    self.scheduler_item_frame, 
-                    text="DELETE", 
-                    corner_radius=5, 
-                    border_spacing=5, 
-                    anchor="center", 
-                    state="normal"
-                    )
-                self.delete_button.pack(side="right", padx=(8, 8), pady=(8,8))
-                self.scheduler_items.append(self.delete_button)
+                # # Delete button
+                # self.delete_button = CTkButton(
+                #     self.scheduler_scroll_frame, 
+                #     text="DELETE", 
+                #     corner_radius=5, 
+                #     border_spacing=5, 
+                #     anchor="center", 
+                #     state="normal"
+                #     )
+                # self.delete_button.pack(side="right", padx=(8, 8), pady=(8,8))
+                # self.scheduler_items.append(self.delete_button)
 
             finally:
                 # Pack forget for all previously packed widgets for action menu.
@@ -246,7 +252,7 @@ class ManipulateView(BaseView):
 
     def _label_template(self, text):
         label = CTkLabel(
-            self.manipulations_frame, 
+            self.manipulations_frame_2, 
             text=text, 
             anchor="w")
         label.pack(side="left", padx=(10, 0))
@@ -258,7 +264,7 @@ class ManipulateView(BaseView):
     def _user_entry_box_template(self):
         # User entry text box template
         user_entry_box = CTkEntry(
-            self.manipulations_frame,
+            self.manipulations_frame_2,
             placeholder_text="Enter column name...",
             corner_radius=5, 
             width=300,
@@ -271,7 +277,7 @@ class ManipulateView(BaseView):
         menu_var = StringVar(value=start_text)
         selector = menu_options
         drop_down_menu = CTkOptionMenu(
-            self.manipulations_frame, 
+            self.manipulations_frame_2, 
             fg_color="gray10", 
             width=3, 
             values=selector, 
@@ -287,7 +293,7 @@ class ManipulateView(BaseView):
         menu_var = StringVar(value=start_text)
         selector = menu_options
         drop_down_menu = CTkOptionMenu(
-            self.manipulations_frame, 
+            self.manipulations_frame_2, 
             fg_color="gray10", 
             width=3, 
             values=selector, 
@@ -316,11 +322,8 @@ class ManipulateView(BaseView):
             border_spacing=5, 
             anchor="center", 
             state="normal"
-            )
-        
+            )       
         return button
-        
-        
 
     def refresh_manipulate_widgets(self, dataset_attributes):
         """Refresh, update or populate the values of various widgets on Amnipulate view with appropriate

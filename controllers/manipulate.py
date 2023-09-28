@@ -18,7 +18,7 @@ class ManipulateController:
         self._bind()
         self.scheduler_actions = []
         self.step_count = 0 
-        self.MAX_STEPS = 4
+        self.MAX_STEPS = 10
 
         # TODO - to be removed once Alex has finished feature which loads chosen dataset from Library component.
         # Once Alex is finished, the methods should work natively with obtaining information directly from 
@@ -71,11 +71,12 @@ class ManipulateController:
 
     def _delete_all_scheduled_manipulations(self):
         for widgets in self.frame.scheduler_items:
-            widgets.pack_forget()
+            widgets.grid_remove()
         self.frame.scheduler_items = []
         self.scheduler_actions = []
         self.step_count = 0
         self.frame.action_selection_menu.configure(state="normal")
+        self.frame.step_count = 0
 
     def _save_column_name(self):
         if len(self.frame.user_entry_box.get()) > 0:
