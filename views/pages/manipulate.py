@@ -116,6 +116,11 @@ class ManipulateView(BaseView):
             )
         self.delete_all_button.pack(side="right", padx=(8, 8), pady=(8,8))
 
+        # Save column name button
+        self.save_column_name_button = self.button_template(self.manipulations_frame,"Save")
+        
+        
+
     def add_manipulation_to_scheduler(self):
 
         if self.schedule_button._state == "normal":
@@ -173,39 +178,47 @@ class ManipulateView(BaseView):
                 self._clear_entry()
 
     def action_callback(self, choice):
-        self.action_menu_var = choice      
+        self.action_menu_var = choice
+        self.schedule_button.configure(state="disabled")     
 
         # Pack forget for all previously packed widgets for action menu.
         for widget in self.action_widget_list:
             widget.pack_forget()
 
-        if self.action_menu_var == "Add Column":
-            # Show column name label
-            self.add_column_name_label = self._label_template("Column Name:")
+        match self.action_menu_var:
+            case "Add Column":
+                # Show column name label
+                self.add_column_name_label = self._label_template("Column Name:")
 
-            # Show Column name text box
-            self.user_entry_box = self._user_entry_box_template()
+                # Show Column name text box
+                self.user_entry_box = self._user_entry_box_template()
 
-        elif self.action_menu_var == "Reduce Dataset":
-            # Show method label
-            self.method_label = self._label_template("Method:")
+                # Save column name button
+                self.save_column_name_button.pack(side="right", padx=(8, 8), pady=(8,8))
+                self.save_column_name_button.configure(state='normal')
+                self.action_widget_list.append(self.save_column_name_button)
+                
+            case "Reduce Dataset":
+                # Show method label
+                self.method_label = self._label_template("Method:")
 
-            # Show reduce method menu drop down
-            self.method_selection_menu = self._drop_down_menu_pos2_template("Select Method", 
-                ["Algorithmic", "Manual"]) 
-            self.method_selection_menu.configure(command=self.reduce_method_select_callback)
+                # Show reduce method menu drop down
+                self.method_selection_menu = self._drop_down_menu_pos2_template("Select Method", 
+                    ["Algorithmic", "Manual"]) 
+                self.method_selection_menu.configure(command=self.reduce_method_select_callback)
 
-        elif self.action_menu_var == "Manipulate Dataset":
-            # Show variable label
-            self.variable_label = self._label_template("Variable:")
+            case "Manipulate Dataset":
+                # Show variable label
+                self.variable_label = self._label_template("Variable:")
 
-            # Show variable menu drop down
-            self.maniuplate_variable_menu = self._drop_down_menu_pos2_template("Select Variable", 
-                ["Single", "Multiple", "Entire Set"])   
+                # Show variable menu drop down
+                self.maniuplate_variable_menu = self._drop_down_menu_pos2_template("Select Variable", 
+                    ["Single", "Multiple", "Entire Set"])   
             
     def reduce_method_select_callback(self, choice):
         self.method_menu_var = choice
         self.scheduler_var = choice
+        self.schedule_button.configure(state="disabled")
 
         for widget in self.pos3_widget_list:
             widget.pack_forget()
@@ -240,13 +253,15 @@ class ManipulateView(BaseView):
     def _user_entry_box_template(self):
         # User entry text box template
         user_entry_box = CTkEntry(
-            self.manipulations_frame, 
+            self.manipulations_frame,
+            placeholder_text="Enter column name...",
             corner_radius=5, 
-            width=200) 
+            width=300,
+            ) 
         user_entry_box.pack(side="left", padx=(5, 0))
         self.action_widget_list.append(user_entry_box)
         return user_entry_box
-
+    
     def _drop_down_menu_pos2_template(self, start_text: str, menu_options: list):    
         menu_var = StringVar(value=start_text)
         selector = menu_options
@@ -284,16 +299,19 @@ class ManipulateView(BaseView):
         self.scheduler_var = choice
         self.schedule_button.configure(state="normal")
 
-    def button_template(self, button_name: str):
+    def button_template(self, frame, button_name: str):
         button = CTkButton(
-            self.scheduler_frame, 
+            frame, 
             text=button_name, 
             corner_radius=5, 
             border_spacing=5, 
             anchor="center", 
             state="normal"
             )
-        button.pack(side="right", padx=(8, 8), pady=(8,8))
+        
+        return button
+        
+        
 
     def refresh_manipulate_widgets(self, dataset_attributes):
         """Refresh, update or populate the values of various widgets on Amnipulate view with appropriate
@@ -304,5 +322,3 @@ class ManipulateView(BaseView):
         """
         self.column_headers = dataset_attributes
         #self.reduce_column_menu.configure(values=self.column_headers)
-
-

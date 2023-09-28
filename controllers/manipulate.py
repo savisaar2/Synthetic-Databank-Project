@@ -39,6 +39,9 @@ class ManipulateController:
         # Delete all sceduled manipulations
         self.frame.delete_all_button.bind("<Button-1>", lambda _: self._delete_all_scheduled_manipulations())
 
+        # Save column name bind
+        self.frame.save_column_name_button.bind("<Button-1>", lambda _: self._save_column_name())
+
     def _refresh_manipulate_widgets(self, event): 
         """
         Obtain column headers from the loaded dataset to be populated in the appropriate widgets e.g. 
@@ -49,6 +52,7 @@ class ManipulateController:
         self.frame.refresh_manipulate_widgets(column_headers)
 
     def _populate_scheduler_list(self):
+        
         if self.frame.schedule_button._state == "normal" and self.step_count < 4:
             self.step_count +=1
             self.scheduler_actions.append({
@@ -68,3 +72,13 @@ class ManipulateController:
         self.frame.scheduler_items = []
         self.scheduler_actions = []
         self.step_count = 0
+
+    def _save_column_name(self):
+        if len(self.frame.user_entry_box.get()) > 0:
+            self.frame.schedule_button.configure(state="normal")
+            self.frame.save_column_name_button.configure(state="disabled")
+            self.frame.user_entry_box.configure(state="disabled")
+        else:
+            self.frame.user_entry_box.pack_forget()
+            self.frame.user_entry_box = self.frame._user_entry_box_template()
+            self.frame.user_entry_box.configure(placeholder_text="Invalid column name, please retry...")
