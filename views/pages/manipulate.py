@@ -24,6 +24,7 @@ class ManipulateView(BaseView):
         self.variable_1 = ""
         self.variable_2 = ""
         self.scheduler_items = []
+        self.step_and_outcome = []
         self.step_count = 0
 
     def _render_page(self):
@@ -183,6 +184,7 @@ class ManipulateView(BaseView):
                 self.step_checkbox.grid(row=self.step_count, column=0, padx=(10, 0), pady=(10, 0), sticky='w')
                 self.step_checkbox.select()
                 self.scheduler_items.append(self.step_checkbox)
+                
 
                 # Name of scheduled manipulation
                 self.manipulation_label_for_scheduler = CTkLabel(self.scheduler_scroll_frame, text=str(self.action_menu_var), font=("Arial", 14))
@@ -211,6 +213,10 @@ class ManipulateView(BaseView):
                 self.outcome_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 0), pady=(10, 0), sticky='w')
                 self.scheduler_items.append(self.outcome_label_for_scheduler)   
 
+                scheduled_items_dict = {"step": self.step_checkbox, "outcome": self.outcome_label_for_scheduler}
+                self.step_and_outcome.append(scheduled_items_dict.copy())
+                print(self.step_and_outcome)
+
             finally:
                 # Pack forget for all previously packed widgets for action menu.
                 for widget in self.action_widget_list:
@@ -221,6 +227,9 @@ class ManipulateView(BaseView):
 
                 # Delete text in user entry box
                 self._clear_entry()
+
+
+                
 
     def action_callback(self, choice):
         self.action_menu_var = choice
@@ -339,7 +348,6 @@ class ManipulateView(BaseView):
         drop_down_menu.pack(side="left", padx=(10, 10), fill='x')
         self.action_widget_list.append(drop_down_menu)
         self.pos3_widget_list.append(drop_down_menu)
-        
         return drop_down_menu
     
     def _set_scheduler_variable_1(self, choice):
@@ -361,12 +369,11 @@ class ManipulateView(BaseView):
             )       
         return button    
 
-    def refresh_manipulate_widgets(self, dataset_attributes):
-        """Refresh, update or populate the values of various widgets on Amnipulate view with appropriate
+    def refresh_manipulate_widgets(self, column_headers):
+        """Refresh, update or populate the values of various widgets on Manipulate view with appropriate
         information pulled from the loaded dataset e.g. column headers for option menues, row count etc. 
 
         Args:
             dataset_attributes (tuple): A tuple consisting of row count and list of column headers (str).
         """
-        self.column_headers = dataset_attributes
-        #self.reduce_column_menu.configure(values=self.column_headers)
+        self.column_headers = column_headers

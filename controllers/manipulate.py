@@ -1,3 +1,5 @@
+import pandas as pd
+
 class ManipulateController:
     def __init__(self, model, view):
         """
@@ -43,14 +45,18 @@ class ManipulateController:
         # Save column name bind
         self.frame.save_column_name_button.bind("<Button-1>", lambda _: self._save_column_name())
 
+        # Generate button bind
+        self.frame.generate_button.bind("<Button-1>", lambda _: self.remove_column(), add="+")
+        self.frame.generate_button.bind("<Button-1>", self._refresh_manipulate_widgets, add="+")
+        
+
     def _refresh_manipulate_widgets(self, event): 
         """
         Obtain column headers from the loaded dataset to be populated in the appropriate widgets e.g. 
         option menues and row count of Manipulate view. Called whenever Manipulate side panel is clicked to 
         ensure correct data.
         """
-        column_headers = self.model.DATASET.get_column_headers()
-        self.frame.refresh_manipulate_widgets(column_headers)
+        self.frame.refresh_manipulate_widgets(self.model.DATASET.get_column_headers())
         self.frame.current_dataset_label.configure(
             text="Current Dataset: " + 
             str(self.model.DATASET.get_dataset_name()) + ", Rows: " +
@@ -64,10 +70,12 @@ class ManipulateController:
                 "step": self.step_count,
                 "action": self.frame.action_menu_var,
                 "variable_1": self.frame.variable_1,
-                "variable_2": self.frame.variable_2
+                "variable_2": self.frame.variable_2,
+                "outcome": "in_queue"
             })
             print(self.scheduler_actions)
             self.frame.schedule_button.configure(state="disabled")
+            self.frame.generate_button.configure(state="normal")
 
             if self.step_count == self.MAX_STEPS:
                 self.frame.schedule_button.configure(state="disabled")
@@ -81,6 +89,7 @@ class ManipulateController:
         self.step_count = 0
         self.frame.action_selection_menu.configure(state="normal")
         self.frame.step_count = 0
+        self.frame.generate_button.configure(state="disabled")
 
     def _save_column_name(self):
         if len(self.frame.user_entry_box.get()) > 0:
@@ -92,3 +101,23 @@ class ManipulateController:
             self.frame.user_entry_box = self.frame._user_entry_box_template()
             self.frame.user_entry_box.configure(placeholder_text="Invalid column name, please retry...")
 
+    # Temp method for testing
+    def remove_column(self):
+
+        if self.frame.generate_button._state == "normal" and self.scheduler_actions[self.step_count-1]["outcome"] == "in_queue":
+            df = self.model.DATASET.get_reference_to_current_snapshot()
+            column_name = str(self.scheduler_actions[self.step_count-1]["variable_2"])
+            df = df.drop([column_name], axis=1)
+            df.to_csv("./db/temp/temp.csv", index=False)
+            self.model.DATASET.load_dataset(file_path="./db/temp/temp.csv", dataset_name="wine_dataset")
+            print(self.model.DATASET.get_column_headers())
+            self.scheduler_actions[self.step_count-1]["outcome"] = "Complete"
+            self.frame.step_and_outcome[self.step_count-1]["outcome"].configure(text="Complete")
+            self.frame.step_and_outcome[self.step_count-1]["step"].configure(state="disabled")
+            self.frame.generate_button.configure(state="disabled")
+            
+        
+
+    
+
+    
