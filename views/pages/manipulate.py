@@ -1,4 +1,4 @@
-from customtkinter import CTkFrame, CTkButton, CTkLabel, CTkOptionMenu, StringVar, CTkCheckBox, CTkScrollableFrame, CTkEntry
+from customtkinter import CTkFrame, CTkButton, CTkLabel, CTkOptionMenu, StringVar, CTkCheckBox, CTkScrollableFrame, CTkEntry, CTkProgressBar
 from .base import BaseView
 
 
@@ -91,20 +91,9 @@ class ManipulateView(BaseView):
         self.scheduler_label = CTkLabel(self.scheduler_frame, text="Scheduler", anchor="w", font=("Arial", 14, "bold"))
         self.scheduler_label.pack(side="left", padx=(8, 0))
 
-        # Generate button
-        self.generate_button = CTkButton(
-            self.scheduler_frame, 
-            text="Generate", 
-            corner_radius=5, 
-            border_spacing=5, 
-            anchor="center", 
-            state="disabled"
-            )
-        self.generate_button.pack(side="right", padx=(8, 8), pady=(8,8))
-
         # Scrollable frame for manipulations
         self.scheduler_scroll_frame = CTkScrollableFrame(self, fg_color="gray20")
-        self.scheduler_scroll_frame.pack(fill="both", pady=(0, 20), padx=20, expand=True)
+        self.scheduler_scroll_frame.pack(fill="both", pady=(0, 2), padx=20, expand=True)
 
         # Step label
         self.step_label = CTkLabel(self.scheduler_scroll_frame, text="Step", font=("Arial", 14))
@@ -132,6 +121,39 @@ class ManipulateView(BaseView):
             state="normal"
             )
         self.delete_all_button.pack(side="right", padx=(8, 8), pady=(8,8))
+
+        # Generate frame
+        self.generate_frame = CTkFrame(self, fg_color="gray20")
+        self.generate_frame.pack(fill="both", pady=(0, 20), padx=20, expand=False)
+
+        # Progress bar label
+        self.progress_bar_label = CTkLabel(
+            self.generate_frame, 
+            text="Progress: "
+            )
+        self.progress_bar_label.pack(side="left", padx=(8, 8), pady=(8,8))
+
+        # Progress bar
+        self.generate_progress_bar = CTkProgressBar(self.generate_frame)
+        self.generate_progress_bar.pack(side="left", padx=(8, 8), pady=(8,8))
+
+        # Progress % complete
+        self.progress_bar_complete = CTkLabel(
+            self.generate_frame, 
+            text=str((self.generate_progress_bar.get() * 100)) + "% Complete"
+            )
+        self.progress_bar_complete.pack(side="left", padx=(8, 8), pady=(8,8))
+
+        # Generate button
+        self.generate_button = CTkButton(
+            self.generate_frame, 
+            text="Generate", 
+            corner_radius=5, 
+            border_spacing=5, 
+            anchor="center", 
+            state="disabled"
+            )
+        self.generate_button.pack(side="right", padx=(8, 8), pady=(8,8))
 
         # Save column name button
         self.save_column_name_button = self.button_template(self.manipulations_frame_2,"Save")
