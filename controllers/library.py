@@ -32,7 +32,20 @@ class LibraryController:
         pass
 
     def _show_metadata(self):
-        pass
+        # Get the selected item(s) from the Treeview
+        selected_items = self.frame.tree_view.selection()
+
+        # Get the metadata for the first selected item (assuming single selection)
+        if selected_items:
+            item = selected_items[0]
+            values = self.frame.tree_view.item(item, "values")
+            name, size = values
+            metadata = self.model.library.get_file_metadata(name) # {"Source": ..., "Description": ...}
+        else:
+            metadata = None
+
+        # Update the view with the selected file's metadata
+        self.frame.update_metadata_display(metadata)
 
     def _load_dataset(self):
         pass
