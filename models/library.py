@@ -1,3 +1,5 @@
+import json, os, re
+
 class LibraryModel():
     def __init__(self):
         """
@@ -8,17 +10,25 @@ class LibraryModel():
         """
         pass
 
-    def get_databank(self):
-        pass
+    def convert_to_megabytes(self, byte_val): 
+        if byte_val >= 1024 * 1024:  # larger than 1 mb
+            size = byte_val / (1024 * 1024)
+            return f"{round(size, 2)} mb" 
+        else:
+            size = byte_val / 1024
+            return f"{round(size, 2)} kb"
 
-    def load_metadata_file(self):
-        pass
+    def sort_datasets_alphabetically(self, json_data): 
+        return sorted(json_data.keys(), key=str.lower)
 
-    def add_metadata(self):
+    def get_datasets(self):
+        pass
+    
+    def get_file_metadata(self):
+        pass
+    
+    def _load_all_metadata(self): 
         pass
 
     def search_metadata(self):
-        pass
-
-    def get_dataset_metadata(self):
         pass
