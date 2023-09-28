@@ -29,11 +29,16 @@ class ManipulateView(BaseView):
     def _render_page(self):
         """Renders widgets on the ManipulateView page."""
 
-        # Rollback frame and label
-        self.rollback_frame = CTkFrame(self, fg_color="gray20")
-        self.rollback_frame.pack(fill="both", pady=(0, 20), padx=20, expand=False)
-        self.rollback_label = CTkLabel(self.rollback_frame, text="Rollback", anchor="w", font=("Arial", 14, "bold"))
+        # Rollback frames and labels
+        self.rollback_frame_1 = CTkFrame(self, fg_color="gray20")
+        self.rollback_frame_1.pack(fill="both", pady=(0, 2), padx=20, expand=False)
+        self.rollback_label = CTkLabel(self.rollback_frame_1, text="Rollback", font=("Arial", 14, "bold"))
         self.rollback_label.pack(side="left", padx=(8, 0))
+
+        self.rollback_frame_2 = CTkFrame(self, fg_color="gray20")
+        self.rollback_frame_2.pack(fill="both", pady=(0, 20), padx=20, expand=False)
+        self.current_dataset_label = CTkLabel(self.rollback_frame_2)
+        self.current_dataset_label.pack(side="left", padx=(8, 0))
 
         # Manipulations frames and label
         self.manipulations_frame_1 = CTkFrame(self, fg_color="gray20")
@@ -110,8 +115,8 @@ class ManipulateView(BaseView):
         self.sched_action_label.grid(row=0, column=1, padx=(0, 150), pady=(0, 10), sticky="w")
 
         # Variable label
-        self.variable_label = CTkLabel(self.scheduler_scroll_frame, text="Variable", font=("Arial", 14))
-        self.variable_label.grid(row=0, column=2, padx=(0, 200), pady=(0, 10), sticky="w")
+        self.variable_label = CTkLabel(self.scheduler_scroll_frame, text="Variable(s)", font=("Arial", 14))
+        self.variable_label.grid(row=0, column=2, padx=(0, 250), pady=(0, 10), sticky="w")
 
         # Outcome label
         self.outcome_label = CTkLabel(self.scheduler_scroll_frame, text="Outcome", font=("Arial", 14))
@@ -127,8 +132,6 @@ class ManipulateView(BaseView):
             state="normal"
             )
         self.delete_all_button.pack(side="right", padx=(8, 8), pady=(8,8))
-
-
 
         # Save column name button
         self.save_column_name_button = self.button_template(self.manipulations_frame_2,"Save")
@@ -157,11 +160,20 @@ class ManipulateView(BaseView):
                 # Varible name for scheduled manipulation
                 self.variable_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
-                    text=self.variable_1 + " " + self.variable_2,  
+                    text=self.variable_1 + ", " + self.variable_2,  
                     font=("Arial", 14)
                     )
                 self.variable_label_for_scheduler.grid(row=self.step_count, column=2, padx=(0, 0), pady=(10, 0), sticky='w')
                 self.scheduler_items.append(self.variable_label_for_scheduler)
+
+                # Label for scheduled manipulation outcome
+                self.outcome_label_for_scheduler = CTkLabel(
+                    self.scheduler_scroll_frame, 
+                    text="In Queue",  
+                    font=("Arial", 14)
+                    )
+                self.outcome_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 0), pady=(10, 0), sticky='w')
+                self.scheduler_items.append(self.outcome_label_for_scheduler)   
 
                 # # Delete button
                 # self.delete_button = CTkButton(

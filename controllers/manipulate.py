@@ -51,6 +51,10 @@ class ManipulateController:
         """
         column_headers = self.model.DATASET.get_column_headers()
         self.frame.refresh_manipulate_widgets(column_headers)
+        self.frame.current_dataset_label.configure(
+            text="Current Dataset: " + 
+            str(self.model.DATASET.get_dataset_name()) + ", Rows: " +
+            str(self.model.DATASET.get_df_row_count()))
 
     def _populate_scheduler_list(self):
 
