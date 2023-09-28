@@ -26,10 +26,19 @@ class LibraryController:
         self.frame.populate_treeview(file_list=data)
 
     def _search_databank(self):
-        pass
+        """
+        Search for meta-data upon each key press inside search (input widget).
+        """
+        keywords = self.frame.search_input.get()
+        if len(keywords) > 1:
+            subset = self.model.library.search_metadata(keywords)
+            self._display_dataset_list(mode="specific", subset=subset)
+        else: 
+            self._display_dataset_list(mode="all")
 
     def _create_new_dataset(self):
-        pass
+        self.model.DATASET.new_dataset()
+        self.frame.dataset_status.configure(text=f"New Unsaved Data Set", text_color="yellow")
 
     def _show_metadata(self):
         # Get the selected item(s) from the Treeview
@@ -74,3 +83,4 @@ class LibraryController:
         self.frame.new_button.bind("<Button-1>", lambda event: self._create_new_dataset())
         self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._show_metadata())
         self.frame.tree_view.bind("<Double-1>", lambda event: self._load_dataset())
+        self.import_overlay.cancel_button.bind("<Button-1>", lambda _: self.import_overlay.hide_view())
