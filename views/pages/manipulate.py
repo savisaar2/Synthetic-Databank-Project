@@ -20,8 +20,10 @@ class ManipulateView(BaseView):
         self.action_widget_list =[]
         self.pos2_widget_list =[]
         self.pos3_widget_list =[]
-        self.scheduler_var = ""
+        self.variable_1 = ""
+        self.variable_2 = ""
         self.scheduler_items = []
+        self.step_count = 0
 
     def _render_page(self):
         """Renders widgets on the ManipulateView page."""
@@ -119,18 +121,19 @@ class ManipulateView(BaseView):
         # Save column name button
         self.save_column_name_button = self.button_template(self.manipulations_frame,"Save")
         
-        
-
     def add_manipulation_to_scheduler(self):
 
         if self.schedule_button._state == "normal":
             try:
+                self.step_count +=1 # Increase step count
+
+                # Scheduler item frame
                 self.scheduler_item_frame = CTkFrame(self, fg_color="gray20")
                 self.scheduler_item_frame.pack(fill="both", pady=(0, 20), padx=20, expand=False)
                 self.scheduler_items.append(self.scheduler_item_frame)
 
                 # Checkbox
-                self.step_checkbox = CTkCheckBox(self.scheduler_item_frame, text="", )
+                self.step_checkbox = CTkCheckBox(self.scheduler_item_frame, text="("+str(self.step_count)+")")
                 self.step_checkbox.pack(side="left", padx=(10, 0))
                 self.step_checkbox.select()
                 self.scheduler_items.append(self.step_checkbox)
@@ -142,12 +145,12 @@ class ManipulateView(BaseView):
 
                 if self.action_menu_var == "Add Column":
                     # Get user input for col name
-                    self.scheduler_var = self.user_entry_box.get()
+                    self.variable_1 = self.user_entry_box.get()
 
                 # Varible name for scheduled manipulation
                 self.variable_label_for_scheduler = CTkLabel(
                     self.scheduler_item_frame, 
-                    text=str(self.scheduler_var), 
+                    text=str(self.variable_1), 
                     anchor="w", 
                     font=("Arial", 14)
                     )
@@ -174,12 +177,14 @@ class ManipulateView(BaseView):
                 # Reset action menu
                 self.action_selection_menu.set("Select Action")
 
-                # Clear user input box on schedule
+                # Delete text in user entry box
                 self._clear_entry()
 
     def action_callback(self, choice):
         self.action_menu_var = choice
-        self.schedule_button.configure(state="disabled")     
+        self.schedule_button.configure(state="disabled")  
+        self.variable_1 = ""
+        self.variable_2 = ""   
 
         # Pack forget for all previously packed widgets for action menu.
         for widget in self.action_widget_list:
@@ -190,7 +195,7 @@ class ManipulateView(BaseView):
                 # Show column name label
                 self.add_column_name_label = self._label_template("Column Name:")
 
-                # Show Column name text box
+                # User column name entry box
                 self.user_entry_box = self._user_entry_box_template()
 
                 # Save column name button
@@ -217,7 +222,7 @@ class ManipulateView(BaseView):
             
     def reduce_method_select_callback(self, choice):
         self.method_menu_var = choice
-        self.scheduler_var = choice
+        self.variable_1 = choice
         self.schedule_button.configure(state="disabled")
 
         for widget in self.pos3_widget_list:
@@ -270,7 +275,7 @@ class ManipulateView(BaseView):
             fg_color="gray10", 
             width=3, 
             values=selector, 
-            command=self._set_scheduler_variable,
+            command=self._set_scheduler_variable_1,
             variable=menu_var
             )
         drop_down_menu.pack(side="left", padx=(10, 10), fill='x')
@@ -286,7 +291,7 @@ class ManipulateView(BaseView):
             fg_color="gray10", 
             width=3, 
             values=selector, 
-            command=self._set_scheduler_variable,
+            command=self._set_scheduler_variable_2,
             variable=menu_var
             )
         drop_down_menu.pack(side="left", padx=(10, 10), fill='x')
@@ -295,8 +300,12 @@ class ManipulateView(BaseView):
         
         return drop_down_menu
     
-    def _set_scheduler_variable(self, choice):
-        self.scheduler_var = choice
+    def _set_scheduler_variable_1(self, choice):
+        self.variable_1 = choice
+        self.schedule_button.configure(state="normal")
+
+    def _set_scheduler_variable_2(self, choice):
+        self.variable_2 = choice
         self.schedule_button.configure(state="normal")
 
     def button_template(self, frame, button_name: str):

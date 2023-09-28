@@ -18,6 +18,7 @@ class ManipulateController:
         self._bind()
         self.scheduler_actions = []
         self.step_count = 0 
+        self.MAX_STEPS = 4
 
         # TODO - to be removed once Alex has finished feature which loads chosen dataset from Library component.
         # Once Alex is finished, the methods should work natively with obtaining information directly from 
@@ -52,19 +53,21 @@ class ManipulateController:
         self.frame.refresh_manipulate_widgets(column_headers)
 
     def _populate_scheduler_list(self):
-        
-        if self.frame.schedule_button._state == "normal" and self.step_count < 4:
+
+        if self.frame.schedule_button._state == "normal" and self.step_count < self.MAX_STEPS:
             self.step_count +=1
             self.scheduler_actions.append({
                 "step": self.step_count,
                 "action": self.frame.action_menu_var,
-                "variable": self.frame.scheduler_var,
+                "variable_1": self.frame.variable_1,
+                "variable_2": self.frame.variable_2
             })
             print(self.scheduler_actions)
             self.frame.schedule_button.configure(state="disabled")
-        elif self.step_count == 4:
-            self.frame.schedule_button.configure(state="disabled")
-            self.frame.action_selection_menu.configure(state="disabled")
+
+            if self.step_count == self.MAX_STEPS:
+                self.frame.schedule_button.configure(state="disabled")
+                self.frame.action_selection_menu.configure(state="disabled")
 
     def _delete_all_scheduled_manipulations(self):
         for widgets in self.frame.scheduler_items:
@@ -72,6 +75,7 @@ class ManipulateController:
         self.frame.scheduler_items = []
         self.scheduler_actions = []
         self.step_count = 0
+        self.frame.action_selection_menu.configure(state="normal")
 
     def _save_column_name(self):
         if len(self.frame.user_entry_box.get()) > 0:
