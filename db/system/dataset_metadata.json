@@ -1,22 +1,38 @@
 {
-    "Airline Customer Holiday Booking Dataset": {
-        "Source": "https://www.kaggle.com/datasets/",
-        "Description": "Unveiling Customer Preferences and Booking Patterns in the Airline Holiday Indus"
+    "bcdata": {
+        "Source": "Some Source",
+        "Description": "Some Description"
     },
-    "Australia - Census data 2021": {
-        "Source": "https://abs.gov.au",
-        "Description": "Census information Australia wide - 2023"
+    "boston": {
+        "Source": "Some Source",
+        "Description": "Some Description"
     },
-    "Bitcoin Blockchain Historical Price Data 2011 to 2023": {
-        "Source": "https://www.bitcoin.com",
-        "Description": "Bitcoin is a protocol which implements a public, permanent, and decentralized ledger. Bitcoin transactions are verified by network nodes through cryptography and recorded."
+    "breast-cancer": {
+        "Source": "Some Source",
+        "Description": "Some Description"
     },
-    "COVID 19 - data - 2022": {
-        "Source": "https://abs.gov.au",
-        "Description": "COVID 19 infections, vaccinations by state - 2022"
+    "diabetes": {
+        "Source": "Some Source",
+        "Description": "Some Description"
     },
-    "Wheat Data of Last 12 Years in Punjab Pakistan": {
-        "Source": "https://www.kaggle.com/datasets/mhaiderali37/wheat-data-of-last-12-years-in-punjab-pakistan",
-        "Description": "Data sheet has simple and refined dataset of wheat crop from Punjab, Pakistan. Anyone can analyse it for future predictions of acreage, production and yield of crop in this region. Moreover, you can compare the average yield of wheat crop with other regions."
+    "IHME_GBD_2019_HAQ_1990_2019_DATA_Y2022M012D21": {
+        "Source": "Some Source",
+        "Description": "Some Description"
+    },
+    "loan_prediction": {
+        "Source": "Some Source",
+        "Description": "Some Description"
+    },
+    "time_series_covid19_confirmed_global": {
+        "Source": "Some Source",
+        "Description": "Some Description"
+    },
+    "wdbc": {
+        "Source": "Some Source",
+        "Description": "Some Description"
+    },
+    "wine_dataset": {
+        "Source": "Some Source",
+        "Description": "Some Description"
     }
 }
