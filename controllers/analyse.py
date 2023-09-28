@@ -15,6 +15,7 @@ class AnalyseController:
         self.model = model
         self.view = view
         self.frame = self.view.frames["analyse"]
+        self.exception = self.view.frames["exception"] # Import for use!
 
         # TODO - to be removed once Alex has finished feature which loads chosen dataset from Library component.
         # Once Alex is finished, the methods should work natively with obtaining information directly from 
@@ -79,7 +80,12 @@ class AnalyseController:
         try: 
             return int(val)
         except (ValueError, TypeError):
-            print("error! to be handled with overlay later")
+            if mode == "round": 
+                self.exception.display_error("Specify rounding value as an integer value.")
+            elif mode == "start_row": 
+                self.exception.display_error("Specify start row value as an integer value.")
+            elif mode == "end_row": 
+                self.exception.display_error("Specify end row value as an integer value.")
 
     def _pivot(self, event): 
         """

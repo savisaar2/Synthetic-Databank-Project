@@ -5,6 +5,7 @@ from .manipulate import ManipulateController
 from .sample import SampleController
 from .save import SaveController
 from .login import LoginController
+from .exception import ExceptionController
 from .accounts import AccountsController
 
 class Controller:
@@ -31,6 +32,7 @@ class Controller:
         self.sample_controller = SampleController(model, view)
         self.save_controller = SaveController(model, view)
         self.login_controller = LoginController(model, view)
+        self.exception = ExceptionController(model, view)
         self.menu_controller = MenuController(model, view)
         self.accounts_controller = AccountsController(model, view)
 
