@@ -48,7 +48,20 @@ class LibraryController:
         self.frame.update_metadata_display(metadata)
 
     def _load_dataset(self):
-        pass
+        # Get the selected item(s) from the Treeview
+        selected_items = self.frame.tree_view.selection()
+
+        # Get the name of the file
+        if selected_items:
+            item = selected_items[0]
+            values = self.frame.tree_view.item(item, "values")
+            name, size = values
+            file_path = self.model.library.databank_dir + name + ".csv"
+            print(f"Double-clicked on file: {name}")
+            
+            self.model.DATASET.load_dataset(file_path=file_path, dataset_name=name)
+            
+            self.frame.dataset_status.configure(text=f"{name} has been loaded", text_color="lime")
 
     def _bind(self):
         """
