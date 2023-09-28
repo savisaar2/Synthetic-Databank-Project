@@ -91,3 +91,4 @@ class ManipulateController:
             self.frame.user_entry_box.pack_forget()
             self.frame.user_entry_box = self.frame._user_entry_box_template()
             self.frame.user_entry_box.configure(placeholder_text="Invalid column name, please retry...")
+
