@@ -11,6 +11,7 @@ from .overlays.importfile import ImportView
 from .overlays.change_password import ChangePwView
 from .overlays.account_manager import AccountMgmtView
 from .overlays.account_editor import AccountEditorView
+from .overlays.exception import ExceptionView
 
 class View:
     def __init__(self):
@@ -42,6 +43,7 @@ class View:
         self._add_frame(ChangePwView, "change_password")
         self._add_frame(AccountMgmtView, "accounts_manager")
         self._add_frame(AccountEditorView, "accounts_editor")
+        self._add_frame(ExceptionView, "exception")
 
         self.current_view = None
 
