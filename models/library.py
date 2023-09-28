@@ -44,8 +44,11 @@ class LibraryModel():
 
         return [(file, size) for file, size in zip(datasets, file_size)]
     
-    def get_file_metadata(self):
-        pass
+    def get_file_metadata(self, file_name):
+        """
+        Return metadata for a specific file (dataset)
+        """
+        return self._metadata[file_name]
     
     def _load_all_metadata(self): 
         """
@@ -58,5 +61,21 @@ class LibraryModel():
         
         return {key: json_data[key] for key in sorted_json} # Alphabetically sorted json_file by key
 
-    def search_metadata(self):
-        pass
+    def search_metadata(self, keywords):
+        """
+        Search for specified keywords in metadata and return a dictionary of identified datasets.
+        Matches string in filename, source and description fields of metadata (json) file. 
+        """
+        keyword_list = keywords.lower().split()
+        matching_metadata = set()
+        
+        for string in self._metadata:
+            description_lower = string.lower() # key
+            if any(re.search(word, description_lower) for word in keyword_list):
+                matching_metadata.add(string)
+            if any(re.search(word, self._metadata[string]["Source"].lower()) for word in keyword_list): 
+                matching_metadata.add(string)
+            if any(re.search(word, self._metadata[string]["Description"].lower()) for word in keyword_list):
+                matching_metadata.add(string)
+
+        return list(matching_metadata)
