@@ -197,18 +197,6 @@ class ManipulateView(BaseView):
                 self.outcome_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 0), pady=(10, 0), sticky='w')
                 self.scheduler_items.append(self.outcome_label_for_scheduler)   
 
-                # # Delete button
-                # self.delete_button = CTkButton(
-                #     self.scheduler_scroll_frame, 
-                #     text="DELETE", 
-                #     corner_radius=5, 
-                #     border_spacing=5, 
-                #     anchor="center", 
-                #     state="normal"
-                #     )
-                # self.delete_button.pack(side="right", padx=(8, 8), pady=(8,8))
-                # self.scheduler_items.append(self.delete_button)
-
             finally:
                 # Pack forget for all previously packed widgets for action menu.
                 for widget in self.action_widget_list:
