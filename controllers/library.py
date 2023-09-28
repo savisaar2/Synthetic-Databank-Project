@@ -16,7 +16,14 @@ class LibraryController:
         self.view = view
         self.frame = self.view.frames["library"]
         self.import_overlay = self.view.frames["import"]
+
+        self._display_dataset_list(mode="all")
+
         self._bind()
+
+    def _display_dataset_list(self, mode, subset=None):
+        data = self.model.library.get_datasets(mode, subset)
+        self.frame.populate_treeview(file_list=data)
 
     def _search_databank(self):
         pass
@@ -24,7 +31,7 @@ class LibraryController:
     def _create_new_dataset(self):
         pass
 
-    def _show_metadata(self, filename):
+    def _show_metadata(self):
         pass
 
     def _load_dataset(self):
@@ -40,4 +47,4 @@ class LibraryController:
         self.frame.import_button.bind("<Button-1>", lambda _: self.import_overlay.show_view())
         self.frame.new_button.bind("<Button-1>", lambda event: self._create_new_dataset())
         self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._show_metadata())
-        self.frame.tree_view.bind("<<Double-1>>", lambda event: self._load_dataset())
+        self.frame.tree_view.bind("<Double-1>", lambda event: self._load_dataset())
