@@ -165,5 +165,8 @@ class AnalyseModel():
         Returns:
             dict: A dictionary of category to aggregate function values.
         """
-        ...
-
+        pivot_calculation = pt(data=df, values=vals, index=cat, aggfunc=agg)
+        temp_dict = pivot_calculation.to_dict()[vals] # return in following sample format {"cat1": 333, "cat2": 444}
+        return {key: round(value, rounding) for key, value in temp_dict.items()} # rounding
+    
+    

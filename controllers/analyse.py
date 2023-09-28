@@ -33,6 +33,7 @@ class AnalyseController:
         column_headers.insert(0, "------")
         row_count = self.model.DATASET.get_df_row_count()
         self.frame.refresh_analyse_widgets(dataset_attributes=(row_count, column_headers))
+        self.frame.restyle_widgets()
 
     def _plot_visualisation(self, event): 
         """
@@ -85,19 +86,33 @@ class AnalyseController:
         Create pivot table based on selected variable (column) of data, i.e. categorical column, related values
         and the selected aggregate function. 
         """
-        ... # TODO
-        print("Pivot clicked!")
+        rounding_val = self._convert_to_number(mode="round", val=self.frame.pivot_round_value_input.get())
+
+        if type(rounding_val) == int: 
+            pivot_data = self.model.analyse.pivot(
+                df=self.model.DATASET.get_reference_to_current_snapshot(),
+                vals=self.frame.values_option_menu.get(),
+                cat=self.frame.categories_option_menu.get(), 
+                agg=self.frame.aggfunc_option_menu.get(),
+                rounding=rounding_val
+            )
+            self.frame.populate_pivot_table(d=pivot_data)
         
 
     def _tabulate(self, event):
         """Facilitate tabulation of dataset using start_row, end_row values in the view
         and obtaining the specified rows from the loaded dataset before refreshing the 
         widgets in the view. 
-
-        Args:
-            event (_type_): _description_
         """
-        print("Tabulate clicked!")
+        start_row = self._convert_to_number(mode="start_row", val=self.frame.start_row_input.get())
+        end_row = self._convert_to_number(mode="end_row", val=self.frame.end_row_input.get())
+        headers = self.model.DATASET.get_column_headers()
+        rows = self.model.DATASET.get_df_row_by_range(start_row=start_row, end_row=end_row)
+        self.frame.create_and_populate_raw_table(
+            container_frame=self.frame.tt_frame,
+            column_headers=headers, 
+            rows=rows
+        )
 
     def _bind(self):
         """

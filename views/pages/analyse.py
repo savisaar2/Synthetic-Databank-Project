@@ -81,7 +81,7 @@ class AnalyseView(BaseView):
 
         # Summary table
         self.st_frame = CTkFrame(self.parent_frame, fg_color="transparent")
-        self.st_frame.pack(fill="x", pady=(0, 20), padx=20, expand=True)
+        self.st_frame.pack(fill="x", pady=(0, 10), padx=20, expand=True)
         self.adv_summary_tree_view = self.build_table(
             self.st_frame, ("SD", "Variance", "IQR", "Outlier Count", "Skew", "Kurtosis"), 1, 10
             )
@@ -94,7 +94,7 @@ class AnalyseView(BaseView):
 
         # Pivot options
         self.po_frame_col1_row1 = CTkFrame(self.parent_frame, fg_color="transparent")
-        self.po_frame_col1_row1.pack(side="top", fill="x", pady=(0, 20), padx=20)
+        self.po_frame_col1_row1.pack(side="top", fill="x", pady=(0, 10), padx=20)
         self.categories_label = CTkLabel(self.po_frame_col1_row1, text="Categories:", anchor="w")
         self.categories_label.pack(side="left", expand=False, padx=(8, 0))        
         self.categories_option_menu = CTkOptionMenu(
@@ -219,7 +219,7 @@ class AnalyseView(BaseView):
         """Populate the summary table with descriptive statistics. 
 
         Args:
-            d (dictionary): dictionary of values returned from calculations of model and 
+            d (dict): dictionary of values returned from calculations of model and 
             passed through by controller.
         """
         self.clear_table(self.basic_summary_tree_view)
@@ -232,16 +232,78 @@ class AnalyseView(BaseView):
             d["SD"], d["Variance"], d["IQR"], d["Outlier Count"], d["Skew"], d["Kurtosis"]
             )
         )
-        self.restyle_widgets()
+        
+    def populate_pivot_table(self, d): 
+        """Populate the pivot table with appropriate information.
 
-    def populate_pivot_table(self): 
-        ...
+        Args:
+            d (dict): dictionary of pivot related keys and values
+        """
+        self._change_table_heading( # Change name of aggregate function column header to selected
+            table=self.pivot_table, target_header="#2", new_header=self.aggfunc_option_menu.get()
+            )
+        self.clear_table(self.pivot_table) # Clear
+        
+        for key, value in d.items():
+            self.pivot_table.insert("", "end", values=(key, value))
 
-    def create_and_populate_raw_table(self): 
-        ...
+    def create_and_populate_raw_table(self, container_frame, column_headers, rows): 
+        """Populate tabulate section with raw table data from the loaded dataset. 
+        
+        Args:
+            container_frame (CTkFrame): Frame that will hold this widget
+            column_headers (list): List of strings which contain column headers
+            rows (pandas DataFrame): Specific row range.
+        """
+        self._delete_child_widgets_refresh_container(parent=self.tt_frame) # Refresh
 
-    def change_table_heading(self): 
-        ...
+        # Create tabulate table
+        self.raw_table = self.build_table(
+            root=container_frame, tuple_of_col_names=column_headers, height=4, width=None
+            )
+        self.raw_table_x_scroll = CTkScrollbar(
+            container_frame, orientation="horizontal", fg_color="gray30", command=self.raw_table.xview
+            )
+        self.raw_table_x_scroll.pack(side="bottom", fill="x")
+        self.raw_table.configure(yscrollcommand=self.raw_table_x_scroll.set)
+        self.raw_table_y_scroll = CTkScrollbar(
+            container_frame, orientation="vertical", fg_color="gray30", command=self.raw_table.yview
+            )
+        self.raw_table_y_scroll.pack(side="right", fill="y")
+        self.raw_table.configure(yscrollcommand=self.raw_table_y_scroll.set)
+        self.raw_table.pack(side="top", fill="both", expand=True)
+
+        # Populate table with rows
+        for index, row in rows.iterrows():
+            self.raw_table.insert('', 'end', values=row.tolist())
+
+    def _delete_child_widgets_refresh_container(self, parent):
+        """Used for purposes of clearing contents of an entire container object for re-rendering.
+
+        Args:
+            parent (CTkFrame): Parent frame (container) of which the child widgets need
+            to be removed. 
+        """
+        for widget in parent.winfo_children():
+            widget.destroy()
+        
+    def _change_table_heading(self, table, target_header, new_header): 
+        """Change heading of table (specifically used for pivot feature. 
+        
+        Args:
+            table (ttk.Treeview): Targeted table to change header for.
+            target_header (str): Target_header a single value e.g. "#1", "#2" etc. 
+            new_header (str): Name of new header i.e. used for aggregate functionality e.g. "Median".
+        """
+        table.heading(f"{target_header}", text=f"{new_header}")
+
+    def restyle_widgets(self): 
+        """Update style of widget for Treeview (table) - TODO: place elsewhere to ensure all 
+        Treeviews throughout app look the same! I.e. Change default values of Treeview widgets.
+        """
+        self.style = ttk.Style()
+        self.style.configure("Treeview", foreground="white", rowheight=20)
+        self.style.configure('Treeview.Heading', font=("Arial", 10))
 
     def reconfig_widgets(self, option, option_set): 
         """Toggle (disable or enable) the appropriate widget based on predefined conditions.
@@ -387,6 +449,4 @@ class AnalyseView(BaseView):
                     bulk_toggle("show", [
                         self.pivot_round_value_label, self.pivot_round_value_input
                     ])
-        
-            
-                
+                    

@@ -1,5 +1,6 @@
 from .dataset import DatasetModel
 from .analyse import AnalyseModel
+from .library import LibraryModel
 
 class Model:
     def __init__(self):
@@ -11,3 +12,4 @@ class Model:
         """
         self.DATASET = DatasetModel()
         self.analyse = AnalyseModel()
+        self.library = LibraryModel()

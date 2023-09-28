@@ -1,5 +1,5 @@
 from tkinter import ttk
-from customtkinter import CTkFrame, CTkFont, CTkLabel, CTkEntry, CTkButton, CENTER, CTkScrollbar
+from customtkinter import CTkFrame, CTkFont, CTkLabel, CTkEntry, CTkButton, CENTER, CTkScrollbar, CTkTextbox
 from .base import BaseView
 
 class LibraryView(BaseView):
@@ -26,7 +26,7 @@ class LibraryView(BaseView):
         # Define our containers for each section.
         row_1 = self._create_frame(parent_frame=content_frame)
         row_2 = self._create_frame(parent_frame=content_frame, pady=10)
-        row_3 = self._create_frame(parent_frame=content_frame)
+        self.row_3 = self._create_frame(parent_frame=content_frame)
         row_4 = self._create_frame(parent_frame=content_frame, pady=(10, 0))
 
         # Configure and pack search label, entry and buttons to first row 1.
@@ -36,7 +36,7 @@ class LibraryView(BaseView):
         self.new_button = self._create_button(row_1, "New", "left")
 
         self.tree_view = self._create_treeview(row_2)                   # Render treeview on row 2.
-        self.dataset_meta = self._create_label(row_3, "", height=140)   # Render metadata on row 3.
+        self.dataset_meta = self._create_label(self.row_3, "", height=140)   # Render metadata on row 3.
 
         # Render status message when dataset is loaded or not loaded into memory.
         self.dataset_status = self._create_label(row_4, "No Dataset Loaded", height=50, font=CTkFont(size=17, weight="normal"), color="red", anchor="n", fill="x")
@@ -54,7 +54,8 @@ class LibraryView(BaseView):
         style.configure("Treeview",
             background="gray20",
             rowheight=30,
-            fieldbackground="gray20"
+            fieldbackground="gray20",
+            foreground="white"
         )
         
         # Customise treeview headings section.
@@ -85,6 +86,27 @@ class LibraryView(BaseView):
 
         # Returns tree_view widget.
         return tree_view
+    
+    def populate_treeview(self, file_list=None):
+        self._clear_dataset_listing()
+        for file in file_list:
+            name, size = file
+            self.tree_view.insert("", "end", values=(name, size))
+
+    def _clear_dataset_listing(self): 
+        for item in self.tree_view.get_children(): 
+            self.tree_view.delete(item)
+
+    def update_metadata_display(self, metadata):
+        # Clear the existing metadata frame content
+        for widget in self.row_3.winfo_children():
+            widget.destroy()
+
+        if metadata:
+            source = metadata.get("Source", "")
+            description = metadata.get("Description", "")
+
+            metadata_text = self._create_textbox(self.row_3, height=140, source=source, description=description)
 
     def _create_frame(self, parent_frame, padx=0, pady=0, fill="x", expand=False, color="gray20"):
         """
@@ -104,6 +126,14 @@ class LibraryView(BaseView):
         label.pack(padx=20, anchor=anchor, side=side, fill=fill)
         return label
     
+    def _create_textbox(self, frame, height, source, description):
+        # Source and description
+        metadata_text = CTkTextbox(frame, wrap="word", fg_color="gray20", height=height)
+        metadata_text.insert("1.0", f"Source: {source}\n\nDescription: {description}")
+        metadata_text.configure(state="disabled")
+        metadata_text.pack(side="left", fill="both", expand=True, padx=10)
+        return metadata_text
+
     def _create_entry(self, frame, side):
         """
         Renders a entry widget with specified parameters. Then returns the object 

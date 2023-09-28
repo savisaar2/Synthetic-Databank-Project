@@ -15,7 +15,53 @@ class LibraryController:
         self.model = model
         self.view = view
         self.frame = self.view.frames["library"]
-        self._bind()   
+        self.import_overlay = self.view.frames["import"]
+
+        self._display_dataset_list(mode="all")
+
+        self._bind()
+
+    def _display_dataset_list(self, mode, subset=None):
+        data = self.model.library.get_datasets(mode, subset)
+        self.frame.populate_treeview(file_list=data)
+
+    def _search_databank(self):
+        pass
+
+    def _create_new_dataset(self):
+        pass
+
+    def _show_metadata(self):
+        # Get the selected item(s) from the Treeview
+        selected_items = self.frame.tree_view.selection()
+
+        # Get the metadata for the first selected item (assuming single selection)
+        if selected_items:
+            item = selected_items[0]
+            values = self.frame.tree_view.item(item, "values")
+            name, size = values
+            metadata = self.model.library.get_file_metadata(name) # {"Source": ..., "Description": ...}
+        else:
+            metadata = None
+
+        # Update the view with the selected file's metadata
+        self.frame.update_metadata_display(metadata)
+
+    def _load_dataset(self):
+        # Get the selected item(s) from the Treeview
+        selected_items = self.frame.tree_view.selection()
+
+        # Get the name of the file
+        if selected_items:
+            item = selected_items[0]
+            values = self.frame.tree_view.item(item, "values")
+            name, size = values
+            file_path = self.model.library.databank_dir + name + ".csv"
+            print(f"Double-clicked on file: {name}")
+            
+            self.model.DATASET.load_dataset(file_path=file_path, dataset_name=name)
+            
+            self.frame.dataset_status.configure(text=f"{name} has been loaded", text_color="lime")
 
     def _bind(self):
         """
@@ -23,4 +69,8 @@ class LibraryController:
         Implement this method to set up event handlers and connections
         for user interactions with widgets on the view related to the library page.
         """
-        pass
+        self.frame.search_input.bind("<Key>", lambda event: self._search_databank())
+        self.frame.import_button.bind("<Button-1>", lambda _: self.import_overlay.show_view())
+        self.frame.new_button.bind("<Button-1>", lambda event: self._create_new_dataset())
+        self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._show_metadata())
+        self.frame.tree_view.bind("<Double-1>", lambda event: self._load_dataset())
