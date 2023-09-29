@@ -211,11 +211,11 @@ class ManipulateView(BaseView):
                     font=("Arial", 14)
                     )
                 self.outcome_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 0), pady=(10, 0), sticky='w')
+
                 self.scheduler_items.append(self.outcome_label_for_scheduler)   
 
                 scheduled_items_dict = {"step": self.step_checkbox, "outcome": self.outcome_label_for_scheduler}
                 self.step_and_outcome.append(scheduled_items_dict.copy())
-                print(self.step_and_outcome)
 
             finally:
                 # Pack forget for all previously packed widgets for action menu.
@@ -227,9 +227,6 @@ class ManipulateView(BaseView):
 
                 # Delete text in user entry box
                 self._clear_entry()
-
-
-                
 
     def action_callback(self, choice):
         self.action_menu_var = choice
