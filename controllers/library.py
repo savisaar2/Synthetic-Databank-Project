@@ -20,6 +20,7 @@ class LibraryController:
         self.view = view
         self.frame = self.view.frames["library"]
         self.import_overlay = self.view.frames["import"]
+        self.exception = self.view.frames["exception"]
         
         # Trigger to determine if new_file has been selected from import overlay.
         self.new_file = None
@@ -143,11 +144,14 @@ class LibraryController:
             self.import_overlay.hide_view()  # Hide the import overlay.
 
         except pd.errors.EmptyDataError:
-            print("The selected dataset contains no data.")
+            #print("The selected dataset contains no data.")
+            self.exception.display_info("The selected dataset contains no data.")
         except (AttributeError, ValueError) as e:
-            print(str(e))
+            #print(str(e))
+            self.exception.display_info(str(e))
         except Exception as e:
-            print(f"An error occurred: {e}")
+            #print(f"An error occurred: {e}")
+            self.exception.display_info(f"An error occurred: {e}")
 
     def _add_meta_data(self, name, description, source):
         """
