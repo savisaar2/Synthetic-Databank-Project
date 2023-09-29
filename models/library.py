@@ -29,7 +29,7 @@ class LibraryModel():
         
         if mode == "all": 
             # Replaced to enable pulling for metadata for import functionality.
-            self._metadata = self._load_all_metadata()
+            self._metadata = self.load_all_metadata()
             datasets = list(self._metadata.keys())
         elif mode == "specific": 
             datasets = subset
@@ -50,7 +50,7 @@ class LibraryModel():
         """
         return self._metadata[file_name]
     
-    def _load_all_metadata(self): 
+    def load_all_metadata(self): 
         """
         Load or refresh databank's metadata information.
         """
@@ -79,3 +79,9 @@ class LibraryModel():
                 matching_metadata.add(string)
 
         return list(matching_metadata)
+    
+    def add_metadata(self, obj):
+        existing_data = self.load_all_metadata()
+        existing_data.update(obj)
+        with open("db/system/dataset_metadata.json", "w") as json_file:
+            json.dump(existing_data, json_file, indent=4)
