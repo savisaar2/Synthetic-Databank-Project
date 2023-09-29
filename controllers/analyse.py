@@ -57,6 +57,7 @@ class AnalyseController:
                 )
         except ValueError as e: 
             self.exception.display_error(e)
+            return
 
         if type(rounding_val) == int: 
             summary = self.model.analyse.summarise(
@@ -77,6 +78,7 @@ class AnalyseController:
                 )
         except ValueError as e: 
             self.exception.display_error(e)
+            return
 
         if type(rounding_val) == int: 
             pivot_data = self.model.analyse.pivot(
@@ -103,6 +105,7 @@ class AnalyseController:
                 )
         except ValueError as e: 
             self.exception.display_error(e)
+            return
 
         headers = self.model.DATASET.get_column_headers()
         rows = self.model.DATASET.get_df_row_by_range(start_row=start_row, end_row=end_row)
