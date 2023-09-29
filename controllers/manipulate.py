@@ -71,6 +71,7 @@ class ManipulateController:
                 "action": self.frame.action_menu_var,
                 "variable_1": self.frame.variable_1,
                 "variable_2": self.frame.variable_2,
+                "variable_3": self.frame.variable_3,
                 "outcome": "in_queue"
             })
             print(self.scheduler_actions)
@@ -98,6 +99,7 @@ class ManipulateController:
             self.frame.schedule_button.configure(state="normal")
             self.frame.save_column_name_button.configure(state="disabled")
             self.frame.user_entry_box.configure(state="disabled")
+            self.frame.variable_3 = self.frame.user_entry_box.get()
         else:
             self.frame.user_entry_box.pack_forget()
             self.frame.user_entry_box = self.frame._user_entry_box_template()
@@ -119,10 +121,10 @@ class ManipulateController:
                     self._update_frame_scheduler_status(manip)
 
                     match manip["action"]:
-                        case "Add Column":
+                        case "Add":
                             print("add column generate")
 
-                        case "Reduce Dataset":
+                        case "Reduce":
                             match manip["variable_1"]:
                                 case "Algorithmic":
                                     match manip["variable_2"]:
@@ -135,7 +137,7 @@ class ManipulateController:
                                 case "Manual":
                                     print("reduce, manual")
 
-                        case "Manipulate Dataset":
+                        case "Manipulate":
                             match manip["variable_1"]:
                                 case "Single":
                                     print("manipulate, single")

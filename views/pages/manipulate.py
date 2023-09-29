@@ -21,8 +21,10 @@ class ManipulateView(BaseView):
         self.action_widget_list =[]
         self.pos2_widget_list =[]
         self.pos3_widget_list =[]
+        self.pos4_widget_list = []
         self.variable_1 = ""
         self.variable_2 = ""
+        self.variable_3 = ""
         self.scheduler_items = []
         self.step_count = 0
 
@@ -86,7 +88,7 @@ class ManipulateView(BaseView):
 
         # Action menu selector
         self.action_menu_var = StringVar(value="Select Action")
-        self.action_selector = ["Add Column", "Reduce Dataset", "Manipulate Dataset"]
+        self.action_selector = ["Add", "Reduce", "Manipulate"]
         self.action_selection_menu = CTkOptionMenu(
             self.manipulations_frame_2, 
             fg_color="gray10", 
@@ -216,10 +218,6 @@ class ManipulateView(BaseView):
                 self.manipulation_label_for_scheduler = CTkLabel(self.scheduler_scroll_frame, text=str(self.action_menu_var))
                 self.manipulation_label_for_scheduler.grid(row=self.step_count, column=1, padx=(0, 0), pady=(0, 0), sticky='w')
 
-                if self.action_menu_var == "Add Column":
-                    # Get user input for col name
-                    self.variable_1 = self.user_entry_box.get()
-
                 # Varible 1 name for scheduled manipulation
                 self.variable_1_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
@@ -234,6 +232,13 @@ class ManipulateView(BaseView):
                     )
                 self.variable_2_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 0), pady=(0, 0), sticky='w')
 
+                # Varible 3 name for scheduled manipulation
+                self.variable_3_label_for_scheduler = CTkLabel(
+                    self.scheduler_scroll_frame, 
+                    text=self.variable_3,  
+                    )
+                self.variable_3_label_for_scheduler.grid(row=self.step_count, column=4, padx=(0, 0), pady=(0, 0), sticky='w')
+
                 # Label for scheduled manipulation outcome
                 self.outcome_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
@@ -246,6 +251,7 @@ class ManipulateView(BaseView):
                                         "action": self.manipulation_label_for_scheduler, 
                                         "variable_1": self.variable_1_label_for_scheduler,
                                         "variable_2": self.variable_2_label_for_scheduler,
+                                        "variable_3": self.variable_3_label_for_scheduler,
                                         "outcome": self.outcome_label_for_scheduler}
                 self.scheduler_items.append(scheduled_items_dict.copy())          
 
@@ -265,42 +271,66 @@ class ManipulateView(BaseView):
         self.schedule_button.configure(state="disabled")  
         self.variable_1 = ""
         self.variable_2 = ""   
+        self.variable_3 = "" 
 
         # Pack forget for all previously packed widgets for action menu.
         for widget in self.action_widget_list:
             widget.pack_forget()
 
         match self.action_menu_var:
-            case "Add Column":
-                # Show column name label
-                self.add_column_name_label = self._label_template("Column Name:")
+            case "Add":
+                self.add_selection_menu = self._drop_down_menu_pos2_template("Select Variable", 
+                    ["Noise", "Column"]) 
+                self.add_selection_menu.configure(command=self.add_select_callback)
+                
+            case "Reduce":
+                # Show reduce method menu drop down
+                self.method_selection_menu = self._drop_down_menu_pos2_template("Select Method", 
+                    ["Data Dimensionality", "Rows"]) 
+                self.method_selection_menu.configure(command=self.reduce_method_select_callback)
 
-                # User column name entry box
+            case "Manipulate":
+                # Show variable menu drop down
+                self.maniuplate_variable_menu = self._drop_down_menu_pos2_template("Select Technique", 
+                    ["Replace Missing Values", "Replace Other Values", "Expand (add rows)", "Data Transformation"])   
+                self.maniuplate_variable_menu.configure(command=self.manipulate_col_select_callback)
+
+    def add_select_callback(self, choice):
+        self.variable_1 = choice
+        self.schedule_button.configure(state="disabled")
+        for widget in self.pos3_widget_list:
+            widget.pack_forget()
+
+        match choice:
+            case "Noise":
+                self.noise_technique_selection_menu = self._drop_down_menu_pos3_template("Select Technique", 
+                ["Add random custom value", "Add Outliers"])
+            case "Column":
+                self.column_technique_selection_menu = self._drop_down_menu_pos3_template("Select Technique", 
+                ["Duplicate", "New", "Feature Engineering"])
+                self.column_technique_selection_menu.configure(command=self.add_column_technique_callback)
+
+    def add_column_technique_callback(self, choice):
+        self.variable_2 = choice
+        self.schedule_button.configure(state="disabled")
+        for widget in self.pos4_widget_list:
+            widget.pack_forget()
+
+        match choice:
+            case "Duplicate":
+                self.column_technique_selection_menu = self._drop_down_menu_pos4_template("Select Column", 
+                self.column_headers)
+            case "New":
                 self.user_entry_box = self._user_entry_box_template()
-
-                # Save column name button
+                 # Save column name button
                 self.save_column_name_button.pack(side="right", padx=(8, 8), pady=(8,8))
                 self.save_column_name_button.configure(state='normal')
                 self.action_widget_list.append(self.save_column_name_button)
-                
-            case "Reduce Dataset":
-                # Show method label
-                self.method_label = self._label_template("Method:")
+                self.pos4_widget_list.append(self.save_column_name_button)
+            case "Feature Engineering":
+                self.column_technique_selection_menu = self._drop_down_menu_pos4_template("Select Technique", 
+                ["Polynomial Features", "Interaction Features", "Feature Aggregation", "Feature Crosses"])
 
-                # Show reduce method menu drop down
-                self.method_selection_menu = self._drop_down_menu_pos2_template("Select Method", 
-                    ["Algorithmic", "Manual"]) 
-                self.method_selection_menu.configure(command=self.reduce_method_select_callback)
-
-            case "Manipulate Dataset":
-                # Show variable label
-                self.variable_label = self._label_template("Variable:")
-
-                # Show variable menu drop down
-                self.maniuplate_variable_menu = self._drop_down_menu_pos2_template("Select Variable", 
-                    ["Single", "Multiple", "Entire Set"])   
-                self.maniuplate_variable_menu.configure(command=self.manipulate_col_select_callback)
-            
     def reduce_method_select_callback(self, choice):
         self.variable_1 = choice
         self.schedule_button.configure(state="disabled")
@@ -308,18 +338,15 @@ class ManipulateView(BaseView):
         for widget in self.pos3_widget_list:
             widget.pack_forget()
 
-        if choice == "Algorithmic":
+        if choice == "Data Dimensionality":
             # Add technique selection drop down menu
             self.technique_selection_menu = self._drop_down_menu_pos3_template("Select Technique", 
-                ["A", "B", "C"]) 
+                ["Algorithmic", "Manual"]) 
 
-        elif choice == "Manual":
-            # Add column name label
-            self.add_column_name_label = self._label_template("Column Name:")
-
+        elif choice == "Rows":
             # Add drop down menu for column selection
-            self.reduce_column_menu = self._drop_down_menu_pos3_template("Select Column", 
-                self.column_headers)
+            self.reduce_column_menu = self._drop_down_menu_pos3_template("Select Variable", 
+                ["Missing Values", "Duplicate Rows"])
 
     def manipulate_col_select_callback(self, choice):
         self.variable_1 = choice
@@ -329,21 +356,21 @@ class ManipulateView(BaseView):
             widget.pack_forget()
         
         match choice:
-            case "Single":
-                self.single_selection_menu = self._drop_down_menu_pos3_template("Select Manipulation", 
-                ["Add Noise", "Add Outliers", "Replace Null Values", "Replace Values", "Data Transformation"]) 
-            case "Multiple":
-                self.multiple_selection_menu = self._drop_down_menu_pos3_template("Select Manipulation", 
-                ["Add Noise", "Data Transformation"])
-            case "Entire Set":
-                self.multiple_selection_menu = self._drop_down_menu_pos3_template("Select Manipulation", 
-                ["Add Noise", "Reduce Dimensionality", "Expand", "Data Transformation"])                                
-
-
+            case "Replace Missing Values":
+                self.replace_missing_values_menu = self._drop_down_menu_pos3_template("Select Manipulation", 
+                ["Numerical Column", "Categorial Column"]) 
+            case "Replace Other Values":
+                self.replace_other_values_menu = self._drop_down_menu_pos3_template("Select Manipulation", 
+                ["Value to Replace", "New Value"])
+            case "Expand (add rows)":
+                self.expand_menu = self._drop_down_menu_pos3_template("Select Manipulation", 
+                ["Random Sampling", "Bootstrap Resamping", "SMOTE", "Add Noise"])  
+            case "Data Transformation":
+                self.data_transformation_menu = self._drop_down_menu_pos3_template("Select Manipulation", 
+                ["Feature Scaling/Normalisation", "Feature Encoding"])                            
 
     def _clear_entry(self):
-        if self.action_menu_var == "Add Column":
-            self.user_entry_box.delete(0, 'end')
+        pass
 
     def _label_template(self, text):
         label = CTkLabel(
@@ -366,6 +393,7 @@ class ManipulateView(BaseView):
             ) 
         user_entry_box.pack(side="left", padx=(5, 0))
         self.action_widget_list.append(user_entry_box)
+        self.pos4_widget_list.append(user_entry_box)
         return user_entry_box
     
     def _drop_down_menu_pos2_template(self, start_text: str, menu_options: list):    
@@ -400,12 +428,32 @@ class ManipulateView(BaseView):
         self.pos3_widget_list.append(drop_down_menu)
         return drop_down_menu
     
+    def _drop_down_menu_pos4_template(self, start_text: str, menu_options: list):    
+        menu_var = StringVar(value=start_text)
+        selector = menu_options
+        drop_down_menu = CTkOptionMenu(
+            self.manipulations_frame_2, 
+            fg_color="gray10", 
+            width=3, 
+            values=selector, 
+            command=self._set_scheduler_variable_3,
+            variable=menu_var
+            )
+        drop_down_menu.pack(side="left", padx=(10, 10), fill='x')
+        self.action_widget_list.append(drop_down_menu)
+        self.pos4_widget_list.append(drop_down_menu)
+        return drop_down_menu
+        
     def _set_scheduler_variable_1(self, choice):
         self.variable_1 = choice
         self.schedule_button.configure(state="normal")
 
     def _set_scheduler_variable_2(self, choice):
         self.variable_2 = choice
+        self.schedule_button.configure(state="normal")
+
+    def _set_scheduler_variable_3(self, choice):
+        self.variable_3 = choice
         self.schedule_button.configure(state="normal")
 
     def button_template(self, frame, button_name: str):
