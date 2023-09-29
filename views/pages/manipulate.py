@@ -24,7 +24,6 @@ class ManipulateView(BaseView):
         self.variable_1 = ""
         self.variable_2 = ""
         self.scheduler_items = []
-        self.step_and_outcome = []
         self.step_count = 0
 
     def _render_page(self):
@@ -118,13 +117,17 @@ class ManipulateView(BaseView):
         self.sched_action_label = CTkLabel(self.scheduler_scroll_frame, text="Action", font=("Arial", 14))
         self.sched_action_label.grid(row=0, column=1, padx=(0, 150), pady=(0, 10), sticky="w")
 
-        # Variable label
-        self.variable_label = CTkLabel(self.scheduler_scroll_frame, text="Variable(s)", font=("Arial", 14))
-        self.variable_label.grid(row=0, column=2, padx=(0, 250), pady=(0, 10), sticky="w")
+        # Variable 1 label
+        self.variable_1_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 1", font=("Arial", 14))
+        self.variable_1_label.grid(row=0, column=2, padx=(0, 100), pady=(0, 10), sticky="w")
+
+        # Variable 2 label
+        self.variable_2_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 2", font=("Arial", 14))
+        self.variable_2_label.grid(row=0, column=3, padx=(0, 100), pady=(0, 10), sticky="w")
 
         # Outcome label
         self.outcome_label = CTkLabel(self.scheduler_scroll_frame, text="Outcome", font=("Arial", 14))
-        self.outcome_label.grid(row=0, column=3, padx=(0, 0), pady=(0, 10), sticky='w')
+        self.outcome_label.grid(row=0, column=4, padx=(0, 0), pady=(0, 10), sticky='w')
 
         # Delete All button
         self.delete_all_button = CTkButton(
@@ -183,39 +186,42 @@ class ManipulateView(BaseView):
                 self.step_checkbox = CTkCheckBox(self.scheduler_scroll_frame, text="("+str(self.step_count)+")")
                 self.step_checkbox.grid(row=self.step_count, column=0, padx=(10, 0), pady=(10, 0), sticky='w')
                 self.step_checkbox.select()
-                self.scheduler_items.append(self.step_checkbox)
-                
 
                 # Name of scheduled manipulation
-                self.manipulation_label_for_scheduler = CTkLabel(self.scheduler_scroll_frame, text=str(self.action_menu_var), font=("Arial", 14))
+                self.manipulation_label_for_scheduler = CTkLabel(self.scheduler_scroll_frame, text=str(self.action_menu_var))
                 self.manipulation_label_for_scheduler.grid(row=self.step_count, column=1, padx=(0, 0), pady=(10, 0), sticky='w')
-                self.scheduler_items.append(self.manipulation_label_for_scheduler)
 
                 if self.action_menu_var == "Add Column":
                     # Get user input for col name
                     self.variable_1 = self.user_entry_box.get()
 
-                # Varible name for scheduled manipulation
-                self.variable_label_for_scheduler = CTkLabel(
+                # Varible 1 name for scheduled manipulation
+                self.variable_1_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
-                    text=self.variable_1 + ", " + self.variable_2,  
-                    font=("Arial", 14)
+                    text=self.variable_1,  
                     )
-                self.variable_label_for_scheduler.grid(row=self.step_count, column=2, padx=(0, 0), pady=(10, 0), sticky='w')
-                self.scheduler_items.append(self.variable_label_for_scheduler)
+                self.variable_1_label_for_scheduler.grid(row=self.step_count, column=2, padx=(0, 0), pady=(10, 0), sticky='w')
+
+                # Varible 2 name for scheduled manipulation
+                self.variable_2_label_for_scheduler = CTkLabel(
+                    self.scheduler_scroll_frame, 
+                    text=self.variable_2,  
+                    )
+                self.variable_2_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 0), pady=(10, 0), sticky='w')
 
                 # Label for scheduled manipulation outcome
                 self.outcome_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
                     text="In Queue",  
-                    font=("Arial", 14)
                     )
-                self.outcome_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 0), pady=(10, 0), sticky='w')
-
-                self.scheduler_items.append(self.outcome_label_for_scheduler)   
-
-                scheduled_items_dict = {"step": self.step_checkbox, "outcome": self.outcome_label_for_scheduler}
-                self.step_and_outcome.append(scheduled_items_dict.copy())
+                self.outcome_label_for_scheduler.grid(row=self.step_count, column=4, padx=(0, 0), pady=(10, 0), sticky='w')
+              
+                scheduled_items_dict = {"step": self.step_checkbox, 
+                                        "action": self.manipulation_label_for_scheduler, 
+                                        "variable_1": self.variable_1_label_for_scheduler,
+                                        "variable_2": self.variable_2_label_for_scheduler,
+                                        "outcome": self.outcome_label_for_scheduler}
+                self.scheduler_items.append(scheduled_items_dict.copy())          
 
             finally:
                 # Pack forget for all previously packed widgets for action menu.

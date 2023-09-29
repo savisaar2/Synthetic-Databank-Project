@@ -82,15 +82,16 @@ class ManipulateController:
                 self.frame.action_selection_menu.configure(state="disabled")
 
     def _delete_all_scheduled_manipulations(self):
-        for widgets in self.frame.scheduler_items:
-            widgets.grid_remove()
+        for items_dict in self.frame.scheduler_items:
+            for widget in items_dict:
+                items_dict[widget].grid_forget()
+
         self.frame.scheduler_items = []
         self.scheduler_actions = []
         self.step_count = 0
         self.frame.action_selection_menu.configure(state="normal")
         self.frame.step_count = 0
         self.frame.generate_button.configure(state="disabled")
-        self.frame.step_and_outcome = []
 
     def _save_column_name(self):
         if len(self.frame.user_entry_box.get()) > 0:
@@ -148,7 +149,7 @@ class ManipulateController:
         self.frame.generate_button.configure(state="disabled")
 
     def _update_frame_scheduler_status(self,manip):
-            self.frame.step_and_outcome[manip["step"]-1]["outcome"].configure(text="Complete")
-            self.frame.step_and_outcome[manip["step"]-1]["step"].configure(state="disabled")
+            self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text="Complete")
+            self.frame.scheduler_items[manip["step"]-1]["step"].configure(state="disabled")
 
     
