@@ -10,15 +10,40 @@ class LibraryModel():
         """
         self.databank_dir = "db/databank/"
 
-    def convert_to_megabytes(self, byte_val): 
-        if byte_val >= 1024 * 1024:  # larger than 1 mb
-            size = byte_val / (1024 * 1024)
-            return f"{round(size, 2)} mb" 
-        else:
-            size = byte_val / 1024
-            return f"{round(size, 2)} kb"
+    def convert_to_megabytes(self, byte_val):
+        """
+        Converts bytes to readable format.
 
-    def sort_datasets_alphabetically(self, json_data): 
+        Parameters
+        ----------
+        byte_val : int
+            Byte value.
+        """
+        # Return 0 if 0.
+        if byte_val <= 0:
+            return "0 bytes"
+        
+        # Define our sizes.
+        units = ["bytes", "KB", "MB", "GB", "TB"]
+        index = 0
+        
+        # Loop through units until correct size found.
+        while byte_val >= 1024 and index < len(units) - 1:
+            byte_val /= 1024.0
+            index += 1
+        
+        # Return size value in 2 decimals.
+        return f"{byte_val:.2f} {units[index]}"
+
+    def sort_datasets_alphabetically(self, json_data):
+        """
+        Sorts json data into into alphabetical order.
+
+        Parameters
+        ----------
+        json_data : json
+            This parameter should be in json format.
+        """
         return sorted(json_data.keys(), key=str.lower)
 
     def get_datasets(self, mode, subset=None):
@@ -27,21 +52,30 @@ class LibraryModel():
         """
         file_size = []
         
-        if mode == "all": 
-            # Replaced to enable pulling for metadata for import functionality.
+        if mode == "all":
+            # Load all metadata and extract datasets.
             self._metadata = self.load_all_metadata()
             datasets = list(self._metadata.keys())
-        elif mode == "specific": 
+        elif mode == "specific":
+            # Use the provided subset of datasets.
             datasets = subset
 
+        # Iterate through dataset names in the metadata.
         for d in self._metadata:
-            if d in datasets: 
+            # Check if the dataset name is in the selected dataset list.
+            if d in datasets:
+                # Construct the full file path for the dataset csv file.
                 file_path = os.path.join("{}{}.csv".format(self.databank_dir, d))
-                if os.path.exists(file_path): 
+
+                # Check if the file exists
+                if os.path.exists(file_path):
+                    # Get the file size and convert it to megabytes.
                     file_size.append(self.convert_to_megabytes(os.path.getsize(file_path)))
-                else: 
+                else:
+                    # If the file doesn't exist, add "-" to indicate missing data.
                     file_size.append("-")
 
+        # Return list of dataset names and their file sizes.
         return [(file, size) for file, size in zip(datasets, file_size)]
     
     def get_file_metadata(self, file_name):
@@ -54,34 +88,61 @@ class LibraryModel():
         """
         Load or refresh databank's metadata information.
         """
+        # Open and store json data.
         with open("db/system/dataset_metadata.json", "r") as json_file: 
             json_data = json.load(json_file)
 
+        # Sort data into alphabetical order.
         sorted_json = self.sort_datasets_alphabetically(json_data)
         
+        # Return data.
         return {key: json_data[key] for key in sorted_json} # Alphabetically sorted json_file by key
 
     def search_metadata(self, keywords):
         """
         Search for specified keywords in metadata and return a dictionary of identified datasets.
         Matches string in filename, source and description fields of metadata (json) file. 
+
+        Parameters
+        ----------
+        keywords : str
+            Search string.
         """
+        # Convert the input keywords to lowercase and split into a list
         keyword_list = keywords.lower().split()
+        # Initialise a set to store matching metadata
         matching_metadata = set()
-        
-        for string in self._metadata:
-            description_lower = string.lower() # key
-            if any(re.search(word, description_lower) for word in keyword_list):
-                matching_metadata.add(string)
-            if any(re.search(word, self._metadata[string]["Source"].lower()) for word in keyword_list): 
-                matching_metadata.add(string)
-            if any(re.search(word, self._metadata[string]["Description"].lower()) for word in keyword_list):
+
+        # Iterate through metadata items (string is the key, metadata is the value)
+        for string, metadata in self._metadata.items():
+            description_lower = string.lower()
+            meta_source_lower = metadata["Source"].lower()
+            meta_description_lower = metadata["Description"].lower()
+            
+            # Check if any of the keywords match the key, Source, or Description
+            if any(re.search(word, description_lower) or re.search(word, meta_source_lower) or re.search(word, meta_description_lower) for word in keyword_list):
+                # Add the matching metadata to the set
                 matching_metadata.add(string)
 
+        # Convert the set of matching metadata to a list and return it
         return list(matching_metadata)
     
     def add_metadata(self, obj):
+        """
+        Adds metadata to the metadata store file.
+
+        Parameters
+        ----------
+        obj : dict
+            Dictionary object to store in metadata file.
+        """
+        # Load the existing metadata.
         existing_data = self.load_all_metadata()
+
+        # Update the existing metadata with new data.
         existing_data.update(obj)
+
+        # Open the metadata file for writing
         with open("db/system/dataset_metadata.json", "w") as json_file:
+            # Write the updated metadata to the json file
             json.dump(existing_data, json_file, indent=4)
