@@ -169,4 +169,23 @@ class AnalyseModel():
         temp_dict = pivot_calculation.to_dict()[vals] # return in following sample format {"cat1": 333, "cat2": 444}
         return {key: round(value, rounding) for key, value in temp_dict.items()} # rounding
     
-    
+    def convert_to_number(self, mode, val): 
+        """Convert 
+
+        Args:
+            mode (str): targeted input widget e.g. number rounding etc. 
+            val (str): user specified input.
+
+        Returns:
+            int: value
+        """
+        try: 
+            return int(val)
+        except ValueError:
+            if mode == "round": 
+                raise ValueError("Specify rounding value as an integer value.")
+            elif mode == "start_row": 
+                raise ValueError("Specify start row value as an integer value.")
+            elif mode == "end_row": 
+                raise ValueError("Specify end row value as an integer value.")
+

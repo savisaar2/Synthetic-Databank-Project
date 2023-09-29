@@ -297,14 +297,6 @@ class AnalyseView(BaseView):
         """
         table.heading(f"{target_header}", text=f"{new_header}")
 
-    def restyle_widgets(self): 
-        """Update style of widget for Treeview (table) - TODO: place elsewhere to ensure all 
-        Treeviews throughout app look the same! I.e. Change default values of Treeview widgets.
-        """
-        self.style = ttk.Style()
-        self.style.configure("Treeview", foreground="white", rowheight=20)
-        self.style.configure('Treeview.Heading', font=("Arial", 10))
-
     def reconfig_widgets(self, option, option_set): 
         """Toggle (disable or enable) the appropriate widget based on predefined conditions.
 
