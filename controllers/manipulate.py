@@ -115,7 +115,7 @@ class ManipulateController:
     def generate(self):
         if self.frame.generate_button._state == "normal":
             for manip in self.scheduler_actions:
-                if manip["outcome"] == "in_queue":
+                if manip["outcome"] == "in_queue" and self.frame.scheduler_items[manip["step"]-1]["step"].get() == "on":
                     self._update_frame_scheduler_status(manip)
 
                     match manip["action"]:

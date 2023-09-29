@@ -182,8 +182,27 @@ class ManipulateView(BaseView):
             try:
                 self.step_count +=1 # Increase step count
 
+                # Logic for step checkbox
+                def checkbox_event():
+                    for items_dict in self.scheduler_items:
+                        match items_dict["step"].get(), items_dict["outcome"].cget("text"):
+                            case "on", "In Queue":
+                                self.generate_button.configure(state="normal")
+                                break
+                            case "off", "Complete":
+                                self.generate_button.configure(state="disabled")
+                            case "off", "In Queue":
+                                self.generate_button.configure(state="disabled")
                 # Checkbox
-                self.step_checkbox = CTkCheckBox(self.scheduler_scroll_frame, text="("+str(self.step_count)+")")
+                self.step_checkbox_var = StringVar(value="on")
+                self.step_checkbox = CTkCheckBox(
+                    self.scheduler_scroll_frame, 
+                    text=str(self.step_count), 
+                    command=checkbox_event,
+                    variable=self.step_checkbox_var,
+                    onvalue="on",
+                    offvalue="off"
+                    )
                 self.step_checkbox.grid(row=self.step_count, column=0, padx=(10, 0), pady=(10, 0), sticky='w')
                 self.step_checkbox.select()
 
@@ -212,7 +231,7 @@ class ManipulateView(BaseView):
                 # Label for scheduled manipulation outcome
                 self.outcome_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
-                    text="In Queue",  
+                    text="In Queue"
                     )
                 self.outcome_label_for_scheduler.grid(row=self.step_count, column=4, padx=(0, 0), pady=(10, 0), sticky='w')
               
@@ -360,6 +379,9 @@ class ManipulateView(BaseView):
     def _set_scheduler_variable_2(self, choice):
         self.variable_2 = choice
         self.schedule_button.configure(state="normal")
+
+    
+
 
     def button_template(self, frame, button_name: str):
         button = CTkButton(
