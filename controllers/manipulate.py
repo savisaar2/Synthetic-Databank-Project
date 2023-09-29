@@ -150,6 +150,7 @@ class ManipulateController:
 
     def _update_frame_scheduler_status(self,manip):
             self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text="Complete")
+            self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text_color="Green")
             self.frame.scheduler_items[manip["step"]-1]["step"].configure(state="disabled")
 
     

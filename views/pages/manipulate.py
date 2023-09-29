@@ -111,23 +111,27 @@ class ManipulateView(BaseView):
 
         # Step label
         self.step_label = CTkLabel(self.scheduler_scroll_frame, text="Step", font=("Arial", 14))
-        self.step_label.grid(row=0, column=0, padx=(8, 50), pady=(0, 10), sticky="w")
+        self.step_label.grid(row=0, column=0, padx=(0, 30), pady=(0, 0), sticky="w")
 
         # Action label
         self.sched_action_label = CTkLabel(self.scheduler_scroll_frame, text="Action", font=("Arial", 14))
-        self.sched_action_label.grid(row=0, column=1, padx=(0, 150), pady=(0, 10), sticky="w")
+        self.sched_action_label.grid(row=0, column=1, padx=(0, 90), pady=(0, 0), sticky="w")
 
         # Variable 1 label
         self.variable_1_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 1", font=("Arial", 14))
-        self.variable_1_label.grid(row=0, column=2, padx=(0, 100), pady=(0, 10), sticky="w")
+        self.variable_1_label.grid(row=0, column=2, padx=(0, 90), pady=(0, 0), sticky="w")
 
         # Variable 2 label
         self.variable_2_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 2", font=("Arial", 14))
-        self.variable_2_label.grid(row=0, column=3, padx=(0, 100), pady=(0, 10), sticky="w")
+        self.variable_2_label.grid(row=0, column=3, padx=(0, 90), pady=(0, 0), sticky="w")
+
+        # Variable 3 label
+        self.variable_3_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 3", font=("Arial", 14))
+        self.variable_3_label.grid(row=0, column=4, padx=(0, 90), pady=(0, 0), sticky="w")
 
         # Outcome label
         self.outcome_label = CTkLabel(self.scheduler_scroll_frame, text="Outcome", font=("Arial", 14))
-        self.outcome_label.grid(row=0, column=4, padx=(0, 0), pady=(0, 10), sticky='w')
+        self.outcome_label.grid(row=0, column=5, padx=(0, 0), pady=(0, 0), sticky='e')
 
         # Delete All button
         self.delete_all_button = CTkButton(
@@ -201,14 +205,16 @@ class ManipulateView(BaseView):
                     command=checkbox_event,
                     variable=self.step_checkbox_var,
                     onvalue="on",
-                    offvalue="off"
+                    offvalue="off",
+                    width=5,
+                    height=5
                     )
-                self.step_checkbox.grid(row=self.step_count, column=0, padx=(10, 0), pady=(10, 0), sticky='w')
+                self.step_checkbox.grid(row=self.step_count, column=0, padx=(2, 0), pady=(0, 0), sticky='w')
                 self.step_checkbox.select()
 
                 # Name of scheduled manipulation
                 self.manipulation_label_for_scheduler = CTkLabel(self.scheduler_scroll_frame, text=str(self.action_menu_var))
-                self.manipulation_label_for_scheduler.grid(row=self.step_count, column=1, padx=(0, 0), pady=(10, 0), sticky='w')
+                self.manipulation_label_for_scheduler.grid(row=self.step_count, column=1, padx=(0, 0), pady=(0, 0), sticky='w')
 
                 if self.action_menu_var == "Add Column":
                     # Get user input for col name
@@ -219,21 +225,22 @@ class ManipulateView(BaseView):
                     self.scheduler_scroll_frame, 
                     text=self.variable_1,  
                     )
-                self.variable_1_label_for_scheduler.grid(row=self.step_count, column=2, padx=(0, 0), pady=(10, 0), sticky='w')
+                self.variable_1_label_for_scheduler.grid(row=self.step_count, column=2, padx=(0, 0), pady=(0, 0), sticky='w')
 
                 # Varible 2 name for scheduled manipulation
                 self.variable_2_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
                     text=self.variable_2,  
                     )
-                self.variable_2_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 0), pady=(10, 0), sticky='w')
+                self.variable_2_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 0), pady=(0, 0), sticky='w')
 
                 # Label for scheduled manipulation outcome
                 self.outcome_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
-                    text="In Queue"
+                    text="In Queue",
+                    text_color="yellow"
                     )
-                self.outcome_label_for_scheduler.grid(row=self.step_count, column=4, padx=(0, 0), pady=(10, 0), sticky='w')
+                self.outcome_label_for_scheduler.grid(row=self.step_count, column=5, padx=(0, 0), pady=(0, 0), sticky='w')
               
                 scheduled_items_dict = {"step": self.step_checkbox, 
                                         "action": self.manipulation_label_for_scheduler, 
@@ -292,21 +299,21 @@ class ManipulateView(BaseView):
                 # Show variable menu drop down
                 self.maniuplate_variable_menu = self._drop_down_menu_pos2_template("Select Variable", 
                     ["Single", "Multiple", "Entire Set"])   
+                self.maniuplate_variable_menu.configure(command=self.manipulate_col_select_callback)
             
     def reduce_method_select_callback(self, choice):
-        self.method_menu_var = choice
         self.variable_1 = choice
         self.schedule_button.configure(state="disabled")
 
         for widget in self.pos3_widget_list:
             widget.pack_forget()
 
-        if self.method_menu_var == "Algorithmic":
+        if choice == "Algorithmic":
             # Add technique selection drop down menu
             self.technique_selection_menu = self._drop_down_menu_pos3_template("Select Technique", 
                 ["A", "B", "C"]) 
 
-        elif self.method_menu_var == "Manual":
+        elif choice == "Manual":
             # Add column name label
             self.add_column_name_label = self._label_template("Column Name:")
 
@@ -314,8 +321,29 @@ class ManipulateView(BaseView):
             self.reduce_column_menu = self._drop_down_menu_pos3_template("Select Column", 
                 self.column_headers)
 
+    def manipulate_col_select_callback(self, choice):
+        self.variable_1 = choice
+        self.schedule_button.configure(state="disabled")
+
+        for widget in self.pos3_widget_list:
+            widget.pack_forget()
+        
+        match choice:
+            case "Single":
+                self.single_selection_menu = self._drop_down_menu_pos3_template("Select Manipulation", 
+                ["Add Noise", "Add Outliers", "Replace Null Values", "Replace Values", "Data Transformation"]) 
+            case "Multiple":
+                self.multiple_selection_menu = self._drop_down_menu_pos3_template("Select Manipulation", 
+                ["Add Noise", "Data Transformation"])
+            case "Entire Set":
+                self.multiple_selection_menu = self._drop_down_menu_pos3_template("Select Manipulation", 
+                ["Add Noise", "Reduce Dimensionality", "Expand", "Data Transformation"])                                
+
+
+
     def _clear_entry(self):
-        self.user_entry_box.delete(0, 'end')
+        if self.action_menu_var == "Add Column":
+            self.user_entry_box.delete(0, 'end')
 
     def _label_template(self, text):
         label = CTkLabel(
@@ -379,9 +407,6 @@ class ManipulateView(BaseView):
     def _set_scheduler_variable_2(self, choice):
         self.variable_2 = choice
         self.schedule_button.configure(state="normal")
-
-    
-
 
     def button_template(self, frame, button_name: str):
         button = CTkButton(
