@@ -69,9 +69,10 @@ class ManipulateController:
             self.scheduler_actions.append({
                 "step": self.step_count,
                 "action": self.frame.action_menu_var,
-                "variable_1": self.frame.variable_1,
-                "variable_2": self.frame.variable_2,
-                "variable_3": self.frame.variable_3,
+                "variable_1": self.frame.variables["var_1"],
+                "variable_2": self.frame.variables["var_2"],
+                "variable_3": self.frame.variables["var_3"],
+                "sme": self.frame.variables["sme"],
                 "outcome": "in_queue"
             })
             print(self.scheduler_actions)
@@ -106,8 +107,7 @@ class ManipulateController:
             self.frame.user_entry_box.configure(placeholder_text="Invalid column name, please retry...")
 
     # Temp method for testing
-    def remove_column(self):
-        
+    def remove_column(self):   
         df = self.model.DATASET.get_reference_to_current_snapshot()
         column_name = str(self.scheduler_actions[self.step_count-1]["variable_2"])
         df = df.drop([column_name], axis=1)
@@ -118,8 +118,7 @@ class ManipulateController:
         if self.frame.generate_button._state == "normal":
             for manip in self.scheduler_actions:
                 if manip["outcome"] == "in_queue" and self.frame.scheduler_items[manip["step"]-1]["step"].get() == "on":
-                    self._update_frame_scheduler_status(manip)
-
+                    
                     match manip["action"]:
                         case "Add":
                             print("add column generate")
@@ -147,7 +146,7 @@ class ManipulateController:
                                     print("manipulate, entire set")                                   
 
                     manip["outcome"] = "Complete"
-
+                    self._update_frame_scheduler_status(manip)
         self.frame.generate_button.configure(state="disabled")
 
     def _update_frame_scheduler_status(self,manip):
