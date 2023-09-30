@@ -72,6 +72,7 @@ class ManipulateController:
                 "variable_1": self.frame.variables["var_1"],
                 "variable_2": self.frame.variables["var_2"],
                 "variable_3": self.frame.variables["var_3"],
+                "variable_4": self.frame.variables["var_4"],
                 "sme": self.frame.variables["sme"],
                 "outcome": "in_queue"
             })
