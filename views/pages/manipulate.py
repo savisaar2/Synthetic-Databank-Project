@@ -76,6 +76,15 @@ class ManipulateView(BaseView):
             )
         self.schedule_button.pack(fill="both",side="right", padx=(8, 8), pady=(8,8))
 
+        # SME Selector
+        self.sme_selector = CTkSegmentedButton(
+            self.manipulations_frame_1,
+            values=["Single", "Multiple", "Entire"],
+            state="disabled",
+            command=(self._set_sme_variable)   
+        )
+        self.sme_selector.pack(side="right", padx=(8, 2), pady=8)
+
         # Action menu selector
         self.action_menu_var = StringVar(value="Select Action")
         self.action_selector = ["Add", "Reduce", "Manipulate"]
@@ -103,31 +112,31 @@ class ManipulateView(BaseView):
 
         # Step label
         self.step_label = CTkLabel(self.scheduler_scroll_frame, text="Step", font=("Arial", 14))
-        self.step_label.grid(row=0, column=0, padx=(0, 30), pady=(0, 0), sticky="w")
+        self.step_label.grid(row=0, column=6, padx=(20, 0), pady=(0, 0), sticky="e")
 
         # Action label
         self.sched_action_label = CTkLabel(self.scheduler_scroll_frame, text="Action", font=("Arial", 14))
-        self.sched_action_label.grid(row=0, column=1, padx=(0, 50), pady=(0, 0), sticky="w")
+        self.sched_action_label.grid(row=0, column=0, padx=(8, 50), pady=(0, 0), sticky="w")
 
         # Variable 1 label
         self.variable_1_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 1", font=("Arial", 14))
-        self.variable_1_label.grid(row=0, column=2, padx=(0, 80), pady=(0, 0), sticky="w")
+        self.variable_1_label.grid(row=0, column=1, padx=(0, 80), pady=(0, 0), sticky="w")
 
         # Variable 2 label
         self.variable_2_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 2", font=("Arial", 14))
-        self.variable_2_label.grid(row=0, column=3, padx=(0, 80), pady=(0, 0), sticky="w")
+        self.variable_2_label.grid(row=0, column=2, padx=(0, 80), pady=(0, 0), sticky="w")
 
         # Variable 3 label
         self.variable_3_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 3", font=("Arial", 14))
-        self.variable_3_label.grid(row=0, column=4, padx=(0, 80), pady=(0, 0), sticky="w")
+        self.variable_3_label.grid(row=0, column=3, padx=(0, 80), pady=(0, 0), sticky="w")
 
         # SME label
         self.sme_label = CTkLabel(self.scheduler_scroll_frame, text="SME", font=("Arial", 14))
-        self.sme_label.grid(row=0, column=5, padx=(0, 30), pady=(0, 0), sticky="w")
+        self.sme_label.grid(row=0, column=4, padx=(0, 30), pady=(0, 0), sticky="w")
 
         # Outcome label
         self.outcome_label = CTkLabel(self.scheduler_scroll_frame, text="Outcome", font=("Arial", 14))
-        self.outcome_label.grid(row=0, column=6, padx=(0, 0), pady=(0, 0), sticky='e')
+        self.outcome_label.grid(row=0, column=5, padx=(0, 0), pady=(0, 0), sticky='e')
 
         # Delete All button
         self.delete_all_button = CTkButton(
@@ -204,42 +213,44 @@ class ManipulateView(BaseView):
                     onvalue="on",
                     offvalue="off",
                     width=5,
-                    height=5
+                    height=5,
+                    checkbox_height=15,
+                    checkbox_width=15
                     )
-                self.step_checkbox.grid(row=self.step_count, column=0, padx=(2, 0), pady=(0, 0), sticky='w')
+                self.step_checkbox.grid(row=self.step_count, column=6, padx=(5, 0), pady=(0, 0), sticky='e')
                 self.step_checkbox.select()
 
                 # Name of scheduled manipulation
                 self.manipulation_label_for_scheduler = CTkLabel(self.scheduler_scroll_frame, text=str(self.action_menu_var))
-                self.manipulation_label_for_scheduler.grid(row=self.step_count, column=1, padx=(0, 0), pady=(0, 0), sticky='w')
+                self.manipulation_label_for_scheduler.grid(row=self.step_count, column=0, padx=(8, 0), pady=(0, 0), sticky='w')
 
                 # Varible 1 name for scheduled manipulation
                 self.variable_1_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
                     text=self.variables["var_1"]
                     )
-                self.variable_1_label_for_scheduler.grid(row=self.step_count, column=2, padx=(0, 0), pady=(0, 0), sticky='w')
+                self.variable_1_label_for_scheduler.grid(row=self.step_count, column=1, padx=(0, 0), pady=(0, 0), sticky='w')
 
                 # Varible 2 name for scheduled manipulation
                 self.variable_2_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
                     text=self.variables["var_2"],  
                     )
-                self.variable_2_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 0), pady=(0, 0), sticky='w')
+                self.variable_2_label_for_scheduler.grid(row=self.step_count, column=2, padx=(0, 0), pady=(0, 0), sticky='w')
 
                 # Varible 3 name for scheduled manipulation
                 self.variable_3_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
                     text=self.variables["var_3"],  
                     )
-                self.variable_3_label_for_scheduler.grid(row=self.step_count, column=4, padx=(0, 0), pady=(0, 0), sticky='w')
+                self.variable_3_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 0), pady=(0, 0), sticky='w')
 
                 # SME name for scheduled manipulation
                 self.sme_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
                     text=self.variables["sme"],  
                     )
-                self.sme_label_for_scheduler.grid(row=self.step_count, column=5, padx=(0, 0), pady=(0, 0), sticky='w')
+                self.sme_label_for_scheduler.grid(row=self.step_count, column=4, padx=(0, 0), pady=(0, 0), sticky='w')
 
                 # Label for scheduled manipulation outcome
                 self.outcome_label_for_scheduler = CTkLabel(
@@ -247,8 +258,9 @@ class ManipulateView(BaseView):
                     text="In Queue",
                     text_color="yellow"
                     )
-                self.outcome_label_for_scheduler.grid(row=self.step_count, column=6, padx=(0, 0), pady=(0, 0), sticky='w')
+                self.outcome_label_for_scheduler.grid(row=self.step_count, column=5, padx=(0, 0), pady=(0, 0), sticky='w')
               
+                # Scheduled manipulations widgets added to a dict to be deleted by user via delete all button.
                 scheduled_items_dict = {"step": self.step_checkbox, 
                                         "action": self.manipulation_label_for_scheduler, 
                                         "variable_1": self.variable_1_label_for_scheduler,
@@ -266,13 +278,18 @@ class ManipulateView(BaseView):
                 # Reset action menu
                 self.action_selection_menu.set("Select Action")
 
-                # Delete text in user entry box
-                self._clear_entry()
+                # Reset SME selector
+                self.sme_selector.configure(state="disabled")
+                self.sme_selector.configure(values=["Single", "Multiple", "Entire"])
+                self.sme_selector.set("")
 
     def action_callback(self, choice):
         self.action_menu_var = choice
         self.schedule_button.configure(state="disabled")  
         self.variables = {"var_1":"", "var_2":"", "var_3":"", "sme":""}
+        # Reset SME selector
+        self.sme_selector.configure(state="disabled")
+        self.sme_selector.set("")
 
         # Remove all previously packed widgets in manipulations frame.
         for widget in self.widget_list:
@@ -298,6 +315,8 @@ class ManipulateView(BaseView):
     def add_select_callback(self, choice):
         self.variables["var_1"] = choice
         self.schedule_button.configure(state="disabled")
+        self.sme_selector.configure(state="disabled")
+        self.sme_selector.set("")
 
         # Remove all previously packed widgets in manipulations frame.
         for widget in self.widget_list:
@@ -315,10 +334,12 @@ class ManipulateView(BaseView):
     def add_noise_technique_callback(self, choice):
         self.variables["var_2"] = choice
         self.schedule_button.configure(state="disabled")
+        self.sme_selector.configure(state="disabled")
+        self.sme_selector.set("")
 
         # Remove all previously packed widgets in manipulations frame.
         for widget in self.widget_list:
-            if widget["col_pos"] == 3 or widget["col_pos"] == 4:
+            if widget["col_pos"] != 1 and widget["col_pos"] != 2:
                 widget["widget"].grid_forget()
 
         match choice:
@@ -326,36 +347,69 @@ class ManipulateView(BaseView):
                 self.user_entry_box = self.user_entry_box_template(3, self.entry_box_standard_callback)
             case "Number of Values":
                 self.user_entry_box = self.user_entry_box_template(3, self.entry_box_numerical_callback)
+
             case "Add Outliers":
+                self.outliers_technique_selection_menu = self._drop_down_menu_template("Select Technique", 
+                ["Z-score(lower percentile)", "Z-score(upper percentile)", "Percentile", "Min/Max"], 
+                self.outliers_technique_callback, 3)
+    
+    def outliers_technique_callback(self, choice):
+        self.variables["var_3"] = choice
+        self.schedule_button.configure(state="disabled")
+        self.sme_selector.configure(state="disabled")
+        self.sme_selector.set("")
+
+        # Remove all previously packed widgets in manipulations frame.
+        for widget in self.widget_list:
+            if widget["col_pos"] != 1 and widget["col_pos"] != 2 and widget["col_pos"] != 3:
+                widget["widget"].grid_forget()
+
+        match choice:
+            case "Z-score(lower percentile)":
+                self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
+                    ["Single"], self._set_sme_variable, 4)
+            case "Z-score(upper percentile)":
+                self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
+                    ["Single"], self._set_sme_variable, 4)
+            case "Percentile":
+                self.user_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_callback)
+            case "Min/Max":
                 pass
 
     def add_column_technique_callback(self, choice):
         self.variables["var_2"] = choice
         self.schedule_button.configure(state="disabled")
+        self.sme_selector.configure(state="disabled")
+        self.sme_selector.set("")
 
         # Remove all previously packed widgets in manipulations frame.
         for widget in self.widget_list:
-            if widget["col_pos"] == 3 or widget["col_pos"] == 4:
+            if widget["col_pos"] != 1 and widget["col_pos"] != 2:
                 widget["widget"].grid_forget()
 
         match choice:
             case "Duplicate":
                 self.column_technique_selection_menu = self._drop_down_menu_template("Select Column", 
-                self.column_headers, self._column_3_S_callback, 3)
+                self.column_headers, self._sme_selector_col_3_callback, 3)
+                self.sme_selector.configure(values=["Single"])
             case "New":
                 self.user_entry_box = self.user_entry_box_template(3, self.entry_box_standard_callback)
+                self.sme_selector.configure(values=["Single"])
             case "Feature Engineering":
                 self.column_technique_selection_menu = self._drop_down_menu_template("Select Technique", 
                 ["Polynomial Features", "Interaction Features", "Feature Aggregation", "Feature Crosses"],
-                self._column_3_SM_callback, 3)
+                self._sme_selector_col_3_callback, 3)
+                self.sme_selector.configure(values=["Single", "Multiple"])
 
     def reduce_method_select_callback(self, choice):
         self.variables["var_1"] = choice
         self.schedule_button.configure(state="disabled")
+        self.sme_selector.configure(state="disabled")
+        self.sme_selector.set("")
 
         # Remove all previously packed widgets in manipulations frame.
         for widget in self.widget_list:
-            if widget["col_pos"] == 2:
+            if widget["col_pos"] != 1:
                 widget["widget"].grid_forget()
 
         if choice == "Data Dimensionality":
@@ -371,32 +425,33 @@ class ManipulateView(BaseView):
     def _dimensionality_reduction_callback(self, choice):
         self.variables["var_2"] = choice
         self.schedule_button.configure(state="disabled")
+        self.sme_selector.configure(state="disabled")
+        self.sme_selector.set("")
 
         # Remove all previously packed widgets in manipulations frame.
         for widget in self.widget_list:
-            if widget["col_pos"] == 3 or widget["col_pos"] == 4:
+            if widget["col_pos"] != 1 and widget["col_pos"] != 2:
                 widget["widget"].grid_forget()
 
         match choice:
             case "Algorithmic":
                 self.algorithmic_selection_menu = self._drop_down_menu_template("Select Technique", 
                 ["PCA", "LDA", "SVD", "Sklearn"], None, 3) 
-                self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
-                ["Entire"], self._set_sme_variable, 4)
 
             case "Manual":
                 self.algorithmic_selection_menu = self._drop_down_menu_template("Select Technique", 
                 ["Retain", "Remove"], None, 3) 
-                self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
-                ["Entire"], self._set_sme_variable, 4)
+
 
     def manipulate_col_select_callback(self, choice):
         self.variables["var_1"] = choice
         self.schedule_button.configure(state="disabled")
+        self.sme_selector.configure(state="disabled")
+        self.sme_selector.set("")
 
          # Remove all previously packed widgets in manipulations frame.
         for widget in self.widget_list:
-            if widget["col_pos"] == 2:
+            if widget["col_pos"] != 1:
                 widget["widget"].grid_forget()
 
         match choice:
@@ -412,9 +467,6 @@ class ManipulateView(BaseView):
             case "Data Transformation":
                 self.data_transformation_menu = self._drop_down_menu_template("Select Manipulation", 
                 ["Feature Scaling/Normalisation", "Feature Encoding"], None, 2)                            
-
-    def _clear_entry(self):
-        pass
 
     def _label_template(self, text, col_pos):
         label = CTkLabel(
@@ -444,33 +496,22 @@ class ManipulateView(BaseView):
     def entry_box_standard_callback(self, choice):
         if len(choice) > 0:
             self.variables["var_3"] = choice
-            for widget in self.widget_list:
-                if widget["col_pos"] == 4:
-                    widget["widget"].grid_forget()
-            self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
-                ["Single", "Mutiple", "Entire"], self._set_sme_variable, 4)
+            self.sme_selector.configure(state="normal")  
             return True
         elif len(choice) == 0:
-            for widget in self.widget_list:
-                if widget["col_pos"] == 4:
-                    widget["widget"].grid_forget()
+            self.sme_selector.configure(state="disabled") 
             return True
 
     def entry_box_numerical_callback(self, choice):
         if choice.isdigit():
             self.variables["var_3"] = choice
-            for widget in self.widget_list:
-                if widget["col_pos"] == 4:
-                    widget["widget"].grid_forget()
-            self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
-                ["Single", "Mutiple", "Entire"], self._set_sme_variable, 4)
+            self.sme_selector.configure(state="normal")
             return True
         elif len(choice) == 0:
-            for widget in self.widget_list:
-                if widget["col_pos"] == 4:
-                    widget["widget"].grid_forget()
+            self.sme_selector.configure(state="disabled") 
             return True
         else:
+            self.sme_selector.configure(state="disabled") 
             return False
         
     def _drop_down_menu_template(self, start_text: str, menu_options: list, command_func, col_pos: int):    
@@ -492,23 +533,9 @@ class ManipulateView(BaseView):
         self.variables["sme"] = choice
         self.schedule_button.configure(state="normal")
 
-    def _column_3_S_callback(self, choice):
+    def _sme_selector_col_3_callback(self, choice):
         self.variables["var_3"] = choice
-        self.schedule_button.configure(state="disabled")
-        self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
-        ["Single"], self._set_sme_variable, 4)
-
-    def _column_3_SM_callback(self, choice):
-        self.variables["var_3"] = choice
-        self.schedule_button.configure(state="disabled")
-        self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
-        ["Single", "Multiple"], self._set_sme_variable, 4)
-
-    def _column_3_SME_single_callback(self, choice):
-        self.variables["var_3"] = choice
-        self.schedule_button.configure(state="disabled")
-        self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
-        ["Single", "Multiple", "Entire"], self._set_sme_variable, 4)
+        self.sme_selector.configure(state="enabled")
 
     def button_template(self, frame, button_name: str):
         button = CTkButton(

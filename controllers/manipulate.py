@@ -138,9 +138,6 @@ class ManipulateController:
                                             pass
                                         case "Feature Engineering":
                                             pass
-                                    
-
-                            
 
                         case "Reduce":
                             match manip["variable_1"]:
