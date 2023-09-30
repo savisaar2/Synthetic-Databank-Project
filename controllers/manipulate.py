@@ -121,7 +121,26 @@ class ManipulateController:
                     
                     match manip["action"]:
                         case "Add":
-                            print("add column generate")
+                            match manip["variable_1"]:
+                                case "Noise":
+                                    match manip["variable_2"]:
+                                        case "Custom value":
+                                            print("GENERATE: Add, Noise, Custom Value")
+                                        case "Number of Values":
+                                            print("GENERATE: Add, Noise, Number of values")
+                                        case "Add Outliers":
+                                            pass
+                                case "Column":
+                                    match manip["variable_1"]:
+                                        case "Duplicate":
+                                            pass
+                                        case "New":
+                                            pass
+                                        case "Feature Engineering":
+                                            pass
+                                    
+
+                            
 
                         case "Reduce":
                             match manip["variable_1"]:

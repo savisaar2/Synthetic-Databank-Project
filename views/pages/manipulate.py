@@ -323,11 +323,9 @@ class ManipulateView(BaseView):
 
         match choice:
             case "Custom value":
-                self.user_entry_box = self.user_entry_box_template(3)
+                self.user_entry_box = self.user_entry_box_template(3, self.entry_box_standard_callback)
             case "Number of Values":
-                self.user_entry_box = self.user_entry_box_template(3)
-                self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
-                ["Single", "Mutiple", "Entire"], self._set_sme_variable, 4)
+                self.user_entry_box = self.user_entry_box_template(3, self.entry_box_numerical_callback)
             case "Add Outliers":
                 pass
 
@@ -343,13 +341,13 @@ class ManipulateView(BaseView):
         match choice:
             case "Duplicate":
                 self.column_technique_selection_menu = self._drop_down_menu_template("Select Column", 
-                self.column_headers, self._column_3_callback, 3)
+                self.column_headers, self._column_3_S_callback, 3)
             case "New":
-                self.user_entry_box = self.user_entry_box_template(3)
+                self.user_entry_box = self.user_entry_box_template(3, self.entry_box_standard_callback)
             case "Feature Engineering":
                 self.column_technique_selection_menu = self._drop_down_menu_template("Select Technique", 
                 ["Polynomial Features", "Interaction Features", "Feature Aggregation", "Feature Crosses"],
-                None, 3)
+                self._column_3_SM_callback, 3)
 
     def reduce_method_select_callback(self, choice):
         self.variables["var_1"] = choice
@@ -427,9 +425,9 @@ class ManipulateView(BaseView):
         self.widget_list.append({"col_pos": col_pos, "widget": label})
         return label
     
-    def user_entry_box_template(self, col_pos):
+    def user_entry_box_template(self, col_pos, callback):
         # User entry text box template
-        entry_box_command = self.register(self.entry_box_callback)
+        entry_box_command = self.register(callback)
         user_entry_box = CTkEntry(
             self.manipulations_frame_2,
             textvariable=StringVar(value=""),
@@ -443,7 +441,7 @@ class ManipulateView(BaseView):
         
         return user_entry_box
     
-    def entry_box_callback(self, choice):
+    def entry_box_standard_callback(self, choice):
         if len(choice) > 0:
             self.variables["var_3"] = choice
             for widget in self.widget_list:
@@ -458,6 +456,23 @@ class ManipulateView(BaseView):
                     widget["widget"].grid_forget()
             return True
 
+    def entry_box_numerical_callback(self, choice):
+        if choice.isdigit():
+            self.variables["var_3"] = choice
+            for widget in self.widget_list:
+                if widget["col_pos"] == 4:
+                    widget["widget"].grid_forget()
+            self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
+                ["Single", "Mutiple", "Entire"], self._set_sme_variable, 4)
+            return True
+        elif len(choice) == 0:
+            for widget in self.widget_list:
+                if widget["col_pos"] == 4:
+                    widget["widget"].grid_forget()
+            return True
+        else:
+            return False
+        
     def _drop_down_menu_template(self, start_text: str, menu_options: list, command_func, col_pos: int):    
         menu_var = StringVar(value=start_text)
         selector = menu_options
@@ -477,11 +492,23 @@ class ManipulateView(BaseView):
         self.variables["sme"] = choice
         self.schedule_button.configure(state="normal")
 
-    def _column_3_callback(self, choice):
+    def _column_3_S_callback(self, choice):
         self.variables["var_3"] = choice
         self.schedule_button.configure(state="disabled")
         self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
         ["Single"], self._set_sme_variable, 4)
+
+    def _column_3_SM_callback(self, choice):
+        self.variables["var_3"] = choice
+        self.schedule_button.configure(state="disabled")
+        self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
+        ["Single", "Multiple"], self._set_sme_variable, 4)
+
+    def _column_3_SME_single_callback(self, choice):
+        self.variables["var_3"] = choice
+        self.schedule_button.configure(state="disabled")
+        self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
+        ["Single", "Multiple", "Entire"], self._set_sme_variable, 4)
 
     def button_template(self, frame, button_name: str):
         button = CTkButton(
