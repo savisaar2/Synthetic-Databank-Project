@@ -277,6 +277,7 @@ class ManipulateView(BaseView):
                                         "variable_1": self.variable_1_label_for_scheduler,
                                         "variable_2": self.variable_2_label_for_scheduler,
                                         "variable_3": self.variable_3_label_for_scheduler,
+                                        "variable_4": self.variable_4_label_for_scheduler,
                                         "sme": self.sme_label_for_scheduler,
                                         "outcome": self.outcome_label_for_scheduler}
                 self.scheduler_items.append(scheduled_items_dict.copy())          
@@ -300,6 +301,7 @@ class ManipulateView(BaseView):
         self.variables = {"var_1":"", "var_2":"", "var_3":"", "var_4":"", "sme":""}
         # Reset SME selector
         self.sme_selector.configure(state="disabled")
+        self.sme_selector.configure(values=["Single", "Multiple", "Entire"])
         self.sme_selector.set("")
 
         # Remove all previously packed widgets in manipulations frame.
@@ -416,6 +418,7 @@ class ManipulateView(BaseView):
         self.variables["var_1"] = choice
         self.schedule_button.configure(state="disabled")
         self.sme_selector.configure(state="disabled")
+        self.sme_selector.configure(values=["Entire"])
         self.sme_selector.set("")
 
         # Remove all previously packed widgets in manipulations frame.
@@ -431,7 +434,7 @@ class ManipulateView(BaseView):
         elif choice == "Rows":
             # Add drop down menu for column selection
             self.reduce_column_menu = self._drop_down_menu_template("Select Variable", 
-                ["Missing Values", "Duplicate Rows"], None, 2)
+                ["Missing Values", "Duplicate Rows"], self._sme_selector_col_2_callback, 2)
 
     def _dimensionality_reduction_callback(self, choice):
         self.variables["var_2"] = choice
@@ -452,7 +455,28 @@ class ManipulateView(BaseView):
 
             case "Manual":
                 self.algorithmic_selection_menu = self._drop_down_menu_template("Select Technique", 
-                ["Retain", "Remove"], None, 3) 
+                ["Retain", "Remove"], self._dimension_reduction_manual_callback, 3) 
+
+
+    def _dimension_reduction_manual_callback(self, choice):
+        self.variables["var_3"] = choice
+        self.schedule_button.configure(state="disabled")
+        self.sme_selector.configure(state="disabled")
+        self.sme_selector.configure(values=["Entire"])
+        self.sme_selector.set("")  
+
+        # Remove all previously packed widgets in manipulations frame.
+        for widget in self.widget_list:
+            if widget["col_pos"] != 1 and widget["col_pos"] != 2 and widget["col_pos"] != 3:
+                widget["widget"].grid_forget() 
+
+        match choice:
+            case "Retain":
+                self.pca_existing_drop_down = self._drop_down_menu_template("Select Column",
+                self.column_headers, self._sme_selector_col_4_callback, 4)                
+            case "Remove":
+                self.pca_existing_drop_down = self._drop_down_menu_template("Select Column",
+                self.column_headers, self._sme_selector_col_4_callback, 4)    
 
     def _dimension_reduction_algo_callback(self, choice):
         self.variables["var_3"] = choice
@@ -485,7 +509,6 @@ class ManipulateView(BaseView):
                     self.column_headers, self._sme_selector_col_4_callback ,4)
             case "Sklearn(Retain)":
                 self.user_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback)
-
 
     def manipulate_col_select_callback(self, choice):
         self.variables["var_1"] = choice
@@ -588,6 +611,10 @@ class ManipulateView(BaseView):
     def _set_sme_variable(self, choice):
         self.variables["sme"] = choice
         self.schedule_button.configure(state="normal")
+
+    def _sme_selector_col_2_callback(self, choice):
+        self.variables["var_2"] = choice
+        self.sme_selector.configure(state="enabled")
 
     def _sme_selector_col_3_callback(self, choice):
         self.variables["var_3"] = choice
