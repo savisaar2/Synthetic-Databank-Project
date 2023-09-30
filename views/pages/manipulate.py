@@ -323,17 +323,11 @@ class ManipulateView(BaseView):
 
         match choice:
             case "Custom value":
-                self.user_entry_box = self._user_entry_box_template(3, "Enter custom value")
-
-                self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
-                ["Single", "Mutiple", "Entire"], self._set_sme_variable, 4)
-
+                self.user_entry_box = self.user_entry_box_template(3)
             case "Number of Values":
-                self.user_entry_box = self._user_entry_box_template(3, "Enter number of values")
-
+                self.user_entry_box = self.user_entry_box_template(3)
                 self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
                 ["Single", "Mutiple", "Entire"], self._set_sme_variable, 4)
-
             case "Add Outliers":
                 pass
 
@@ -351,7 +345,7 @@ class ManipulateView(BaseView):
                 self.column_technique_selection_menu = self._drop_down_menu_template("Select Column", 
                 self.column_headers, self._column_3_callback, 3)
             case "New":
-                self.user_entry_box = self._user_entry_box_template(3, "Enter column name...")
+                self.user_entry_box = self.user_entry_box_template(3)
             case "Feature Engineering":
                 self.column_technique_selection_menu = self._drop_down_menu_template("Select Technique", 
                 ["Polynomial Features", "Interaction Features", "Feature Aggregation", "Feature Crosses"],
@@ -433,18 +427,37 @@ class ManipulateView(BaseView):
         self.widget_list.append({"col_pos": col_pos, "widget": label})
         return label
     
-    def _user_entry_box_template(self, col_pos, place_holder_text):
+    def user_entry_box_template(self, col_pos):
         # User entry text box template
+        entry_box_command = self.register(self.entry_box_callback)
         user_entry_box = CTkEntry(
             self.manipulations_frame_2,
-            placeholder_text=place_holder_text,
+            textvariable=StringVar(value=""),
             corner_radius=5, 
             width=150,
+            validate='key',
+            validatecommand=(entry_box_command, '%P')
             ) 
         user_entry_box.grid(row=0, column=col_pos, padx=(8, 10), pady=(8, 8), sticky="w")
         self.widget_list.append({"col_pos": col_pos, "widget": user_entry_box})
+        
         return user_entry_box
     
+    def entry_box_callback(self, choice):
+        if len(choice) > 0:
+            self.variables["var_3"] = choice
+            for widget in self.widget_list:
+                if widget["col_pos"] == 4:
+                    widget["widget"].grid_forget()
+            self.sme_selection_menu = self._drop_down_menu_template("Select Column", 
+                ["Single", "Mutiple", "Entire"], self._set_sme_variable, 4)
+            return True
+        elif len(choice) == 0:
+            for widget in self.widget_list:
+                if widget["col_pos"] == 4:
+                    widget["widget"].grid_forget()
+            return True
+
     def _drop_down_menu_template(self, start_text: str, menu_options: list, command_func, col_pos: int):    
         menu_var = StringVar(value=start_text)
         selector = menu_options
