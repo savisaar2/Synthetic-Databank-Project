@@ -42,9 +42,6 @@ class ManipulateController:
         # Delete all sceduled manipulations
         self.frame.delete_all_button.bind("<Button-1>", lambda _: self._delete_all_scheduled_manipulations())
 
-        # Save column name bind
-        self.frame.save_column_name_button.bind("<Button-1>", lambda _: self._save_column_name())
-
         # Generate button bind
         self.frame.generate_button.bind("<Button-1>", lambda _: self.generate(), add="+")
         self.frame.generate_button.bind("<Button-1>", self._refresh_manipulate_widgets, add="+")
@@ -95,17 +92,6 @@ class ManipulateController:
         self.frame.action_selection_menu.configure(state="normal")
         self.frame.step_count = 0
         self.frame.generate_button.configure(state="disabled")
-
-    def _save_column_name(self):
-        if len(self.frame.user_entry_box.get()) > 0:
-            self.frame.schedule_button.configure(state="normal")
-            self.frame.save_column_name_button.configure(state="disabled")
-            self.frame.user_entry_box.configure(state="disabled")
-            self.frame.variable_3 = self.frame.user_entry_box.get()
-        else:
-            self.frame.user_entry_box.pack_forget()
-            self.frame.user_entry_box = self.frame._user_entry_box_template()
-            self.frame.user_entry_box.configure(placeholder_text="Invalid column name, please retry...")
 
     # Temp method for testing
     def remove_column(self):   
