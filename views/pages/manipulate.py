@@ -323,7 +323,7 @@ class ManipulateView(BaseView):
 
     def add_select_callback(self, choice):
         self.variables["var_1"] = choice
-        self._refresh_menu_widgets_col_2()
+        self._refresh_menu_widgets(2)
 
         match choice:
             case "Noise":
@@ -335,7 +335,7 @@ class ManipulateView(BaseView):
 
     def add_noise_technique_callback(self, choice):
         self.variables["var_2"] = choice
-        self._refresh_menu_widgets_col_3()
+        self._refresh_menu_widgets(3)
 
         match choice:
             case "Custom value":
@@ -349,7 +349,7 @@ class ManipulateView(BaseView):
     
     def outliers_technique_callback(self, choice):
         self.variables["var_3"] = choice
-        self._refresh_menu_widgets_col_4()
+        self._refresh_menu_widgets(4)
 
         match choice:
             case "Z-score(lower percentile)":
@@ -366,7 +366,7 @@ class ManipulateView(BaseView):
 
     def add_column_technique_callback(self, choice):
         self.variables["var_2"] = choice
-        self._refresh_menu_widgets_col_3()
+        self._refresh_menu_widgets(3)
 
         match choice:
             case "Duplicate":
@@ -385,7 +385,7 @@ class ManipulateView(BaseView):
     def reduce_method_select_callback(self, choice):
         self.variables["var_1"] = choice
         self.sme_selector.configure(values=["Entire"])
-        self._refresh_menu_widgets_col_2()
+        self._refresh_menu_widgets(2)
 
         if choice == "Data Dimensionality":
             # Add technique selection drop down menu
@@ -399,7 +399,7 @@ class ManipulateView(BaseView):
 
     def _dimensionality_reduction_callback(self, choice):
         self.variables["var_2"] = choice
-        self._refresh_menu_widgets_col_3()
+        self._refresh_menu_widgets(3)
 
         match choice:
             case "Algorithmic":
@@ -415,7 +415,7 @@ class ManipulateView(BaseView):
     def _dimension_reduction_manual_callback(self, choice):
         self.variables["var_3"] = choice
         self.sme_selector.configure(values=["Entire"])
-        self._refresh_menu_widgets_col_4()
+        self._refresh_menu_widgets(4)
 
         match choice:
             case "Retain":
@@ -428,7 +428,7 @@ class ManipulateView(BaseView):
     def _dimension_reduction_algo_callback(self, choice):
         self.variables["var_3"] = choice
         self.sme_selector.configure(values=["Entire"])
-        self._refresh_menu_widgets_col_4()
+        self._refresh_menu_widgets(4)
 
         match choice:
             case "PCA(Existing)":
@@ -452,7 +452,7 @@ class ManipulateView(BaseView):
 
     def manipulate_col_select_callback(self, choice):
         self.variables["var_1"] = choice
-        self._refresh_menu_widgets_col_2()
+        self._refresh_menu_widgets(2)
 
         match choice:
             case "Replace Missing Values":
@@ -471,7 +471,7 @@ class ManipulateView(BaseView):
     def _replace_missing_values_callback(self, choice):
         self.variables["var_2"] = choice
         self.sme_selector.configure(values=["Single"])
-        self._refresh_menu_widgets_col_3()
+        self._refresh_menu_widgets(3)
 
         match choice:
             case "Numerical Column":
@@ -484,7 +484,7 @@ class ManipulateView(BaseView):
     def _categorical_column_callback(self, choice):
         self.variables["var_3"] = choice
         self.sme_selector.configure(values=["Single"])
-        self._refresh_menu_widgets_col_4()
+        self._refresh_menu_widgets(4)
         
         match choice:
             case "Algorithm":
@@ -496,7 +496,7 @@ class ManipulateView(BaseView):
     def _numerical_column_callback(self, choice):
         self.variables["var_3"] = choice
         self.sme_selector.configure(values=["Single"])
-        self._refresh_menu_widgets_col_4()
+        self._refresh_menu_widgets(4)
 
         match choice:
             case "Algorithm":
@@ -614,32 +614,24 @@ class ManipulateView(BaseView):
             )       
         return button    
 
-    def _refresh_menu_widgets_col_2(self):
+    def _refresh_menu_widgets(self, col_ref):
         self.schedule_button.configure(state="disabled")
         self.sme_selector.configure(state="disabled")
         self.sme_selector.set("")
 
-        for widget in self.widget_list:
-            if widget["col_pos"] != 1:
-                widget["widget"].grid_forget()
-
-    def _refresh_menu_widgets_col_3(self):
-        self.schedule_button.configure(state="disabled")
-        self.sme_selector.configure(state="disabled")
-        self.sme_selector.set("")
-
-        for widget in self.widget_list:
-            if widget["col_pos"] != 1 and widget["col_pos"] != 2:
-                widget["widget"].grid_forget()
-
-    def _refresh_menu_widgets_col_4(self):
-        self.schedule_button.configure(state="disabled")
-        self.sme_selector.configure(state="disabled")
-        self.sme_selector.set("")
-
-        for widget in self.widget_list:
-            if widget["col_pos"] != 1 and widget["col_pos"] != 2 and widget["col_pos"] != 3:
-                widget["widget"].grid_forget()
+        match col_ref:
+            case 2:
+                for widget in self.widget_list:
+                    if widget["col_pos"] != 1:
+                        widget["widget"].grid_forget()
+            case 3:
+                for widget in self.widget_list:
+                    if widget["col_pos"] != 1 and widget["col_pos"] != 2:
+                        widget["widget"].grid_forget()
+            case 4:
+                for widget in self.widget_list:
+                    if widget["col_pos"] != 1 and widget["col_pos"] != 2 and widget["col_pos"] != 3:
+                        widget["widget"].grid_forget()
                     
     def refresh_manipulate_widgets(self, column_headers):
         """Refresh, update or populate the values of various widgets on Manipulate view with appropriate
