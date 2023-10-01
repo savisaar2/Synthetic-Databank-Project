@@ -25,31 +25,6 @@ class ManipulateView(BaseView):
     def _render_page(self):
         """Renders widgets on the ManipulateView page."""
 
-        # Rollback frames and labels
-        self.rollback_frame_1 = CTkFrame(self, fg_color="gray20")
-        self.rollback_frame_1.pack(fill="both", pady=(0, 2), padx=20, expand=False)
-        self.rollback_label = CTkLabel(self.rollback_frame_1, text="Rollback", font=("Arial", 14, "bold"))
-        self.rollback_label.pack(side="left", padx=(8, 0))
-
-        # Rollback button
-        self.rollback_button = self.button_template(self.rollback_frame_1, "Rollback")
-        self.rollback_button.pack(side="right", padx=8, pady=8)
-
-        # Rollback frame 2 and dataset selector
-        self.rollback_frame_2 = CTkFrame(self, fg_color="gray20")
-        self.rollback_frame_2.pack(fill="both", pady=(0, 20), padx=20, expand=False)
-
-        self.rollback_dataset_var = StringVar(value="Current")
-        self.rollback_dataset_selector = CTkSegmentedButton(
-            self.rollback_frame_2,
-            values=["1", "2", "3", "Current"],
-            variable=self.rollback_dataset_var,
-        )
-        self.rollback_dataset_selector.pack(side="left", padx=(8, 0), pady=8)
-
-        self.current_dataset_label = CTkLabel(self.rollback_frame_2)
-        self.current_dataset_label.pack(side="right", padx=(8, 8))
-
         # Manipulations frames and label
         self.manipulations_frame_1 = CTkFrame(self, fg_color="gray20")
         self.manipulations_frame_1.pack(fill="both", padx=20)
@@ -185,6 +160,32 @@ class ManipulateView(BaseView):
             state="disabled"
             )
         self.generate_button.pack(side="right", padx=(8, 8), pady=(8,8))
+
+        # Rollback frames and labels
+        self.rollback_frame_1 = CTkFrame(self, fg_color="gray20")
+        self.rollback_frame_1.pack(fill="both", pady=(0, 2), padx=20, expand=False)
+        self.rollback_label = CTkLabel(self.rollback_frame_1, text="Rollback", font=("Arial", 14, "bold"))
+        self.rollback_label.pack(side="left", padx=(8, 0))
+
+        # Rollback button
+        self.rollback_button = self.button_template(self.rollback_frame_1, "Rollback")
+        self.rollback_button.pack(side="right", padx=8, pady=8)
+        self.rollback_button.configure(state="disabled")
+
+        # Rollback frame 2 and dataset selector
+        self.rollback_frame_2 = CTkFrame(self, fg_color="gray20")
+        self.rollback_frame_2.pack(fill="both", pady=(0, 20), padx=20, expand=False)
+
+        self.rollback_dataset_var = StringVar(value="Current")
+        self.rollback_dataset_selector = CTkSegmentedButton(
+            self.rollback_frame_2,
+            values=["1", "2", "3", "Current"],
+            variable=self.rollback_dataset_var,
+        )
+        self.rollback_dataset_selector.pack(side="left", padx=(8, 0), pady=8)
+
+        self.current_dataset_label = CTkLabel(self.rollback_frame_2)
+        self.current_dataset_label.pack(side="right", padx=(8, 8))
 
     def add_manipulation_to_scheduler(self):
 

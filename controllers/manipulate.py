@@ -55,9 +55,8 @@ class ManipulateController:
         """
         self.frame.refresh_manipulate_widgets(self.model.DATASET.get_column_headers())
         self.frame.current_dataset_label.configure(
-            text="Current Dataset: " + 
-            str(self.model.DATASET.get_dataset_name()) + ", Rows: " +
-            str(self.model.DATASET.get_df_row_count()))
+            text=f"Current Dataset: {self.model.DATASET.get_dataset_name()} | Rows: {self.model.DATASET.get_df_row_count()} | "
+                    f"Columns: {len(self.model.DATASET.get_column_headers())}")
 
     def _populate_scheduler_list(self):
 
