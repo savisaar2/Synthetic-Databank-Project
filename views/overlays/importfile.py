@@ -1,4 +1,5 @@
-from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkTextbox, CTkEntry
+from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkTextbox, CTkEntry, filedialog, END
+from os import path
 
 class ImportView(CTkFrame):
     def __init__(self, root, *args, **kwargs):
@@ -68,6 +69,20 @@ class ImportView(CTkFrame):
         self.cancel_button = CTkButton(button_frame, corner_radius=5, text="Cancel", font=("Arial", 16), width=150,
                                         height=40)
         self.cancel_button.pack(side="left", padx=5)
+
+    def import_new_dataset(self):
+        new_file = filedialog.askopenfilename(
+            filetypes=[("CSV Files", "*.csv")]
+        )
+        if new_file:
+            # Update the loaded file label
+            self.loaded_file_label.configure(text=f"{path.basename(new_file)}")
+        return new_file
+
+    def clear_fields(self):
+        self.loaded_file_label.configure(text="")
+        self.source_entry.delete(0, END)
+        self.description_entry.delete('1.0', END)
 
     def show_view(self):
         """Shows the ImportView overlay."""

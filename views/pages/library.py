@@ -53,7 +53,6 @@ class LibraryView(BaseView):
         # Customise treeview body section.
         style.configure("Treeview",
             background="gray20",
-            rowheight=30,
             fieldbackground="gray20",
             foreground="white"
         )
@@ -62,7 +61,7 @@ class LibraryView(BaseView):
         style.configure("Treeview.Heading",
             foreground="white",
             background="#336AA0",
-            font=("Arial", 16)
+            font=("Arial", 10)
         )
 
         # Remove border from treeview and define row selection color.
@@ -70,10 +69,10 @@ class LibraryView(BaseView):
         style.map("Treeview", background=[("selected", "#336aa0")])
 
         # Define configure and pack the initial treeview.
-        tree_view = ttk.Treeview(frame, columns=("Name", "Size"), show="headings", selectmode="browse", height=7)
+        tree_view = ttk.Treeview(frame, columns=("Name", "Size"), show="headings", selectmode="browse", height=10)
         tree_view.heading("Name", text="Name")
         tree_view.heading("Size", text="Size")
-        tree_view.column("Name", width=300, stretch=True)
+        tree_view.column("Name", width=500, stretch=True)
         tree_view.column("Size", width=100, stretch=True)
 
         # Setup vertical scrolling when treeview overflows.
