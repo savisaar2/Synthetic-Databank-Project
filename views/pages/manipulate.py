@@ -485,7 +485,6 @@ class ManipulateView(BaseView):
             case "Random Sampling" | "Bootstrap Resamping":
                 self.pos_3_entry_box = self.user_entry_box_template(3, self.entry_box_numerical_pos_3_callback, 
                                                                     "Enter number of rows to generate")
-
             case "SMOTE":
                 self.pos_3_entry_box = self.user_entry_box_template(3, self.entry_box_standard_pos_3_callback,
                                                                     "Enter dependent variable name")

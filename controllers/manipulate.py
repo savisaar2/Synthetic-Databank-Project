@@ -20,7 +20,7 @@ class ManipulateController:
         self._bind()
         self.scheduler_actions = []
         self.step_count = 0 
-        self.MAX_STEPS = 7
+        self.MAX_STEPS = 4
 
         # TODO - to be removed once Alex has finished feature which loads chosen dataset from Library component.
         # Once Alex is finished, the methods should work natively with obtaining information directly from 
