@@ -340,9 +340,11 @@ class ManipulateView(BaseView):
 
         match choice:
             case "Custom value":
-                self.pos_2_entry_box = self.user_entry_box_template(3, self.entry_box_standard_callback)
+                self.pos_2_entry_box = self.user_entry_box_template(3, self.entry_box_standard_pos_3_callback,
+                                                                    "Enter custom value")
             case "Number of Values":
-                self.pos_2_entry_box = self.user_entry_box_template(3, self.entry_box_numerical_callback)
+                self.pos_2_entry_box = self.user_entry_box_template(3, self.entry_box_numerical_pos_3_callback,
+                                                                    "Enter number of values")
             case "Add Outliers":
                 self.pos_2_menu = self._drop_down_menu_template("Select Technique", 
                 ["Z-score(lower percentile)", "Z-score(upper percentile)", "Percentile", "Min/Max"], 
@@ -360,7 +362,8 @@ class ManipulateView(BaseView):
                 self.sme_selector.configure(values=["Single"])
                 self.sme_selector.configure(state="normal")
             case "Percentile":
-                self.pos_3_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback)
+                self.pos_4_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback,
+                                                                    "Enter number of missing values")
                 self.sme_selector.configure(values=["Single"])
             case "Min/Max":
                 pass
@@ -375,7 +378,8 @@ class ManipulateView(BaseView):
                 self.column_headers, self._sme_selector_col_3_callback, 3)
                 self.sme_selector.configure(values=["Single"])
             case "New":
-                self.pos_2_entry_box = self.user_entry_box_template(3, self.entry_box_standard_callback)
+                self.pos_2_entry_box = self.user_entry_box_template(3, self.entry_box_standard_pos_3_callback,
+                                                                    "Enter column name")
                 self.sme_selector.configure(values=["Single"])
             case "Feature Engineering":
                 self.pos_2_menu = self._drop_down_menu_template("Select Technique", 
@@ -436,7 +440,8 @@ class ManipulateView(BaseView):
                 self.pos_3_menu = self._drop_down_menu_template("Select Column",
                     self.column_headers, self._sme_selector_col_4_callback ,4)
             case "PCA(Retain)":
-                self.pos_3_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback)
+                self.pos_3_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback,
+                                                                    "Enter number of columns to retain")
             case "LDA":
                 self.pos_3_menu = self._drop_down_menu_template("Select Column",
                     self.column_headers, self._sme_selector_col_4_callback ,4)
@@ -444,12 +449,14 @@ class ManipulateView(BaseView):
                 self.pos_3_menu = self._drop_down_menu_template("Select Column",
                     self.column_headers, self._sme_selector_col_4_callback ,4)
             case "SVD(Retain)":
-                self.pos_3_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback)
+                self.pos_3_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback,
+                                                                    "Enter number of columns to retain")
             case "Sklearn(Existing)":
                 self.pos_3_menu = self._drop_down_menu_template("Select Column",
                     self.column_headers, self._sme_selector_col_4_callback ,4)
             case "Sklearn(Retain)":
-                self.pos_3_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback)
+                self.pos_3_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback,
+                                                                    "Enter number of columns to retain")
 
     def manipulate_col_select_callback(self, choice):
         self.variables["var_1"] = choice
@@ -464,10 +471,26 @@ class ManipulateView(BaseView):
                 ["Value to Replace", "New Value"], None, 2)
             case "Expand (add rows)":
                 self.pos_1_menu = self._drop_down_menu_template("Select Manipulation", 
-                ["Random Sampling", "Bootstrap Resamping", "SMOTE", "Add Noise"], None, 2)  
+                ["Random Sampling", "Bootstrap Resamping", "SMOTE", "Add Noise"], self._expand_rows_callback, 2)  
             case "Data Transformation":
                 self.pos_1_menu = self._drop_down_menu_template("Select Manipulation", 
                 ["Feature Scaling/Normalisation", "Feature Encoding"], None, 2)                            
+
+    def _expand_rows_callback(self, choice):
+        self.variables["var_2"] = choice
+        self.sme_selector.configure(values=["Entire"])
+        self._refresh_menu_widgets(3)
+
+        match choice:
+            case "Random Sampling" | "Bootstrap Resamping":
+                self.pos_3_entry_box = self.user_entry_box_template(3, self.entry_box_numerical_pos_3_callback, 
+                                                                    "Enter number of rows to generate")
+
+            case "SMOTE":
+                self.pos_3_entry_box = self.user_entry_box_template(3, self.entry_box_standard_pos_3_callback,
+                                                                    "Enter dependent variable name")
+            case "Add Noise":
+                pass
 
     def _replace_missing_values_callback(self, choice):
         self.variables["var_2"] = choice
@@ -492,7 +515,7 @@ class ManipulateView(BaseView):
                 self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
                 ["Mode", "Similarity", "ML"], self._sme_selector_col_4_callback, 4)
             case "Manual":
-                self.pos_4_entry = self.user_entry_box_template(4, self.entry_box_standard_pos_4_callback)
+                self.pos_4_entry_box = self.user_entry_box_template(4, self.entry_box_standard_pos_4_callback, "Enter new value")
 
     def _numerical_column_callback(self, choice):
         self.variables["var_3"] = choice
@@ -504,7 +527,7 @@ class ManipulateView(BaseView):
                 self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
                 ["Mean", "Median", "KNN", "ML"], self._sme_selector_col_4_callback, 4)
             case "Manual":
-                self.pos_4_entry = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback)
+                self.pos_4_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback, "Enter new number value")
 
     def _label_template(self, text, col_pos):
         label = CTkLabel(
@@ -515,23 +538,23 @@ class ManipulateView(BaseView):
         self.widget_list.append({"col_pos": col_pos, "widget": label})
         return label
     
-    def user_entry_box_template(self, col_pos, callback):
+    def user_entry_box_template(self, col_pos, callback, start_text):
         # User entry text box template
         entry_box_command = self.register(callback)
         user_entry_box = CTkEntry(
             self.manipulations_frame_2,
-            textvariable=StringVar(value=""),
             corner_radius=5, 
-            width=150,
+            width=200,
             validate='key',
             validatecommand=(entry_box_command, '%P')
             ) 
         user_entry_box.grid(row=0, column=col_pos, padx=(8, 10), pady=(8, 8), sticky="w")
+        user_entry_box.configure(placeholder_text=start_text)
         self.widget_list.append({"col_pos": col_pos, "widget": user_entry_box})
         
         return user_entry_box
     
-    def entry_box_standard_callback(self, choice):
+    def entry_box_standard_pos_3_callback(self, choice):
         if len(choice) > 0:
             self.variables["var_3"] = choice
             self.sme_selector.configure(state="normal")  
@@ -549,8 +572,11 @@ class ManipulateView(BaseView):
             self.sme_selector.configure(state="disabled") 
             return True
 
-    def entry_box_numerical_callback(self, choice):
-        if choice.isdigit():
+    def entry_box_numerical_pos_3_callback(self, choice):
+        if len(choice) > 5:
+            self.sme_selector.configure(state="disabled") 
+            return True
+        elif choice.isdigit():
             self.variables["var_3"] = choice
             self.sme_selector.configure(state="normal")
             return True        
@@ -560,19 +586,22 @@ class ManipulateView(BaseView):
         else:
             self.sme_selector.configure(state="disabled") 
             return False
-    
+ 
     def entry_box_numerical_pos_4_callback(self, choice):
-        if choice.isdigit():
+        if len(choice) > 5:
+            self.sme_selector.configure(state="disabled") 
+            return True
+        elif choice.isdigit():
             self.variables["var_4"] = choice
             self.sme_selector.configure(state="normal")
-            return True        
+            return True          
         elif len(choice) == 0:
             self.sme_selector.configure(state="disabled") 
             return True
         else:
             self.sme_selector.configure(state="disabled") 
             return False
-            
+
     def _drop_down_menu_template(self, start_text: str, menu_options: list, command_func, col_pos: int):    
         menu_var = StringVar(value=start_text)
         selector = menu_options
