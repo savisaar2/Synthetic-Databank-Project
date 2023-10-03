@@ -314,12 +314,13 @@ class ManipulateView(BaseView):
             case "Reduce":
                 # Show reduce method menu drop down
                 self.pos_0_menu = self._drop_down_menu_template("Select Method", 
-                    ["Data Dimensionality", "Rows"], self.reduce_method_select_callback, 1) 
+                    ["Columns (Dimensionality)", "Remove Rows"], self.reduce_method_select_callback, 1) 
 
             case "Manipulate":
                 # Show variable menu drop down
                 self.pos_0_menu = self._drop_down_menu_template("Select Technique", 
-                    ["Replace Missing Values", "Replace Other Values", "Expand (add rows)", "Data Transformation"],
+                    ["Replace Missing Values", "Replace Value (x) with New Value", 
+                     "Change Column Name", "Expand (add rows)", "Data Transformation"],
                     self.manipulate_col_select_callback, 1)
 
     def add_select_callback(self, choice):
@@ -395,15 +396,16 @@ class ManipulateView(BaseView):
         self.sme_selector.configure(values=["Entire"])
         self._refresh_menu_widgets(2)
 
-        if choice == "Data Dimensionality":
+        if choice == "Columns (Dimensionality)":
             # Add technique selection drop down menu
             self.pos_1_menu = self._drop_down_menu_template("Select Technique", 
                 ["Algorithmic", "Manual"], self._dimensionality_reduction_callback, 2) 
 
-        elif choice == "Rows":
+        elif choice == "Remove Rows":
             # Add drop down menu for column selection
             self.pos_1_menu = self._drop_down_menu_template("Select Variable", 
                 ["Missing Values", "Duplicate Rows"], self._sme_selector_col_2_callback, 2)
+            self.sme_selector.set("Entire")
 
     def _dimensionality_reduction_callback(self, choice):
         self.variables["sub_action"] = choice
@@ -415,22 +417,8 @@ class ManipulateView(BaseView):
                 ["PCA", "LDA", "SVD", "Sklearn"], self._dimension_reduction_algo_callback, 3) 
 
             case "Manual":
-                self.pos_2_menu = self._drop_down_menu_template("Select Technique", 
-                ["Retain", "Remove"], self._dimension_reduction_manual_callback, 3) 
-
-
-    def _dimension_reduction_manual_callback(self, choice):
-        self.variables["var_3"] = choice
-        self.sme_selector.configure(values=["Entire"])
-        self._refresh_menu_widgets(4)
-
-        match choice:
-            case "Retain":
-                self.pos_3_menu = self._drop_down_menu_template("Select Column",
-                self.column_headers, self._sme_selector_col_4_callback, 4)                
-            case "Remove":
-                self.pos_3_menu = self._drop_down_menu_template("Select Column",
-                self.column_headers, self._sme_selector_col_4_callback, 4)    
+                self.sme_selector.configure(values=["Single"])
+                self.sme_selector.configure(state=["normal"])
 
     def _dimension_reduction_algo_callback(self, choice):
         self.variables["var_3"] = choice
@@ -440,24 +428,33 @@ class ManipulateView(BaseView):
         self.pos_4_menu = self._drop_down_menu_template("Select Dependent Column", self.column_headers, 
                                                         self._sme_selector_col_4_callback ,4)
         self.pos_5_entry_box = self.user_entry_box_template(4, 1, self.entry_box_numerical_arg_b_callback,
-                                                            "Enter number of columns to retain")
+                                                            "Number of columns to retain")
 
     def manipulate_col_select_callback(self, choice):
         self.variables["action"] = choice
         self._refresh_menu_widgets(2)
-
+        
         match choice:
             case "Replace Missing Values":
-                self.pos_1_menu = self._drop_down_menu_template("Select Manipulation", 
+                self.sme_selector.set("Single")
+                self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
                 ["Numerical Column", "Categorial Column"], self._replace_missing_values_callback, 2)
-            case "Replace Other Values":
-                self.pos_1_menu = self._drop_down_menu_template("Select Manipulation", 
-                ["Value to Replace", "New Value"], None, 2)
+            case "Replace Value (x) with New Value":
+                self.sme_selector.set("Single")
+                self.pos_2_entry_box = self.user_entry_box_template(2, 0, self.entry_box_numerical_arg_a_callback, 
+                                                                    "Enter value to replace")
+                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_numerical_arg_b_callback, 
+                                                                    "Enter New Value")
+            case "Change Column Name":
+                self.sme_selector.set("Single")
+                self.pos_2_entry_box = self.user_entry_box_template(2, 0, self.entry_box_numerical_arg_a_callback, 
+                                                                    "Enter new column name")
             case "Expand (add rows)":
-                self.pos_1_menu = self._drop_down_menu_template("Select Manipulation", 
+                self.sme_selector.set("Entire")
+                self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
                 ["Random Sampling", "Bootstrap Resamping", "SMOTE", "Add Noise"], self._expand_rows_callback, 2)  
             case "Data Transformation":
-                self.pos_1_menu = self._drop_down_menu_template("Select Manipulation", 
+                self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
                 ["Feature Scaling/Normalisation", "Feature Encoding"], None, 2)                            
 
     def _expand_rows_callback(self, choice):
@@ -489,7 +486,7 @@ class ManipulateView(BaseView):
                 ["Algorithm", "Manual"], self._categorical_column_callback, 3)
 
     def _categorical_column_callback(self, choice):
-        self.variables["var_3"] = choice
+        self.variables["args"]["a"] = choice
         self.sme_selector.configure(values=["Single"])
         self._refresh_menu_widgets(4)
         
@@ -498,10 +495,10 @@ class ManipulateView(BaseView):
                 self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
                 ["Mode", "Similarity", "ML"], self._sme_selector_col_4_callback, 4)
             case "Manual":
-                self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_standard_arg_a_callback, "Enter new value")
+                self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_standard_arg_b_callback, "Enter new value")
 
     def _numerical_column_callback(self, choice):
-        self.variables["var_3"] = choice
+        self.variables["args"]["a"] = choice
         self.sme_selector.configure(values=["Single"])
         self._refresh_menu_widgets(4)
 
@@ -510,7 +507,7 @@ class ManipulateView(BaseView):
                 self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
                 ["Mean", "Median", "KNN", "ML"], self._sme_selector_col_4_callback, 4)
             case "Manual":
-                self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_numerical_arg_a_callback, "Enter new number value")
+                self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_numerical_arg_b_callback, "Enter new number value")
 
     def _label_template(self, text, col_pos):
         label = CTkLabel(
@@ -531,7 +528,7 @@ class ManipulateView(BaseView):
             validate='key',
             validatecommand=(entry_box_command, '%P')
             ) 
-        user_entry_box.grid(column=col_pos, row=row_pos,  padx=(8, 10), pady=(8, 8), sticky="w")
+        user_entry_box.grid(column=col_pos, row=row_pos,  padx=(0, 2), pady=(8, 8), sticky="w")
         user_entry_box.configure(placeholder_text=start_text)
         self.widget_list.append({"col_pos": col_pos, "widget": user_entry_box})
         
@@ -596,7 +593,7 @@ class ManipulateView(BaseView):
             command=command_func,
             variable=menu_var
             )
-        drop_down_menu.grid(row=0, column=col_pos, padx=(0, 4), pady=(8, 8), sticky="w")
+        drop_down_menu.grid(row=0, column=col_pos, padx=(0, 2), pady=(8, 8), sticky="w")
         self.widget_list.append({"col_pos": col_pos, "widget": drop_down_menu})
         return drop_down_menu
        
