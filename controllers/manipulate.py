@@ -18,14 +18,13 @@ class ManipulateController:
         self.view = view
         self.frame = self.view.frames["manipulate"]
         self._bind()
-        self.scheduler_actions = []
         self.step_count = 0 
         self.MAX_STEPS = 4
 
         # TODO - to be removed once Alex has finished feature which loads chosen dataset from Library component.
         # Once Alex is finished, the methods should work natively with obtaining information directly from 
         # dataset model's method calls. 
-        self.model.DATASET.load_dataset(file_path="./db/databank/wine_dataset.csv", dataset_name="wine_dataset")
+        #self.model.DATASET.load_dataset(file_path="./db/databank/wine_dataset.csv", dataset_name="wine_dataset")
 
     def _bind(self):
         """
@@ -37,7 +36,7 @@ class ManipulateController:
         
         # Add manipulations to scheduler
         self.frame.schedule_button.bind("<Button-1>", lambda _: self.frame.add_manipulation_to_scheduler(), add="+")
-        self.frame.schedule_button.bind("<Button-1>", lambda _: self._populate_scheduler_list(), add="+")
+        self.frame.schedule_button.bind("<Button-1>", lambda _: self.populate_scheduler_list(), add="+")
 
         # Delete all sceduled manipulations
         self.frame.delete_all_button.bind("<Button-1>", lambda _: self._delete_all_scheduled_manipulations())
@@ -58,11 +57,11 @@ class ManipulateController:
             text=f"Current Dataset: {self.model.DATASET.get_dataset_name()} | Rows: {self.model.DATASET.get_df_row_count()} | "
                     f"Columns: {len(self.model.DATASET.get_column_headers())}")
 
-    def _populate_scheduler_list(self):
+    def populate_scheduler_list(self):
 
         if self.frame.schedule_button._state == "normal" and self.step_count < self.MAX_STEPS:
             self.step_count +=1
-            self.scheduler_actions.append({
+            schedule_set = {
                 "step": self.step_count,
                 "action": self.frame.variables["action"],
                 "sub_action": self.frame.variables["sub_action"],
@@ -70,8 +69,9 @@ class ManipulateController:
                 "column": self.frame.variables["column"],
                 "sme": self.frame.variables["sme"],
                 "outcome": "in_queue"
-            })
-            print(self.scheduler_actions)
+            }
+            self.model.manipulations.update_schedule_set(schedule_set)
+ 
             self.frame.schedule_button.configure(state="disabled")
             self.frame.generate_button.configure(state="normal")
 
@@ -90,65 +90,11 @@ class ManipulateController:
         self.frame.action_selection_menu.configure(state="normal")
         self.frame.step_count = 0
         self.frame.generate_button.configure(state="disabled")
-
-    # Temp method for testing
-    def remove_column(self):   
-        df = self.model.DATASET.get_reference_to_current_snapshot()
-        column_name = str(self.scheduler_actions[self.step_count-1]["variable_2"])
-        df = df.drop([column_name], axis=1)
-        df.to_csv("./db/temp/temp.csv", index=False)
-        self.model.DATASET.load_dataset(file_path="./db/temp/temp.csv", dataset_name="wine_dataset")
-              
+          
     def generate(self):
-        if self.frame.generate_button._state == "normal":
-            for manip in self.scheduler_actions:
-                if manip["outcome"] == "in_queue" and self.frame.scheduler_items[manip["step"]-1]["step"].get() == "on":
-                    
-                    match manip["action"]:
-                        case "Add":
-                            match manip["variable_1"]:
-                                case "Noise":
-                                    match manip["variable_2"]:
-                                        case "Custom value":
-                                            print("GENERATE: Add, Noise, Custom Value")
-                                        case "Number of Values":
-                                            print("GENERATE: Add, Noise, Number of values")
-                                        case "Add Outliers":
-                                            pass
-                                case "Column":
-                                    match manip["variable_1"]:
-                                        case "Duplicate":
-                                            pass
-                                        case "New":
-                                            pass
-                                        case "Feature Engineering":
-                                            pass
-
-                        case "Reduce":
-                            match manip["variable_1"]:
-                                case "Algorithmic":
-                                    match manip["variable_2"]:
-                                        case "A":
-                                            print("reduce, algo, tech A")
-                                        case "B":
-                                            print("reduce, algo, tech B")
-                                        case "C":
-                                            print("reduce, algo, tech C")
-                                case "Manual":
-                                    print("reduce, manual")
-
-                        case "Manipulate":
-                            match manip["variable_1"]:
-                                case "Single":
-                                    print("manipulate, single")
-                                case "Multiple":
-                                    print("manipulate, multiple")
-                                case "Entire Set":
-                                    print("manipulate, entire set")                                   
-
-                    manip["outcome"] = "Complete"
-                    self._update_frame_scheduler_status(manip)
-        self.frame.generate_button.configure(state="disabled")
+        x = self.model.manipulations.get_schedule_set()
+        print(x)
+        
 
     def _update_frame_scheduler_status(self,manip):
             self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text="Complete")
