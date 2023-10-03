@@ -17,8 +17,7 @@ class ManipulateView(BaseView):
         super().__init__(root, "Manipulate", "Configure your Dataset.", *args, **kwargs)
         self._render_page()
         self.widget_list = []
-        self.variables = {"var_1":"", "var_2":"", "var_3":"", "var_4":"", "sme":""}
-        self.sme_variable = ""
+        self.variables = {"action":"", "sub_action":"", "args":{"a":"", "b":"", "c":""},"column":"", "sme":""}
         self.scheduler_items = []
         self.step_count = 0
 
@@ -50,6 +49,17 @@ class ManipulateView(BaseView):
             state="disabled",
             )
         self.schedule_button.pack(fill="both",side="right", padx=(8, 8), pady=(8,8))
+
+        # Column Selector
+        self.column_dropdown = CTkOptionMenu(
+            self.manipulations_frame_1, 
+            fg_color="gray10", 
+            width=3, 
+            command=self._set_column_var,
+            variable=StringVar(value="Select Column"),
+            state="disabled"
+            )
+        self.column_dropdown.pack(fill="both",side="right", padx=(8, 8), pady=(8,8))
 
         # SME Selector
         self.sme_selector = CTkSegmentedButton(
@@ -94,28 +104,24 @@ class ManipulateView(BaseView):
         self.outcome_label.grid(row=0, column=1, padx=(0, 15), pady=(0, 0), sticky='w')
 
         # Action label
-        self.sched_action_label = CTkLabel(self.scheduler_scroll_frame, text="Action", font=("Arial", 14))
-        self.sched_action_label.grid(row=0, column=2, padx=(0, 35), pady=(0, 0), sticky="w")
+        self.action_label = CTkLabel(self.scheduler_scroll_frame, text="Action", font=("Arial", 14))
+        self.action_label.grid(row=0, column=2, padx=(0, 100), pady=(0, 0), sticky="w")
 
-        # Variable 1 label
-        self.variable_1_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 1", font=("Arial", 14))
-        self.variable_1_label.grid(row=0, column=3, padx=(0, 80), pady=(0, 0), sticky="w")
+        # Sub-action label
+        self.sub_action_label = CTkLabel(self.scheduler_scroll_frame, text="Sub-Action", font=("Arial", 14))
+        self.sub_action_label.grid(row=0, column=3, padx=(0, 100), pady=(0, 0), sticky="w")
 
-        # Variable 2 label
-        self.variable_2_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 2", font=("Arial", 14))
-        self.variable_2_label.grid(row=0, column=4, padx=(0, 60), pady=(0, 0), sticky="w")
-
-        # Variable 3 label
-        self.variable_3_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 3", font=("Arial", 14))
-        self.variable_3_label.grid(row=0, column=5, padx=(0, 60), pady=(0, 0), sticky="w")
-
-        # Variable 4 label
-        self.variable_4_label = CTkLabel(self.scheduler_scroll_frame, text="Variable 4", font=("Arial", 14))
-        self.variable_4_label.grid(row=0, column=6, padx=(0, 40), pady=(0, 0), sticky="w")
+        # Args label
+        self.args_label = CTkLabel(self.scheduler_scroll_frame, text="Args", font=("Arial", 14))
+        self.args_label.grid(row=0, column=4, padx=(0, 100), pady=(0, 0), sticky="w")
 
         # SME label
         self.sme_label = CTkLabel(self.scheduler_scroll_frame, text="SME", font=("Arial", 14))
-        self.sme_label.grid(row=0, column=7, padx=(0, 0), pady=(0, 0), sticky="w")
+        self.sme_label.grid(row=0, column=5, padx=(0, 30), pady=(0, 0), sticky="w")
+                
+        # Column label
+        self.column_label = CTkLabel(self.scheduler_scroll_frame, text="Column", font=("Arial", 14))
+        self.column_label.grid(row=0, column=6, padx=(0, 0), pady=(0, 0), sticky="w")
 
         # Delete All button
         self.delete_all_button = CTkButton(
@@ -230,53 +236,48 @@ class ManipulateView(BaseView):
                     )
                 self.outcome_label_for_scheduler.grid(row=self.step_count, column=1, padx=(0, 0), pady=(0, 0), sticky='w')
 
-                # Name of scheduled action 
-                self.manipulation_label_for_scheduler = CTkLabel(self.scheduler_scroll_frame, text=str(self.action_menu_var))
-                self.manipulation_label_for_scheduler.grid(row=self.step_count, column=2, padx=(0, 0), pady=(0, 0), sticky='w')
-
-                # Varible 1 name for scheduled manipulation
-                self.variable_1_label_for_scheduler = CTkLabel(
+                # Action label for scheduled manipulation
+                self.action_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
-                    text=self.variables["var_1"]
+                    text=self.variables["action"]
                     )
-                self.variable_1_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 2), pady=(0, 0), sticky='w')
+                self.action_label_for_scheduler.grid(row=self.step_count, column=2, padx=(0, 10), pady=(0, 0), sticky='w')
 
-                # Varible 2 name for scheduled manipulation
-                self.variable_2_label_for_scheduler = CTkLabel(
+                # Sub-action label for scheduled manipulation
+                self.sub_action_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
-                    text=self.variables["var_2"],  
+                    text=self.variables["sub_action"],  
                     )
-                self.variable_2_label_for_scheduler.grid(row=self.step_count, column=4, padx=(0, 2), pady=(0, 0), sticky='w')
+                self.sub_action_label_for_scheduler.grid(row=self.step_count, column=3, padx=(0, 10), pady=(0, 0), sticky='w')
 
-                # Varible 3 name for scheduled manipulation
-                self.variable_3_label_for_scheduler = CTkLabel(
+                # Args for scheduled manipulation
+                self.args_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
-                    text=self.variables["var_3"],  
+                    text=self.variables["args"],  
                     )
-                self.variable_3_label_for_scheduler.grid(row=self.step_count, column=5, padx=(0, 2), pady=(0, 0), sticky='w')
-
-                # Varible 4 name for scheduled manipulation
-                self.variable_4_label_for_scheduler = CTkLabel(
-                    self.scheduler_scroll_frame, 
-                    text=self.variables["var_4"],  
-                    )
-                self.variable_4_label_for_scheduler.grid(row=self.step_count, column=6, padx=(0, 2), pady=(0, 0), sticky='w')
+                self.args_label_for_scheduler.grid(row=self.step_count, column=4, padx=(0, 10), pady=(0, 0), sticky='w')
 
                 # SME name for scheduled manipulation
                 self.sme_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
                     text=self.variables["sme"],  
                     )
-                self.sme_label_for_scheduler.grid(row=self.step_count, column=7, padx=(2, 0), pady=(0, 0), sticky='w')
+                self.sme_label_for_scheduler.grid(row=self.step_count, column=5, padx=(0, 0), pady=(0, 0), sticky='w')
+
+                # column name for scheduled manipulation
+                self.column_label_for_scheduler = CTkLabel(
+                    self.scheduler_scroll_frame, 
+                    text=self.variables["column"],  
+                    )
+                self.column_label_for_scheduler.grid(row=self.step_count, column=6, padx=(0, 0), pady=(0, 0), sticky='w')                
 
                 # Scheduled manipulations widgets added to a dict to be deleted by user via delete all button.
                 scheduled_items_dict = {"step": self.step_checkbox, 
-                                        "action": self.manipulation_label_for_scheduler, 
-                                        "variable_1": self.variable_1_label_for_scheduler,
-                                        "variable_2": self.variable_2_label_for_scheduler,
-                                        "variable_3": self.variable_3_label_for_scheduler,
-                                        "variable_4": self.variable_4_label_for_scheduler,
+                                        "action": self.action_label_for_scheduler, 
+                                        "sub_action": self.sub_action_label_for_scheduler,
+                                        "args": self.args_label_for_scheduler,
                                         "sme": self.sme_label_for_scheduler,
+                                        "column": self.column_label_for_scheduler,
                                         "outcome": self.outcome_label_for_scheduler}
                 self.scheduler_items.append(scheduled_items_dict.copy())          
 
@@ -294,9 +295,8 @@ class ManipulateView(BaseView):
                 self.sme_selector.set("")
 
     def action_callback(self, choice):
-        self.action_menu_var = choice
         self.schedule_button.configure(state="disabled")  
-        self.variables = {"var_1":"", "var_2":"", "var_3":"", "var_4":"", "sme":""}
+        self.variables = self.variables = {"action":"", "sub_action":"", "args":{"a":"", "b":"", "c":""},"column":"", "sme":""}
         # Reset SME selector
         self.sme_selector.configure(state="disabled")
         self.sme_selector.configure(values=["Single", "Multiple", "Entire"])
@@ -323,53 +323,53 @@ class ManipulateView(BaseView):
                     self.manipulate_col_select_callback, 1)
 
     def add_select_callback(self, choice):
-        self.variables["var_1"] = choice
+        self.variables["action"] = f"Add {choice}"
         self._refresh_menu_widgets(2)
 
         match choice:
             case "Noise":
                 self.pos_1_menu = self._drop_down_menu_template("Select Technique", 
-                ["Custom value", "Number of Values", "Add Outliers"], self.add_noise_technique_callback, 2)
+                ["Add Random Custom Value", "Add Outliers"], self.add_noise_technique_callback, 2)
             case "Column":
                 self.pos_1_menu = self._drop_down_menu_template("Select Technique", 
                 ["Duplicate", "New", "Feature Engineering"], self.add_column_technique_callback, 2)
 
     def add_noise_technique_callback(self, choice):
-        self.variables["var_2"] = choice
+        self.variables["sub_action"] = choice
         self._refresh_menu_widgets(3)
 
         match choice:
-            case "Custom value":
-                self.pos_2_entry_box = self.user_entry_box_template(3, self.entry_box_standard_pos_3_callback,
-                                                                    "Enter custom value")
-            case "Number of Values":
-                self.pos_2_entry_box = self.user_entry_box_template(3, self.entry_box_numerical_pos_3_callback,
+            case "Add Random Custom Value":
+                self.sme_selector.configure(values=["Single", "Multiple", "Entire"])
+                self.pos_3_entry_box = self.user_entry_box_template(3, self.entry_box_standard_arg_a_callback,
+                                                                    "Enter custom value") 
+                self.pos_4_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_arg_b_callback,
                                                                     "Enter number of values")
             case "Add Outliers":
                 self.pos_2_menu = self._drop_down_menu_template("Select Technique", 
-                ["Z-score(lower percentile)", "Z-score(upper percentile)", "Percentile", "Min/Max"], 
+                ["Z-score", "Percentile", "Min/Max"], 
                 self.outliers_technique_callback, 3)
+                self.sme_selector.configure(values=["Single"])
     
     def outliers_technique_callback(self, choice):
-        self.variables["var_3"] = choice
+        previous_sub_type = self.variables["sub_action"]
+        self.variables["sub_action"] = f"{previous_sub_type} {choice}"
         self._refresh_menu_widgets(4)
 
         match choice:
-            case "Z-score(lower percentile)":
-                self.sme_selector.configure(values=["Single"])
-                self.sme_selector.configure(state="normal")
-            case "Z-score(upper percentile)":
-                self.sme_selector.configure(values=["Single"])
-                self.sme_selector.configure(state="normal")
+            case "Z-score":
+                self.pos_4_entry_box = self.user_entry_box_template(4, self.entry_box_standard_arg_a_callback,
+                                                                    "Enter lower percentile") 
+                self.pos_5_entry_box = self.user_entry_box_template(5, self.entry_box_numerical_arg_b_callback,
+                                                                    "Enter upper percentile")
             case "Percentile":
-                self.pos_4_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback,
+                self.pos_4_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_arg_a_callback,
                                                                     "Enter number of missing values")
-                self.sme_selector.configure(values=["Single"])
             case "Min/Max":
                 pass
 
     def add_column_technique_callback(self, choice):
-        self.variables["var_2"] = choice
+        self.variables["sub_action"] = choice
         self._refresh_menu_widgets(3)
 
         match choice:
@@ -378,7 +378,7 @@ class ManipulateView(BaseView):
                 self.column_headers, self._sme_selector_col_3_callback, 3)
                 self.sme_selector.configure(values=["Single"])
             case "New":
-                self.pos_2_entry_box = self.user_entry_box_template(3, self.entry_box_standard_pos_3_callback,
+                self.pos_2_entry_box = self.user_entry_box_template(3, self.entry_box_standard_arg_a_callback,
                                                                     "Enter column name")
                 self.sme_selector.configure(values=["Single"])
             case "Feature Engineering":
@@ -388,7 +388,7 @@ class ManipulateView(BaseView):
                 self.sme_selector.configure(values=["Single", "Multiple"])
 
     def reduce_method_select_callback(self, choice):
-        self.variables["var_1"] = choice
+        self.variables["action"] = f"Reduce {choice}"
         self.sme_selector.configure(values=["Entire"])
         self._refresh_menu_widgets(2)
 
@@ -403,7 +403,7 @@ class ManipulateView(BaseView):
                 ["Missing Values", "Duplicate Rows"], self._sme_selector_col_2_callback, 2)
 
     def _dimensionality_reduction_callback(self, choice):
-        self.variables["var_2"] = choice
+        self.variables["sub_action"] = choice
         self._refresh_menu_widgets(3)
 
         match choice:
@@ -459,7 +459,7 @@ class ManipulateView(BaseView):
                                                                     "Enter number of columns to retain")
 
     def manipulate_col_select_callback(self, choice):
-        self.variables["var_1"] = choice
+        self.variables["action"] = choice
         self._refresh_menu_widgets(2)
 
         match choice:
@@ -477,22 +477,22 @@ class ManipulateView(BaseView):
                 ["Feature Scaling/Normalisation", "Feature Encoding"], None, 2)                            
 
     def _expand_rows_callback(self, choice):
-        self.variables["var_2"] = choice
+        self.variables["sub_action"] = choice
         self.sme_selector.configure(values=["Entire"])
         self._refresh_menu_widgets(3)
 
         match choice:
             case "Random Sampling" | "Bootstrap Resamping":
-                self.pos_3_entry_box = self.user_entry_box_template(3, self.entry_box_numerical_pos_3_callback, 
+                self.pos_3_entry_box = self.user_entry_box_template(3, self.entry_box_numerical_arg_a_callback, 
                                                                     "Enter number of rows to generate")
             case "SMOTE":
-                self.pos_3_entry_box = self.user_entry_box_template(3, self.entry_box_standard_pos_3_callback,
+                self.pos_3_entry_box = self.user_entry_box_template(3, self.entry_box_standard_arg_a_callback,
                                                                     "Enter dependent variable name")
             case "Add Noise":
                 pass
 
     def _replace_missing_values_callback(self, choice):
-        self.variables["var_2"] = choice
+        self.variables["sub_action"] = choice
         self.sme_selector.configure(values=["Single"])
         self._refresh_menu_widgets(3)
 
@@ -514,7 +514,7 @@ class ManipulateView(BaseView):
                 self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
                 ["Mode", "Similarity", "ML"], self._sme_selector_col_4_callback, 4)
             case "Manual":
-                self.pos_4_entry_box = self.user_entry_box_template(4, self.entry_box_standard_pos_4_callback, "Enter new value")
+                self.pos_4_entry_box = self.user_entry_box_template(4, self.entry_box_standard_arg_a_callback, "Enter new value")
 
     def _numerical_column_callback(self, choice):
         self.variables["var_3"] = choice
@@ -526,7 +526,7 @@ class ManipulateView(BaseView):
                 self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
                 ["Mean", "Median", "KNN", "ML"], self._sme_selector_col_4_callback, 4)
             case "Manual":
-                self.pos_4_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_pos_4_callback, "Enter new number value")
+                self.pos_4_entry_box = self.user_entry_box_template(4, self.entry_box_numerical_arg_a_callback, "Enter new number value")
 
     def _label_template(self, text, col_pos):
         label = CTkLabel(
@@ -543,7 +543,7 @@ class ManipulateView(BaseView):
         user_entry_box = CTkEntry(
             self.manipulations_frame_2,
             corner_radius=5, 
-            width=200,
+            width=150,
             validate='key',
             validatecommand=(entry_box_command, '%P')
             ) 
@@ -553,45 +553,30 @@ class ManipulateView(BaseView):
         
         return user_entry_box
     
-    def entry_box_standard_pos_3_callback(self, choice):
+    def entry_box_standard_arg_a_callback(self, choice):
         if len(choice) > 0:
-            self.variables["var_3"] = choice
+            self.variables["args"]["a"] = choice
             self.sme_selector.configure(state="normal")  
             return True
         elif len(choice) == 0:
             self.sme_selector.configure(state="disabled") 
             return True
         
-    def entry_box_standard_pos_4_callback(self, choice):
+    def entry_box_standard_arg_b_callback(self, choice):
         if len(choice) > 0:
-            self.variables["var_4"] = choice
+            self.variables["args"]["b"] = choice
             self.sme_selector.configure(state="normal")  
             return True
         elif len(choice) == 0:
             self.sme_selector.configure(state="disabled") 
             return True
 
-    def entry_box_numerical_pos_3_callback(self, choice):
+    def entry_box_numerical_arg_a_callback(self, choice):
         if len(choice) > 5:
             self.sme_selector.configure(state="disabled") 
             return True
         elif choice.isdigit():
-            self.variables["var_3"] = choice
-            self.sme_selector.configure(state="normal")
-            return True        
-        elif len(choice) == 0:
-            self.sme_selector.configure(state="disabled") 
-            return True
-        else:
-            self.sme_selector.configure(state="disabled") 
-            return False
- 
-    def entry_box_numerical_pos_4_callback(self, choice):
-        if len(choice) > 5:
-            self.sme_selector.configure(state="disabled") 
-            return True
-        elif choice.isdigit():
-            self.variables["var_4"] = choice
+            self.variables["args"]["a"] = choice
             self.sme_selector.configure(state="normal")
             return True          
         elif len(choice) == 0:
@@ -600,7 +585,22 @@ class ManipulateView(BaseView):
         else:
             self.sme_selector.configure(state="disabled") 
             return False
-
+        
+    def entry_box_numerical_arg_b_callback(self, choice):
+        if len(choice) > 5:
+            self.sme_selector.configure(state="disabled") 
+            return True
+        elif choice.isdigit():
+            self.variables["args"]["b"] = choice
+            self.sme_selector.configure(state="normal")
+            return True          
+        elif len(choice) == 0:
+            self.sme_selector.configure(state="disabled") 
+            return True
+        else:
+            self.sme_selector.configure(state="disabled") 
+            return False
+        
     def _drop_down_menu_template(self, start_text: str, menu_options: list, command_func, col_pos: int):    
         menu_var = StringVar(value=start_text)
         selector = menu_options
@@ -618,12 +618,31 @@ class ManipulateView(BaseView):
        
     def _set_sme_variable(self, choice):
         self.variables["sme"] = choice
-        self.schedule_button.configure(state="normal")
+        self.schedule_button.configure(state="disabled")
+        self.column_dropdown.configure(values=self.column_headers)
+        match choice:
+            case "Single":
+                self.column_dropdown.configure(state="normal")
+            case "Multiple":
+                pass
+            case "Entire":
+                self.schedule_button.configure(state="normal")
+                self.column_dropdown.configure(state="disabled")
+
+    def _set_column_var(self, choice):
+        self.variables["column"] = choice
+        match self.variables["sme"]:
+            case "Single":
+                self.schedule_button.configure(state="normal")
+            case "Multiple":
+                pass
+            case "Entire":
+                self.schedule_button.configure(state="normal")
 
     def _sme_selector_col_2_callback(self, choice):
-        self.variables["var_2"] = choice
+        self.variables["sub_action"] = choice
         self.sme_selector.configure(state="enabled")
-
+      
     def _sme_selector_col_3_callback(self, choice):
         self.variables["var_3"] = choice
         self.sme_selector.configure(state="enabled")

@@ -64,11 +64,10 @@ class ManipulateController:
             self.step_count +=1
             self.scheduler_actions.append({
                 "step": self.step_count,
-                "action": self.frame.action_menu_var,
-                "variable_1": self.frame.variables["var_1"],
-                "variable_2": self.frame.variables["var_2"],
-                "variable_3": self.frame.variables["var_3"],
-                "variable_4": self.frame.variables["var_4"],
+                "action": self.frame.variables["action"],
+                "sub_action": self.frame.variables["sub_action"],
+                "args": self.frame.variables["args"],
+                "column": self.frame.variables["column"],
                 "sme": self.frame.variables["sme"],
                 "outcome": "in_queue"
             })
