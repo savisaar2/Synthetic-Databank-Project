@@ -103,6 +103,7 @@ class ManipulateController:
                  
     def generate(self):
         self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+        
 
     def _update_frame_scheduler_status(self,manip):
             self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text="Complete")

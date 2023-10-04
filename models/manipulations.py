@@ -34,7 +34,9 @@ class ManipulationsModel():
             generated_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], r["args"])
             self.current_df = generated_df
         print(self.current_df)
+        self.schedule_set = []
         self.current_df =""
+        
 
     def update_schedule_set(self, manip_set):
           self.schedule_set.append(manip_set)
