@@ -1,4 +1,4 @@
-from pandas import *
+import pandas as pd
 import random
 
 class ManipulationsModel():
@@ -23,29 +23,37 @@ class ManipulationsModel():
             }
     
     def generate_churner(self, scheduler_row):
-        for r in scheduler_row:
-            match r["step"]:
-                 case 1:
-                    generated_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], r["args"])
-                    self.current_df = generated_df
-                 case _:
-                    r["df"] = self.current_df
-                    generated_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], r["args"])
-                    self.current_df = generated_df
+        for index, r in enumerate(scheduler_row):
+            # Set in dataframe as current, but not for the first item.
+            if not index:
+                pass
+            else:
+                r["df"] = self.current_df
+
+            generated_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], r["args"])
+            self.current_df = generated_df
+        print(self.current_df)
 
     def update_schedule_set(self, manip_set):
           self.schedule_set.append(manip_set)
 
     def add_noise(self, sub_action, df, column, args=None):
-        a,b,c = args #unpack
+        a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
             case "Add Random Custom Value":
                 pass
-            case "Add Outliers":
-                pass   
+            case "Add Outliers Z-score":
+                pass
+            case "Add Outliers Percentile":
+                pass
+            case "Add Outliers Min/Max":
+                pass
+
     
     def add_column(self, sub_action, df, column, args):
+        a, b, c = args["a"], args["b"], args["c"]  #unpack args
+
         match sub_action:
             case "Duplicate":
                 # Function to add an extra column by duplicating an existing column
@@ -53,12 +61,21 @@ class ManipulationsModel():
                 df_with_duplicate_column[random.randrange(1,100)] = df_with_duplicate_column[column]
                 return df_with_duplicate_column
             case "New":
-                pass
+                df.insert(0, a, " ")
+                return df
             case "Feature Engineering":
-                pass
+                match a:
+                    case "Polynominal Features":
+                        pass
+                    case "Interaction Features":
+                        pass
+                    case "Feature Aggregration":
+                        pass
+                    case "Feature Crosses":
+                        pass
 
     def remove_columns(self, sub_action, df, column, args=None): 
-        a,b,c = args #unpack
+        a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
             case "Algorithmic":
@@ -67,7 +84,7 @@ class ManipulationsModel():
                 pass
 
     def remove_rows(self, sub_action, df, column, args=None):   
-        a,b,c = args #unpack
+        a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
             case "Missing Values":

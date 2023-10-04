@@ -330,7 +330,7 @@ class ManipulateView(BaseView):
         match choice:
             case "Noise":
                 self.pos_1_menu = self._drop_down_menu_template("Select Technique", 
-                ["Add Random Custom Value", "Add Outliers"], self.add_noise_technique_callback, 2)
+                ["Add Random Custom Value", "Add Missing", "Add Outliers"], self.add_noise_technique_callback, 2)
             case "Column":
                 self.pos_1_menu = self._drop_down_menu_template("Select Technique", 
                 ["Duplicate", "New", "Feature Engineering"], self.add_column_technique_callback, 2)
@@ -341,11 +341,15 @@ class ManipulateView(BaseView):
 
         match choice:
             case "Add Random Custom Value":
-                self.sme_selector.configure(values=["Single", "Multiple", "Entire"])
+                self.sme_selector.configure(values=["Single"])
                 self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_standard_arg_a_callback,
                                                                     "Enter custom value") 
                 self.pos_4_entry_box = self.user_entry_box_template(3, 1, self.entry_box_numerical_arg_b_callback,
                                                                     "Enter number of values")
+            case "Add Missing":
+                self.sme_selector.configure(values=["Single", "Entire"])
+                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_numerical_arg_a_callback,
+                                                                    "Enter number of values")                
             case "Add Outliers":
                 self.pos_2_menu = self._drop_down_menu_template("Select Technique", 
                 ["Z-score", "Percentile", "Min/Max"], 
