@@ -36,7 +36,7 @@ class ManipulateController:
         
         # Add manipulations to scheduler
         self.frame.schedule_button.bind("<Button-1>", lambda _: self.frame.add_manipulation_to_scheduler(), add="+")
-        self.frame.schedule_button.bind("<Button-1>", lambda _: self.populate_scheduler_list(), add="+")
+        self.frame.schedule_button.bind("<Button-1>", lambda _: self.populate_schedule_set(), add="+")
 
         # Delete all sceduled manipulations
         self.frame.delete_all_button.bind("<Button-1>", lambda _: self._delete_all_scheduled_manipulations())
@@ -57,23 +57,34 @@ class ManipulateController:
             text=f"Current Dataset: {self.model.DATASET.get_dataset_name()} | Rows: {self.model.DATASET.get_df_row_count()} | "
                     f"Columns: {len(self.model.DATASET.get_column_headers())}")
 
-    def populate_scheduler_list(self):
+    def populate_schedule_set(self):
 
         if self.frame.schedule_button._state == "normal" and self.step_count < self.MAX_STEPS:
             self.step_count +=1
+
+            match self.frame.variables["sme"]:
+                case "Single":
+                    df = self.model.DATASET.get_column_data(self.frame.variables["column"])
+                case "Multiple":
+                    pass
+                case "Entire":
+                    df = self.model.DATASET.get_reference_to_current_snapshot()
+
             schedule_set = {
                 "step": self.step_count,
                 "action": self.frame.variables["action"],
                 "sub_action": self.frame.variables["sub_action"],
                 "args": self.frame.variables["args"],
                 "column": self.frame.variables["column"],
-                "sme": self.frame.variables["sme"],
-                "outcome": "in_queue"
+                "outcome": "in_queue",
+                "df": self.model.DATASET.get_reference_to_current_snapshot()
             }
             self.model.manipulations.update_schedule_set(schedule_set)
  
             self.frame.schedule_button.configure(state="disabled")
             self.frame.generate_button.configure(state="normal")
+            self.frame.column_dropdown.configure(state="disbled")
+            self.frame.sme_selector.configure(state="disbled")
 
             if self.step_count == self.MAX_STEPS:
                 self.frame.schedule_button.configure(state="disabled")
@@ -90,10 +101,14 @@ class ManipulateController:
         self.frame.action_selection_menu.configure(state="normal")
         self.frame.step_count = 0
         self.frame.generate_button.configure(state="disabled")
+        
           
     def generate(self):
-        x = self.model.manipulations.get_schedule_set()
-        print(x)
+        self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+        
+        
+        
+
         
 
     def _update_frame_scheduler_status(self,manip):

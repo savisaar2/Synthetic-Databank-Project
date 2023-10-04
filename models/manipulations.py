@@ -1,4 +1,5 @@
 from pandas import *
+import random
 
 class ManipulationsModel():
     def __init__(self):
@@ -10,57 +11,70 @@ class ManipulationsModel():
         """
         self.schedule_set = []
         self._manip_collection()
+        self.current_df = ""
         
         super().__init__()
 
     def _manip_collection(self):
             self.manip_collection = {
-                 "add_noise": "add noise function"
+                 "Add Noise": self.add_noise,
+                 "Add Column": self.add_column,
+                 "Remove Rows": self.remove_rows,
             }
     
-    def churner(scheduler_row):
-        # for r in scheduler_row:
-        #     manip_collection[r["action"]](r["args"])
-            pass
+    def generate_churner(self, scheduler_row):
+        for r in scheduler_row:
+            match r["step"]:
+                 case 1:
+                    generated_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], r["args"])
+                    self.current_df = generated_df
+                 case _:
+                    r["df"] = self.current_df
+                    generated_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], r["args"])
+                    self.current_df = generated_df
 
     def update_schedule_set(self, manip_set):
           self.schedule_set.append(manip_set)
-          print(self.schedule_set)
 
-    def get_schedule_set(self):
-          return self.schedule_set
-          
-    # Temp method for testing
-    def remove_column(self):   
-        df = self.model.DATASET.get_reference_to_current_snapshot()
-        column_name = str(self.scheduler_actions[self.step_count-1]["variable_2"])
-        df = df.drop([column_name], axis=1)
-        df.to_csv("./db/temp/temp.csv", index=False)
-        self.model.DATASET.load_dataset(file_path="./db/temp/temp.csv", dataset_name="wine_dataset")
+    def add_noise(self, sub_action, df, column, args=None):
+        a,b,c = args #unpack
 
-    # Temp method for testing
-    def add_noise(self, args=None):
-        a,b = args #unpack
+        match sub_action:
+            case "Add Random Custom Value":
+                pass
+            case "Add Outliers":
+                pass   
+    
+    def add_column(self, sub_action, df, column, args):
+        match sub_action:
+            case "Duplicate":
+                # Function to add an extra column by duplicating an existing column
+                df_with_duplicate_column = df.copy()
+                df_with_duplicate_column[random.randrange(1,100)] = df_with_duplicate_column[column]
+                return df_with_duplicate_column
+            case "New":
+                pass
+            case "Feature Engineering":
+                pass
+
+    def remove_columns(self, sub_action, df, column, args=None): 
+        a,b,c = args #unpack
+
+        match sub_action:
+            case "Algorithmic":
+                pass
+            case "Manual":
+                pass
+
+    def remove_rows(self, sub_action, df, column, args=None):   
+        a,b,c = args #unpack
+
+        match sub_action:
+            case "Missing Values":
+                pass
+            case "Duplicate Rows":
+                pass
 
 
-        # Define the variable to introduce noise to and the value to replace
-        variable_to_noise = 'Age'  # Replace with the actual variable name
-        value_to_replace = 200  # Replace with the value you want to replace
 
-        # Define the percentage of rows to be replaced
-        percent_to_replace = 10  # Replace with the desired percentage
 
-        # Calculate the number of rows to replace
-        num_rows_to_replace = int(len(df) * (percent_to_replace / 100))
-
-        # Create a mask to select rows to replace
-        mask = random.sample(range(len(df)), num_rows_to_replace)
-
-        # Use the mask to replace the specified variable
-        df.loc[mask, variable_to_noise] = value_to_replace
-
-        # Save the noisy dataset to a new CSV file
-        noisy_dataset_path = r'C:\Users\61408\noisy_breast_cancer_dataset.csv'
-        df.to_csv(noisy_dataset_path, index=False)
-
-        print(f"Noisy dataset saved to {noisy_dataset_path}")
