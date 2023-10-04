@@ -45,7 +45,6 @@ class ManipulateController:
         self.frame.generate_button.bind("<Button-1>", lambda _: self.generate(), add="+")
         self.frame.generate_button.bind("<Button-1>", self._refresh_manipulate_widgets, add="+")
         
-
     def _refresh_manipulate_widgets(self, event): 
         """
         Obtain column headers from the loaded dataset to be populated in the appropriate widgets e.g. 
@@ -101,15 +100,9 @@ class ManipulateController:
         self.frame.action_selection_menu.configure(state="normal")
         self.frame.step_count = 0
         self.frame.generate_button.configure(state="disabled")
-        
-          
+                 
     def generate(self):
         self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
-        
-        
-        
-
-        
 
     def _update_frame_scheduler_status(self,manip):
             self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text="Complete")

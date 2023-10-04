@@ -363,13 +363,13 @@ class ManipulateView(BaseView):
 
         match choice:
             case "Z-score":
+                self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_numerical_arg_a_callback,
+                                                                    "Enter number of missing values")
+            case "Percentile":
                 self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_standard_arg_a_callback,
                                                                     "Enter lower percentile") 
                 self.pos_5_entry_box = self.user_entry_box_template(4, 1, self.entry_box_numerical_arg_b_callback,
                                                                     "Enter upper percentile")
-            case "Percentile":
-                self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_numerical_arg_a_callback,
-                                                                    "Enter number of missing values")
             case "Min/Max":
                 pass
 
@@ -410,6 +410,7 @@ class ManipulateView(BaseView):
             self.pos_1_menu = self._drop_down_menu_template("Select Variable", 
                 ["Missing Values", "Duplicate Rows"], self._sme_selector_col_2_callback, 2)
             self.sme_selector.set("Entire")
+            
 
     def _dimensionality_reduction_callback(self, choice):
         self.variables["sub_action"] = choice
@@ -425,7 +426,8 @@ class ManipulateView(BaseView):
                 self.sme_selector.configure(state=["normal"])
 
     def _dimension_reduction_algo_callback(self, choice):
-        self.variables["var_3"] = choice
+        first_sub = self.variables["sub_action"]
+        self.variables["sub_action"] = f"{first_sub} {choice}"
         self.sme_selector.configure(values=["Entire"])
         self._refresh_menu_widgets(4)
 
@@ -627,6 +629,7 @@ class ManipulateView(BaseView):
     def _sme_selector_col_2_callback(self, choice):
         self.variables["sub_action"] = choice
         self.sme_selector.configure(state="enabled")
+        self.schedule_button.configure(state="normal")
       
     def _sme_selector_col_3_callback(self, choice):
         self.variables["args"]["a"] = choice

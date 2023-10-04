@@ -20,6 +20,7 @@ class ManipulationsModel():
                  "Add Noise": self.add_noise,
                  "Add Column": self.add_column,
                  "Remove Rows": self.remove_rows,
+                 "Reduce Columns (Dimensionality)": self.reduce_columns
             }
     
     def generate_churner(self, scheduler_row):
@@ -33,6 +34,7 @@ class ManipulationsModel():
             generated_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], r["args"])
             self.current_df = generated_df
         print(self.current_df)
+        self.current_df =""
 
     def update_schedule_set(self, manip_set):
           self.schedule_set.append(manip_set)
@@ -42,16 +44,33 @@ class ManipulationsModel():
 
         match sub_action:
             case "Add Random Custom Value":
+                # Insert function here!!!
+                pass
+            case "Add Missing":
+                # Insert function here!!!
                 pass
             case "Add Outliers Z-score":
+                # Insert function here!!!
                 pass
             case "Add Outliers Percentile":
+                # Insert function here!!!
                 pass
             case "Add Outliers Min/Max":
+                # Insert function here!!!
                 pass
 
-    
     def add_column(self, sub_action, df, column, args):
+        """Adds a column(s) to a pandas dataframe.
+
+        Args:
+            sub_action (str): Description of user selected chosen technique
+            df (_type_): The dataframe to be manipulated.
+            column (_type_): Name of single column (if selected by user as "single").
+            args (_type_): Dictinory of the arguments associated with the sceduled manipulation.
+
+        Returns:
+            pandas_dataframe: A Pandas dataframe which has been manipulated.
+        """
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
@@ -61,26 +80,42 @@ class ManipulationsModel():
                 df_with_duplicate_column[random.randrange(1,100)] = df_with_duplicate_column[column]
                 return df_with_duplicate_column
             case "New":
+                # Function to add new column to dataframe.
                 df.insert(0, a, " ")
                 return df
             case "Feature Engineering":
                 match a:
                     case "Polynominal Features":
+                        # Insert function here!!!
                         pass
                     case "Interaction Features":
+                        # Insert function here!!!
                         pass
                     case "Feature Aggregration":
+                        # Insert function here!!!
                         pass
                     case "Feature Crosses":
+                        # Insert function here!!!
                         pass
 
-    def remove_columns(self, sub_action, df, column, args=None): 
+    def reduce_columns(self, sub_action, df, column, args=None): 
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
-            case "Algorithmic":
+            case "Algorithmic PCA":
+                # Insert function here!!!
+                pass
+            case "Algorithmic LDA":
+                # Insert function here!!!
+                pass
+            case "Algorithmic SVD":
+                # Insert function here!!!
+                pass
+            case "Algorithmic Sklearn":
+                # Insert function here!!!
                 pass
             case "Manual":
+                # Insert function here!!!
                 pass
 
     def remove_rows(self, sub_action, df, column, args=None):   
@@ -88,8 +123,10 @@ class ManipulationsModel():
 
         match sub_action:
             case "Missing Values":
+                # Insert function here!!!
                 pass
             case "Duplicate Rows":
+                # Insert function here!!!
                 pass
 
 
