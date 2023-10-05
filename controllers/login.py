@@ -1,5 +1,5 @@
 class LoginController:
-    def __init__(self, model, view):
+    def __init__(self, model, view, logger):
         """
         Initialises an instance of the LoginController class.
 
@@ -12,6 +12,7 @@ class LoginController:
         name : View
             The application's view instance.
         """
+        self.logger = logger
         self.model = model
         self.view = view
         self.frame = self.view.frames["login"]

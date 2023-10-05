@@ -1,4 +1,3 @@
-import plotly.offline as pyo
 import plotly.express as px
 import plotly.graph_objects as go
 from pandas import pivot_table as pt

@@ -1,3 +1,5 @@
+from utils.logger_utils import Logger
+
 class AnalyseController:
     def __init__(self, model, view):
         """
@@ -12,6 +14,7 @@ class AnalyseController:
         name : View
             The application's view instance.
         """
+        self.logger = Logger()
         self.model = model
         self.view = view
         self.frame = self.view.frames["analyse"]
@@ -91,7 +94,6 @@ class AnalyseController:
                 rounding=rounding_val
             )
             self.frame.populate_pivot_table(d=pivot_data)
-        
 
     def _tabulate(self, event):
         """Facilitate tabulation of dataset using start_row, end_row values in the view

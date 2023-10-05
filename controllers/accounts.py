@@ -1,3 +1,5 @@
+from utils.logger_utils import Logger
+
 class AccountsController:
     def __init__(self, model, view):
         """
@@ -12,6 +14,7 @@ class AccountsController:
         name : View
             The application's view instance.
         """
+        self.logger = Logger()
         self.model = model
         self.view = view
         self.frame = self.view.frames["accounts"]

@@ -1,4 +1,5 @@
 from models.dataset import DatasetModel
+from utils.logger_utils import Logger
 
 class SaveController:
     def __init__(self, model, view):
@@ -14,6 +15,7 @@ class SaveController:
         name : View
             The application's view instance.
         """
+        self.logger = Logger()
         self.model = model
         self.view = view
         self.frame = self.view.frames["save"]
