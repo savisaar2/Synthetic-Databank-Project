@@ -364,7 +364,7 @@ class ManipulateView(BaseView):
         match choice:
             case "Z-score":
                 self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_numerical_arg_a_callback,
-                                                                    "Enter number of missing values")
+                                                                    "Enter z-score threshold")
             case "Percentile":
                 self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_standard_arg_a_callback,
                                                                     "Enter lower percentile") 
@@ -393,9 +393,21 @@ class ManipulateView(BaseView):
                 self.schedule_button.configure(state="normal")
             case "Feature Engineering":
                 self.pos_3_menu = self._drop_down_menu_template("Select Technique", 
-                ["Polynomial Features", "Interaction Features", "Feature Aggregation", "Feature Crosses"],
-                self._sme_selector_col_3_callback, 3)
+                                                                ["Polynomial Features", "Interaction Features"], 
+                                                                self.feature_engineering_callback, 3)
                 self.sme_selector.configure(values=["Single", "Multiple"])
+
+    def feature_engineering_callback(self, choice):
+        sub_action = self.variables["sub_action"]
+        self.variables["sub_action"] = f"{sub_action} {choice}"
+        self._refresh_menu_widgets(4)
+
+        match choice:
+            case "Polynomial Features":
+                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_numerical_arg_a_callback,
+                                                                    "Enter degree")
+            case "Interaction Features":
+                self.sme_selector.configure(state="normal")
 
     def reduce_method_select_callback(self, choice):
         self.variables["action"] = f"Reduce {choice}"
@@ -411,7 +423,7 @@ class ManipulateView(BaseView):
             # Add drop down menu for column selection
             self.pos_1_menu = self._drop_down_menu_template("Select Variable", 
                 ["Missing Values", "Duplicate Rows"], self._sme_selector_col_2_callback, 2)
-            self.sme_selector.set("Entire")
+            self.sme_selector.configure(state="normal")
             
 
     def _dimensionality_reduction_callback(self, choice):
@@ -631,7 +643,6 @@ class ManipulateView(BaseView):
     def _sme_selector_col_2_callback(self, choice):
         self.variables["sub_action"] = choice
         self.sme_selector.configure(state="enabled")
-        self.schedule_button.configure(state="normal")
       
     def _sme_selector_col_3_callback(self, choice):
         self.variables["args"]["a"] = choice

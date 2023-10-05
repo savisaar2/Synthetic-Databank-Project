@@ -84,20 +84,12 @@ class ManipulationsModel():
                 # Function to add new column to dataframe.
                 df.insert(0, a, " ")
                 return df
-            case "Feature Engineering":
-                match a:
-                    case "Polynominal Features":
-                        # Insert function here!!!
-                        pass
-                    case "Interaction Features":
-                        # Insert function here!!!
-                        pass
-                    case "Feature Aggregration":
-                        # Insert function here!!!
-                        pass
-                    case "Feature Crosses":
-                        # Insert function here!!!
-                        pass
+            case "Feature Engineering Polynominal Features":
+                # Insert function here!!!
+                pass
+            case "Feature Engineering Interaction Features":
+                # Insert function here!!!
+                pass
 
     def reduce_columns(self, sub_action, df, column, args): 
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
