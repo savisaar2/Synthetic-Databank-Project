@@ -158,3 +158,16 @@ class DatasetModel:
         """
         self._SNAPSHOTS.clear()
         print("snapshots cleared!")
+
+    def add_generated_dataset_to_snapshot(self, schedule_set, dataset_name, df):
+        """Loads a csv file stored in the databank into memory i.e. _SNAPSHOTS list.
+        """
+        self._SNAPSHOTS.append(
+            {
+                "Name": f"{dataset_name}", 
+                "Description": "Generated dataset.", 
+                "Schedule Set": schedule_set, 
+                "Dataframe": df
+            }
+        )
+        print("Generated data set:", self._SNAPSHOTS[-1])

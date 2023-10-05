@@ -31,17 +31,16 @@ class ManipulationsModel():
             else:
                 r["df"] = self.current_df
 
-            generated_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], r["args"])
-            self.current_df = generated_df
-        print(self.current_df)
+            self.generated_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], r["args"])
+            self.current_df = self.generated_df
+        self.current_df = []
         self.schedule_set = []
-        self.current_df =""
-        
+        return self.generated_df
 
     def update_schedule_set(self, manip_set):
           self.schedule_set.append(manip_set)
 
-    def add_noise(self, sub_action, df, column, args=None):
+    def add_noise(self, sub_action, df, column, args):
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
@@ -100,7 +99,7 @@ class ManipulationsModel():
                         # Insert function here!!!
                         pass
 
-    def reduce_columns(self, sub_action, df, column, args=None): 
+    def reduce_columns(self, sub_action, df, column, args): 
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
@@ -120,7 +119,7 @@ class ManipulationsModel():
                 # Insert function here!!!
                 pass
 
-    def remove_rows(self, sub_action, df, column, args=None):   
+    def remove_rows(self, sub_action, df, column, args):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:

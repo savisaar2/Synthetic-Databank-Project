@@ -95,16 +95,18 @@ class ManipulateController:
                 items_dict[widget].grid_forget()
 
         self.frame.scheduler_items = []
-        self.scheduler_actions = []
+        self.model.manipulations.schedule_set = []
         self.step_count = 0
         self.frame.action_selection_menu.configure(state="normal")
         self.frame.step_count = 0
         self.frame.generate_button.configure(state="disabled")
                  
     def generate(self):
-        self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+        manips = self.model.manipulations.schedule_set
+        generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+        self.model.DATASET.add_generated_dataset_to_snapshot(manips, "Generated Dataset",
+                                                             generated_df)
         
-
     def _update_frame_scheduler_status(self,manip):
             self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text="Complete")
             self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text_color="Green")

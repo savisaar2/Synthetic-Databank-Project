@@ -381,16 +381,18 @@ class ManipulateView(BaseView):
             case "Duplicate":
                 self.sme_selector.configure(values=["Single"])
                 self.sme_selector.configure(state="normal")
-            case "New":
-                self.pos_2_entry_box = self.user_entry_box_template(3, 0, self.entry_box_standard_arg_a_callback,
+                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_standard_arg_a_callback,
                                                                     "Enter column name")
+            case "New":
+                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_standard_arg_a_callback,
+                                                                    "Enter column name")
+                self.sme_selector.configure(values=["No Column Required"])
+                self.sme_selector.set("No Column Required")
                 self.sme_selector.configure(state="disabled")
-                self.sme_selector.set("Single")
-                self.sme_selector.configure(values=["Single"])
-                self.column_dropdown.configure("disabled")
+                self.column_dropdown.configure(state="disabled")
                 self.schedule_button.configure(state="normal")
             case "Feature Engineering":
-                self.pos_2_menu = self._drop_down_menu_template("Select Technique", 
+                self.pos_3_menu = self._drop_down_menu_template("Select Technique", 
                 ["Polynomial Features", "Interaction Features", "Feature Aggregation", "Feature Crosses"],
                 self._sme_selector_col_3_callback, 3)
                 self.sme_selector.configure(values=["Single", "Multiple"])
