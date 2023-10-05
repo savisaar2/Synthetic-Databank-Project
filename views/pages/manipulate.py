@@ -456,7 +456,7 @@ class ManipulateView(BaseView):
         
         match choice:
             case "Replace Missing Values":
-                self.sme_selector.set("Single")
+                self.sme_selector.configure(values=["Single"])
                 self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
                 ["Numerical Column", "Categorial Column"], self._replace_missing_values_callback, 2)
             case "Replace Value (x) with New Value":
@@ -466,11 +466,11 @@ class ManipulateView(BaseView):
                 self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_numerical_arg_b_callback, 
                                                                     "Enter New Value")
             case "Change Column Name":
-                self.sme_selector.set("Single")
+                self.sme_selector.configure(values=["Single"])
                 self.pos_2_entry_box = self.user_entry_box_template(2, 0, self.entry_box_numerical_arg_a_callback, 
                                                                     "Enter new column name")
             case "Expand (add rows)":
-                self.sme_selector.set("Entire")
+                self.sme_selector.configure(values=["Entire"])
                 self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
                 ["Random Sampling", "Bootstrap Resamping", "SMOTE", "Add Noise"], self._expand_rows_callback, 2)  
             case "Data Transformation":

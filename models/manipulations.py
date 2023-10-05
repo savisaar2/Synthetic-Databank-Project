@@ -20,7 +20,8 @@ class ManipulationsModel():
                  "Add Noise": self.add_noise,
                  "Add Column": self.add_column,
                  "Remove Rows": self.remove_rows,
-                 "Reduce Columns (Dimensionality)": self.reduce_columns
+                 "Reduce Columns (Dimensionality)": self.reduce_columns,
+                 "Replace Missing Values": self.replace_null_values
             }
     
     def generate_churner(self, scheduler_row):
@@ -78,7 +79,7 @@ class ManipulationsModel():
             case "Duplicate":
                 # Function to add an extra column by duplicating an existing column
                 df_with_duplicate_column = df.copy()
-                df_with_duplicate_column[random.randrange(1,100)] = df_with_duplicate_column[column]
+                df_with_duplicate_column[a] = df_with_duplicate_column[column]
                 return df_with_duplicate_column
             case "New":
                 # Function to add new column to dataframe.
@@ -122,6 +123,38 @@ class ManipulationsModel():
                 # Insert function here!!!
                 pass
 
+    def replace_null_values(self, sub_action, df, column, args):   
+        a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
-
-
+        match sub_action:
+            case "Numerical Column":
+                match a:
+                    case "Mean":
+                        # Insert function here!!!
+                        pass
+                    case "Median":
+                        # Insert function here!!!
+                        pass
+                    case "KNN":
+                        # Insert function here!!!
+                        pass
+                    case "ML":
+                        # Insert function here!!!
+                        pass
+                    case "Manual":
+                        # Insert function here!!!
+                        pass
+            case "Categorial Column":
+                match a:
+                    case "Mode":
+                        # Insert function here!!!
+                        pass
+                    case "Similarity":
+                        # Insert function here!!!
+                        pass
+                    case "ML":
+                        # Insert function here!!!
+                        pass
+                    case "Manual":
+                        # Insert function here!!!
+                        pass
