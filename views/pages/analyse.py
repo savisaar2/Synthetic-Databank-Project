@@ -33,7 +33,7 @@ class AnalyseView(BaseView):
         self.v_frame.pack(fill='x', pady=(20, 0), padx=20)
         self.graph_label = CTkLabel(self.v_frame, text="Graph Style:", anchor="w")
         self.graph_label.pack(side="left", padx=(8, 0))
-        self.graphing_options = ["------", "Box", "Histogram", "Line", "Scatter", "Violin"]
+        self.graphing_options = ["------", "Box", "Heat Map", "Histogram", "Line", "Scatter", "Violin"]
         self.graph_option_menu = CTkOptionMenu(
             self.v_frame, fg_color="gray10", width=3, values=self.graphing_options, 
             command=lambda option: self.reconfig_widgets(option, "graph")
@@ -380,7 +380,7 @@ class AnalyseView(BaseView):
                     bulk_toggle("hide", [
                         self.pivot_round_value_label, self.pivot_round_value_input
                     ])
-        else: 
+        else: # != "------"
             match option_set: 
                 case "summarise":
                     bulk_toggle("on", [
@@ -388,6 +388,12 @@ class AnalyseView(BaseView):
                         self.null_value_input
                     ])
                 case "graph":
+                    bulk_toggle("reset_menu", [ # Always reset variables
+                        self.variable_a_option_menu, self.variable_b_option_menu]
+                    )
+                    bulk_toggle("off", [ # Always disable plot after reset
+                        self.plot_button
+                    ])
                     if self.graph_option_menu.get() == "Scatter":
                         bulk_toggle("on", [
                             self.variable_b_option_menu
@@ -405,9 +411,17 @@ class AnalyseView(BaseView):
                         bulk_toggle("hide", [
                             self.variable_b_label, self.variable_b_option_menu
                         ])
-                    bulk_toggle("on", [
-                        self.variable_a_option_menu
+                    if self.graph_option_menu.get() == "Heat Map": 
+                        bulk_toggle("off", [
+                            self.variable_a_option_menu
                         ])
+                        bulk_toggle("on", [
+                            self.plot_button
+                        ])
+                    else: 
+                        bulk_toggle("on", [
+                            self.variable_a_option_menu
+                            ])
                 case "var_a":
                     if self.graph_option_menu.get() != "Scatter": 
                         bulk_toggle("on", [

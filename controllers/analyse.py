@@ -34,17 +34,23 @@ class AnalyseController:
         """
         Plot selected visualisation based on selected Graph Style and variable(s). 
         """
+        # Defaults
         dataset_name = self.model.DATASET.get_dataset_name()
+        var_a_column = None
+        var_b_column = None
+        df_ref = None 
         graph_option = self.frame.graph_option_menu.get()
-        var_a_column = self.model.DATASET.get_column_data(column=self.frame.variable_a_option_menu.get())
-        
+
+        if graph_option == "Heat Map":
+            df_ref = self.model.DATASET.get_reference_to_current_snapshot() # reference to the current dataframe
+        else: 
+            var_a_column = self.model.DATASET.get_column_data(column=self.frame.variable_a_option_menu.get())
+
         if graph_option == "Scatter": 
             var_b_column = self.model.DATASET.get_column_data(column=self.frame.variable_b_option_menu.get())
-        else:
-            var_b_column = None
 
         self.model.analyse.plot_visualisation(
-            mode=graph_option, title=dataset_name, var_a=var_a_column, var_b=var_b_column
+            mode=graph_option, title=dataset_name, var_a=var_a_column, var_b=var_b_column, df_ref=df_ref
             )
 
     def _summarise(self, event): 
@@ -52,11 +58,9 @@ class AnalyseController:
         Generate descriptive statistics based on chosen variable (column of data) in the view.
         """
         try: 
-            rounding_val = self.model.analyse.convert_to_number(
-                mode="round", val=self.frame.summary_round_value_input.get()
-                )
+            rounding_val = self.model.analyse.convert_to_number(val=self.frame.summary_round_value_input.get())
         except ValueError as e: 
-            self.exception.display_error(e)
+            self.exception.display_error("Specify rounding value as an integer value.")
             return
 
         if type(rounding_val) == int: 
@@ -73,11 +77,9 @@ class AnalyseController:
         and the selected aggregate function. 
         """
         try: 
-            rounding_val = self.model.analyse.convert_to_number(
-                mode="round", val=self.frame.pivot_round_value_input.get()
-                )
+            rounding_val = self.model.analyse.convert_to_number(val=self.frame.pivot_round_value_input.get())
         except ValueError as e: 
-            self.exception.display_error(e)
+            self.exception.display_error("Specify rounding value as an integer value.")
             return
 
         if type(rounding_val) == int: 
@@ -97,14 +99,10 @@ class AnalyseController:
         widgets in the view. 
         """
         try: 
-            start_row = self.model.analyse.convert_to_number(
-                mode="start_row", val=self.frame.start_row_input.get()
-                )
-            end_row = self.model.analyse.convert_to_number(
-                mode="end_row", val=self.frame.end_row_input.get()
-                )
+            start_row = self.model.analyse.convert_to_number(val=self.frame.start_row_input.get())
+            end_row = self.model.analyse.convert_to_number(val=self.frame.end_row_input.get())
         except ValueError as e: 
-            self.exception.display_error(e)
+            self.exception.display_error("Specify start/end row values as an integer values.")
             return
 
         headers = self.model.DATASET.get_column_headers()
