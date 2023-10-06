@@ -24,6 +24,7 @@ class LoginView(CTkFrame):
             relx=0.5, rely=0.5, anchor="center",
             relwidth=1, relheight=1
         )
+        # Comment below to show authentication page (production).
         self.overlay_frame.lower()
 
         self.login_frame = CTkFrame(self.overlay_frame)
@@ -48,9 +49,6 @@ class LoginView(CTkFrame):
 
         self.msg_label = CTkLabel(self.login_frame, text="")
         self.msg_label.pack(pady=(0, 50))
-
-        self.logo_label = CTkLabel(self.overlay_frame, text="test")
-        self.logo_label.pack(padx=100,pady=10)
 
     def show_view(self):
         """Shows the LoginView overlay."""
