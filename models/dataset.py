@@ -170,4 +170,4 @@ class DatasetModel:
                 "Dataframe": df
             }
         )
-        print("Generated data set:", self._SNAPSHOTS[-1])
+        print("Generated data set:", self._SNAPSHOTS[-1]["Dataframe"])
