@@ -1,3 +1,5 @@
+import json as j
+
 class UserModel():
     def __init__(self):
         """
@@ -6,4 +8,20 @@ class UserModel():
         This class represents the UserModel component of the application's MVC (Model-View-Controller) architecture.
         It initialises the models to be consumed by the controllers of this applicaiton.
         """
-        pass
+        self.accounts = None
+        self.user_info = None
+        self.read_accounts()
+
+    def read_accounts(self):
+        with open("./db/system/accounts.json", "r") as file:
+            jsonArray = file.read()
+
+        self.accounts = j.loads(jsonArray)
+
+    def login(self, username, password):
+        for account in self.accounts:
+            if account["username"] == username and account["password"] == password:
+                self.user_info = account
+                return True
+            
+        return False

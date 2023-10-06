@@ -31,12 +31,15 @@ class LoginController:
             self.frame.overlay_frame.focus() # Remove focus from widgets.
             return
         
-        authenticated, msg = self.model.user.login(username, password)
+        authenticated = self.model.user.login(username, password)
 
         if authenticated:
+            # Log success
+            self.frame.hide_view()
             self.frame.hide_view()
         else:
-            self.exception.display_error(msg)
+            # Display generic error for failure.
+            self.exception.display_error("AUTH: Invalid username & password.")
 
     def _bind(self):
         """

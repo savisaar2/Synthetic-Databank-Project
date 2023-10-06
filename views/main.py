@@ -45,7 +45,6 @@ class View:
         self._add_frame(AccountMgmtView, "accounts_manager")
         self._add_frame(AccountEditorView, "accounts_editor")
         self._add_frame(ExceptionView, "exception")
-        self._add_frame(LoginView, "login")
 
         self.current_view = None
 
