@@ -11,7 +11,7 @@ class ManipulationsModel():
         """
         self.schedule_set = []
         self._manip_collection()
-        self.current_df = ""
+
         
         super().__init__()
 
@@ -21,27 +21,28 @@ class ManipulationsModel():
                  "Add Column": self.add_column,
                  "Remove Rows": self.remove_rows,
                  "Reduce Columns (Dimensionality)": self.reduce_columns,
-                 "Replace Missing Values": self.replace_null_values
+                 "Replace Missing Values": self.replace_null_values,
+                 "Change Column Name": self.change_column_name,
+                 "Expand (add rows)": self.add_rows,
             }
     
     def generate_churner(self, scheduler_row):
+        # Set dataframe as current, but not for the first item. 
         for index, r in enumerate(scheduler_row):
-            # Set in dataframe as current, but not for the first item.
             if not index:
                 pass
             else:
                 r["df"] = self.current_df
-
-            self.generated_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], r["args"])
-            self.current_df = self.generated_df
-        self.current_df = []
-        self.schedule_set = []
-        return self.generated_df
+                         
+            self.current_df  = self.manip_collection[r["action"]](r["sub_action"], 
+                                                        r["df"], r["column"], r["args"], r["sme"])
+        self.schedule_set = [] # Clear schedule set
+        return self.current_df
 
     def update_schedule_set(self, manip_set):
           self.schedule_set.append(manip_set)
 
-    def add_noise(self, sub_action, df, column, args):
+    def add_noise(self, sub_action, df, column, args, sme):
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
@@ -49,7 +50,15 @@ class ManipulationsModel():
                 # Insert function here!!!
                 pass
             case "Add Missing":
-                # Insert function here!!!
+                match column:
+                    case "":
+                        # If column has no string, the user has selected entire.
+                        # Insert function here!!!
+                        pass
+                    case _:
+                        # If column has has a string, the user has selected single.
+                        # Insert function here!!!
+                        pass
                 pass
             case "Add Outliers Z-score":
                 # Insert function here!!!
@@ -61,7 +70,7 @@ class ManipulationsModel():
                 # Insert function here!!!
                 pass
 
-    def add_column(self, sub_action, df, column, args):
+    def add_column(self, sub_action, df, column, args, sme):
         """Adds a column(s) to a pandas dataframe.
 
         Args:
@@ -92,7 +101,7 @@ class ManipulationsModel():
                 # Insert function here!!!
                 pass
 
-    def reduce_columns(self, sub_action, df, column, args): 
+    def reduce_columns(self, sub_action, df, column, args, sme): 
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
@@ -112,7 +121,7 @@ class ManipulationsModel():
                 # Insert function here!!!
                 pass
 
-    def remove_rows(self, sub_action, df, column, args):   
+    def remove_rows(self, sub_action, df, column, args, sme):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
@@ -123,7 +132,7 @@ class ManipulationsModel():
                 # Insert function here!!!
                 pass
 
-    def replace_null_values(self, sub_action, df, column, args):   
+    def replace_null_values(self, sub_action, df, column, args, sme):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
@@ -158,3 +167,23 @@ class ManipulationsModel():
                     case "Manual":
                         # Insert function here!!!
                         pass
+
+    def change_column_name(self, sub_action, df, column, args, sme):   
+        a, b, c = args["a"], args["b"], args["c"]  #unpack args
+
+        # Insert function here!!!
+        pass
+
+    def add_rows(self, sub_action, df, column, args, sme):   
+        a, b, c = args["a"], args["b"], args["c"]  #unpack args
+        
+        match sub_action:
+            case "Random Sampling":
+                # Insert function here!!!
+                pass
+            case "Bootstrap Resampling":
+                # Insert function here!!!
+                pass
+            case "SMOTE":
+                # Insert function here!!!
+                pass        

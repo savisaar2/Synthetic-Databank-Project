@@ -61,20 +61,13 @@ class ManipulateController:
         if self.frame.schedule_button._state == "normal" and self.step_count < self.MAX_STEPS:
             self.step_count +=1
 
-            match self.frame.variables["sme"]:
-                case "Single":
-                    df = self.model.DATASET.get_column_data(self.frame.variables["column"])
-                case "Multiple":
-                    pass
-                case "Entire":
-                    df = self.model.DATASET.get_reference_to_current_snapshot()
-
             schedule_set = {
                 "step": self.step_count,
                 "action": self.frame.variables["action"],
                 "sub_action": self.frame.variables["sub_action"],
                 "args": self.frame.variables["args"],
                 "column": self.frame.variables["column"],
+                "sme": self.frame.variables["sme"],
                 "outcome": "in_queue",
                 "df": self.model.DATASET.get_reference_to_current_snapshot()
             }

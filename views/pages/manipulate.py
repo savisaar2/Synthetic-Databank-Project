@@ -468,7 +468,7 @@ class ManipulateView(BaseView):
                                                                     "Enter New Value")
             case "Change Column Name":
                 self.sme_selector.configure(values=["Single"])
-                self.pos_2_entry_box = self.user_entry_box_template(2, 0, self.entry_box_standardarg_a_callback, 
+                self.pos_2_entry_box = self.user_entry_box_template(2, 0, self.entry_box_standard_arg_a_callback, 
                                                                     "Enter new column name")
             case "Expand (add rows)":
                 self.sme_selector.configure(values=["Entire"])
@@ -476,7 +476,30 @@ class ManipulateView(BaseView):
                 ["Random Sampling", "Bootstrap Resamping", "SMOTE", "Add Noise"], self._expand_rows_callback, 2)  
             case "Data Transformation":
                 self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
-                ["Feature Scaling/Normalisation", "Feature Encoding"], None, 2)                            
+                ["Feature Scaling", "Feature Encoding"], self._data_transformation_callback, 2)                            
+
+    def _data_transformation_callback(self, choice):
+        self.variables["sub_action"] = choice
+        self._refresh_menu_widgets(3)
+
+        match choice:
+            case "Feature Scaling":
+                self.pos_3_menu = self._drop_down_menu_template("Select Technique", 
+                ["Min/Max Scaler", "Z-score"], self._feature_scaling_callback, 3)
+            case "Feature Encoding":
+                self.pos_3_menu = self._drop_down_menu_template("Select Technique", 
+                ["One-hot Encoding", "Label Encoding", "Embedding"], None, 3)
+
+    def _feature_scaling_callback(self, choice):
+        sub_action = self.variables["sub_action"]
+        self.variables["sub_action"] = f"{sub_action} {choice}"
+        self.sme_selector.configure(values=["Entire"])
+        self._refresh_menu_widgets(4)
+
+        match choice:
+            case "Min/Max Scaler" | "Z-score":
+                self.pos_4_menu = self._drop_down_menu_template("Select Dependant Variable", 
+                self.column_headers, self._sme_selector_col_4_callback, 4)
 
     def _expand_rows_callback(self, choice):
         self.variables["sub_action"] = choice
@@ -632,6 +655,7 @@ class ManipulateView(BaseView):
             case "Multiple":
                 pass
             case "Entire":
+                self.variables["column"] = ""
                 self.schedule_button.configure(state="normal")
                 self.column_dropdown.configure(state="disabled")
 
