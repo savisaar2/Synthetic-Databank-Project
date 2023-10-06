@@ -1,3 +1,4 @@
+from utils.logger_utils import Logger
 from os import path
 from shutil import copy
 import pandas as pd
@@ -16,6 +17,7 @@ class LibraryController:
         name : View
             The application's view instance.
         """
+        self.logger = Logger()
         self.model = model
         self.view = view
         self.frame = self.view.frames["library"]

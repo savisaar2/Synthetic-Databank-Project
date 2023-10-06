@@ -1,5 +1,8 @@
+from utils.logger_utils import Logger
+
 class ExceptionController:
     def __init__(self, model, view):
+        self.logger = Logger()
         self.model = model
         self.view = view
         self.frame = self.view.frames["exception"]

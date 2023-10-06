@@ -11,14 +11,15 @@ class AnalyseModel():
         """
         super().__init__()
 
-    def plot_visualisation(self, mode, title, var_a, var_b):
-        """_summary_
+    def plot_visualisation(self, mode, title, var_a, var_b, df_ref):
+        """Plot!
 
         Args:
-            mode (_type_): _description_
-            title (_type_): _description_
-            var_a (_type_): _description_
-            var_b (_type_): _description_
+            mode (str): Type of graph
+            title (str): Name of the dataset
+            var_a (str): selected column
+            var_b (str): selected column
+            df_ref (pandas Dataframe): reference to the currently loaded dataframe
         """
         # Configure styles
         match mode: 
@@ -27,6 +28,10 @@ class AnalyseModel():
             case "Histogram": 
                 plot = go.Figure(data=[go.Histogram(x=var_a, nbinsx=20)])
                 plot.update_layout(title=title)
+            case "Heat Map":
+                heatmap = go.Heatmap(z=df_ref.values, x=df_ref.columns, y=df_ref.index, colorscale="Viridis")
+                layout = go.Layout(title=title)
+                plot = go.Figure(data=[heatmap], layout=layout)
             case "Line": 
                 plot = px.line(y=var_a, title=title)
             case "Scatter": 
@@ -40,12 +45,14 @@ class AnalyseModel():
         elif mode in ["Scatter"]: 
             plot.update_traces(marker=dict(size=3))
 
-        plot.update_xaxes(title_text=var_a.name)
         if mode == "Scatter": 
             plot.update_yaxes(title_text=var_b.name)
         else: 
             plot.update_yaxes(title_text="")
-        
+
+        if mode != "Heat Map":
+            plot.update_xaxes(title_text=var_a.name)
+                    
         plot.show()
 
     def summarise(self, var, rounding, null_val): 
@@ -66,7 +73,7 @@ class AnalyseModel():
         upper_bound = self._upper_bound(q3=q3, iqr=iqr)
         identified_outliers = (var < lower_bound) | (var > upper_bound)
         outlier_count = identified_outliers.sum()
-        null_series = var == self.typify(null_val) # pandas series of Boolean values
+        null_series = var == self._typify(null_val) # pandas series of Boolean values
 
         summary = {
             "Min": var.min(), 
@@ -84,15 +91,20 @@ class AnalyseModel():
         }
         return {key: round(value, rounding) for key, value in summary.items()} # rounding
     
-    def typify(self, null_val): 
-        """
-        Convert null_val as specified by user into the correct type. 
+    def _typify(self, null_val): 
+        """Convert null_val as specified by user into the correct type. 
+
+        Args:
+            null_val (_type_): _description_
+
+        Returns:
+            _type_: _description_
         """
         try: 
             converted = float(null_val)
             return converted
         except Exception as e: 
-            return null_val # likely string or empty?
+            return null_val # likely string or empty? TODO: use raise
 
     def _iqr(self, q3, q1):
         """IQR - inter quartile range
@@ -169,23 +181,18 @@ class AnalyseModel():
         temp_dict = pivot_calculation.to_dict()[vals] # return in following sample format {"cat1": 333, "cat2": 444}
         return {key: round(value, rounding) for key, value in temp_dict.items()} # rounding
     
-    def convert_to_number(self, mode, val): 
+    def convert_to_number(self, val): 
         """Convert 
 
         Args:
-            mode (str): targeted input widget e.g. number rounding etc. 
             val (str): user specified input.
 
         Returns:
             int: value
         """
-        try: 
+        if val.isdigit(): 
             return int(val)
-        except ValueError:
-            if mode == "round": 
-                raise ValueError("Specify rounding value as an integer value.")
-            elif mode == "start_row": 
-                raise ValueError("Specify start row value as an integer value.")
-            elif mode == "end_row": 
-                raise ValueError("Specify end row value as an integer value.")
+        else: 
+            raise ValueError
+            
 
