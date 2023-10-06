@@ -488,7 +488,7 @@ class ManipulateView(BaseView):
                 ["Min/Max Scaler", "Z-score"], self._feature_scaling_callback, 3)
             case "Feature Encoding":
                 self.pos_3_menu = self._drop_down_menu_template("Select Technique", 
-                ["One-hot Encoding", "Label Encoding", "Embedding"], None, 3)
+                ["One-hot Encoding", "Label Encoding", "Embedding"], self._feature_encoding_callback, 3)
 
     def _feature_scaling_callback(self, choice):
         sub_action = self.variables["sub_action"]
@@ -496,10 +496,18 @@ class ManipulateView(BaseView):
         self.sme_selector.configure(values=["Entire"])
         self._refresh_menu_widgets(4)
 
-        match choice:
-            case "Min/Max Scaler" | "Z-score":
-                self.pos_4_menu = self._drop_down_menu_template("Select Dependant Variable", 
-                self.column_headers, self._sme_selector_col_4_callback, 4)
+        self.pos_4_menu = self._drop_down_menu_template("Select Dependant Variable", 
+        self.column_headers, self._sme_selector_col_4_callback, 4)
+
+    def _feature_encoding_callback(self, choice):
+        sub_action = self.variables["sub_action"]
+        self.variables["sub_action"] = f"{sub_action} {choice}"
+        self.sme_selector.configure(values=["Single"])
+        self._refresh_menu_widgets(4)
+
+        self.pos_4_menu = self._drop_down_menu_template("Select Dependant Variable", 
+        self.column_headers, self._sme_selector_col_4_callback, 4)
+
 
     def _expand_rows_callback(self, choice):
         self.variables["sub_action"] = choice

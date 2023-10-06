@@ -26,6 +26,7 @@ class ManipulationsModel():
                  "Replace Missing Values": self.replace_null_values,
                  "Change Column Name": self.change_column_name,
                  "Expand (add rows)": self.add_rows,
+                 "Data Transformation": self.data_transformation,
             }
     
     def generate_churner(self, scheduler_row):
@@ -262,3 +263,18 @@ class ManipulationsModel():
             case "SMOTE":
                 # Insert function here!!!
                 pass        
+
+    def data_transformation(self, sub_action, df, column, args, sme): 
+        a, b, c = args["a"], args["b"], args["c"]  #unpack args
+
+        match sub_action:
+            case "Feature Scaling Min/Max Scaler":
+                pass
+            case "Feature Scaling Z-score":
+                pass
+            case "Feature Encoding One-hot Encoding":
+                pass
+            case "Feature Encoding Label Encoding":
+                pass
+            case "Feature Encoding Embedding":
+                pass
