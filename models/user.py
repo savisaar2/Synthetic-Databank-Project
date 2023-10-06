@@ -10,6 +10,7 @@ class UserModel():
         """
         self.accounts = None
         self.user_info = None
+        self.is_locked = False
         self.read_accounts()
 
     def read_accounts(self):
@@ -17,6 +18,13 @@ class UserModel():
             jsonArray = file.read()
 
         self.accounts = j.loads(jsonArray)
+
+    def get_user_by_username(self, username):
+        for account in self.accounts:
+            if account["username"] == username:
+                return True
+            
+        return False
 
     def login(self, username, password):
         for account in self.accounts:

@@ -18,6 +18,7 @@ class LoginController:
         self.frame = self.view.frames["login"]
         self.menu_frame = self.view.frames["menu"]
         self.exception = self.view.frames["exception"]
+        self.failed_attempts = 0
         self._bind()
 
     def _authenticate_user(self, event):
@@ -25,18 +26,21 @@ class LoginController:
         username, password = self.frame.get_login_info()
 
         # Ensure fields are not blank.
-        # TODO: Add some visual cues.
         if username == "" or password == "":
             self.exception.display_error("AUTH: Invalid username & password.")
             self.frame.overlay_frame.focus() # Remove focus from widgets.
             return
         
-        authenticated = self.model.user.login(username, password)
+        user = self.model.user.get_user_by_username(username)
 
-        if authenticated:
-            # Log success
-            self.frame.hide_view()
-            self.frame.hide_view()
+        if user:
+            authenticated = self.model.user.login(username, password)
+
+            if authenticated:
+                self.frame.hide_view()
+            else:
+                # Display generic error for failure.
+                self.exception.display_error("AUTH: Invalid username & password.")
         else:
             # Display generic error for failure.
             self.exception.display_error("AUTH: Invalid username & password.")
