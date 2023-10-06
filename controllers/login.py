@@ -16,7 +16,27 @@ class LoginController:
         self.model = model
         self.view = view
         self.frame = self.view.frames["login"]
+        self.menu_frame = self.view.frames["menu"]
+        self.exception = self.view.frames["exception"]
         self._bind()
+
+    def _authenticate_user(self, event):
+        # Get authentication info from view.
+        username, password = self.frame.get_login_info()
+
+        # Ensure fields are not blank.
+        # TODO: Add some visual cues.
+        if username == "" or password == "":
+            self.exception.display_error("AUTH: Invalid username & password.")
+            self.frame.overlay_frame.focus() # Remove focus from widgets.
+            return
+        
+        authenticated, msg = self.model.user.login(username, password)
+
+        if authenticated:
+            self.frame.hide_view()
+        else:
+            self.exception.display_error(msg)
 
     def _bind(self):
         """
@@ -24,4 +44,4 @@ class LoginController:
         Implement this method to set up event handlers and connections
         for user interactions with widgets on the view related to the login page.
         """
-        pass
+        self.frame.login_button.bind("<Button-1>", lambda event: self._authenticate_user(event))
