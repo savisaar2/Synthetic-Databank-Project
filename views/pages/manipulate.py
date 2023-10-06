@@ -14,13 +14,13 @@ class ManipulateView(BaseView):
         root : Root
             The applicaiton's root instance.
         """
-        # Pass some base title and description to our BaseView class.
         super().__init__(root, "Manipulate", "Configure your Dataset.", *args, **kwargs)
         self._render_page()
-        self.widget_list = []
-        self.variables = {"action":"", "sub_action":"", "args":{"a":"", "b":"", "c":""},"column":"", "sme":""}
-        self.scheduler_items = []
-        self.step_count = 0
+        self.widget_list = [] # List of widgets dispayed in manipulation frame; removed during user navigation.
+        self.variables = {"action":"", "sub_action":"", # Variables accessed by controller.
+                          "args":{"a":"", "b":"", "c":""},"column":"", "sme":""}
+        self.scheduler_items = [] # List of widgets dispayed in scheduler frame; removed when user selects "delete all".
+        self.step_count = 0 # Counter for scheduled manipulations.
 
     def _render_page(self):
         """Renders widgets on the ManipulateView page."""
@@ -28,10 +28,8 @@ class ManipulateView(BaseView):
         # Manipulations frames and label
         self.manipulations_frame_1 = CTkFrame(self, fg_color="gray20")
         self.manipulations_frame_1.pack(fill="both", padx=20)
-
         self.manipulations_frame_2 = CTkFrame(self, fg_color="gray20")
         self.manipulations_frame_2.pack(fill="both", pady=(2, 20), padx=20)
-
         self.manipulations_label = CTkLabel(
             self.manipulations_frame_1, 
             text="Manipulations", 
@@ -191,10 +189,12 @@ class ManipulateView(BaseView):
         )
         self.rollback_dataset_selector.pack(side="left", padx=(8, 0), pady=8)
 
+        # Current dataset label
         self.current_dataset_label = CTkLabel(self.rollback_frame_2)
         self.current_dataset_label.pack(side="right", padx=(8, 8))
 
     def add_manipulation_to_scheduler(self):
+        """Method creates a set of widgets to display a users selected manipulation parameters."""
 
         if self.schedule_button._state == "normal":
             try:
@@ -296,9 +296,14 @@ class ManipulateView(BaseView):
                 self.sme_selector.set("")
 
     def action_callback(self, choice):
+        """Action menu selector callback function.
+
+        Args:
+            choice (str): User selection via dropdown menu or entry box.
+        """
+        # Refresh widgets
         self.schedule_button.configure(state="disabled")  
         self.variables = self.variables = {"action":"", "sub_action":"", "args":{"a":"", "b":"", "c":""},"column":"", "sme":""}
-        # Reset SME selector
         self.sme_selector.configure(state="disabled")
         self.sme_selector.configure(values=["Single", "Multiple", "Entire"])
         self.sme_selector.set("")
@@ -325,6 +330,11 @@ class ManipulateView(BaseView):
                     self.manipulate_col_select_callback, 1)
 
     def add_select_callback(self, choice):
+        """Add menu selector callback function. New menu/entry box appears on user selection.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         self.variables["action"] = f"Add {choice}"
         self._refresh_menu_widgets(2)
 
@@ -337,6 +347,11 @@ class ManipulateView(BaseView):
                 ["Duplicate", "New", "Feature Engineering"], self.add_column_technique_callback, 2)
 
     def add_noise_technique_callback(self, choice):
+        """Add noise selector callback function. New menu/entry box appears on user selection.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         self.variables["sub_action"] = choice
         self._refresh_menu_widgets(3)
 
@@ -358,6 +373,11 @@ class ManipulateView(BaseView):
                 self.sme_selector.configure(values=["Single"])
     
     def outliers_technique_callback(self, choice):
+        """Outliers callback function. New menu/entry box appears on user selection.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         previous_sub_type = self.variables["sub_action"]
         self.variables["sub_action"] = f"{previous_sub_type} {choice}"
         self._refresh_menu_widgets(4)
@@ -375,6 +395,11 @@ class ManipulateView(BaseView):
                 pass
 
     def add_column_technique_callback(self, choice):
+        """Add column callback function. New menu/entry box appears on user selection.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         self.variables["sub_action"] = choice
         self._refresh_menu_widgets(3)
 
@@ -399,6 +424,11 @@ class ManipulateView(BaseView):
                 self.sme_selector.configure(values=["Single", "Multiple"])
 
     def feature_engineering_callback(self, choice):
+        """Add feature engineering callback function. New menu/entry box appears on user selection.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         sub_action = self.variables["sub_action"]
         self.variables["sub_action"] = f"{sub_action} {choice}"
         self._refresh_menu_widgets(4)
@@ -411,6 +441,11 @@ class ManipulateView(BaseView):
                 self.sme_selector.configure(state="normal")
 
     def reduce_method_select_callback(self, choice):
+        """Reduce callback function. New menu/entry box appears on user selection.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         self.variables["action"] = f"Reduce {choice}"
         self.sme_selector.configure(values=["Entire"])
         self._refresh_menu_widgets(2)
@@ -428,6 +463,11 @@ class ManipulateView(BaseView):
             
 
     def _dimensionality_reduction_callback(self, choice):
+        """Dimensionality reduction callback function. New menu/entry box appears on user selection.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         self.variables["sub_action"] = choice
         self._refresh_menu_widgets(3)
 
@@ -441,6 +481,11 @@ class ManipulateView(BaseView):
                 self.sme_selector.configure(state=["normal"])
 
     def _dimension_reduction_algo_callback(self, choice):
+        """Dimension reduction algorithm callback function. New menu/entry box appears on user selection.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         first_sub = self.variables["sub_action"]
         self.variables["sub_action"] = f"{first_sub} {choice}"
         self.sme_selector.configure(values=["Entire"])
@@ -452,6 +497,11 @@ class ManipulateView(BaseView):
                                                             "Number of columns to retain")
 
     def manipulate_col_select_callback(self, choice):
+        """Add column callback function. New menu/entry box appears on user selection.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         self.variables["action"] = choice
         self._refresh_menu_widgets(2)
         
