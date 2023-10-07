@@ -15,12 +15,12 @@ class ManipulateView(BaseView):
             The applicaiton's root instance.
         """
         super().__init__(root, "Manipulate", "Configure your Dataset.", *args, **kwargs)
-        self._render_page()
         self.widget_list = [] # List of widgets dispayed in manipulation frame; removed during user navigation.
         self.variables = {"action":"", "sub_action":"", # Variables accessed by controller.
                           "args":{"a":"", "b":"", "c":""},"column":"", "sme":""}
         self.scheduler_items = [] # List of widgets dispayed in scheduler frame; removed when user selects "delete all".
         self.step_count = 0 # Counter for scheduled manipulations.
+        self._render_page()
 
     def _render_page(self):
         """Renders widgets on the ManipulateView page."""
@@ -192,6 +192,8 @@ class ManipulateView(BaseView):
         # Current dataset label
         self.current_dataset_label = CTkLabel(self.rollback_frame_2)
         self.current_dataset_label.pack(side="right", padx=(8, 8))
+
+        self.entry_warning = self._label_template("", 10)
 
     def add_manipulation_to_scheduler(self):
         """Method creates a set of widgets to display a users selected manipulation parameters."""
@@ -384,7 +386,7 @@ class ManipulateView(BaseView):
 
         match choice:
             case "Z-score":
-                self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_standard_arg_a_callback,
+                self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_float_arg_a_callback,
                                                                     "Enter z-score threshold")
             case "Percentile":
                 self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_standard_arg_a_callback,
@@ -411,8 +413,6 @@ class ManipulateView(BaseView):
                 self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_standard_arg_a_callback,
                                                                     "Enter column name")
                 self.sme_selector.configure(values=["No Column Required"])
-                self.sme_selector.set("No Column Required")
-                self.sme_selector.configure(state="disabled")
                 self.column_dropdown.configure(state="disabled")
                 self.schedule_button.configure(state="normal")
             case "Feature Engineering":
@@ -644,6 +644,93 @@ class ManipulateView(BaseView):
             case "Manual":
                 self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_standard_arg_b_callback, "Enter new number value")
 
+    def entry_box_standard_arg_a_callback(self, choice):
+        match len(choice):
+            case _ if len(choice) <= 20:
+                self.variables["args"]["a"] = choice
+                self.sme_selector.configure(state="normal")
+                return True
+            case _ if len(choice) == 0:
+                self.sme_selector.configure(state="disabled") 
+                return True
+        
+    def entry_box_standard_arg_b_callback(self, choice):
+        if len(choice) > 0:
+            self.variables["args"]["b"] = choice
+            self.sme_selector.configure(state="normal")  
+            return True
+        elif len(choice) == 0:
+            self.sme_selector.configure(state="disabled") 
+            return True
+
+    def _validate_numerical_input(self, string):
+        regex = re.compile(r"^[0-9]+(\.[0-9]*)?$")
+        result = regex.match(string)
+        return (string == ""
+                or (string.count('.') <= 1
+                    and result is not None
+                    and result.group(0) != ""))
+    
+    def entry_box_float_arg_a_callback(self, choice):
+        
+        try:
+            float(choice)
+            self.variables["args"]["a"] = float(choice)
+            self.sme_selector.configure(state="normal")
+            self.entry_warning.configure(text="")
+            return True
+        except ValueError:
+            self.entry_warning.configure(text="<- Enter a float")
+            self.sme_selector.configure(state="disabled")
+            self.column_dropdown.configure(state="disabled")
+            self.schedule_button.configure(state="disabled")
+            return True
+
+
+
+
+        # self.entry_warning = self._label_template("", 10)
+        # validate = self._validate_numerical_input(choice)
+        # print(validate)
+        
+        # if len(choice) > 0 and validate == True:
+        #     self.variables["args"]["a"] = choice
+        #     self.sme_selector.configure(state="normal")
+        #     self.entry_warning.configure(text="")
+            
+
+        # elif len(choice) == 0:
+        #     self.sme_selector.configure(state="disabled")
+        #     self.sme_selector.set("")
+        #     self.column_dropdown.configure(state="disabled")
+        #     self.schedule_button.configure(state="disabled")
+        #     self.entry_warning.configure(text="Input must be a float")
+            
+        
+        # elif validate == False:
+        #     print("IN FALSE")
+        #     self.sme_selector.configure(state="disabled")
+        #     self.sme_selector.set("")
+        #     self.column_dropdown.configure(state="disabled")
+        #     self.schedule_button.configure(state="disabled")
+        #     self.entry_warning.configure(text="Input must be a float")
+                
+
+    def entry_box_numerical_arg_b_callback(self, choice):
+        if len(choice) > 5:
+            self.sme_selector.configure(state="disabled") 
+            return True
+        elif choice.isdigit():
+            self.variables["args"]["b"] = choice
+            self.sme_selector.configure(state="normal")
+            return True          
+        elif len(choice) == 0:
+            self.sme_selector.configure(state="disabled") 
+            return True
+        else:
+            self.sme_selector.configure(state="disabled") 
+            return False
+
     def _label_template(self, text, col_pos):
         """Template for label widgets.
 
@@ -659,20 +746,20 @@ class ManipulateView(BaseView):
             text=text, 
             anchor="w")
         label.grid(row=0, column=col_pos, padx=(8, 10), pady=(8, 8), sticky="w")
-        self.widget_list.append({"col_pos": col_pos, "widget": label})
+        #self.widget_list.append({"col_pos": col_pos, "widget": label})
         return label
     
-    def user_entry_box_template(self, col_pos, row_pos, callback, start_text):
+    def user_entry_box_template(self, col_pos:int, row_pos:int, callback, start_text:str):
         """Entry box wiget template.
 
         Args:
             col_pos (int): Column position to place on grid.
             row_pos (int): Row position to place on grid.
             callback (function): Callback function associated with widget.
-            start_text (_type_): Placeholder text of entry widget.
+            start_text (str): Placeholder text of entry widget.
 
         Returns:
-            Ctk widget: A Ctk entry box  widget object.
+            Ctk widget: A Ctk entry box widget object.
         """
         entry_box_command = self.register(callback)
         user_entry_box = CTkEntry(
@@ -685,61 +772,8 @@ class ManipulateView(BaseView):
         user_entry_box.grid(column=col_pos, row=row_pos,  padx=(0, 2), pady=(8, 8), sticky="w")
         user_entry_box.configure(placeholder_text=start_text)
         self.widget_list.append({"col_pos": col_pos, "widget": user_entry_box})
-        
         return user_entry_box
     
-    def entry_box_standard_arg_a_callback(self, choice):
-        if len(choice) > 0:
-            self.variables["args"]["a"] = choice
-            self.sme_selector.configure(state="normal")  
-            return True
-        elif len(choice) == 0:
-            self.sme_selector.configure(state="disabled") 
-            return True
-        
-    def entry_box_standard_arg_b_callback(self, choice):
-        if len(choice) > 0:
-            self.variables["args"]["b"] = choice
-            self.sme_selector.configure(state="normal")  
-            return True
-        elif len(choice) == 0:
-            self.sme_selector.configure(state="disabled") 
-            return True
-
-    def _validate_numerical_input(self, string):
-        regex = re.compile(r"[0-9.]*$")
-        result = regex.match(string)
-        return (string == ""
-                or (string.count('.') <= 1
-                    and result is not None
-                    and result.group(0) != ""))
-    
-    def entry_box_numerical_arg_a_callback(self, choice):
-        match self._validate_numerical_input(choice):
-            case True:
-                if len(choice) > 0:
-                    self.variables["args"]["a"] = choice
-                    self.sme_selector.configure(state="normal")
-            case False:
-                self.sme_selector.configure(state="disabled")
-        return self._validate_numerical_input(choice)
-    
-        
-    def entry_box_numerical_arg_b_callback(self, choice):
-        if len(choice) > 5:
-            self.sme_selector.configure(state="disabled") 
-            return True
-        elif choice.isdigit():
-            self.variables["args"]["b"] = choice
-            self.sme_selector.configure(state="normal")
-            return True          
-        elif len(choice) == 0:
-            self.sme_selector.configure(state="disabled") 
-            return True
-        else:
-            self.sme_selector.configure(state="disabled") 
-            return False
-        
     def _drop_down_menu_template(self, start_text: str, menu_options: list, command_func, col_pos: int):    
         menu_var = StringVar(value=start_text)
         selector = menu_options
@@ -807,6 +841,7 @@ class ManipulateView(BaseView):
         self.sme_selector.configure(state="disabled")
         self.sme_selector.set("")
         self.column_dropdown.configure(state="disabled")
+        self.entry_warning.configure(text="")
 
         match col_ref:
             case 2:
@@ -821,6 +856,7 @@ class ManipulateView(BaseView):
                 for widget in self.widget_list:
                     if widget["col_pos"] != 1 and widget["col_pos"] != 2 and widget["col_pos"] != 3:
                         widget["widget"].grid_forget()
+            
                     
     def refresh_manipulate_widgets(self, column_headers):
         """Refresh, update or populate the values of various widgets on Manipulate view with appropriate
