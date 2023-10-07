@@ -110,3 +110,4 @@ class ManipulateController:
         self.col_dtype_dict ={}
         for col in self.model.DATASET.get_column_headers():
             self.col_dtype_dict[col] = df.dtypes[col]
+        print(self.col_dtype_dict)

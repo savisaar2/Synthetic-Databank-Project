@@ -362,10 +362,8 @@ class ManipulateView(BaseView):
         match choice:
             case "Add Random Custom Value":
                 self.sme_selector.configure(values=["Single"])
-                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_int_arg_b_callback,
-                                                                    "Enter number of values less than total rows")
-                self.pos_4_entry_box = self.user_entry_box_template(3, 1, self.entry_box_standard_arg_a_callback,
-                                                                    "Enter custom value (datatype must match column)") 
+                self.pos_3_menu = self._drop_down_menu_template("Select Column",
+                                                                self.column_headers, self._add_random_custom_value_callback, 3)
             case "Add Missing":
                 self.sme_selector.configure(values=["Single", "Entire"])
                 self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_int_arg_a_callback,
@@ -376,6 +374,25 @@ class ManipulateView(BaseView):
                 self.outliers_technique_callback, 3)
                 self.sme_selector.configure(values=["Single"])
     
+    def _add_random_custom_value_callback(self, choice):
+        self.variables["column"] = choice
+        self._refresh_menu_widgets(4)
+        self.entry_warning.grid_forget()
+        
+        match self.column_dtypes[choice]:
+            case "int64":
+                self.pos_4_entry_box = self.user_entry_box_template(3, 1, self.entry_box_int_arg_a_callback,
+                                                                    "Enter custom value (integer)") 
+            case "float64":
+                self.pos_4_entry_box = self.user_entry_box_template(3, 1, self.entry_box_float_arg_a_callback,
+                                                                    "Enter custom value (float)")
+            case _:
+                self.pos_4_entry_box = self.user_entry_box_template(3, 1, self.entry_box_standard_arg_a_callback,
+                                                                    "Enter custom value (string)")
+
+        self.pos_5_entry_box = self.user_entry_box_template(3, 2, self.entry_box_int_arg_b_callback,
+                                                            "Enter number of values less than total rows")
+        
     def outliers_technique_callback(self, choice):
         """Outliers callback function. New menu/entry box appears on user selection.
 
@@ -500,8 +517,6 @@ class ManipulateView(BaseView):
                 self.action_callback
                 self.entry_warning.configure(text="Dataset must be numerical to reduce.")
                 
-
-
     def manipulate_col_select_callback(self, choice):
         """Add column callback function. New menu/entry box appears on user selection.
 
@@ -651,7 +666,7 @@ class ManipulateView(BaseView):
                 ["Mean", "Median", "KNN", "ML"], self._sme_selector_col_4_callback, 4)
             case "Manual":
                 self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_standard_arg_b_callback, "Enter new number value")
-
+    
     def entry_box_standard_arg_a_callback(self, choice):
         match len(choice):
             case _ if len(choice) <= 20:
@@ -770,7 +785,13 @@ class ManipulateView(BaseView):
     def _set_sme_variable(self, choice):
         self.variables["sme"] = choice
         self.schedule_button.configure(state="disabled")
-        self.column_dropdown.configure(values=self.column_headers)
+
+        match self.variables['sub_action']:
+            case "Add Random Custom Value":
+                self.column_dropdown.configure(values=[self.variables['column']])
+            case _:
+                self.column_dropdown.configure(values=self.column_headers)
+
         match choice:
             case "Single":
                 self.column_dropdown.configure(state="normal")
@@ -862,3 +883,4 @@ class ManipulateView(BaseView):
                     case _:
                         self.columns_all_numerical = False
                         break
+                
