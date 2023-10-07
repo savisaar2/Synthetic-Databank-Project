@@ -1,7 +1,6 @@
 import pandas as pd
 
 from utils.logger_utils import Logger
-
 class ManipulateController:
     def __init__(self, model, view):
         """
@@ -20,14 +19,11 @@ class ManipulateController:
         self.model = model
         self.view = view
         self.frame = self.view.frames["manipulate"]
+        self.col_dtype_dict = {}
         self._bind()
         self.step_count = 0 
         self.MAX_STEPS = 4
-
-        # TODO - to be removed once Alex has finished feature which loads chosen dataset from Library component.
-        # Once Alex is finished, the methods should work natively with obtaining information directly from 
-        # dataset model's method calls. 
-        #self.model.DATASET.load_dataset(file_path="./db/databank/wine_dataset.csv", dataset_name="wine_dataset")
+        
 
     def _bind(self):
         """
@@ -35,7 +31,8 @@ class ManipulateController:
         Implement this method to set up event handlers and connections
         for user interactions with widgets on the view related to the manipulate page.
         """
-        self.view.frames["menu"].manipulate_button.bind("<Button-1>", self._refresh_manipulate_widgets)
+        self.view.frames["menu"].manipulate_button.bind("<Button-1>", lambda _: self._scan_dataset(), add="+")
+        self.view.frames["menu"].manipulate_button.bind("<Button-1>", self._refresh_manipulate_widgets, add="+")
         
         # Add manipulations to scheduler
         self.frame.schedule_button.bind("<Button-1>", lambda _: self.frame.add_manipulation_to_scheduler(), add="+")
@@ -54,7 +51,7 @@ class ManipulateController:
         option menues and row count of Manipulate view. Called whenever Manipulate side panel is clicked to 
         ensure correct data.
         """
-        self.frame.refresh_manipulate_widgets(self.model.DATASET.get_column_headers())
+        self.frame.refresh_manipulate_widgets(self.model.DATASET.get_column_headers(), self.col_dtype_dict)
         self.frame.current_dataset_label.configure(
             text=f"Current Dataset: {self.model.DATASET.get_dataset_name()} | Rows: {self.model.DATASET.get_df_row_count()} | "
                     f"Columns: {len(self.model.DATASET.get_column_headers())}")
@@ -78,8 +75,8 @@ class ManipulateController:
  
             self.frame.schedule_button.configure(state="disabled")
             self.frame.generate_button.configure(state="normal")
-            self.frame.column_dropdown.configure(state="disbled")
-            self.frame.sme_selector.configure(state="disbled")
+            self.frame.column_dropdown.configure(state="disabled")
+            self.frame.sme_selector.configure(state="disabled")
 
             if self.step_count == self.MAX_STEPS:
                 self.frame.schedule_button.configure(state="disabled")
@@ -108,4 +105,8 @@ class ManipulateController:
             self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text_color="Green")
             self.frame.scheduler_items[manip["step"]-1]["step"].configure(state="disabled")
 
-    
+    def _scan_dataset(self):  
+        df = self.model.DATASET.get_reference_to_current_snapshot()
+        self.col_dtype_dict ={}
+        for col in self.model.DATASET.get_column_headers():
+            self.col_dtype_dict[col] = df.dtypes[col]

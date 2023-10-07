@@ -292,10 +292,11 @@ class ManipulateView(BaseView):
                 # Reset action menu
                 self.action_selection_menu.set("Select Action")
 
-                # Reset SME selector
-                self.sme_selector.configure(state="disabled")
+                # Reset SME selector and column dropdown
                 self.sme_selector.configure(values=["Single", "Multiple", "Entire"])
                 self.sme_selector.set("")
+                self.sme_selector.configure(state="disabled")
+                self.column_dropdown.configure(state="disabled")
 
     def action_callback(self, choice):
         """Action menu selector callback function.
@@ -311,9 +312,10 @@ class ManipulateView(BaseView):
         self.sme_selector.set("")
 
         # Remove all previously packed widgets in manipulations frame.
-        for widget in self.widget_list:
-            widget["widget"].grid_forget()
-        self.widget_list =[]
+        self._refresh_menu_widgets(1)
+        # for widget in self.widget_list:
+        #     widget["widget"].grid_forget()
+        # self.widget_list =[]
 
         match choice:
             case "Add":
@@ -360,14 +362,14 @@ class ManipulateView(BaseView):
         match choice:
             case "Add Random Custom Value":
                 self.sme_selector.configure(values=["Single"])
-                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_standard_arg_a_callback,
-                                                                    "Enter custom value") 
-                self.pos_4_entry_box = self.user_entry_box_template(3, 1, self.entry_box_standard_arg_b_callback,
-                                                                    "Enter number of values")
+                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_int_arg_b_callback,
+                                                                    "Enter number of values less than total rows")
+                self.pos_4_entry_box = self.user_entry_box_template(3, 1, self.entry_box_standard_arg_a_callback,
+                                                                    "Enter custom value (datatype must match column)") 
             case "Add Missing":
                 self.sme_selector.configure(values=["Single", "Entire"])
-                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_standard_arg_a_callback,
-                                                                    "Enter number of values")                
+                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_int_arg_a_callback,
+                                                                    "Enter number of values less than total rows")                
             case "Add Outliers":
                 self.pos_2_menu = self._drop_down_menu_template("Select Technique", 
                 ["Z-score", "Percentile", "Min/Max"], 
@@ -389,8 +391,8 @@ class ManipulateView(BaseView):
                 self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_float_arg_a_callback,
                                                                     "Enter z-score threshold")
             case "Percentile":
-                self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_standard_arg_a_callback,
-                                                                    "Enter number of outliers") 
+                self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_int_arg_a_callback,
+                                                                    "Enter number of outliers less than total rows") 
             case "Min/Max":
                 pass
 
@@ -484,15 +486,21 @@ class ManipulateView(BaseView):
             Args:
                 choice (str): User selection via dropdown menu or entry box.
         """
-        first_sub = self.variables["sub_action"]
-        self.variables["sub_action"] = f"{first_sub} {choice}"
-        self.sme_selector.configure(values=["Entire"])
-        self._refresh_menu_widgets(4)
+        match self.columns_all_numerical:
+            case True:
+                first_sub = self.variables["sub_action"]
+                self.variables["sub_action"] = f"{first_sub} {choice}"
+                self.sme_selector.configure(values=["Entire"])
+                self._refresh_menu_widgets(4)
+                self.pos_4_menu = self._drop_down_menu_template("Select Dependent Column", self.column_headers, 
+                                                                self._sme_selector_col_4_callback ,4)
+                self.pos_5_entry_box = self.user_entry_box_template(4, 1, self.entry_box_standard_arg_b_callback,
+                                                                    "Number of columns to retain")
+            case False:
+                self.action_callback
+                self.entry_warning.configure(text="Dataset must be numerical to reduce.")
+                
 
-        self.pos_4_menu = self._drop_down_menu_template("Select Dependent Column", self.column_headers, 
-                                                        self._sme_selector_col_4_callback ,4)
-        self.pos_5_entry_box = self.user_entry_box_template(4, 1, self.entry_box_standard_arg_b_callback,
-                                                            "Number of columns to retain")
 
     def manipulate_col_select_callback(self, choice):
         """Add column callback function. New menu/entry box appears on user selection.
@@ -662,74 +670,43 @@ class ManipulateView(BaseView):
         elif len(choice) == 0:
             self.sme_selector.configure(state="disabled") 
             return True
-
-    def _validate_numerical_input(self, string):
-        regex = re.compile(r"^[0-9]+(\.[0-9]*)?$")
-        result = regex.match(string)
-        return (string == ""
-                or (string.count('.') <= 1
-                    and result is not None
-                    and result.group(0) != ""))
     
     def entry_box_float_arg_a_callback(self, choice):
-        
         try:
-            float(choice)
             self.variables["args"]["a"] = float(choice)
             self.sme_selector.configure(state="normal")
             self.entry_warning.configure(text="")
-            return True
         except ValueError:
             self.entry_warning.configure(text="<- Enter a float")
             self.sme_selector.configure(state="disabled")
             self.column_dropdown.configure(state="disabled")
             self.schedule_button.configure(state="disabled")
-            return True
-
-
-
-
-        # self.entry_warning = self._label_template("", 10)
-        # validate = self._validate_numerical_input(choice)
-        # print(validate)
+        return True
         
-        # if len(choice) > 0 and validate == True:
-        #     self.variables["args"]["a"] = choice
-        #     self.sme_selector.configure(state="normal")
-        #     self.entry_warning.configure(text="")
-            
-
-        # elif len(choice) == 0:
-        #     self.sme_selector.configure(state="disabled")
-        #     self.sme_selector.set("")
-        #     self.column_dropdown.configure(state="disabled")
-        #     self.schedule_button.configure(state="disabled")
-        #     self.entry_warning.configure(text="Input must be a float")
-            
-        
-        # elif validate == False:
-        #     print("IN FALSE")
-        #     self.sme_selector.configure(state="disabled")
-        #     self.sme_selector.set("")
-        #     self.column_dropdown.configure(state="disabled")
-        #     self.schedule_button.configure(state="disabled")
-        #     self.entry_warning.configure(text="Input must be a float")
-                
-
-    def entry_box_numerical_arg_b_callback(self, choice):
-        if len(choice) > 5:
-            self.sme_selector.configure(state="disabled") 
-            return True
-        elif choice.isdigit():
-            self.variables["args"]["b"] = choice
+    def entry_box_int_arg_a_callback(self, choice):
+        try:
+            self.variables["args"]["a"] = int(choice)
             self.sme_selector.configure(state="normal")
-            return True          
-        elif len(choice) == 0:
-            self.sme_selector.configure(state="disabled") 
-            return True
-        else:
-            self.sme_selector.configure(state="disabled") 
-            return False
+            self.entry_warning.configure(text="")
+        except ValueError:
+            self.entry_warning.configure(text="<- Enter an integer")
+            self.sme_selector.configure(state="disabled")
+            self.column_dropdown.configure(state="disabled")
+            self.schedule_button.configure(state="disabled")
+        return True
+    
+    def entry_box_int_arg_b_callback(self, choice):
+        try:
+            self.variables["args"]["b"] = int(choice)
+            self.sme_selector.configure(state="normal")
+            self.entry_warning.configure(text="")
+        except ValueError:
+            self.entry_warning.configure(text="<- Enter an integer")
+            self.sme_selector.configure(state="disabled")
+            self.column_dropdown.configure(state="disabled")
+            self.schedule_button.configure(state="disabled")
+        return True
+
 
     def _label_template(self, text, col_pos):
         """Template for label widgets.
@@ -744,6 +721,7 @@ class ManipulateView(BaseView):
         label = CTkLabel(
             self.manipulations_frame_2, 
             text=text, 
+            text_color="yellow",
             anchor="w")
         label.grid(row=0, column=col_pos, padx=(8, 10), pady=(8, 8), sticky="w")
         #self.widget_list.append({"col_pos": col_pos, "widget": label})
@@ -765,7 +743,7 @@ class ManipulateView(BaseView):
         user_entry_box = CTkEntry(
             self.manipulations_frame_2,
             corner_radius=5, 
-            width=200,
+            width=250,
             validate='key',
             validatecommand=(entry_box_command, '%P')
             ) 
@@ -844,6 +822,9 @@ class ManipulateView(BaseView):
         self.entry_warning.configure(text="")
 
         match col_ref:
+            case 1:
+                for widget in self.widget_list:
+                    widget["widget"].grid_forget()
             case 2:
                 for widget in self.widget_list:
                     if widget["col_pos"] != 1:
@@ -858,7 +839,7 @@ class ManipulateView(BaseView):
                         widget["widget"].grid_forget()
             
                     
-    def refresh_manipulate_widgets(self, column_headers):
+    def refresh_manipulate_widgets(self, column_headers, column_dtypes):
         """Refresh, update or populate the values of various widgets on Manipulate view with appropriate
         information pulled from the loaded dataset e.g. column headers for option menues, row count etc. 
 
@@ -866,3 +847,18 @@ class ManipulateView(BaseView):
             dataset_attributes (tuple): A tuple consisting of row count and list of column headers (str).
         """
         self.column_headers = column_headers
+        self.column_dtypes = column_dtypes
+        self._refresh_menu_widgets(1)
+
+        # Menu logic to deny or allow user to perform manipulation based on all numerical columns.
+        self.columns_all_numerical = True
+        for col in self.column_dtypes:
+            if self.columns_all_numerical:
+                match self.column_dtypes[col]:
+                    case 'int64':
+                        self.columns_all_numerical = True
+                    case 'float64':
+                        self.columns_all_numerical = True
+                    case _:
+                        self.columns_all_numerical = False
+                        break
