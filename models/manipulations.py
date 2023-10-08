@@ -212,7 +212,7 @@ class ManipulationsModel():
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
-            case "Numerical Column":
+            case "Algorithmic Numerical":
                 match a:
                     case "Mean":
                         # Insert function here!!!
@@ -226,10 +226,10 @@ class ManipulationsModel():
                     case "ML":
                         # Insert function here!!!
                         pass
-                    case "Manual":
-                        # Insert function here!!!
-                        pass
-            case "Categorial Column":
+            case "Manual Numerical":  
+                # Insert function here!!!
+                pass
+            case "Algorithmic Categorial":
                 match a:
                     case "Mode":
                         # Insert function here!!!
@@ -240,9 +240,9 @@ class ManipulationsModel():
                     case "ML":
                         # Insert function here!!!
                         pass
-                    case "Manual":
-                        # Insert function here!!!
-                        pass
+            case "Manual Categorical":
+                # Insert function here!!!
+                pass
 
     def change_column_name(self, sub_action, df, column, args, sme):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args

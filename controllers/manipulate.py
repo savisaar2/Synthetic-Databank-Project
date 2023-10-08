@@ -75,7 +75,6 @@ class ManipulateController:
  
             self.frame.schedule_button.configure(state="disabled")
             self.frame.generate_button.configure(state="normal")
-            self.frame.column_dropdown.configure(state="disabled")
             self.frame.sme_selector.configure(state="disabled")
 
             if self.step_count == self.MAX_STEPS:
