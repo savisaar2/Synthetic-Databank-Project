@@ -12,6 +12,7 @@ from .overlays.change_password import ChangePwView
 from .overlays.account_manager import AccountMgmtView
 from .overlays.account_editor import AccountEditorView
 from .overlays.exception import ExceptionView
+from .overlays.login import LoginView
 
 class View:
     def __init__(self):

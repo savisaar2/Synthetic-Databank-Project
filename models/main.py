@@ -1,6 +1,7 @@
 from .dataset import DatasetModel
 from .analyse import AnalyseModel
 from .library import LibraryModel
+from .user import UserModel
 from .manipulations import ManipulationsModel
 
 class Model:
@@ -14,4 +15,5 @@ class Model:
         self.DATASET = DatasetModel()
         self.analyse = AnalyseModel()
         self.library = LibraryModel()
+        self.user = UserModel()
         self.manipulations = ManipulationsModel()
