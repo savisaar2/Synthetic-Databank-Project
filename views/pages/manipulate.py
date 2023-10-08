@@ -403,8 +403,12 @@ class ManipulateView(BaseView):
         self.variables["sub_action"] = f"{previous_sub_type} {choice}"
         self._refresh_menu_widgets(4)
 
+
+
         match choice:
             case "Z-score":
+                self.pos_3_menu = self._drop_down_menu_template("Select Column",
+                                                self.column_headers, self._outliers_column_callback, 4)
                 self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_float_arg_a_callback,
                                                                     "Enter z-score threshold")
             case "Percentile":
@@ -412,6 +416,16 @@ class ManipulateView(BaseView):
                                                                     "Enter number of outliers less than total rows") 
             case "Min/Max":
                 pass
+
+    def _outliers_column_callback(self, choice):
+        self.variables["column"] = choice
+        self._refresh_menu_widgets(5)
+
+        match choice:
+            case"":
+                pass
+
+        
 
     def add_column_technique_callback(self, choice):
         """Add column callback function. New menu/entry box appears on user selection.
@@ -503,20 +517,30 @@ class ManipulateView(BaseView):
             Args:
                 choice (str): User selection via dropdown menu or entry box.
         """
+        first_sub = self.variables["sub_action"]
+        self.variables["sub_action"] = f"{first_sub} {choice}"
+        self.sme_selector.configure(values=["Entire"])
+        self._refresh_menu_widgets(4)
+
+        self.pos_4_menu = self._drop_down_menu_template("Select Dependent Column", self.column_headers, 
+                                                        self._dimension_reduction_column_select_callack ,4)
+
+    def _dimension_reduction_column_select_callack(self, choice):
+        self.variables["args"]["a"] = choice
+        self._refresh_menu_widgets(4)
+
+        temp_col_dtypes = self.column_dtypes
+        temp_col_dtypes.pop(choice)
+        self._check_column_types(temp_col_dtypes)
+
         match self.columns_all_numerical:
             case True:
-                first_sub = self.variables["sub_action"]
-                self.variables["sub_action"] = f"{first_sub} {choice}"
-                self.sme_selector.configure(values=["Entire"])
-                self._refresh_menu_widgets(4)
-                self.pos_4_menu = self._drop_down_menu_template("Select Dependent Column", self.column_headers, 
-                                                                self._sme_selector_col_4_callback ,4)
                 self.pos_5_entry_box = self.user_entry_box_template(4, 1, self.entry_box_standard_arg_b_callback,
                                                                     "Number of columns to retain")
             case False:
                 self.action_callback
-                self.entry_warning.configure(text="Dataset must be numerical to reduce.")
-                
+                self.entry_warning.configure(text="All dataset features must be numerical.")
+ 
     def manipulate_col_select_callback(self, choice):
         """Add column callback function. New menu/entry box appears on user selection.
 
@@ -858,6 +882,10 @@ class ManipulateView(BaseView):
                 for widget in self.widget_list:
                     if widget["col_pos"] != 1 and widget["col_pos"] != 2 and widget["col_pos"] != 3:
                         widget["widget"].grid_forget()
+            case 5:
+                for widget in self.widget_list:
+                    if widget["col_pos"] != 1 and widget["col_pos"] != 2 and widget["col_pos"] != 3 and widget["col_pos"] != 4:
+                        widget["widget"].grid_forget()
             
                     
     def refresh_manipulate_widgets(self, column_headers, column_dtypes):
@@ -871,11 +899,12 @@ class ManipulateView(BaseView):
         self.column_dtypes = column_dtypes
         self._refresh_menu_widgets(1)
 
+    def _check_column_types(self, column_dtypes):
         # Menu logic to deny or allow user to perform manipulation based on all numerical columns.
         self.columns_all_numerical = True
-        for col in self.column_dtypes:
+        for col in column_dtypes:
             if self.columns_all_numerical:
-                match self.column_dtypes[col]:
+                match column_dtypes[col]:
                     case 'int64':
                         self.columns_all_numerical = True
                     case 'float64':
