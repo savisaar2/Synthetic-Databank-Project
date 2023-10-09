@@ -55,6 +55,8 @@ class ManipulateController:
         self.frame.current_dataset_label.configure(
             text=f"Current Dataset: {self.model.DATASET.get_dataset_name()} | Rows: {self.model.DATASET.get_df_row_count()} | "
                     f"Columns: {len(self.model.DATASET.get_column_headers())}")
+        
+        
 
     def populate_schedule_set(self):
 
@@ -101,14 +103,21 @@ class ManipulateController:
 
         if len(self.model.manipulations.schedule_set) > 0:
                 manips = self.model.manipulations.schedule_set
+
+                for item in manips:
+                    old_text = self.frame.applied_manips_label.cget("text")
+                    action = item["action"]
+                    self.frame.applied_manips_label.configure(text = f"{old_text} {action} |")
+                    
+
                 generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
                 self.model.DATASET.add_generated_dataset_to_snapshot(manips, "Generated Dataset",
                                                                     generated_df)
-                
+                self._refresh_manipulate_widgets
+
                 for item in self.frame.scheduler_items:
                      item["outcome"].configure(text="Complete")
                      item["outcome"].configure(text_color="green")
-                     item["step"].configure(state="disabled")
                 
                 self.frame.generate_button.configure(state="disabled")
         else:
@@ -119,4 +128,3 @@ class ManipulateController:
         self.col_dtype_dict ={}
         for col in self.model.DATASET.get_column_headers():
             self.col_dtype_dict[col] = df.dtypes[col]
-        print(self.col_dtype_dict)

@@ -1,6 +1,7 @@
 from customtkinter import CTkFrame, CTkButton, CTkLabel, CTkOptionMenu, StringVar, CTkCheckBox, CTkScrollableFrame, CTkEntry, CTkProgressBar, CTkSegmentedButton
 from .base import BaseView
 import re
+import tkinter as tk
 class ManipulateView(BaseView):
     def __init__(self, root, *args, **kwargs):
         """
@@ -86,8 +87,8 @@ class ManipulateView(BaseView):
         self.scheduler_label.pack(side="left", padx=(8, 0))
 
         # Scrollable frame for manipulations
-        self.scheduler_scroll_frame = CTkScrollableFrame(self, fg_color="gray20", orientation="horizontal")
-        self.scheduler_scroll_frame.pack(fill="x", pady=(0, 2), padx=20, expand=True)
+        self.scheduler_scroll_frame = CTkScrollableFrame(self, fg_color="gray20", orientation="horizontal", height=150)
+        self.scheduler_scroll_frame.pack(fill="x", pady=(0, 2), padx=20, expand=False)
 
         # Step label
         self.step_label = CTkLabel(self.scheduler_scroll_frame, text="Step", font=("Arial", 14))
@@ -133,22 +134,22 @@ class ManipulateView(BaseView):
         self.generate_frame.pack(fill="both", pady=(0, 20), padx=20)
 
         # Progress bar label
-        self.progress_bar_label = CTkLabel(
-            self.generate_frame, 
-            text="Progress: "
-            )
-        self.progress_bar_label.pack(side="left", padx=(8, 8), pady=(8,8))
+        # self.progress_bar_label = CTkLabel(
+        #     self.generate_frame, 
+        #     text="Progress: "
+        #     )
+        # self.progress_bar_label.pack(side="left", padx=(8, 8), pady=(8,8))
 
         # Progress bar
-        self.generate_progress_bar = CTkProgressBar(self.generate_frame, width=100)
-        self.generate_progress_bar.pack(side="left", padx=(8, 8), pady=(8,8))
+        # self.generate_progress_bar = CTkProgressBar(self.generate_frame, width=100)
+        # self.generate_progress_bar.pack(side="left", padx=(8, 8), pady=(8,8))
 
         # Progress % complete
-        self.progress_bar_complete = CTkLabel(
-            self.generate_frame, 
-            text=str((self.generate_progress_bar.get() * 100)) + "% Complete"
-            )
-        self.progress_bar_complete.pack(side="left", padx=(8, 8), pady=(8,8))
+        # self.progress_bar_complete = CTkLabel(
+        #     self.generate_frame, 
+        #     text=str((self.generate_progress_bar.get() * 100)) + "% Complete"
+        #     )
+        # self.progress_bar_complete.pack(side="left", padx=(8, 8), pady=(8,8))
 
         # Generate button
         self.generate_button = CTkButton(
@@ -176,21 +177,25 @@ class ManipulateView(BaseView):
         self.rollback_button.pack(side="right", padx=8, pady=8)
         self.rollback_button.configure(state="disabled")
 
-        # Rollback frame 2 and dataset selector
-        self.rollback_frame_2 = CTkFrame(self, fg_color="gray20")
-        self.rollback_frame_2.pack(fill="both", pady=(0, 20), padx=20, expand=False)
-
+        # Rollback dataset selector
         self.rollback_dataset_var = StringVar(value="Current")
         self.rollback_dataset_selector = CTkSegmentedButton(
-            self.rollback_frame_2,
+            self.rollback_frame_1,
             values=["1", "2", "3", "Current"],
             variable=self.rollback_dataset_var,
         )
-        self.rollback_dataset_selector.pack(side="left", padx=(8, 0), pady=8)
+        self.rollback_dataset_selector.pack(side="right", padx=8, pady=8)
+
+        # Rollback frame 2
+        self.rollback_frame_2 = CTkFrame(self, fg_color="gray20")
+        self.rollback_frame_2.pack(fill="both", pady=(0, 20), padx=20, expand=True)
 
         # Current dataset label
         self.current_dataset_label = CTkLabel(self.rollback_frame_2)
-        self.current_dataset_label.pack(side="right", padx=(8, 8))
+        self.current_dataset_label.grid(row=0, column=0, padx=(8, 8), pady=(0, 0), sticky="W")
+        # Applied manipulations label
+        self.applied_manips_label = CTkLabel(self.rollback_frame_2, text="Applied Manipultions: ")
+        self.applied_manips_label.grid(row=1, column=0, padx=(8, 8), pady=(0, 0), sticky="W")
 
 
 
