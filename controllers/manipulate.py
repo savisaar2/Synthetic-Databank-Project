@@ -76,11 +76,14 @@ class ManipulateController:
             self.frame.schedule_button.configure(state="disabled")
             self.frame.generate_button.configure(state="normal")
             self.frame.sme_selector.configure(state="disabled")
+            
 
             if self.step_count == self.MAX_STEPS:
                 self.frame.schedule_button.configure(state="disabled")
                 self.frame.action_selection_menu.configure(state="disabled")
 
+        self.frame.entry_description.configure(text="")
+        
     def _delete_all_scheduled_manipulations(self):
         for items_dict in self.frame.scheduler_items:
             for widget in items_dict:
