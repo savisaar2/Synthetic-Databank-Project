@@ -83,7 +83,7 @@ class ManipulateController:
                 self.frame.action_selection_menu.configure(state="disabled")
 
         self.frame.entry_description.configure(text="")
-        
+
     def _delete_all_scheduled_manipulations(self):
         for items_dict in self.frame.scheduler_items:
             for widget in items_dict:
@@ -104,16 +104,15 @@ class ManipulateController:
                 generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
                 self.model.DATASET.add_generated_dataset_to_snapshot(manips, "Generated Dataset",
                                                                     generated_df)
+                
+                for item in self.frame.scheduler_items:
+                     item["outcome"].configure(text="Complete")
+                     item["outcome"].configure(text_color="green")
+                     item["step"].configure(state="disabled")
+                
+                self.frame.generate_button.configure(state="disabled")
         else:
              self.frame.generate_warning.configure(text="Must have at least 1 manipulation scheduled")
-
-        
-                
-        
-    def _update_frame_scheduler_status(self,manip):
-            self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text="Complete")
-            self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text_color="Green")
-            self.frame.scheduler_items[manip["step"]-1]["step"].configure(state="disabled")
 
     def _scan_dataset(self):  
         df = self.model.DATASET.get_reference_to_current_snapshot()

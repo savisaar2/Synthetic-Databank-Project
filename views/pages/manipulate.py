@@ -201,34 +201,12 @@ class ManipulateView(BaseView):
             try:
                 self.step_count +=1 # Increase step count
 
-                # Logic for step checkbox
-                def checkbox_event():
-                    for items_dict in self.scheduler_items:
-                        match items_dict["step"].get(), items_dict["outcome"].cget("text"):
-                            case "on", "In Queue":
-                                self.generate_button.configure(state="normal")
-                                break
-                            case "off", "Complete":
-                                self.generate_button.configure(state="disabled")
-                            case "off", "In Queue":
-                                self.generate_button.configure(state="disabled")
-                
-                # Checkbox
-                self.step_checkbox_var = StringVar(value="on")
-                self.step_checkbox = CTkCheckBox(
+                # Step # label
+                self.step_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
-                    text=str(self.step_count), 
-                    command=checkbox_event,
-                    variable=self.step_checkbox_var,
-                    onvalue="on",
-                    offvalue="off",
-                    width=5,
-                    height=5,
-                    checkbox_height=15,
-                    checkbox_width=15
+                    text=str(self.step_count),
                     )
-                self.step_checkbox.grid(row=self.step_count, column=0, padx=(2, 0), pady=(0, 0), sticky='w')
-                self.step_checkbox.select() 
+                self.step_label_for_scheduler.grid(row=self.step_count, column=0, padx=(8, 0), pady=(0, 0), sticky='w')
 
                 # Label for scheduled manipulation outcome
                 self.outcome_label_for_scheduler = CTkLabel(
@@ -274,7 +252,7 @@ class ManipulateView(BaseView):
                 self.column_label_for_scheduler.grid(row=self.step_count, column=6, padx=(0, 0), pady=(0, 0), sticky='w')                
 
                 # Scheduled manipulations widgets added to a dict to be deleted by user via delete all button.
-                scheduled_items_dict = {"step": self.step_checkbox, 
+                scheduled_items_dict = {"step": self.step_label_for_scheduler, 
                                         "action": self.action_label_for_scheduler, 
                                         "sub_action": self.sub_action_label_for_scheduler,
                                         "args": self.args_label_for_scheduler,
@@ -292,7 +270,7 @@ class ManipulateView(BaseView):
                 self.action_selection_menu.set("Select Action")
 
                 # Reset SME selector and column dropdown
-                self.sme_selector.configure(values=["Single", "Multiple", "Entire"])
+                self.sme_selector.configure(values=["Single", "Entire"])
                 self.sme_selector.set("")
                 self.sme_selector.configure(state="disabled")
 
@@ -306,7 +284,7 @@ class ManipulateView(BaseView):
         self.schedule_button.configure(state="disabled")  
         self.variables = self.variables = {"action":"", "sub_action":"", "args":{"a":"", "b":"", "c":""},"column":"", "sme":""}
         self.sme_selector.configure(state="disabled")
-        self.sme_selector.configure(values=["Single", "Multiple", "Entire"])
+        self.sme_selector.configure(values=["Single", "Entire"])
         self.sme_selector.set("")
 
         # Remove all previously packed widgets in manipulations frame.
@@ -458,7 +436,7 @@ class ManipulateView(BaseView):
                 # self.pos_3_menu = self._drop_down_menu_template("Select Technique", 
                 #                                                 ["Polynomial Features", "Interaction Features"], 
                 #                                                 self.feature_engineering_callback, 3)
-                # self.sme_selector.configure(values=["Single", "Multiple"])
+                # self.sme_selector.configure(values=["Single"])
 
     def feature_engineering_callback(self, choice):
         """Add feature engineering callback function. New menu/entry box appears on user selection.
@@ -534,7 +512,7 @@ class ManipulateView(BaseView):
                                                         self._dimension_reduction_column_select_callack ,4)
 
     def _dimension_reduction_column_select_callack(self, choice):
-        self.variables["args"]["a"] = choice
+        self.variables["column"] = choice
         self._refresh_menu_widgets(5)
 
         self.temp_col_dtypes = self.column_dtypes.copy()
@@ -543,8 +521,8 @@ class ManipulateView(BaseView):
 
         match self.columns_all_numerical:
             case True:
-                self.pos_5_entry_box = self.user_entry_box_template(4, 1, self.entry_box_standard_arg_b_callback,
-                                                                    "Number of columns to retain", 200)
+                self.pos_5_entry_box = self.user_entry_box_template(4, 1, self.entry_box_int_arg_a_callback,
+                                                                    "Enter an integer", 150)
                 self.entry_description.configure(text="Number of columns to retain")
             case False:
                 self.entry_description.configure(text="All dataset features except the dependant column must be numerical.")
@@ -682,9 +660,23 @@ class ManipulateView(BaseView):
         self.sme_selector.configure(values=["Entire"])
         self._refresh_menu_widgets(4)
 
-        self.pos_4_menu = self._drop_down_menu_template("Select Dependant Variable", 
+        self.pos_4_menu = self._drop_down_menu_template("Select Dependant Column", 
                                                         self.column_headers, 
-                                                        self._sme_selector_col_4_callback, 4)
+                                                        self._provide_numerical_cols, 4)
+    def _provide_numerical_cols(self, choice):
+        self.variables['column'] = choice
+        
+        self.temp_col_dtypes = self.column_dtypes.copy()
+        self.temp_col_dtypes.pop(choice)
+        arg_a_col_list = []
+        
+        for column in self.temp_col_dtypes:
+            match self.temp_col_dtypes[column]:
+                case "int64" | "float64":
+                    arg_a_col_list.append(column)
+
+        self.variables["args"]["a"] = arg_a_col_list
+        self.sme_selector.configure(state="normal")
 
     def _feature_encoding_callback(self, choice):
         """Feature encoding callback function. New menu/entry box appears on user selection.
@@ -697,9 +689,24 @@ class ManipulateView(BaseView):
         self.sme_selector.configure(values=["Single"])
         self._refresh_menu_widgets(4)
 
-        self.pos_4_menu = self._drop_down_menu_template("Select Dependant Variable", 
-        self.column_headers, self._sme_selector_col_4_callback, 4)
+        self.pos_4_menu = self._drop_down_menu_template("Select Dependant Column", 
+                                                        self.column_headers, 
+                                                        self._provide_categorical_cols , 4)
+        
+    def _provide_categorical_cols(self, choice):
+        self.variables['column'] = choice
+        
+        self.temp_col_dtypes = self.column_dtypes.copy()
+        self.temp_col_dtypes.pop(choice)
+        arg_a_col_list = []
+        
+        for column in self.temp_col_dtypes:
+            match self.temp_col_dtypes[column]:
+                case "object":
+                    arg_a_col_list.append(column)
 
+        self.variables["args"]["a"] = arg_a_col_list
+        self.sme_selector.configure(state="normal")
 
     def _expand_rows_callback(self, choice):
         """Expand rows callback function. New menu/entry box appears on user selection.
@@ -724,7 +731,6 @@ class ManipulateView(BaseView):
             case "Add Noise(NA)":
                 pass
 
-    
     def entry_box_standard_arg_a_callback(self, choice):
         match len(choice):
             case _ if len(choice) <= 20:
@@ -846,6 +852,7 @@ class ManipulateView(BaseView):
 
     def _set_column_var(self, choice):
         self.variables["column"] = choice
+        self.sme_selector.configure(state="normal")
         match self.variables["sme"]:
             case "Single":
                 self.schedule_button.configure(state="normal")
