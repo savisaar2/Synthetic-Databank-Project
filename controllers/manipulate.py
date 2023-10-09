@@ -94,10 +94,18 @@ class ManipulateController:
         self.frame.generate_button.configure(state="disabled")
                  
     def generate(self):
-        manips = self.model.manipulations.schedule_set
-        generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
-        self.model.DATASET.add_generated_dataset_to_snapshot(manips, "Generated Dataset",
-                                                             generated_df)
+        self.frame.generate_warning.configure(text="")
+
+        if len(self.model.manipulations.schedule_set) > 0:
+                manips = self.model.manipulations.schedule_set
+                generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                self.model.DATASET.add_generated_dataset_to_snapshot(manips, "Generated Dataset",
+                                                                    generated_df)
+        else:
+             self.frame.generate_warning.configure(text="Must have at least 1 manipulation scheduled")
+
+        
+                
         
     def _update_frame_scheduler_status(self,manip):
             self.frame.scheduler_items[manip["step"]-1]["outcome"].configure(text="Complete")

@@ -28,6 +28,7 @@ class ManipulationsModel():
                  "Reduce Remove Rows": self.remove_rows,
                  "Reduce Columns (Dimensionality)": self.reduce_columns,
                  "Replace Missing Values": self.replace_null_values,
+                 "Replace Value (x) with New Value": self.replace_x_with_new_value,
                  "Change Column Name": self.change_column_name,
                  "Expand (add rows)": self.add_rows,
                  "Data Transformation": self.data_transformation,
@@ -285,12 +286,6 @@ class ManipulationsModel():
                     case "Median":
                         # Insert function here!!!
                         pass
-                    case "KNN":
-                        # Insert function here!!!
-                        pass
-                    case "ML":
-                        # Insert function here!!!
-                        pass
             case "Manual Numerical":  
                 # Insert function here!!!
                 pass
@@ -299,15 +294,22 @@ class ManipulationsModel():
                     case "Mode":
                         # Insert function here!!!
                         pass
-                    case "Similarity":
-                        # Insert function here!!!
-                        pass
-                    case "ML":
-                        # Insert function here!!!
-                        pass
             case "Manual Categorical":
                 # Insert function here!!!
                 pass
+            case "Algorithmic Categorial" | "Algorithmic Numerical":
+                match a:
+                    case "KNN":
+                        # Insert function here!!!
+                        pass
+                    case "ML":
+                        pass
+
+    def replace_x_with_new_value(self, sub_action, df, column, args, sme):   
+        a, b, c = args["a"], args["b"], args["c"]  #unpack args
+
+        pass
+
 
     def change_column_name(self, sub_action, df, column, args, sme):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args

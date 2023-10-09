@@ -29,7 +29,9 @@ class ManipulateView(BaseView):
         self.manipulations_frame_1 = CTkFrame(self, fg_color="gray20")
         self.manipulations_frame_1.pack(fill="both", padx=20)
         self.manipulations_frame_2 = CTkFrame(self, fg_color="gray20")
-        self.manipulations_frame_2.pack(fill="both", pady=(2, 20), padx=20)
+        self.manipulations_frame_2.pack(fill="both", pady=(2, 0), padx=20)
+        self.manipulations_frame_3 = CTkFrame(self, fg_color="gray20")
+        self.manipulations_frame_3.pack(fill="both", pady=(2, 20), padx=20)
         self.manipulations_label = CTkLabel(
             self.manipulations_frame_1, 
             text="Manipulations", 
@@ -38,9 +40,13 @@ class ManipulateView(BaseView):
             )
         self.manipulations_label.pack(side="left",padx=(8, 0), pady=(0, 0))
 
+        # Entry box description for user
+        self.entry_description = CTkLabel(self.manipulations_frame_1, text_color='yellow')
+        self.entry_description.pack(side="right", padx=(8, 8))
+
         # Schedule button in manipulate frame.
         self.schedule_button = CTkButton(
-            self.manipulations_frame_1, 
+            self.manipulations_frame_3, 
             text="Schedule", 
             corner_radius=5, 
             border_spacing=5, 
@@ -51,8 +57,8 @@ class ManipulateView(BaseView):
 
         # SME Selector
         self.sme_selector = CTkSegmentedButton(
-            self.manipulations_frame_1,
-            values=["Single", "Multiple", "Entire"],
+            self.manipulations_frame_3,
+            values=["Single", "Entire"],
             state="disabled",
             command=(self._set_sme_variable)   
         )
@@ -134,7 +140,7 @@ class ManipulateView(BaseView):
         self.progress_bar_label.pack(side="left", padx=(8, 8), pady=(8,8))
 
         # Progress bar
-        self.generate_progress_bar = CTkProgressBar(self.generate_frame)
+        self.generate_progress_bar = CTkProgressBar(self.generate_frame, width=100)
         self.generate_progress_bar.pack(side="left", padx=(8, 8), pady=(8,8))
 
         # Progress % complete
@@ -154,6 +160,10 @@ class ManipulateView(BaseView):
             state="disabled"
             )
         self.generate_button.pack(side="right", padx=(8, 8), pady=(8,8))
+
+        # Generate warning label
+        self.generate_warning = CTkLabel(self.generate_frame, text_color='yellow')
+        self.generate_warning.pack(side="right", padx=(8, 8))
 
         # Rollback frames and labels
         self.rollback_frame_1 = CTkFrame(self, fg_color="gray20")
@@ -182,7 +192,7 @@ class ManipulateView(BaseView):
         self.current_dataset_label = CTkLabel(self.rollback_frame_2)
         self.current_dataset_label.pack(side="right", padx=(8, 8))
 
-        self.entry_warning = self._label_template("", 10)
+
 
     def add_manipulation_to_scheduler(self):
         """Method creates a set of widgets to display a users selected manipulation parameters."""
@@ -301,22 +311,20 @@ class ManipulateView(BaseView):
 
         # Remove all previously packed widgets in manipulations frame.
         self._refresh_menu_widgets(1)
-        # for widget in self.widget_list:
-        #     widget["widget"].grid_forget()
-        # self.widget_list =[]
+
 
         match choice:
             case "Add":
-                self.pos_0_menu = self._drop_down_menu_template("Select Variable", 
+                self.pos_0_menu = self._drop_down_menu_template("Select Sub-action", 
                     ["Noise", "Column"], self.add_select_callback, 1)      
             case "Reduce":
                 # Show reduce method menu drop down
-                self.pos_0_menu = self._drop_down_menu_template("Select Method", 
+                self.pos_0_menu = self._drop_down_menu_template("Select Sub-action", 
                     ["Columns (Dimensionality)", "Remove Rows"], self.reduce_method_select_callback, 1) 
 
             case "Manipulate":
                 # Show variable menu drop down
-                self.pos_0_menu = self._drop_down_menu_template("Select Technique", 
+                self.pos_0_menu = self._drop_down_menu_template("Select Sub-action", 
                     ["Replace Missing Values", "Replace Value (x) with New Value", 
                      "Change Column Name", "Expand (add rows)", "Data Transformation"],
                     self.manipulate_col_select_callback, 1)
@@ -336,7 +344,7 @@ class ManipulateView(BaseView):
                 ["Add Random Custom Value", "Add Missing", "Add Outliers"], self.add_noise_technique_callback, 2)
             case "Column":
                 self.pos_2_menu = self._drop_down_menu_template("Select Technique", 
-                ["Duplicate", "New", "Feature Engineering"], self.add_column_technique_callback, 2)
+                ["Duplicate", "New", "Feature Engineering(NA)"], self.add_column_technique_callback, 2)
 
     def add_noise_technique_callback(self, choice):
         """Add noise selector callback function. New menu/entry box appears on user selection.
@@ -357,7 +365,8 @@ class ManipulateView(BaseView):
                 self.pos_3_menu = self._drop_down_menu_template("Select Column", self.column_headers, 
                                                                 self._set_column_var, 3) 
                 self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_int_arg_a_callback,
-                                                                    "Enter number of values less than total rows")
+                                                                    "Enter an integer", 150)
+                self.entry_description.configure(text="Enter number of values less than total rows")
                
             case "Add Outliers":
                 self.pos_2_menu = self._drop_down_menu_template("Select Technique", 
@@ -368,22 +377,25 @@ class ManipulateView(BaseView):
     def _add_random_custom_value_callback(self, choice):
         self.variables["column"] = choice
         self._refresh_menu_widgets(4)
-        self.entry_warning.grid_forget()
         
         match self.column_dtypes[choice]:
             case "int64":
                 self.pos_4_entry_box = self.user_entry_box_template(3, 1, self.entry_box_int_arg_a_callback,
-                                                                    "Enter custom value (integer)") 
+                                                                    "1. Enter an integer",150) 
+                self.entry_description.configure(text="1. Enter custom value (integer), 2. Enter number of values less than total rows")
             case "float64":
                 self.pos_4_entry_box = self.user_entry_box_template(3, 1, self.entry_box_float_arg_a_callback,
-                                                                    "Enter custom value (float)")
+                                                                    " 1. Enter a float",150)
+                self.entry_description.configure(text="1. Enter custom value (float), 2. Enter number of values less than total rows")
             case _:
                 self.pos_4_entry_box = self.user_entry_box_template(3, 1, self.entry_box_standard_arg_a_callback,
-                                                                    "Enter custom value (string)")
+                                                                    "1. Enter a string",200)
+                self.entry_description.configure(text="1. Enter custom value (string), 2. Enter number of values less than total rows")
 
         self.pos_5_entry_box = self.user_entry_box_template(3, 2, self.entry_box_int_arg_b_callback,
-                                                            "Enter number of values less than total rows")
-        
+                                                            "2. Enter number of values less than total rows", 280)
+        self.pos_3_menu.configure(state="disabled")
+
     def outliers_technique_callback(self, choice):
         """Outliers callback function. New menu/entry box appears on user selection.
 
@@ -394,7 +406,7 @@ class ManipulateView(BaseView):
         self.variables["sub_action"] = f"{previous_sub_type} {choice}"
         self._refresh_menu_widgets(4)
 
-        self.pos_3_menu = self._drop_down_menu_template("Select Column",
+        self.pos_4_menu = self._drop_down_menu_template("Select Column",
                                                         self.column_headers, self._outliers_column_callback, 4)
         
     def _outliers_column_callback(self, choice):
@@ -405,14 +417,16 @@ class ManipulateView(BaseView):
             case "int64" | "float64":
                 match self.variables["sub_action"]:
                     case "Add Outliers Z-score":
-                        self.pos_4_entry_box = self.user_entry_box_template(4, 1, self.entry_box_float_arg_a_callback,
-                                                                            "Enter z-score threshold")
+                        self.pos_5_entry_box = self.user_entry_box_template(5, 0, self.entry_box_float_arg_a_callback,
+                                                                            "Enter a float", 150)
+                        self.entry_description.configure(text="Enter z-score threshold") 
                     case "Add Outliers Percentile":
-                        self.pos_4_entry_box = self.user_entry_box_template(4, 1, self.entry_box_int_arg_a_callback,
-                                                                            "Enter number of outliers less than total rows")
+                        self.pos_5_entry_box = self.user_entry_box_template(5, 0, self.entry_box_int_arg_a_callback,
+                                                                            "Enter an integer", 150)
+                        self.entry_description.configure(text="Enter number of outliers (less than total rows)")
             case _:
-                self.action_callback
-                self.entry_warning.configure(text="Selected column must be numerical.")
+                self.entry_description.configure(text="Column must be numerical to add outliers")
+                
 
     def add_column_technique_callback(self, choice):
         """Add column callback function. New menu/entry box appears on user selection.
@@ -430,18 +444,21 @@ class ManipulateView(BaseView):
                 self.pos_3_menu = self._drop_down_menu_template("Select Column", self.column_headers, 
                                                 self._set_column_var, 3)
                 self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_standard_arg_a_callback,
-                                                                    "Enter column name")
+                                                                    "Enter column name", 200)
+                self.entry_description.configure(text="Enter column name")
 
             case "New":
                 self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_standard_arg_a_callback,
-                                                                    "Enter column name")
+                                                                    "Enter column name", 200)
+                self.entry_description.configure(text="Enter column name")
                 self.sme_selector.configure(values=["No Column Required"])
                 self.schedule_button.configure(state="normal")
-            case "Feature Engineering":
-                self.pos_3_menu = self._drop_down_menu_template("Select Technique", 
-                                                                ["Polynomial Features", "Interaction Features"], 
-                                                                self.feature_engineering_callback, 3)
-                self.sme_selector.configure(values=["Single", "Multiple"])
+            case "Feature Engineering(NA)":
+                pass
+                # self.pos_3_menu = self._drop_down_menu_template("Select Technique", 
+                #                                                 ["Polynomial Features", "Interaction Features"], 
+                #                                                 self.feature_engineering_callback, 3)
+                # self.sme_selector.configure(values=["Single", "Multiple"])
 
     def feature_engineering_callback(self, choice):
         """Add feature engineering callback function. New menu/entry box appears on user selection.
@@ -455,8 +472,9 @@ class ManipulateView(BaseView):
 
         match choice:
             case "Polynomial Features":
-                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_standard_arg_a_callback,
-                                                                    "Enter degree")
+                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_int_arg_a_callback,
+                                                                    "Enter an integer", 150)
+                self.entry_description.configure(text="Enter degree")
             case "Interaction Features":
                 self.sme_selector.configure(state="normal")
 
@@ -519,18 +537,18 @@ class ManipulateView(BaseView):
         self.variables["args"]["a"] = choice
         self._refresh_menu_widgets(5)
 
-        temp_col_dtypes = self.column_dtypes
-        temp_col_dtypes.pop(choice)
-        self._check_column_types(temp_col_dtypes)
+        self.temp_col_dtypes = self.column_dtypes.copy()
+        self.temp_col_dtypes.pop(choice)
+        self._check_column_types(self.temp_col_dtypes)
 
         match self.columns_all_numerical:
             case True:
                 self.pos_5_entry_box = self.user_entry_box_template(4, 1, self.entry_box_standard_arg_b_callback,
-                                                                    "Number of columns to retain")
+                                                                    "Number of columns to retain", 200)
+                self.entry_description.configure(text="Number of columns to retain")
             case False:
-                self.action_callback
-                self.entry_warning.configure(text="All dataset features must be numerical.")
- 
+                self.entry_description.configure(text="All dataset features except the dependant column must be numerical.")
+
     def manipulate_col_select_callback(self, choice):
         """Add column callback function. New menu/entry box appears on user selection.
 
@@ -574,9 +592,6 @@ class ManipulateView(BaseView):
         self.variables["sub_action"] = choice
         self._refresh_menu_widgets(4)
 
-        print(self.column_dtypes[self.variables["column"]])
-        print(self.variables["sub_action"])
-
         match self.column_dtypes[self.variables["column"]]:
             case "int64" | "float64":
                 match self.variables["sub_action"]:
@@ -584,7 +599,7 @@ class ManipulateView(BaseView):
                         self.variables["sub_action"] = f"{choice} Numerical"
                         self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
                                                                         ["Mean", "Median", "KNN", "ML"], 
-                                                                        self._sme_selector_col_4_callback, 4)
+                                                                        self._replace_missing_technique_selection, 4)
                     case "Manual":
                         self.variables["sub_action"] = f"{choice} Numerical"
                         self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_float_arg_a_callback,
@@ -594,14 +609,25 @@ class ManipulateView(BaseView):
                     case "Algorithmic":
                         self.variables["sub_action"] = f"{choice} Categorical"
                         self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
-                                                                        ["Mode", "Similarity", "ML"], 
-                                                                        self._sme_selector_col_4_callback, 4)
+                                                                        ["Mode", "KNN", "ML"], 
+                                                                        self._replace_missing_technique_selection, 4)
                     case "Manual":
                         self.variables["sub_action"] = f"{choice} Categorical"
                         self.pos_4_entry_box = self.user_entry_box_template(4, 0, self.entry_box_standard_arg_a_callback,
                                                                             "Enter new value")
 
+    def _replace_missing_technique_selection(self, choice):
+        self.variables["args"]["a"] = choice
+        self._refresh_menu_widgets(5)
 
+        match choice:
+            case "Mean" | "Median" | "Mode" | "ML":
+                self.sme_selector.configure(state="normal")
+                self.pos_4_menu.configure(state='disabled')
+            case "KNN":
+                self.pos_4_entry_box = self.user_entry_box_template(4, 1, self.entry_box_int_arg_b_callback,
+                                                                            "Enter desired number of neighbours")
+                self.pos_4_menu.configure(state='disabled')
 
     def _data_transformation_callback(self, choice):
         """Data transformation callback function. New menu/entry box appears on user selection.
@@ -693,9 +719,7 @@ class ManipulateView(BaseView):
         try:
             self.variables["args"]["a"] = float(choice)
             self.sme_selector.configure(state="normal")
-            self.entry_warning.configure(text="")
         except ValueError:
-            self.entry_warning.configure(text="<- Enter a float")
             self.sme_selector.configure(state="disabled")
             self.schedule_button.configure(state="disabled")
         return True
@@ -704,9 +728,7 @@ class ManipulateView(BaseView):
         try:
             self.variables["args"]["a"] = int(choice)
             self.sme_selector.configure(state="normal")
-            self.entry_warning.configure(text="")
         except ValueError:
-            self.entry_warning.configure(text="<- Enter an integer")
             self.sme_selector.configure(state="disabled")
             self.schedule_button.configure(state="disabled")
         return True
@@ -715,15 +737,13 @@ class ManipulateView(BaseView):
         try:
             self.variables["args"]["b"] = int(choice)
             self.sme_selector.configure(state="normal")
-            self.entry_warning.configure(text="")
         except ValueError:
-            self.entry_warning.configure(text="<- Enter an integer")
             self.sme_selector.configure(state="disabled")
             self.schedule_button.configure(state="disabled")
         return True
 
 
-    def _label_template(self, text, col_pos):
+    def _label_template(self, text, col_pos, row_pos):
         """Template for label widgets.
 
         Args:
@@ -738,11 +758,11 @@ class ManipulateView(BaseView):
             text=text, 
             text_color="yellow",
             anchor="w")
-        label.grid(row=0, column=col_pos, padx=(8, 10), pady=(8, 8), sticky="w")
+        label.grid(row=row_pos, column=col_pos, padx=(8, 10), pady=(8, 8), sticky="w")
         #self.widget_list.append({"col_pos": col_pos, "widget": label})
         return label
     
-    def user_entry_box_template(self, col_pos:int, row_pos:int, callback, start_text:str):
+    def user_entry_box_template(self, col_pos:int, row_pos:int, callback, start_text:str, width:int):
         """Entry box wiget template.
 
         Args:
@@ -758,7 +778,7 @@ class ManipulateView(BaseView):
         user_entry_box = CTkEntry(
             self.manipulations_frame_2,
             corner_radius=5, 
-            width=250,
+            width=width,
             validate='key',
             validatecommand=(entry_box_command, '%P')
             ) 
@@ -827,7 +847,7 @@ class ManipulateView(BaseView):
         self.schedule_button.configure(state="disabled")
         self.sme_selector.configure(state="disabled")
         self.sme_selector.set("")
-        self.entry_warning.configure(text="")
+        self.entry_description.configure(text="")
 
         match col_ref:
             case 1:
