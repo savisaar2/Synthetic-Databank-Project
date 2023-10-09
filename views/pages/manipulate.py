@@ -679,9 +679,12 @@ class ManipulateView(BaseView):
             match self.temp_col_dtypes[column]:
                 case "int64" | "float64":
                     arg_a_col_list.append(column)
-
-        self.variables["args"]["a"] = arg_a_col_list
-        self.sme_selector.configure(state="normal")
+        if arg_a_col_list == []:
+            self.entry_description.configure(text="There are no numerical columns in this dataset")
+            self.pos_4_menu.configure(state="disabled")
+        else:
+            self.variables["args"]["a"] = arg_a_col_list
+            self.sme_selector.configure(state="normal")
 
     def _feature_encoding_callback(self, choice):
         """Feature encoding callback function. New menu/entry box appears on user selection.
@@ -710,8 +713,12 @@ class ManipulateView(BaseView):
                 case "object":
                     arg_a_col_list.append(column)
 
-        self.variables["args"]["a"] = arg_a_col_list
-        self.sme_selector.configure(state="normal")
+        if arg_a_col_list == []:
+            self.entry_description.configure(text="There are no catergorial columns in this dataset")
+            self.pos_4_menu.configure(state="disabled")
+        else:
+            self.variables["args"]["a"] = arg_a_col_list
+            self.sme_selector.configure(state="normal")
 
     def _expand_rows_callback(self, choice):
         """Expand rows callback function. New menu/entry box appears on user selection.
