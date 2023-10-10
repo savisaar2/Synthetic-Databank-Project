@@ -198,8 +198,6 @@ class ManipulateView(BaseView):
         # self.applied_manips_label = CTkLabel(self.rollback_frame_2, text="Applied Manipultions: ")
         # self.applied_manips_label.grid(row=1, column=0, padx=(8, 8), pady=(0, 0), sticky="W")
 
-
-
     def add_manipulation_to_scheduler(self):
         """Method creates a set of widgets to display a users selected manipulation parameters."""
 
@@ -562,7 +560,7 @@ class ManipulateView(BaseView):
                 ["Random Sampling", "Bootstrap Resamping", "SMOTE", "Add Noise(NA)"], self._expand_rows_callback, 2)  
             case "Data Transformation":
                 self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
-                ["Feature Scaling", "Feature Encoding"], self._data_transformation_callback, 2)                             
+                ["Feature Encoding", "Feature Scaling"], self._data_transformation_callback, 2)                             
 
     def _replace_value_x_callaback(self,choice):
         self.variables["column"] = choice
@@ -653,7 +651,7 @@ class ManipulateView(BaseView):
                 ["Min/Max Scaler", "Z-score"], self._feature_scaling_callback, 3)
             case "Feature Encoding":
                 self.pos_3_menu = self._drop_down_menu_template("Select Technique", 
-                ["One-hot Encoding", "Label Encoding", "Embedding"], self._feature_encoding_callback, 3)
+                ["One-hot Encoding", "Label Encoding", "Target Encoding"], self._feature_encoding_callback, 3)
 
     def _feature_scaling_callback(self, choice):
         """Feature scaling callback function. New menu/entry box appears on user selection.
@@ -661,6 +659,7 @@ class ManipulateView(BaseView):
             Args:
                 choice (str): User selection via dropdown menu or entry box.
         """
+        self.pos_3_menu.configure(state="disabled")
         sub_action = self.variables["sub_action"]
         self.variables["sub_action"] = f"{sub_action} {choice}"
         self.sme_selector.configure(values=["Entire"])
@@ -693,14 +692,46 @@ class ManipulateView(BaseView):
             Args:
                 choice (str): User selection via dropdown menu or entry box.
         """
+        self.pos_3_menu.configure(state="disabled")
         sub_action = self.variables["sub_action"]
         self.variables["sub_action"] = f"{sub_action} {choice}"
         self.sme_selector.configure(values=["Single"])
         self._refresh_menu_widgets(4)
 
-        self.pos_4_menu = self._drop_down_menu_template("Select Dependant Column", 
-                                                        self.column_headers, 
-                                                        self._provide_categorical_cols , 4)
+        match choice:
+            case "One-hot Encoding" | "Label Encoding":
+                self.pos_4_menu = self._drop_down_menu_template("Select Dependant Column", 
+                                                                self.column_headers, 
+                                                                self._provide_categorical_cols , 4)
+            case "Target Encoding":
+                self.pos_4_menu = self._drop_down_menu_template("Select Dependant Column", 
+                                                self.column_headers, 
+                                                self._target_encoding_callback , 4)
+
+    def _target_encoding_callback(self, choice):
+        match self.column_dtypes[choice]:
+            case "int64" | "float64":
+                self.temp_col_dtypes = self.column_dtypes.copy()
+                self.temp_col_dtypes.pop(choice)
+                arg_a_col_list = []
+        
+                for column in self.temp_col_dtypes:
+                    match self.temp_col_dtypes[column]:
+                        case "object":
+                            arg_a_col_list.append(column)
+                if arg_a_col_list == []:
+                    self.entry_description.configure(text="There are no catergorial columns in this dataset")
+                    self.pos_4_menu.configure(state="disabled")
+                    self.pos_3_menu.configure(state="disabled")
+                else:
+                    self.variables["args"]["a"] = arg_a_col_list
+                    self.sme_selector.configure(state="normal")
+            case _:
+                self.entry_description.configure(text="The dependant column must be numerical")
+                self.pos_4_menu.configure(state="disabled")
+                self.pos_3_menu.configure(state="disabled")
+
+
         
     def _provide_categorical_cols(self, choice):
         self.variables['column'] = choice

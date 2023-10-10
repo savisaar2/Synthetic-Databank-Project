@@ -360,5 +360,5 @@ class ManipulationsModel():
                 pass
             case "Feature Encoding Label Encoding":
                 pass
-            case "Feature Encoding Embedding":
+            case "Feature Encoding Target Encoding":
                 pass
