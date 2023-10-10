@@ -104,33 +104,39 @@ class ManipulateController:
         self.frame.generate_warning.configure(text="")
 
         if len(self.model.manipulations.schedule_set) > 0:
-                manips = self.model.manipulations.schedule_set
-                generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                
+            generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
 
-                match generated_df:
-                    case False:
-                        self.frame.generate_warning.configure(text="Generate has failed, check failed manipulation's args & column variables")
-                        self.frame.generate_warning.configure(text_color="red")
-                    case _:
-                        print("Dataset saved to snapshot")
-                        self.model.DATASET.add_generated_dataset_to_snapshot(manips, "Generated Dataset", generated_df)
-                        self.frame.generate_warning.configure(text="Generate was successful.")
-                        self.frame.generate_warning.configure(text_color="green")
+            # Logger INFO add
+            logger_manips = self.model.manipulations.schedule_set
+            for item in logger_manips:
+                item.pop("df")
+            self.logger.log_info(f"User initiated generate function with schedule set: {logger_manips}.")
 
-                for item in self.model.manipulations.schedule_set:
-                    index = item["step"]
-                    widget = self.frame.scheduler_items[index-1]["outcome"]
-          
-                    match item["outcome"]:
-                        case "Success":
-                            widget.configure(text="Success")
-                            widget.configure(text_color="green")
-                        case "Failed":
-                            widget.configure(text="Failed")
-                            widget.configure(text_color="red")
-                        case "Pending":
-                            widget.configure(text="Pending")
-                            widget.configure(text_color="yellow")
+            match generated_df:
+                case False:
+                    self.frame.generate_warning.configure(text="Generate has failed, check failed manipulation's args & column variables")
+                    self.frame.generate_warning.configure(text_color="red")
+                case _:
+                    print("Dataset saved to snapshot")
+                    self.model.DATASET.add_generated_dataset_to_snapshot(self.model.manipulations.schedule_set, "Generated Dataset", generated_df)
+                    self.frame.generate_warning.configure(text="Generate was successful.")
+                    self.frame.generate_warning.configure(text_color="green")
+
+            for item in self.model.manipulations.schedule_set:
+                index = item["step"]
+                widget = self.frame.scheduler_items[index-1]["outcome"]
+        
+                match item["outcome"]:
+                    case "Success":
+                        widget.configure(text="Success")
+                        widget.configure(text_color="green")
+                    case "Failed":
+                        widget.configure(text="Failed")
+                        widget.configure(text_color="red")
+                    case "Pending":
+                        widget.configure(text="Pending")
+                        widget.configure(text_color="yellow")
                      
         else:
              self.frame.generate_warning.configure(text="Must have at least 1 pending manipulation scheduled")

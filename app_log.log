@@ -707,3 +707,28 @@
 2023-10-10 14:24:45,425 - INFO - User changed view to 'library'.
 2023-10-10 14:24:47,362 - INFO - User changed view to 'manipulate'.
 2023-10-10 14:35:30,198 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:12:17,855 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:27:54,577 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:27:55,218 - INFO - User changed view to 'analyse'.
+2023-10-10 22:27:55,458 - INFO - User changed view to 'library'.
+2023-10-10 22:27:57,164 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:28:03,482 - INFO - Generate function initiated.
+2023-10-10 22:31:53,422 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:32:00,441 - INFO - User initiated generate function with manpulations: [{'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '567', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success', 'df':      Pregnancies  Glucose  BloodPressure  SkinThickness  Insulin   BMI  DiabetesPedigreeFunction  Age  Outcome   567
+0              6      148             72             35        0  33.6                     0.627   50        1  None
+1              1       85             66             29        0  26.6                     0.351   31        0  None
+2              8      183             64              0        0  23.3                     0.672   32        1  None
+3              1       89             66             23       94  28.1                     0.167   21        0  None
+4              0      137             40             35      168  43.1                     2.288   33        1  None
+..           ...      ...            ...            ...      ...   ...                       ...  ...      ...   ...
+763           10      101             76             48      180  32.9                     0.171   63        0  None
+764            2      122             70             27        0  36.8                     0.340   27        0  None
+765            5      121             72             23      112  26.2                     0.245   30        0  None
+766            1      126             60              0        0  30.1                     0.349   47        1  None
+767            1       93             70             31        0  30.4                     0.315   23        0  None
+
+[768 rows x 10 columns]}].
+2023-10-10 22:46:17,135 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:46:25,779 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:46:37,844 - INFO - User initiated generate function with manpulations: [{'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'dfg', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}].
+2023-10-10 22:47:49,750 - INFO - User initiated generate function with manpulations: [{'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '354', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}, {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'dfgwe', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}].
