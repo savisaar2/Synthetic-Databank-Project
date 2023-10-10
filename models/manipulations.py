@@ -276,9 +276,12 @@ class ManipulationsModel():
                 return reduced_data
 
             case "Manual":
-                # Funtion to remove the selected column
-                df = df.drop(column)
-                return df
+                try:
+                    # Funtion to remove the selected column
+                    df = df.drop(column)
+                    return df
+                except:
+                    return False
 
     def remove_rows(self, sub_action, df, column, args, sme):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
