@@ -6,6 +6,12 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.decomposition import TruncatedSVD
 from sklearn.feature_selection import SelectKBest, f_classif
 from sklearn.preprocessing import StandardScaler
+from sklearn.impute import KNNImputer
+from sklearn.ensemble import RandomForestRegressor
+from imblearn.over_sampling import SMOTE
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import MinMaxScaler
+import category_encoders as ce
 
 class ManipulationsModel():
     def __init__(self):
@@ -18,8 +24,6 @@ class ManipulationsModel():
         self.schedule_set = []
         self._manip_collection()
         self.current_df = ""
-
-        
         super().__init__()
 
     def _manip_collection(self):
@@ -108,11 +112,11 @@ class ManipulationsModel():
                                
                 z_scores = np.abs((df[column] - df[column].mean()) / df[column].std())
                 # Identify the rows where z-scores exceed the threshold
-                outlier_indices = np.where(z_scores > float(a))[0]
+                outlier_indices = np.where(z_scores > a)[0]
                 # Ensure the target column has a floating-point dtype
                 df[column] = df[column].astype(float)
                 # Introduce outliers using .loc to set values
-                outlier_values = np.random.uniform(5, 10, len(outlier_indices)).astype(float) #### should user has option to enter the range?
+                outlier_values = np.random.uniform(5, 10, len(outlier_indices)).astype(float) 
                 df.loc[df.index[outlier_indices], column] += outlier_values
                 return df
 
@@ -191,63 +195,62 @@ class ManipulationsModel():
         match sub_action:
             case "Algorithmic PCA":
                 # Function to reduce dataset dimensionality using PCA     
-                # a = target (dependent) column); b = number of features to keep
-
+                # column = the target column; a = number of features to keep
                 # Extract the features (X) from the DataFrame
-                X = df.drop(columns=[a])  
+                X = df.drop(columns=[column])  
                 #Initialize and fit the PCA model
-                pca = PCA(n_components=b)
+                pca = PCA(n_components=a)
                 X_pca = pca.fit_transform(X)
                 # Create a DataFrame with the reduced dimensionality
-                columns = [f'PC{i+1}' for i in range(b)]
+                columns = [f'PC{i+1}' for i in range(a)]
                 df_pca = pd.DataFrame(data=X_pca, columns=columns)
                 # Add the target column back to df_pca 
-                df_pca[a] = df[a]     
-                print(df_pca.head(10))
+                df_pca[column] = df[column]     
+                
                 return df_pca
             
             case "Algorithmic LDA":                           
                 # Function to reduce dataset dimensionality using LDA  
-                # a = target (dependent) column); b = number of features to keep
+                # column =target (dependent) column; a = number of features (columns) to keep
 
                 # Extract the features (X) and target variable (y) from the DataFrame
-                X = df.drop(columns=[a])
-                y = df[a]
-
+                X = df.drop(columns=[column])
+                y = df[column]   
+               
                 # Initialize and fit the LDA model
-                lda = LinearDiscriminantAnalysis(n_components=b)
+                lda = LinearDiscriminantAnalysis(n_components=a)
                 X_lda = lda.fit_transform(X, y)
 
                 # Create a DataFrame with the reduced dimensionality
-                columns = [f'LD{i + 1}' for i in range(b)]
+                columns = [f'LD{i + 1}' for i in range(a)]
                 df_lda = pd.DataFrame(data=X_lda, columns=columns)
                 
-                df_lda[a] = y # Add the target column back to df_lda if needed
+                df_lda[column] = y # Add the target column back to df_lda if needed
                 return df_lda
             
             case "Algorithmic SVD":
                 # Function to reduce dataset dimensionality using SVD
-                # a: selected column; b: numbers of column to keep                
-                # b > 1 and b <= df.shape[1]-1:           
+                # column: the selected column; a: numbers of column to keep                
+                # a > 1 and a <= df.shape[1]-1:           
 
                 # Extract the features (X) from the DataFrame
-                X = df.drop(columns=[a])
+                X = df.drop(columns=[column])
 
                 # Initialize and fit the TruncatedSVD model
-                svd = TruncatedSVD(n_components=b)
+                svd = TruncatedSVD(n_components=a)
                 X_svd = svd.fit_transform(X)
 
                 # Create a DataFrame with the reduced dimensionality
-                columns = [f'SVD{i+1}' for i in range(b)]
+                columns = [f'SVD{i+1}' for i in range(a)]
                 df_svd = pd.DataFrame(data=X_svd, columns=columns)
 
                 # Add the target column back to df_svd if needed
-                df_svd[a] = df[a]                       
+                df_svd[column] = df[column]                       
                 return df_svd
             
             case "Algorithmic Sklearn":
                 # Function to reduce dataset dimensionality using SKlearn Feature Selection
-                # a = target (dependent) column; b = number of columns(features) to retain
+                # column = target (dependent) column; a = number of columns(features) to retain
 
                 X = df.drop(column, axis=1)
                 y = df[column]
@@ -257,7 +260,7 @@ class ManipulationsModel():
                 X_scaled = scaler.fit_transform(X)                    
 
                 # Create a SelectKBest model using ANOVA F-statistic (can change this metric)
-                select_best = SelectKBest(score_func=f_classif, k=b)
+                select_best = SelectKBest(score_func=f_classif, k=a)
 
                 # Fit the SelectKBest model to your standardised data
                 X_selected = select_best.fit_transform(X_scaled, y)
@@ -296,42 +299,94 @@ class ManipulationsModel():
             case "Algorithmic Numerical":
                 match a:
                     case "Mean":
-                        # Insert function here!!!
-                        pass
+                        # column = the selected column
+                        # Function to replace missing value with Mean
+                        # Calculate the mean of the selected column
+                        mean_colum = df[column].mean()
+                        # Replace missing values in the selected column with the mean
+                        df[column].fillna(mean_colum, inplace=True)
+                        return df
+                    
                     case "Median":
-                        # Insert function here!!!
-                        pass
+                        # column = the selected column
+                        # Function to replace missing value with Median
+                        # Calculate the medina  of the selected column
+                        median_column = df[column].median()
+                        # Replace missing values in 'BMI' with the median
+                        df[column].fillna(median_column, inplace=True)
+                        return df
+                        
             case "Manual Numerical":  
-                # Insert function here!!!
-                pass
+                # column = the selected column; a = new value
+                # Function to replace all missing value in the selected column with fixed value
+                # Replace all missing values with a fixed value 
+                df[column].fillna(a, inplace=True)                        
+                return df
+            
             case "Algorithmic Categorial":
                 match a:
                     case "Mode":
-                        # Insert function here!!!
-                        pass
+                        # column = the selected colum
+                        # Function to replace all  missing values in the selected column woth MODE
+                        # Calculate the mode of the 'Age' column
+                        mode_val = df[column].mode().values[0]
+                        # Perform fillna with mode
+                        df[column].fillna(mode_val, inplace=True)
+                        return df
+                    
             case "Manual Categorical":
-                # Insert function here!!!
-                pass
+                # column = the selected column; a = new value
+                # Function to replace all missing value in the selected column with fixed value
+                # Replace all missing 'BMI' values with a fixed value of 180
+                df[column].fillna(a, inplace=True)                        
+                return df
+            
             case "Algorithmic Categorial" | "Algorithmic Numerical":
                 match a:
                     case "KNN":
-                        # Insert function here!!!
-                        pass
+                        # column = the selected column; b = the desired number of neighbours (int)
+                        # Function to replace missing value using K-Nearest Neighbors (KNN) Imputation
+                        # Initialize the KNNImputer with the desired number of neighbors (e.g. 5)
+                        knn_imputer = KNNImputer(n_neighbors=b)
+                        # Perform KNN imputation on the 'BMI' column
+                        df[column] = knn_imputer.fit_transform(df[[column]])                        
+                        return df                       
+
                     case "ML":
-                        pass
+                        # column = the selected column
+                        # Function to replace missing value using Machince Learning-Based Imputation
+                        # Separate the dataset into two parts: one with missing  values and one without
+                        df_missing = df[df[column].isna()].copy()  # Make a copy to avoid SettingWithCopyWarning
+                        df_not_missing = df[~df[column].isna()]
+
+                        # Prepare the features and target for imputation
+                        X = df_not_missing.drop(columns=[column])
+                        y = df_not_missing[column]
+                        # Initialize the Random Forest Regressor 
+                        rf_imputer = RandomForestRegressor(n_estimators=100, random_state=42)
+
+                        # Train the model on non-missing data
+                        rf_imputer.fit(X, y)
+
+                        # Impute missing values using the trained model
+                        imputed_values = rf_imputer.predict(df_missing.drop(columns=[column]))
+                        df.loc[df[column].isna(), column] = imputed_values
+                        return df
 
     def replace_x_with_new_value(self, sub_action, df, column, args, sme):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
-        pass
+#       # column = the selected column; a = value to replace; b = new value
+        # Function to replace x value with new value
 
+        df[column].replace(a, b, inplace=True)
+        return df
 
     def change_column_name(self, sub_action, df, column, args, sme):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
-        # Function to rename selected column
+        # Function to rename the selected column
         df.rename(columns={column: a}, inplace=True)
-
         return df
 
     def add_rows(self, sub_action, df, column, args, sme):   
@@ -339,26 +394,126 @@ class ManipulationsModel():
         
         match sub_action:
             case "Random Sampling":
-                # Insert function here!!!
-                pass
-            case "Bootstrap Resampling":
-                # Insert function here!!!
-                pass
+                # a = number of rows to resample & expand                
+                # Randomly select rows from the existing dataset
+                random_rows = df.sample(n=a, replace=False)
+                # Append the randomly selected rows to the existing dataset
+                df = pd.concat([df, random_rows], ignore_index=True)
+                return df
+            
+            case "Bootstrap Resampling": 
+               # a = number of rows to resample & expand                
+                # Randomly select rows from the existing dataset
+                bt_rows = df.sample(n=a, replace=True)
+                # Append the randomly selected rows to the existing dataset
+                df = pd.concat([df, bt_rows], ignore_index=True)
+                return df
+            
             case "SMOTE":
-                # Insert function here!!!
-                pass        
+                # column = the selected column
+                # Function to expand rows using SMOTE
+                # Split the dataset into features (X) and the target variable (y)
+                X = df.drop(column, axis=1)  
+                y = df[column] 
+                # Initialize the SMOTE resampler
+                smote = SMOTE(sampling_strategy='auto', random_state=42)  # You can adjust the sampling_strategy parameter if needed
+
+                # Apply SMOTE to generate synthetic samples
+                X_resampled, y_resampled = smote.fit_resample(X, y)
+
+                # Create a new DataFrame with the resampled data
+                df_resampled = pd.concat([pd.DataFrame(X_resampled), pd.DataFrame({column: y_resampled})], axis=1)       
+                return df_resampled
+            
 
     def data_transformation(self, sub_action, df, column, args, sme): 
+
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
             case "Feature Scaling Min/Max Scaler":
-                return False
+                # column = dependent column
+                # Exclude the target column to get the feature columns                             
+                
+                target_column = column
+                # Exclude the target column to get the feature columns
+                feature_columns = df.drop(columns=[target_column])
+
+                # Separate the features and target variable
+                X = feature_columns
+                y = df[target_column]
+
+                # Initialize the MinMaxScaler
+                scaler = MinMaxScaler()
+
+                # Fit the scaler to your feature data and transform it
+                X_scaled = scaler.fit_transform(X)
+
+                # Convert X_scaled back to a DataFrame with the same column names as the original features
+                X_scaled_df = pd.DataFrame(X_scaled, columns=feature_columns.columns)
+
+                # Add the target column back to the scaled feature dataset
+                X_scaled_df[target_column] = y
+
+                return X_scaled_df
+                
             case "Feature Scaling Z-score":
-                pass
+                # column = the dependent (target) column
+                target_column = column
+
+                # Exclude the target column to get the feature columns
+                feature_columns = df.drop(columns=[target_column])
+
+                # Separate the features and target variable
+                X = feature_columns
+                y = df[target_column]
+
+                # Initialize the StandardScaler
+                scaler = StandardScaler()
+
+                # Fit the scaler to your feature data and transform it
+                X_scaled = scaler.fit_transform(X)
+
+                # Convert X_scaled back to a DataFrame with the same column names as the original features
+                X_scaled_df = pd.DataFrame(X_scaled, columns=feature_columns.columns)
+
+                # Add the target column back to the scaled feature dataset
+                X_scaled_df[target_column] = y
+                return X_scaled_df
+            
             case "Feature Encoding One-hot Encoding":
-                pass
+                # column = the selected column; a = dependent (target) column
+                # Exclude the target column to get the feature columns                
+                feature_columns = df.drop(columns=[a])
+                # Separate the features and target variable
+                X = feature_columns
+                y = df[a]
+                # Perform one-hot encoding on the categorical columns
+                X_encoded = pd.get_dummies(X, columns=[column], drop_first=True)         
+                # Add the target column back to the encoded feature dataset
+                X_encoded[a] = y
+                # Now, X_encoded contains the one-hot encoded feature data with the target column
+                return df
+            
             case "Feature Encoding Label Encoding":
-                pass
+                # column = the selected column; a = dependent (target) column         
+                # Identify categorical columns (replace this list with your actual categorical columns)
+                categorical_column = [column]              
+                # Separate the features and target variable
+                X = df.drop(columns=[a])
+                y = df[column]
+
+                # Use LabelEncoder for categorical columns without a loop
+                label_encoder = LabelEncoder()
+                X[column] = X[column].apply(label_encoder.fit_transform)
+                # Now, X contains label encoded feature data with the target column
+                # Add the target column back to the encoded feature dataset
+                X[a] = y
+                return X
+            
             case "Feature Encoding Target Encoding":
-                pass
+                # column = the selected column; a = dependent (target) column         
+                # Encode the categorical column using target encoding
+                encoding_map = df.groupby(column)[a].mean()
+                df[column + '_encoded'] = df[column].map(lambda x: encoding_map.get(x, encoding_map.mean()))
+                return df

@@ -549,18 +549,25 @@ class ManipulateView(BaseView):
                 self.sme_selector.configure(values=["Single"])
                 self.pos_2_menu = self._drop_down_menu_template("Select Column", self.column_headers, 
                                                     self._replace_value_x_callaback, 2)
-
             case "Change Column Name":
                 self.sme_selector.configure(values=["Single"])
-                self.pos_2_entry_box = self.user_entry_box_template(2, 0, self.entry_box_standard_arg_a_callback, 
-                                                                    "Enter new column name", 200)
+                self.pos_2_menu = self._drop_down_menu_template("Select Column", self.column_headers, 
+                                                    self._set_column_var, 2)
+                self.pos_3_entry_box = self.user_entry_box_template(3, 0, self.entry_box_standard_arg_a_callback, 
+                                                                    "1. Enter a string", 200)
             case "Expand (add rows)":
                 self.sme_selector.configure(values=["Entire"])
                 self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
                 ["Random Sampling", "Bootstrap Resamping", "SMOTE", "Add Noise(NA)"], self._expand_rows_callback, 2)  
+            
             case "Data Transformation":
                 self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
-                ["Feature Encoding", "Feature Scaling"], self._data_transformation_callback, 2)                             
+                ["Feature Encoding", "Feature Scaling"], self._data_transformation_callback, 2) 
+
+    def _change_col_name_callback(self, choice):
+        self.variables["column"] = choice
+        self._refresh_menu_widgets(3)
+        self.sme_selector.configure(state='normal')
 
     def _replace_value_x_callaback(self,choice):
         self.variables["column"] = choice
