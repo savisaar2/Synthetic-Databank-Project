@@ -17,6 +17,7 @@ class ManipulationsModel():
         """
         self.schedule_set = []
         self._manip_collection()
+        self.current_df = ""
 
         
         super().__init__()
@@ -38,13 +39,27 @@ class ManipulationsModel():
         # Set dataframe as current, but not for the first item. 
         for index, r in enumerate(scheduler_row):
             if not index:
-                pass
+                self.current_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], 
+                                                   r["args"], r["sme"])
+                match self.current_df:
+                    case False:
+                        r["outcome"] = "Failed"
+                    case _:
+                        r["outcome"] = "Success"          
             else:
-                r["df"] = self.current_df
-                         
-            self.current_df  = self.manip_collection[r["action"]](r["sub_action"], 
-                                                        r["df"], r["column"], r["args"], r["sme"])
-        self.schedule_set = [] # Clear schedule set
+                match self.current_df:
+                    case False:
+                        r["outcome"] = "Pending"
+                    case _:
+                        r["df"] = self.current_df
+                        self.current_df  = self.manip_collection[r["action"]](r["sub_action"], 
+                                                                r["df"], r["column"], r["args"], r["sme"])
+                        match self.current_df:
+                            case False:
+                                r["outcome"] = "Failed"
+                            case _:
+                                r["outcome"] = "Success"
+  
         return self.current_df
 
     def update_schedule_set(self, manip_set):
@@ -338,7 +353,7 @@ class ManipulationsModel():
 
         match sub_action:
             case "Feature Scaling Min/Max Scaler":
-                pass
+                return False
             case "Feature Scaling Z-score":
                 pass
             case "Feature Encoding One-hot Encoding":

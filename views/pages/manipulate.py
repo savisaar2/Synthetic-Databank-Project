@@ -193,9 +193,10 @@ class ManipulateView(BaseView):
         # Current dataset label
         self.current_dataset_label = CTkLabel(self.rollback_frame_2)
         self.current_dataset_label.grid(row=0, column=0, padx=(8, 8), pady=(0, 0), sticky="W")
+        
         # Applied manipulations label
-        self.applied_manips_label = CTkLabel(self.rollback_frame_2, text="Applied Manipultions: ")
-        self.applied_manips_label.grid(row=1, column=0, padx=(8, 8), pady=(0, 0), sticky="W")
+        # self.applied_manips_label = CTkLabel(self.rollback_frame_2, text="Applied Manipultions: ")
+        # self.applied_manips_label.grid(row=1, column=0, padx=(8, 8), pady=(0, 0), sticky="W")
 
 
 
@@ -216,7 +217,7 @@ class ManipulateView(BaseView):
                 # Label for scheduled manipulation outcome
                 self.outcome_label_for_scheduler = CTkLabel(
                     self.scheduler_scroll_frame, 
-                    text="In Queue",
+                    text="Pending",
                     text_color="yellow"
                     )
                 self.outcome_label_for_scheduler.grid(row=self.step_count, column=1, padx=(0, 0), pady=(0, 0), sticky='w')
