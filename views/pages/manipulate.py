@@ -946,10 +946,20 @@ class ManipulateView(BaseView):
         return drop_down_menu
        
     def _set_sme_variable(self, choice):
+        """SME variable callback function. Sets SME variable as user choice.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         self.variables["sme"] = choice
         self.schedule_button.configure(state="normal")
 
     def _set_column_var(self, choice):
+        """Column variable callback function. Sets column variable as user choice.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         self.variables["column"] = choice
         self.sme_selector.configure(state="normal")
         match self.variables["sme"]:
@@ -961,22 +971,23 @@ class ManipulateView(BaseView):
                 self.schedule_button.configure(state="normal")
 
     def _sme_selector_col_2_callback(self, choice):
+        """SME callback function. Sets sub-action variable as user choice.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         self.variables["sub_action"] = choice
         self.sme_selector.configure(state="enabled")
       
-    def _sme_selector_col_3_callback(self, choice):
-        self.variables["args"]["a"] = choice
-        self.sme_selector.configure(state="enabled")
-
-    def _sme_selector_col_4_callback(self, choice):
-        self.variables["args"]["a"] = choice
-        self.sme_selector.configure(state="enabled")
-
-    def _sme_selector_col_5_callback(self, choice):
-        self.variables["args"]["a"] = choice
-        self.sme_selector.configure(state="enabled")
-
     def _button_template(self, frame, button_name: str):
+        """Button template.
+
+        Args:
+            frame (tkinter frame object): Designated frame for button.
+            button_name (str): text on button.
+        Returns:
+            object: Ctk button widget
+        """
         button = CTkButton(
             frame, 
             text=button_name, 
@@ -987,12 +998,19 @@ class ManipulateView(BaseView):
             )       
         return button    
 
-    def _refresh_menu_widgets(self, col_ref):
+    def _refresh_menu_widgets(self, col_ref:int):
+        """Method to refresh menu widget in manipulations frame.
+
+        Args:
+            col_ref (int): Refrence to widget column position.
+        """
+        # Refresh UI widget variables.
         self.schedule_button.configure(state="disabled")
         self.sme_selector.configure(state="disabled")
         self.sme_selector.set("")
         self.entry_description.configure(text="")
 
+        # Remove widgets from view based on column of current widget.
         match col_ref:
             case 1:
                 for widget in self.widget_list:
@@ -1013,20 +1031,13 @@ class ManipulateView(BaseView):
                 for widget in self.widget_list:
                     if widget["col_pos"] != 1 and widget["col_pos"] != 2 and widget["col_pos"] != 3 and widget["col_pos"] != 4:
                         widget["widget"].grid_forget()
-            
-                    
-    def refresh_manipulate_widgets(self, column_headers, column_dtypes):
-        """Refresh, update or populate the values of various widgets on Manipulate view with appropriate
-        information pulled from the loaded dataset e.g. column headers for option menues, row count etc. 
+                            
+    def _check_column_types(self, column_dtypes: dict):
+        """Checks if column dtypes in dataset are all numerical or catergorical. 
 
         Args:
-            dataset_attributes (tuple): A tuple consisting of row count and list of column headers (str).
+            column_dtypes (dict): A dictionary of column dtypes.
         """
-        self.column_headers = column_headers
-        self.column_dtypes = column_dtypes
-        self._refresh_menu_widgets(1)
-
-    def _check_column_types(self, column_dtypes):
         # Menu logic to deny or allow user to perform manipulation based on all numerical columns.
         self.columns_all_numerical = True
         for col in column_dtypes:
@@ -1039,4 +1050,15 @@ class ManipulateView(BaseView):
                     case _:
                         self.columns_all_numerical = False
                         break
-                
+
+    def refresh_manipulate_widgets(self, column_headers, column_dtypes):
+        """Refresh values of various widgets on Manipulate view with appropriate
+        information pulled from the loaded dataset.
+
+        Args:
+            column_headers (list): A list consisting of column headers (str).
+            column_dtypes (dict): A dictionary of column dtypes.
+        """
+        self.column_headers = column_headers
+        self.column_dtypes = column_dtypes
+        self._refresh_menu_widgets(1)
