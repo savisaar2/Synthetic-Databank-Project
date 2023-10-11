@@ -55,3 +55,5 @@ class LoginController:
         for user interactions with widgets on the view related to the login page.
         """
         self.frame.login_button.bind("<Button-1>", lambda event: self._authenticate_user(event))
+        self.frame.username_entry.bind("<Return>", lambda event: self._authenticate_user(event))
+        self.frame.password_entry.bind("<Return>", lambda event: self._authenticate_user(event))

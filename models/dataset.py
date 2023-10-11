@@ -1,4 +1,6 @@
+import json
 import pandas as pd
+from os import path
 
 class DatasetModel:
     """Singleton. Working collection of datasets. _SNAPSHOTS is a list of dictionaries with keys representing 
@@ -35,6 +37,7 @@ class DatasetModel:
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(DatasetModel, cls).__new__(cls)
+            cls.databank_dir = "db/databank/"
             cls._instance._SNAPSHOTS = []
         return cls._instance
         
@@ -68,7 +71,16 @@ class DatasetModel:
                 }
             )
             print("Loaded data set:", self._SNAPSHOTS[-1])
-        
+
+    def save_export_dataset(self, full_path): 
+        """Save / save as or export the most current dataframe in memory back to specified file (CSV) on disk.
+
+        Args:
+            full_path (str): entire path including filename.
+        """
+        if full_path: 
+            self._SNAPSHOTS[-1]["Dataframe"].to_csv(f"{full_path}", index=False)
+
     def get_column_headers(self):
         """Method to obtain column names for the current dataset in _SNAPSHOTS list.
 
@@ -158,6 +170,178 @@ class DatasetModel:
         """
         self._SNAPSHOTS.clear()
         print("snapshots cleared!")
+
+    def _sort_datasets_alphabetically(self, json_data):
+        """
+        Sorts json data into into alphabetical order. TODO: to subsume method of the same name in library.
+
+        Parameters
+        ----------
+        json_data : json
+            This parameter should be in json format.
+        """
+        return sorted(json_data.keys(), key=str.lower)
+
+    def load_all_metadata(self): 
+        """Generalised method to be used from Library and Save & Export. TODO: subsume Library Model 
+        method by the name of "load_all_metadata" with this method.
+
+        Returns:
+            dictionary: metadata values
+        """
+        # Open and store json data.
+        with open("db/system/dataset_metadata.json", "r") as json_file: 
+            json_data = json.load(json_file)
+
+        # Sort data into alphabetical order.
+        sorted_json = self._sort_datasets_alphabetically(json_data)
+        
+        # Return data.
+        return {key: json_data[key] for key in sorted_json} # Alphabetically sorted json_file by key
+    
+    def add_metadata(self, name, description, source):
+        """
+        Adds metadata to the metadata store file. TODO: subsumes Library Model's method by the same name.
+
+        Parameters
+        ----------
+        name : str
+            Name of file to be stored in databank.
+        description : str
+            Description metadata for file.
+        source : str
+            Source metadata for file.
+        """
+        new_data = { # new payload
+            path.splitext(name)[0]: { 
+                "Source": source, 
+                "Description": description
+            }
+        }
+        # Load the existing metadata.
+        existing_data = self.load_all_metadata()
+
+        # Update the existing metadata with new data.
+        existing_data.update(new_data)
+
+        # Open the metadata file for writing
+        with open("db/system/dataset_metadata.json", "w") as json_file:
+            # Write the updated metadata to the json file
+            json.dump(existing_data, json_file, indent=4)
+
+    def export_metadata_to_file(self, destination_dir, name, desc, source): 
+        """_summary_
+
+        Args:
+            destination_dir (_type_): chosen export location
+            name (str): metadata name i.e. dataset name specified by user
+            desc (str): metadata desc
+            source (scr): metadata source
+        """
+        with open(destination_dir + name + ".txt", "w") as file: 
+            file.write(f"Name: {name}\n")
+            file.write(f"Description: {desc}\n")
+            file.write(f"Source: {source}")
+    
+    def get_file_metadata(self, metadata_collection, name): 
+        """Return specific metadata from the loaded databank metadata repository. 
+        TODO: subsume Library Model method by the name of "get_file_metadata" with this method 
+        so it can be used in both Library and Save & Export components.
+
+        Args: 
+            metadata_collection (dict): dictionary containing the databank's metadata repository.
+            name (str): specific name of the metadata file being sort.
+        
+        Returns: 
+            Dictionary: specific metadata entry.
+        """
+        return metadata_collection[name]
+
+    def _sort_datasets_alphabetically(self, json_data):
+        """
+        Sorts json data into into alphabetical order. TODO: to subsume method of the same name in library.
+
+        Parameters
+        ----------
+        json_data : json
+            This parameter should be in json format.
+        """
+        return sorted(json_data.keys(), key=str.lower)
+
+    def load_all_metadata(self): 
+        """Generalised method to be used from Library and Save & Export. TODO: subsume Library Model 
+        method by the name of "load_all_metadata" with this method.
+
+        Returns:
+            dictionary: metadata values
+        """
+        # Open and store json data.
+        with open("db/system/dataset_metadata.json", "r") as json_file: 
+            json_data = json.load(json_file)
+
+        # Sort data into alphabetical order.
+        sorted_json = self._sort_datasets_alphabetically(json_data)
+        
+        # Return data.
+        return {key: json_data[key] for key in sorted_json} # Alphabetically sorted json_file by key
+    
+    def add_metadata(self, name, description, source):
+        """
+        Adds metadata to the metadata store file. TODO: subsumes Library Model's method by the same name.
+
+        Parameters
+        ----------
+        name : str
+            Name of file to be stored in databank.
+        description : str
+            Description metadata for file.
+        source : str
+            Source metadata for file.
+        """
+        new_data = { # new payload
+            path.splitext(name)[0]: { 
+                "Source": source, 
+                "Description": description
+            }
+        }
+        # Load the existing metadata.
+        existing_data = self.load_all_metadata()
+
+        # Update the existing metadata with new data.
+        existing_data.update(new_data)
+
+        # Open the metadata file for writing
+        with open("db/system/dataset_metadata.json", "w") as json_file:
+            # Write the updated metadata to the json file
+            json.dump(existing_data, json_file, indent=4)
+
+    def export_metadata_to_file(self, destination_dir, name, desc, source): 
+        """_summary_
+
+        Args:
+            destination_dir (_type_): chosen export location
+            name (str): metadata name i.e. dataset name specified by user
+            desc (str): metadata desc
+            source (scr): metadata source
+        """
+        with open(destination_dir + name + ".txt", "w") as file: 
+            file.write(f"Name: {name}\n")
+            file.write(f"Description: {desc}\n")
+            file.write(f"Source: {source}")
+    
+    def get_file_metadata(self, metadata_collection, name): 
+        """Return specific metadata from the loaded databank metadata repository. 
+        TODO: subsume Library Model method by the name of "get_file_metadata" with this method 
+        so it can be used in both Library and Save & Export components.
+
+        Args: 
+            metadata_collection (dict): dictionary containing the databank's metadata repository.
+            name (str): specific name of the metadata file being sort.
+        
+        Returns: 
+            Dictionary: specific metadata entry.
+        """
+        return metadata_collection[name]
 
     def add_generated_dataset_to_snapshot(self, schedule_set, dataset_name, df):
         """Appends the successfully generated dataframe to the SNAPSHOTS list.

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2023-10-06 03:19:01,517 - INFO - User changed view to 'analyse'.
 2023-10-06 03:19:10,203 - INFO - User changed view to 'library'.
 2023-10-06 03:19:18,039 - INFO - User changed view to 'analyse'.
@@ -1003,3 +1004,21 @@ ValueError: could not convert string to float: 'no-recurrence-events'
 2023-10-11 22:10:56,487 - INFO - User initiated generate function with schedule set:
 2023-10-11 22:10:56,487 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Manual Categorical', 'args': {'a': '5', 'b': '', 'c': ''}, 'column': 'c', 'outcome': 'Success'}
 2023-10-11 22:10:56,500 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+=======
+2023-10-11 18:48:09,913 - INFO - User changed view to 'accounts'.
+2023-10-11 18:48:22,394 - INFO - User changed view to 'accounts'.
+2023-10-11 18:56:18,608 - INFO - User changed view to 'accounts'.
+2023-10-11 18:56:21,454 - INFO - User changed view to 'save'.
+2023-10-11 18:56:22,143 - INFO - User changed view to 'accounts'.
+2023-10-11 18:56:22,553 - INFO - User changed view to 'accounts'.
+2023-10-11 18:56:22,987 - INFO - User changed view to 'accounts'.
+2023-10-11 18:56:23,209 - INFO - User changed view to 'accounts'.
+2023-10-11 18:56:38,048 - INFO - User changed view to 'accounts'.
+2023-10-11 19:00:07,430 - INFO - User changed view to 'accounts'.
+2023-10-11 19:00:26,691 - INFO - User changed view to 'accounts'.
+2023-10-11 19:00:27,090 - INFO - User changed view to 'accounts'.
+2023-10-11 19:02:53,130 - INFO - User changed view to 'accounts'.
+2023-10-11 19:03:38,275 - INFO - User changed view to 'accounts'.
+2023-10-11 19:03:42,283 - INFO - User changed view to 'accounts'.
+2023-10-11 20:15:05,133 - INFO - User changed view to 'accounts'.
+>>>>>>> main
