@@ -1,3 +1,4 @@
+from utils.logger_utils import Logger
 import pandas as pd
 import random
 import numpy as np
@@ -24,6 +25,7 @@ class ManipulationsModel():
         self.schedule_set = []
         self._manip_collection()
         self.current_df = ""
+        self.logger = Logger()
         super().__init__()
 
     def _manip_collection(self):
@@ -278,9 +280,10 @@ class ManipulationsModel():
             case "Manual":
                 try:
                     # Funtion to remove the selected column
-                    df = df.drop(column)
+                    df = df.drop("break me")
                     return df
                 except:
+                    self.logger.log_exception("Manipulation failed to complete. Traceback:")
                     return False
 
     def remove_rows(self, sub_action, df, column, args, sme):   

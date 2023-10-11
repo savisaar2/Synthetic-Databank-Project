@@ -38,14 +38,14 @@ class ManipulateController:
         # Add manipulations to scheduler
         self.frame.schedule_button.bind("<Button-1>", lambda _: self._clear_generated_manips_from_scheduler(), add="+")
         self.frame.schedule_button.bind("<Button-1>", lambda _: self.frame.add_manipulation_to_scheduler(), add="+")
-        self.frame.schedule_button.bind("<Button-1>", lambda _: self.populate_schedule_set(), add="+")
+        self.frame.schedule_button.bind("<Button-1>", lambda _: self._populate_schedule_set(), add="+")
         
 
         # Delete all sceduled manipulations
         self.frame.delete_all_button.bind("<Button-1>", lambda _: self._delete_all_scheduled_manipulations())
 
         # Generate button bind
-        self.frame.generate_button.bind("<Button-1>", lambda _: self.generate(), add="+")
+        self.frame.generate_button.bind("<Button-1>", lambda _: self._generate(), add="+")
         self.frame.generate_button.bind("<Button-1>", self._refresh_manipulate_widgets, add="+")
         
     def _refresh_manipulate_widgets(self, event): 
@@ -59,8 +59,11 @@ class ManipulateController:
             text=f"Current Dataset: {self.model.DATASET.get_dataset_name()} | Rows: {self.model.DATASET.get_df_row_count()} | "
                     f"Columns: {len(self.model.DATASET.get_column_headers())}")
         
-    def populate_schedule_set(self):
-
+    def _populate_schedule_set(self):
+        """
+        Method to populate user manipulations to the schedule set in the UI and model.
+        Bound to "schedule_button" located in the manipulate frame.
+        """
         if self.frame.schedule_button._state == "normal" and self.step_count < self.MAX_STEPS:
             self.step_count +=1
 
@@ -88,10 +91,14 @@ class ManipulateController:
         self.frame.entry_description.configure(text="")
 
     def _delete_all_scheduled_manipulations(self):
+        """
+        Method to delete all UI widgets associated with a scheduled item and clear scheduled manipulations list 
+        stored in the model. Bound to "delete_all_button" located in manipulation frame.
+        """
+        # Remove all widgets and clear variables associated with scheduled manipulations.
         for items_dict in self.frame.scheduler_items:
             for widget in items_dict:
                 items_dict[widget].grid_forget()
-
         self.frame.scheduler_items = []
         self.model.manipulations.schedule_set = []
         self.step_count = 0
@@ -99,29 +106,37 @@ class ManipulateController:
         self.frame.step_count = 0
         self.frame.generate_button.configure(state="disabled")
                  
-    def generate(self):
-
+    def _generate(self):
+        """
+        Method to call manipulations churner located in the manipulations model which generates a dataset based on
+        the manipulations specified by the user. 
+        Refreshes, updates widgets in the UI associated with dataset generation.
+        Calls logger utility to populate log file.
+        Bound to generate button loacted in manipulation frame.
+        """
         self.frame.generate_warning.configure(text="")
 
-        if len(self.model.manipulations.schedule_set) > 0:
-                
+        if len(self.model.manipulations.schedule_set) > 0:   
             generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
-
             # Logger INFO add
-            logger_manips = self.model.manipulations.schedule_set
-            for item in logger_manips:
-                item.pop("df")
-            self.logger.log_info(f"User initiated generate function with schedule set: {logger_manips}.")
+            self._add_manips_to_log()
 
+            # If the generated dataframe returned from the churner failed, log and display user message.
+            # Updates to current dataframe in SNAPSHOTS if successful, logs and dsplays user message.
             match generated_df:
                 case False:
                     self.frame.generate_warning.configure(text="Generate has failed, check failed manipulation's args & column variables")
                     self.frame.generate_warning.configure(text_color="red")
+                    # Logger INFO add
+                    self.logger.log_info(f"Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.")
                 case _:
-                    print("Dataset saved to snapshot")
-                    self.model.DATASET.add_generated_dataset_to_snapshot(self.model.manipulations.schedule_set, "Generated Dataset", generated_df)
+                    self.model.DATASET.add_generated_dataset_to_snapshot(self.model.manipulations.schedule_set, 
+                                                                         "Generated Dataset", generated_df)
                     self.frame.generate_warning.configure(text="Generate was successful.")
                     self.frame.generate_warning.configure(text_color="green")
+                    # Logger INFO add
+                    self.logger.log_info(f"Generated dataset added to SNAPSHOTS as current dataframe.")
+                    
 
             for item in self.model.manipulations.schedule_set:
                 index = item["step"]
@@ -158,3 +173,9 @@ class ManipulateController:
         if self.step_count == 0:
             self._delete_all_scheduled_manipulations()
 
+    def _add_manips_to_log(self):
+        logger_manips = self.model.manipulations.schedule_set
+        self.logger.log_info(f"User initiated generate function with schedule set:")
+        for item in logger_manips:
+            item.pop("df")
+            self.logger.log_info(f"{item}")

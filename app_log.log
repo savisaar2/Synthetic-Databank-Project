@@ -732,3 +732,77 @@
 2023-10-10 22:46:25,779 - INFO - User changed view to 'manipulate'.
 2023-10-10 22:46:37,844 - INFO - User initiated generate function with manpulations: [{'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'dfg', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}].
 2023-10-10 22:47:49,750 - INFO - User initiated generate function with manpulations: [{'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '354', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}, {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'dfgwe', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}].
+2023-10-11 09:12:54,619 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:15:17,349 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:15:29,441 - INFO - User initiated generate function with schedule set:
+2023-10-11 09:15:29,461 - INFO - [{'step': 1, 'action': 'Add Column', 'sub_action': 'Duplicate', 'args': {'a': 'asds', 'b': '', 'c': ''}, 'column': 'Class', 'sme': 'Single', 'outcome': 'Success'}, {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asdsd', 'b': '', 'c': ''}, 'column': '', 'sme': 'No Column Required', 'outcome': 'Success', 'df':                     Class    Age menopause tumor-zie inv-nodes node-caps  deg-malig  breat breast-quad irradiat                  asds asdsd
+0    no-recurrence-events  30-39   premeno     30-34       0-2        no          3   left    left_low       no  no-recurrence-events  None
+1    no-recurrence-events  40-49   premeno     20-24       0-2        no          2  right    right_up       no  no-recurrence-events  None
+2    no-recurrence-events  40-49   premeno     20-24       0-2        no          2   left    left_low       no  no-recurrence-events  None
+3    no-recurrence-events  60-69      ge40     15-19       0-2        no          2  right     left_up       no  no-recurrence-events  None
+4    no-recurrence-events  40-49   premeno       0-4       0-2        no          2  right   right_low       no  no-recurrence-events  None
+..                    ...    ...       ...       ...       ...       ...        ...    ...         ...      ...                   ...   ...
+281     recurrence-events  30-39   premeno     30-34       0-2        no          2   left     left_up       no     recurrence-events  None
+282     recurrence-events  30-39   premeno     20-24       0-2        no          3   left     left_up      yes     recurrence-events  None
+283     recurrence-events  60-69      ge40     20-24       0-2        no          1  right     left_up       no     recurrence-events  None
+284     recurrence-events  40-49      ge40     30-34     3-May        no          3   left    left_low       no     recurrence-events  None
+285     recurrence-events  50-59      ge40     30-34     3-May        no          3   left    left_low       no     recurrence-events  None
+
+[286 rows x 12 columns]}]
+2023-10-11 09:15:29,461 - INFO - [{'step': 1, 'action': 'Add Column', 'sub_action': 'Duplicate', 'args': {'a': 'asds', 'b': '', 'c': ''}, 'column': 'Class', 'sme': 'Single', 'outcome': 'Success'}, {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asdsd', 'b': '', 'c': ''}, 'column': '', 'sme': 'No Column Required', 'outcome': 'Success'}]
+2023-10-11 09:18:52,921 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:19:05,272 - INFO - User initiated generate function with schedule set:
+2023-10-11 09:19:05,272 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'afds', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 09:19:05,272 - INFO - {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asfasfasf', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 09:45:11,201 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:45:18,194 - INFO - User initiated generate function with schedule set:
+2023-10-11 09:45:18,195 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'fghjghj', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 09:46:39,933 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:46:45,011 - INFO - User initiated generate function with schedule set:
+2023-10-11 09:46:45,012 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asd', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 09:46:45,086 - INFO - Generated dataset to SNAPSHOTS: None
+2023-10-11 09:50:06,054 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:50:17,866 - INFO - User initiated generate function with schedule set:
+2023-10-11 09:50:17,866 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'sd', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 09:50:17,900 - INFO - Generated dataset added to SNAPSHOTS as current dataframe:
+2023-10-11 09:50:17,900 - INFO - None
+2023-10-11 10:02:01,383 - INFO - User changed view to 'manipulate'.
+2023-10-11 10:02:09,445 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:02:09,445 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'sr', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 10:02:09,491 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 10:02:25,026 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:02:25,027 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Scaling Z-score', 'args': {'a': ['Pregnancies', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome'], 'b': '', 'c': ''}, 'column': 'Glucose', 'sme': 'Entire', 'outcome': 'Success'}
+2023-10-11 10:02:25,042 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 10:03:36,029 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:03:36,030 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'sdfd', 'b': '', 'c': ''}, 'column': '', 'sme': 'No Column Required', 'outcome': 'Success'}
+2023-10-11 10:03:36,059 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 10:05:35,659 - INFO - User changed view to 'manipulate'.
+2023-10-11 10:05:41,845 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:05:41,846 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'sd', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 10:05:41,874 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 10:31:51,275 - INFO - User changed view to 'manipulate'.
+2023-10-11 10:32:18,184 - ERROR - test
+Traceback (most recent call last):
+  File "c:\Users\sonnyk\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 283, in reduce_columns
+    df = df.drop("break me")
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['break me'] not found in axis"
+2023-10-11 10:32:18,437 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:32:18,437 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'sme': 'Single', 'outcome': 'Failed'}
+2023-10-11 10:32:18,438 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 10:49:44,954 - INFO - User changed view to 'library'.
+2023-10-11 10:49:50,321 - INFO - User changed view to 'manipulate'.
+2023-10-11 10:50:02,187 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:50:02,187 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 10:50:02,190 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
