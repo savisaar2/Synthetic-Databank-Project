@@ -15,6 +15,7 @@ class LoginView(CTkFrame):
             The applicaiton's root instance.
         """
         super().__init__(root, *args, **kwargs)
+        self.root = root
         self._setup_page()
 
     def _setup_page(self):
