@@ -1,5 +1,3 @@
-import pandas as pd
-
 from utils.logger_utils import Logger
 class ManipulateController:
     def __init__(self, model, view):
@@ -32,6 +30,7 @@ class ManipulateController:
         Implement this method to set up event handlers and connections
         for user interactions with widgets on the view related to the manipulate page.
         """
+        # Refreshes widgets and scan of datatypes in dataframe.
         self.view.frames["menu"].manipulate_button.bind("<Button-1>", lambda _: self._scan_dataset(), add="+")
         self.view.frames["menu"].manipulate_button.bind("<Button-1>", self._refresh_manipulate_widgets, add="+")
         
@@ -40,7 +39,6 @@ class ManipulateController:
         self.frame.schedule_button.bind("<Button-1>", lambda _: self.frame.add_manipulation_to_scheduler(), add="+")
         self.frame.schedule_button.bind("<Button-1>", lambda _: self._populate_schedule_set(), add="+")
         
-
         # Delete all sceduled manipulations
         self.frame.delete_all_button.bind("<Button-1>", lambda _: self._delete_all_scheduled_manipulations())
 
@@ -137,7 +135,7 @@ class ManipulateController:
                     # Logger INFO add
                     self.logger.log_info(f"Generated dataset added to SNAPSHOTS as current dataframe.")
                     
-
+            # Logic to change outcome label of manipulations.
             for item in self.model.manipulations.schedule_set:
                 index = item["step"]
                 widget = self.frame.scheduler_items[index-1]["outcome"]
@@ -151,29 +149,39 @@ class ManipulateController:
                         widget.configure(text_color="red")
                     case "Pending":
                         widget.configure(text="Pending")
-                        widget.configure(text_color="yellow")
-                     
+                        widget.configure(text_color="yellow")           
+        
+        # User warning if no manipulations are scheduled and manipulate in clicked.
         else:
              self.frame.generate_warning.configure(text="Must have at least 1 pending manipulation scheduled")
              self.frame.generate_warning.configure(text_color="yellow")
 
-        self.model.manipulations.schedule_set = [] # Clear schedule set
+        # Clear variables and widgets associated with post generate function.
+        self.model.manipulations.schedule_set = [] 
         self.step_count = 0
         self.frame.step_count = 0
         self.frame.generate_button.configure(state="disabled")
         self._refresh_manipulate_widgets
 
     def _scan_dataset(self):  
+        """
+        Function creates a dictionary of column headers and datatypes. Used for type checking in manipulation UI.
+        """
         df = self.model.DATASET.get_reference_to_current_snapshot()
         self.col_dtype_dict ={}
         for col in self.model.DATASET.get_column_headers():
             self.col_dtype_dict[col] = df.dtypes[col]
 
     def _clear_generated_manips_from_scheduler(self):
+        """Function clears manipulations in the scheduler automatically after a generate function and when a
+        new manipulation is added.
+        """
         if self.step_count == 0:
             self._delete_all_scheduled_manipulations()
 
     def _add_manips_to_log(self):
+        """Method to clean up the schedule set, and populate the system log during generate function.
+        """
         logger_manips = self.model.manipulations.schedule_set
         self.logger.log_info(f"User initiated generate function with schedule set:")
         for item in logger_manips:
