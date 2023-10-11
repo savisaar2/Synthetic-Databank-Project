@@ -29,19 +29,31 @@ class ManipulationsModel():
         super().__init__()
 
     def _manip_collection(self):
-            self.manip_collection = {
-                 "Add Noise": self.add_noise,
-                 "Add Column": self.add_column,
-                 "Reduce Remove Rows": self.remove_rows,
-                 "Reduce Columns (Dimensionality)": self.reduce_columns,
-                 "Replace Missing Values": self.replace_null_values,
-                 "Replace Value (x) with New Value": self.replace_x_with_new_value,
-                 "Change Column Name": self.change_column_name,
-                 "Expand (add rows)": self.add_rows,
-                 "Data Transformation": self.data_transformation,
-            }
-    
-    def generate_churner(self, scheduler_row):
+        """Dictionary of manipulation functions with their associated key value.
+        """
+        self.manip_collection = {
+                "Add Noise": self.add_noise,
+                "Add Column": self.add_column,
+                "Reduce Remove Rows": self.remove_rows,
+                "Reduce Columns (Dimensionality)": self.reduce_columns,
+                "Replace Missing Values": self.replace_null_values,
+                "Replace Value (x) with New Value": self.replace_x_with_new_value,
+                "Change Column Name": self.change_column_name,
+                "Expand (add rows)": self.add_rows,
+                "Data Transformation": self.data_transformation,
+        }
+
+    def generate_churner(self, scheduler_row:list):
+        """Generate churner function iterates through user's scheduled manipulations and
+        applies them to the current dataframe. 
+
+        Args:
+            scheduler_row (list): List of scheduled manipulations.
+
+        Returns:
+            pandas dataframe | Bool: dataframe with applied manipulations 
+                                        or False to indicate the manipulation set failed.
+        """
         # Set dataframe as current, but not for the first item. 
         for index, r in enumerate(scheduler_row):
             if not index:
@@ -65,11 +77,15 @@ class ManipulationsModel():
                                 r["outcome"] = "Failed"
                             case _:
                                 r["outcome"] = "Success"
-  
         return self.current_df
 
-    def update_schedule_set(self, manip_set):
-          self.schedule_set.append(manip_set)
+    def update_schedule_set(self, manip_set:dict):
+        """Builds the schedule set user clicks schedule button. Initiates from the manipulation controller.
+
+        Args:
+            manip_set (dict): Dictionary of variables to apply to a dataset.
+        """
+        self.schedule_set.append(manip_set)
 
     def add_noise(self, sub_action, df, column, args):
         a, b, c = args["a"], args["b"], args["c"]  #unpack args

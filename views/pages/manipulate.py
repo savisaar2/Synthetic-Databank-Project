@@ -577,6 +577,7 @@ class ManipulateView(BaseView):
         self.pos_4_menu = self._drop_down_menu_template("Select Dependant Column", 
                                                         self.column_headers, 
                                                         self._check_numerical_cols, 4)
+        
     def _check_numerical_cols(self, choice):
         """Provide only numerical dtype columns to user callback function. New menu/entry box appears on user selection.
 
@@ -890,6 +891,11 @@ class ManipulateView(BaseView):
         self.schedule_button.configure(state="normal")
     
     def _arg_a_callback(self, choice):
+        """Arg a callback function. Sets "arg a" variable as user choice.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
         self.variables["args"]["a"] = choice
         self.schedule_button.configure(state="normal")
     
