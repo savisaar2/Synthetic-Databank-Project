@@ -12,6 +12,7 @@ class UserModel():
         key = b'net5Gs6Mt6-guRLj-o7r4nmCgXOA8_RUnOKvkXoROdk='
         self.cipher = Fernet(key)
         self.accounts = None # Holds all accounts for reference.
+        self.user_info = None
 
         # Accounts should be read on initialise.
         self.read_accounts()
@@ -41,6 +42,12 @@ class UserModel():
                 return True
             
         return False # If no user return False.
+    
+    def get_user_role(self):
+        return self.user_info["role"]
+    
+    def get_user_profile(self):
+        return self.user_info
 
     def login(self, username, password):
         '''

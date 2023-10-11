@@ -18,7 +18,33 @@ class AccountsController:
         self.model = model
         self.view = view
         self.frame = self.view.frames["accounts"]
+
+        self._load_profile_info()
         self._bind()
+
+    def _load_profile_info(self):
+        #profile_info = self.model.user.get_user_profile()
+        
+        profile = {
+            "username": "admin",
+            "role": "admin",
+            "profile_info": {
+                "first": "John", 
+                "last": "Doe", 
+                "initials": "JD",
+                "title": "Online Tutor", 
+                "department": "Teaching", 
+                "office": "Main Campus", 
+                "email": "johndoe@mymail.unisa.edu.au", 
+                "bio": "Sample biography"},
+        }
+        
+        self.frame.load_profile_info(profile)
+
+    def _load_buttons_by_role(self):
+        #role = self.model.user.get_user_role()
+        role = "admin"
+        self.frame.load_buttons_by_role(role)
 
     def _bind(self):
         """
@@ -26,4 +52,4 @@ class AccountsController:
         Implement this method to set up event handlers and connections
         for user interactions with widgets on the view related to the user accounts.
         """
-        pass
+        self.view.frames["menu"].accounts_button.bind("<Button-1>", self._load_buttons_by_role())

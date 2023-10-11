@@ -1,4 +1,4 @@
-from customtkinter import CTkFrame, CTkLabel, CTkEntry, CTkCanvas, CTkButton
+from customtkinter import CTkFrame, CTkLabel, CTkEntry, CTkCanvas, CTkButton, END
 from .base import BaseView
 
 class AccountsView(BaseView):
@@ -29,37 +29,37 @@ class AccountsView(BaseView):
         row4_frame = CTkFrame(self.parent_frame, corner_radius=0, fg_color="transparent")
 
         first_name_label = CTkLabel(row1_frame, width=80, text="First Name:", anchor="w").pack(side="left", padx=5, pady=5)
-        self.first_name_entry = CTkEntry(row1_frame, state="disabled")
+        self.first_name_entry = CTkEntry(row1_frame)
 
         self.first_name_entry.pack(side="left", padx=5, pady=5)
 
         last_name_label = CTkLabel(row1_frame, width=80, text="Last Name:", anchor="w").pack(side="left", padx=5, pady=5)
-        self.last_name_entry = CTkEntry(row1_frame, state="disabled")
+        self.last_name_entry = CTkEntry(row1_frame)
 
         self.last_name_entry.pack(side="left", padx=5, pady=5)
         
         username_label = CTkLabel(row1_frame, width=80, text="Username:", anchor="w").pack(side="left", padx=5, pady=5)
-        self.username_entry = CTkEntry(row1_frame, state="disabled")
+        self.username_entry = CTkEntry(row1_frame)
         
         self.username_entry.pack(side="left", padx=5, pady=5)
 
         initial_label = CTkLabel(row2_frame, width=80, text="Initials:", anchor="w").pack(side="left", padx=5, pady=5)
-        self.initial_entry = CTkEntry(row2_frame, state="disabled")
+        self.initial_entry = CTkEntry(row2_frame)
 
         self.initial_entry.pack(side="left", padx=5, pady=5)
 
         department_label = CTkLabel(row2_frame, width=80, text="Department:", anchor="w").pack(side="left", padx=5, pady=5)
-        self.department_entry = CTkEntry(row2_frame, state="disabled")
+        self.department_entry = CTkEntry(row2_frame)
 
         self.department_entry.pack(side="left", padx=5, pady=5)
 
         office_label = CTkLabel(row2_frame, width=80, text="Office:", anchor="w").pack(side="left", padx=5, pady=5)
-        self.office_entry = CTkEntry(row2_frame, state="disabled")
+        self.office_entry = CTkEntry(row2_frame)
 
         self.office_entry.pack(side="left", padx=5, pady=5)
 
         email_label = CTkLabel(row3_frame, width=80, text="Email:", anchor="w").pack(side="left", padx=5, pady=5)
-        self.email_entry = CTkEntry(row3_frame, state="disabled", width=250)
+        self.email_entry = CTkEntry(row3_frame, width=250)
 
         self.email_entry.pack(side="left", padx=5, pady=5)
 
@@ -75,6 +75,47 @@ class AccountsView(BaseView):
 
         self.button_frame = CTkFrame(self.parent_frame, fg_color="transparent")
         self.button_frame.pack(fill="x", expand=True, padx=20)
+
+    def load_profile_info(self, user):
+        self.first_name_entry.delete(0, END)
+        self.last_name_entry.delete(0, END)
+        self.username_entry.delete(0, END)
+        self.initial_entry.delete(0, END)
+        self.department_entry.delete(0, END)
+        self.office_entry.delete(0, END)
+        self.email_entry.delete(0, END)
+        self.bio_entry.delete(0, END)
+
+        self.first_name_entry.insert(0, user["profile_info"]["first"])
+        self.last_name_entry.insert(0, user["profile_info"]["last"])
+        self.username_entry.insert(0, user["username"])
+        self.initial_entry.insert(0, user["profile_info"]["initials"])
+        self.department_entry.insert(0, user["profile_info"]["department"])
+        self.office_entry.insert(0, user["profile_info"]["office"])
+        self.email_entry.insert(0, user["profile_info"]["email"])
+        self.bio_entry.insert(0, user["profile_info"]["bio"])
+
+        self.disable_entries()
+
+    def enable_entries(self):
+        self.first_name_entry.configure(state="normal")
+        self.last_name_entry.configure(state="normal")
+        self.username_entry.configure(state="normal")
+        self.initial_entry.configure(state="normal")
+        self.department_entry.configure(state="normal")
+        self.office_entry.configure(state="normal")
+        self.email_entry.configure(state="normal")
+        self.bio_entry.configure(state="normal")
+
+    def disable_entries(self):
+        self.first_name_entry.configure(state="disabled")
+        self.last_name_entry.configure(state="disabled")
+        self.username_entry.configure(state="disabled")
+        self.initial_entry.configure(state="disabled")
+        self.department_entry.configure(state="disabled")
+        self.office_entry.configure(state="disabled")
+        self.email_entry.configure(state="disabled")
+        self.bio_entry.configure(state="disabled")
 
     def load_buttons_by_role(self, role):
         for widget in self.button_frame.winfo_children():
