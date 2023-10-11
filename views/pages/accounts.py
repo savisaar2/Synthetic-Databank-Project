@@ -63,7 +63,7 @@ class AccountsView(BaseView):
 
         self.email_entry.pack(side="left", padx=5, pady=5)
 
-        bio_label = CTkLabel(row4_frame, text="Bio:", width=80, anchor="nw").pack(side="left", padx=5, pady=5, fill="both")
+        bio_label = CTkLabel(row4_frame, text="Bio:", width=80, anchor="nw").pack(side="left", padx=5, pady=5)
         self.bio_entry = CTkEntry(row4_frame, width=620, height=150)
 
         self.bio_entry.pack(side="left", padx=5, pady=5)
@@ -98,24 +98,24 @@ class AccountsView(BaseView):
         self.disable_entries()
 
     def enable_entries(self):
-        self.first_name_entry.configure(state="normal")
-        self.last_name_entry.configure(state="normal")
-        self.username_entry.configure(state="normal")
-        self.initial_entry.configure(state="normal")
-        self.department_entry.configure(state="normal")
-        self.office_entry.configure(state="normal")
-        self.email_entry.configure(state="normal")
-        self.bio_entry.configure(state="normal")
+        self.first_name_entry.configure(state="normal", border_width=1)
+        self.last_name_entry.configure(state="normal", border_width=1)
+        #self.username_entry.configure(state="normal", border_width=1)
+        self.initial_entry.configure(state="normal", border_width=1)
+        self.department_entry.configure(state="normal", border_width=1)
+        self.office_entry.configure(state="normal", border_width=1)
+        self.email_entry.configure(state="normal", border_width=1)
+        self.bio_entry.configure(state="normal", border_width=1)
 
     def disable_entries(self):
-        self.first_name_entry.configure(state="disabled")
-        self.last_name_entry.configure(state="disabled")
-        self.username_entry.configure(state="disabled")
-        self.initial_entry.configure(state="disabled")
-        self.department_entry.configure(state="disabled")
-        self.office_entry.configure(state="disabled")
-        self.email_entry.configure(state="disabled")
-        self.bio_entry.configure(state="disabled")
+        self.first_name_entry.configure(state="disabled", border_width=0)
+        self.last_name_entry.configure(state="disabled", border_width=0)
+        self.username_entry.configure(state="disabled", border_width=0)
+        self.initial_entry.configure(state="disabled", border_width=0)
+        self.department_entry.configure(state="disabled", border_width=0)
+        self.office_entry.configure(state="disabled", border_width=0)
+        self.email_entry.configure(state="disabled", border_width=0)
+        self.bio_entry.configure(state="disabled", border_width=0)
 
     def load_buttons_by_role(self, role):
         for widget in self.button_frame.winfo_children():
@@ -136,3 +136,25 @@ class AccountsView(BaseView):
 
             self.edit_pw_button = CTkButton(self.button_frame, height=40, border_spacing=10, text="Reset Password", anchor="n")
             self.edit_pw_button.pack(side="left", padx=50)
+
+    def toggle_edit(self):
+        current_text = self.edit_button.cget("text")
+        if current_text == "Edit Details":
+            self.enable_entries()
+            new_text = "Save Details"
+            self.edit_button.configure(text=new_text)
+        else:
+            self.disable_entries()
+            new_text = "Edit Details"
+            self.edit_button.configure(text=new_text)
+            return {
+                "profile_info": {
+                    "first": self.first_name_entry.get(), 
+                    "last": self.last_name_entry.get(),
+                    "initials": self.initial_entry.get(), 
+                    "department": self.department_entry.get(), 
+                    "office": self.office_entry.get(), 
+                    "email": self.email_entry.get(), 
+                    "bio": self.bio_entry.get()
+                }
+            }

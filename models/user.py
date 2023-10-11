@@ -46,8 +46,23 @@ class UserModel():
     def get_user_role(self):
         return self.user_info["role"]
     
+    def get_username(self):
+        return self.user_info["username"]
+    
     def get_user_profile(self):
         return self.user_info
+    
+    def save_profile(self, user, profile):
+        for account in self.accounts:
+            if account["username"] == user:
+                account["profile_info"] = profile["profile_info"]
+                if user == self.get_username():
+                    self.profile = profile["profile_info"]
+                if "role" in profile:
+                    account["role"] = profile["role"]
+                break
+
+        self.write_accounts()
 
     def login(self, username, password):
         '''
