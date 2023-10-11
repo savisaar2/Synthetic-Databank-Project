@@ -806,3 +806,33 @@ KeyError: "['break me'] not found in axis"
 2023-10-11 10:50:02,187 - INFO - User initiated generate function with schedule set:
 2023-10-11 10:50:02,187 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
 2023-10-11 10:50:02,190 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 13:37:20,296 - INFO - User changed view to 'manipulate'.
+2023-10-11 13:46:12,833 - INFO - User changed view to 'analyse'.
+2023-10-11 13:46:13,272 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:03:47,319 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:29:07,921 - INFO - User changed view to 'library'.
+2023-10-11 14:29:08,584 - INFO - User changed view to 'library'.
+2023-10-11 14:29:09,968 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:29:10,921 - INFO - User changed view to 'library'.
+2023-10-11 14:29:13,100 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:42:35,489 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:52:46,121 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:59:53,808 - INFO - User changed view to 'manipulate'.
+2023-10-11 15:17:19,342 - INFO - User changed view to 'manipulate'.
+2023-10-11 15:50:25,696 - INFO - User changed view to 'manipulate'.
+2023-10-11 15:53:26,967 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:18:56,962 - INFO - User changed view to 'library'.
+2023-10-11 16:18:59,728 - INFO - User changed view to 'sample'.
+2023-10-11 16:19:00,380 - INFO - User changed view to 'analyse'.
+2023-10-11 16:19:00,637 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:27:03,745 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:27:22,236 - INFO - User changed view to 'library'.
+2023-10-11 16:27:24,509 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:31:24,750 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:35:05,412 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:35:30,808 - INFO - User changed view to 'library'.
+2023-10-11 16:35:33,232 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:37:21,274 - INFO - User changed view to 'library'.
+2023-10-11 16:37:23,552 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:43:24,386 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:49:38,097 - INFO - User changed view to 'manipulate'.

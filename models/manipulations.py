@@ -46,7 +46,7 @@ class ManipulationsModel():
         for index, r in enumerate(scheduler_row):
             if not index:
                 self.current_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], 
-                                                   r["args"], r["sme"])
+                                                   r["args"])
                 match self.current_df:
                     case False:
                         r["outcome"] = "Failed"
@@ -59,7 +59,7 @@ class ManipulationsModel():
                     case _:
                         r["df"] = self.current_df
                         self.current_df  = self.manip_collection[r["action"]](r["sub_action"], 
-                                                                r["df"], r["column"], r["args"], r["sme"])
+                                                                r["df"], r["column"], r["args"])
                         match self.current_df:
                             case False:
                                 r["outcome"] = "Failed"
@@ -71,7 +71,7 @@ class ManipulationsModel():
     def update_schedule_set(self, manip_set):
           self.schedule_set.append(manip_set)
 
-    def add_noise(self, sub_action, df, column, args, sme):
+    def add_noise(self, sub_action, df, column, args):
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
@@ -156,7 +156,7 @@ class ManipulationsModel():
                 # Insert function here!!!
                 pass
 
-    def add_column(self, sub_action, df, column, args, sme):
+    def add_column(self, sub_action, df, column, args):
         """Adds a column(s) to a pandas dataframe.
 
         Args:
@@ -191,7 +191,7 @@ class ManipulationsModel():
                 # Insert function here!!!
                 pass
 
-    def reduce_columns(self, sub_action, df, column, args, sme): 
+    def reduce_columns(self, sub_action, df, column, args): 
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
@@ -286,7 +286,7 @@ class ManipulationsModel():
                     self.logger.log_exception("Manipulation failed to complete. Traceback:")
                     return False
 
-    def remove_rows(self, sub_action, df, column, args, sme):   
+    def remove_rows(self, sub_action, df, column, args):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
@@ -298,7 +298,7 @@ class ManipulationsModel():
                 df_no_duplicate = df.drop_duplicates()
                 return df_no_duplicate
 
-    def replace_null_values(self, sub_action, df, column, args, sme):   
+    def replace_null_values(self, sub_action, df, column, args):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         match sub_action:
@@ -379,7 +379,7 @@ class ManipulationsModel():
                         df.loc[df[column].isna(), column] = imputed_values
                         return df
 
-    def replace_x_with_new_value(self, sub_action, df, column, args, sme):   
+    def replace_x_with_new_value(self, sub_action, df, column, args):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
 #       # column = the selected column; a = value to replace; b = new value
@@ -388,14 +388,14 @@ class ManipulationsModel():
         df[column].replace(a, b, inplace=True)
         return df
 
-    def change_column_name(self, sub_action, df, column, args, sme):   
+    def change_column_name(self, sub_action, df, column, args):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         # Function to rename the selected column
         df.rename(columns={column: a}, inplace=True)
         return df
 
-    def add_rows(self, sub_action, df, column, args, sme):   
+    def add_rows(self, sub_action, df, column, args):   
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
         
         match sub_action:
@@ -432,7 +432,7 @@ class ManipulationsModel():
                 return df_resampled
             
 
-    def data_transformation(self, sub_action, df, column, args, sme): 
+    def data_transformation(self, sub_action, df, column, args): 
 
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 

@@ -70,7 +70,6 @@ class ManipulateController:
                 "sub_action": self.frame.variables["sub_action"],
                 "args": self.frame.variables["args"],
                 "column": self.frame.variables["column"],
-                "sme": self.frame.variables["sme"],
                 "outcome": "Pending",
                 "df": self.model.DATASET.get_reference_to_current_snapshot()
             }
@@ -78,7 +77,6 @@ class ManipulateController:
  
             self.frame.schedule_button.configure(state="disabled")
             self.frame.generate_button.configure(state="normal")
-            self.frame.sme_selector.configure(state="disabled")
             
             if self.step_count == self.MAX_STEPS:
                 self.frame.schedule_button.configure(state="disabled")
