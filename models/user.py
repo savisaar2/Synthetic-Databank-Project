@@ -64,6 +64,17 @@ class UserModel():
 
         self.write_accounts()
 
+    def save_user_password(self, user, data):
+        info = data
+        info["password"] = self.encrypt(info["password"])
+        for account in self.accounts:
+            if account["username"] == user:
+                self.accounts.remove(account)
+                self.accounts.append(data)
+                break
+        
+        self.write_accounts()
+
     def login(self, username, password):
         '''
         Authenticates user against accounts dictionary.
