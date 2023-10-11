@@ -51,6 +51,7 @@ class ManipulateController:
         option menues and row count of Manipulate view. Called whenever Manipulate side panel is clicked to 
         ensure correct data.
         """
+        self._scan_dataset()
         self.frame.refresh_manipulate_widgets(self.model.DATASET.get_column_headers(), self.col_dtype_dict)
         self.frame.current_dataset_label.configure(
             text=f"Current Dataset: {self.model.DATASET.get_dataset_name()} | Rows: {self.model.DATASET.get_df_row_count()} | "
@@ -120,8 +121,10 @@ class ManipulateController:
             # Updates to current dataframe in SNAPSHOTS if successful, logs and dsplays user message.
             match generated_df:
                 case False:
-                    self.frame.generate_warning.configure(text="Generate has failed, check failed manipulation's args & column variables")
-                    self.frame.generate_warning.configure(text_color="red")
+                    error_msg = self.model.manipulations.error_msg
+                    self.frame.generate_warning.configure(text=f"Generate has failed. {error_msg}")
+                    self.frame.generate_warning.configure(text_color="yellow")
+                    
                     # Logger INFO add
                     self.logger.log_info(f"Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.")
                 case _:

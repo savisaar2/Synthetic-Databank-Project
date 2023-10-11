@@ -540,6 +540,7 @@ class ManipulateView(BaseView):
         match choice:
             case "Mean" | "Median" | "Mode" | "ML":
                 self.pos_4_menu.configure(state='disabled')
+                self.schedule_button.configure(state="normal")
             case "KNN":
                 self.pos_4_entry_box = self._user_entry_box_template(4, 1, self._entry_box_int_arg_b_callback,
                                                                     "1. Enter an integer",150)

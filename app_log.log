@@ -836,3 +836,170 @@ KeyError: "['break me'] not found in axis"
 2023-10-11 16:37:23,552 - INFO - User changed view to 'manipulate'.
 2023-10-11 16:43:24,386 - INFO - User changed view to 'manipulate'.
 2023-10-11 16:49:38,097 - INFO - User changed view to 'manipulate'.
+2023-10-11 20:03:24,207 - INFO - User changed view to 'manipulate'.
+2023-10-11 20:03:42,395 - INFO - User initiated generate function with schedule set:
+2023-10-11 20:03:42,395 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'dfg', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 20:03:42,406 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 20:21:07,344 - INFO - User changed view to 'library'.
+2023-10-11 20:21:09,197 - INFO - User changed view to 'manipulate'.
+2023-10-11 20:24:38,707 - INFO - User changed view to 'library'.
+2023-10-11 20:24:40,959 - INFO - User changed view to 'manipulate'.
+2023-10-11 20:37:18,220 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:04:29,384 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:04:47,676 - INFO - User changed view to 'library'.
+2023-10-11 21:04:49,881 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:23:17,883 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:27:26,006 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:38:51,579 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:39:02,895 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 299, in reduce_columns
+    df = df.drop("break me")
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['break me'] not found in axis"
+2023-10-11 21:39:02,992 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:39:02,992 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-11 21:39:02,993 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 21:42:11,680 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:42:25,681 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 299, in reduce_columns
+    df = df.drop("break me")
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['break me'] not found in axis"
+2023-10-11 21:42:25,688 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:42:25,688 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Age', 'outcome': 'Failed'}
+2023-10-11 21:42:25,689 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 21:43:31,618 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:43:31,619 - INFO - {'step': 1, 'action': 'Replace Value (x) with New Value', 'sub_action': '', 'args': {'a': '2', 'b': '0', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-11 21:43:31,630 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 21:45:21,681 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:45:21,682 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-11 21:45:21,692 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 21:46:53,799 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 299, in reduce_columns
+    df = df.drop("break me")
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['break me'] not found in axis"
+2023-10-11 21:46:53,800 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:46:53,800 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'tumor-zie', 'outcome': 'Failed'}
+2023-10-11 21:46:53,801 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 21:48:02,898 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:48:15,975 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 299, in reduce_columns
+    df = df.drop("break me")
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['break me'] not found in axis"
+2023-10-11 21:48:15,982 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:48:15,983 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'menopause', 'outcome': 'Failed'}
+2023-10-11 21:48:15,983 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 21:56:23,577 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:56:28,223 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:56:28,223 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asd', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 21:56:28,235 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 21:57:15,909 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:57:20,975 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 208, in add_column
+    df[abc]=None
+       ^^^
+NameError: name 'abc' is not defined
+2023-10-11 21:57:20,976 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:57:20,976 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asd', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-11 21:57:20,976 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 22:05:37,609 - INFO - User changed view to 'manipulate'.
+2023-10-11 22:05:43,194 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:05:43,194 - INFO - {'step': 1, 'action': 'Change Column Name', 'sub_action': '', 'args': {'a': 'v', 'b': '', 'c': ''}, 'column': 'Age', 'outcome': 'Success'}
+2023-10-11 22:05:43,205 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 22:05:53,602 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 484, in add_rows
+    X_resampled, y_resampled = smote.fit_resample(X, y)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 208, in fit_resample
+    return super().fit_resample(X, y)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 106, in fit_resample
+    X, y, binarize_y = self._check_X_y(X, y)
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 161, in _check_X_y
+    X, y = self._validate_data(X, y, reset=True, accept_sparse=accept_sparse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 622, in _validate_data
+    X, y = check_X_y(X, y, **check_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 1146, in check_X_y
+    X = check_array(
+        ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 915, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_array_api.py", line 380, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 2084, in __array__
+    arr = np.asarray(values, dtype=dtype)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: 'no-recurrence-events'
+2023-10-11 22:05:53,618 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:05:53,618 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'SMOTE', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'v', 'outcome': 'Failed'}
+2023-10-11 22:05:53,619 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 22:06:58,175 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:06:58,176 - INFO - {'step': 1, 'action': 'Change Column Name', 'sub_action': 'Algorithmic', 'args': {'a': '5', 'b': '', 'c': ''}, 'column': 'tumor-zie', 'outcome': 'Success'}
+2023-10-11 22:06:58,187 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 22:07:07,995 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:07:07,995 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'Duplicate', 'args': {'a': '4', 'b': '', 'c': ''}, 'column': '5', 'outcome': 'Success'}
+2023-10-11 22:07:08,007 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 22:10:35,227 - INFO - User changed view to 'manipulate'.
+2023-10-11 22:10:42,210 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:10:42,210 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'c', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 22:10:42,222 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 22:10:56,487 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:10:56,487 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Manual Categorical', 'args': {'a': '5', 'b': '', 'c': ''}, 'column': 'c', 'outcome': 'Success'}
+2023-10-11 22:10:56,500 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
