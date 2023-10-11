@@ -73,7 +73,7 @@ class SaveController:
         change back to "Save".
         """
         name = self.model.DATASET.get_dataset_name()
-        if self.frame.get_name_entry(mode="Save/SaveAs") == name: # no change
+        if self.frame.get_name_entry(mode="Save") == name: # no change
             self.frame.change_save_button_text(mode="Save")
         else: 
             self.frame.change_save_button_text(mode="Save As")
