@@ -23,7 +23,6 @@ class ManipulateController:
         self.MAX_STEPS = 4
         self.current_df =""
         
-
     def _bind(self):
         """
         Private method to establish event bindings.
