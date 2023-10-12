@@ -134,9 +134,13 @@ class ManipulateView(BaseView):
             )
         self.generate_button.pack(side="right", padx=(8, 8), pady=(8,8))
 
+        # Scrollable frame for generate warning
+        self.generate_warning_scroll_frame = CTkScrollableFrame(self.generate_frame, fg_color="gray20", orientation="horizontal", height=25)
+        self.generate_warning_scroll_frame.pack(fill="both")
+
         # Generate warning label
-        self.generate_warning = CTkLabel(self.generate_frame, text_color='yellow', text="")
-        self.generate_warning.pack(side="right", padx=(8, 8))
+        self.generate_warning = CTkLabel(self.generate_warning_scroll_frame, text_color='yellow', text="")
+        self.generate_warning.pack(side="right")
 
         # Rollback frames and labels
         self.rollback_frame_1 = CTkFrame(self, fg_color="gray20")

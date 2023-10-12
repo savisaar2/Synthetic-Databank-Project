@@ -1210,3 +1210,310 @@ ValueError: a must be greater than 0 unless no samples are taken
 2023-10-12 10:29:07,788 - INFO - User initiated generate function with schedule set:
 2023-10-12 10:29:07,788 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 1, 'b': '', 'c': ''}, 'column': 'cut', 'outcome': 'Success'}
 2023-10-12 10:29:07,803 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 10:34:10,220 - INFO - User changed view to 'manipulate'.
+2023-10-12 10:34:28,682 - INFO - User initiated generate function with schedule set:
+2023-10-12 10:34:28,682 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 2, 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-12 10:34:28,693 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 10:34:43,888 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 234, in reduce_columns
+    X_pca = pca.fit_transform(X)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 460, in fit_transform
+    U, S, Vt = self._fit(X)
+               ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 510, in _fit
+    return self._fit_full(X, n_components)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 524, in _fit_full
+    raise ValueError(
+ValueError: n_components=23 must be between 0 and min(n_samples, n_features)=8 with svd_solver='full'
+2023-10-12 10:34:43,919 - INFO - User initiated generate function with schedule set:
+2023-10-12 10:34:43,919 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic PCA', 'args': {'a': 23, 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-12 10:34:43,920 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-12 10:38:56,183 - INFO - User changed view to 'manipulate'.
+2023-10-12 10:39:22,065 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 234, in reduce_columns
+    X_pca = pca.fit_transform(X)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 460, in fit_transform
+    U, S, Vt = self._fit(X)
+               ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 510, in _fit
+    return self._fit_full(X, n_components)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 524, in _fit_full
+    raise ValueError(
+ValueError: n_components=100 must be between 0 and min(n_samples, n_features)=8 with svd_solver='full'
+2023-10-12 10:39:22,068 - INFO - User initiated generate function with schedule set:
+2023-10-12 10:39:22,068 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic PCA', 'args': {'a': 100, 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-12 10:39:22,068 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-12 10:42:30,041 - INFO - User changed view to 'manipulate'.
+2023-10-12 10:42:39,095 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 234, in reduce_columns
+    X_pca = pca.fit_transform(X)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 460, in fit_transform
+    U, S, Vt = self._fit(X)
+               ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 510, in _fit
+    return self._fit_full(X, n_components)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 524, in _fit_full
+    raise ValueError(
+ValueError: n_components=200 must be between 0 and min(n_samples, n_features)=8 with svd_solver='full'
+2023-10-12 10:42:39,098 - INFO - User initiated generate function with schedule set:
+2023-10-12 10:42:39,098 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic PCA', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-12 10:42:39,098 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-12 10:43:31,518 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 234, in reduce_columns
+    X_pca = pca.fit_transform(X)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 460, in fit_transform
+    U, S, Vt = self._fit(X)
+               ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 483, in _fit
+    X = self._validate_data(
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 605, in _validate_data
+    out = check_array(X, input_name="X", **check_params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 957, in check_array
+    _assert_all_finite(
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 122, in _assert_all_finite
+    _assert_all_finite_element_wise(
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 171, in _assert_all_finite_element_wise
+    raise ValueError(msg_err)
+ValueError: Input X contains NaN.
+PCA does not accept missing values encoded as NaN natively. For supervised learning, you might want to consider sklearn.ensemble.HistGradientBoostingClassifier and Regressor which accept missing values encoded as NaNs natively. Alternatively, it is possible to preprocess the data, for instance by using an imputer transformer in a pipeline or drop samples with missing values. See https://scikit-learn.org/stable/modules/impute.html You can find a list of all estimators that handle NaN values at the following page: https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values
+2023-10-12 10:43:31,532 - INFO - User initiated generate function with schedule set:
+2023-10-12 10:43:31,533 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 10:43:31,533 - INFO - {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 10:43:31,533 - INFO - {'step': 3, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 10:43:31,533 - INFO - {'step': 4, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic PCA', 'args': {'a': 122, 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-12 10:43:31,533 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-12 10:46:06,473 - INFO - User changed view to 'manipulate'.
+2023-10-12 10:47:14,427 - INFO - User initiated generate function with schedule set:
+2023-10-12 10:47:14,427 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 10:47:14,427 - INFO - {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 10:47:14,427 - INFO - {'step': 3, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '3', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 10:47:14,427 - INFO - {'step': 4, 'action': 'Add Noise', 'sub_action': 'Add Outliers Z-score', 'args': {'a': 2.0, 'b': '', 'c': ''}, 'column': 'Unnamed: 0', 'outcome': 'Success'}
+2023-10-12 10:47:14,446 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 10:47:25,823 - INFO - User changed view to 'analyse'.
+2023-10-12 10:47:26,714 - INFO - User changed view to 'manipulate'.
+2023-10-12 10:47:34,550 - INFO - User changed view to 'library'.
+2023-10-12 10:47:36,605 - INFO - User changed view to 'manipulate'.
+2023-10-12 10:49:04,598 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 234, in reduce_columns
+    X_pca = pca.fit_transform(X)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 460, in fit_transform
+    U, S, Vt = self._fit(X)
+               ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 483, in _fit
+    X = self._validate_data(
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 605, in _validate_data
+    out = check_array(X, input_name="X", **check_params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 957, in check_array
+    _assert_all_finite(
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 122, in _assert_all_finite
+    _assert_all_finite_element_wise(
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 171, in _assert_all_finite_element_wise
+    raise ValueError(msg_err)
+ValueError: Input X contains NaN.
+PCA does not accept missing values encoded as NaN natively. For supervised learning, you might want to consider sklearn.ensemble.HistGradientBoostingClassifier and Regressor which accept missing values encoded as NaNs natively. Alternatively, it is possible to preprocess the data, for instance by using an imputer transformer in a pipeline or drop samples with missing values. See https://scikit-learn.org/stable/modules/impute.html You can find a list of all estimators that handle NaN values at the following page: https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values
+2023-10-12 10:49:04,601 - INFO - User initiated generate function with schedule set:
+2023-10-12 10:49:04,601 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 10:49:04,601 - INFO - {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 10:49:04,601 - INFO - {'step': 3, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '3', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 10:49:04,601 - INFO - {'step': 4, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic PCA', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': 'BloodPressure', 'outcome': 'Failed'}
+2023-10-12 10:49:04,602 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-12 11:33:10,591 - INFO - User changed view to 'manipulate'.
+2023-10-12 11:33:24,095 - INFO - User initiated generate function with schedule set:
+2023-10-12 11:33:24,096 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '4', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 11:33:24,107 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 11:43:21,817 - INFO - User changed view to 'manipulate'.
+2023-10-12 11:44:00,270 - INFO - User changed view to 'manipulate'.
+2023-10-12 11:54:09,153 - INFO - User changed view to 'manipulate'.
+2023-10-12 11:55:01,754 - INFO - User changed view to 'manipulate'.
+2023-10-12 11:55:54,328 - INFO - User changed view to 'manipulate'.
+2023-10-12 11:55:55,891 - INFO - User changed view to 'library'.
+2023-10-12 11:55:57,518 - INFO - User changed view to 'manipulate'.
+2023-10-12 11:56:34,488 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 234, in reduce_columns
+    X_pca = pca.fit_transform(X)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 460, in fit_transform
+    U, S, Vt = self._fit(X)
+               ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 510, in _fit
+    return self._fit_full(X, n_components)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 524, in _fit_full
+    raise ValueError(
+ValueError: n_components=200 must be between 0 and min(n_samples, n_features)=8 with svd_solver='full'
+2023-10-12 11:56:34,491 - INFO - User initiated generate function with schedule set:
+2023-10-12 11:56:34,491 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic PCA', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-12 11:56:34,492 - INFO - Generate function failed to fully complete successfully.
+2023-10-12 11:58:52,569 - INFO - User changed view to 'manipulate'.
+2023-10-12 11:59:45,155 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 234, in reduce_columns
+    X_pca = pca.fit_transform(X)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 460, in fit_transform
+    U, S, Vt = self._fit(X)
+               ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 510, in _fit
+    return self._fit_full(X, n_components)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 524, in _fit_full
+    raise ValueError(
+ValueError: n_components=200 must be between 0 and min(n_samples, n_features)=8 with svd_solver='full'
+2023-10-12 11:59:45,158 - INFO - User initiated generate function with schedule set:
+2023-10-12 11:59:45,158 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic PCA', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': 'Glucose', 'outcome': 'Failed'}
+2023-10-12 11:59:45,159 - INFO - Generate function failed to fully complete successfully.
+2023-10-12 12:00:44,609 - INFO - User changed view to 'manipulate'.
+2023-10-12 12:01:03,765 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:01:03,765 - INFO - {'step': 1, 'action': 'Change Column Name', 'sub_action': '', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': 'Glucose', 'outcome': 'Success'}
+2023-10-12 12:01:03,776 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 12:01:53,123 - INFO - User changed view to 'manipulate'.
+2023-10-12 12:02:07,133 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 234, in reduce_columns
+    X_pca = pca.fit_transform(X)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 460, in fit_transform
+    U, S, Vt = self._fit(X)
+               ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 510, in _fit
+    return self._fit_full(X, n_components)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 524, in _fit_full
+    raise ValueError(
+ValueError: n_components=200 must be between 0 and min(n_samples, n_features)=8 with svd_solver='full'
+2023-10-12 12:02:07,135 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:02:07,135 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic PCA', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': 'BloodPressure', 'outcome': 'Failed'}
+2023-10-12 12:02:07,136 - INFO - Generate function failed to fully complete successfully.
+2023-10-12 12:02:42,178 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:02:42,178 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asd', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 12:02:42,191 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 12:04:04,811 - INFO - User changed view to 'manipulate'.
+2023-10-12 12:04:11,503 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:04:11,503 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asd', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 12:04:11,516 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 12:06:27,811 - INFO - User changed view to 'manipulate'.
+2023-10-12 12:06:34,726 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:06:34,727 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'hjgjn', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 12:06:34,740 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 12:09:05,985 - INFO - User changed view to 'manipulate'.
+2023-10-12 12:09:22,175 - INFO - User changed view to 'library'.
+2023-10-12 12:09:25,003 - INFO - User changed view to 'manipulate'.
+2023-10-12 12:09:48,548 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 234, in reduce_columns
+    X_pca = pca.fit_transform(X)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 460, in fit_transform
+    U, S, Vt = self._fit(X)
+               ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 510, in _fit
+    return self._fit_full(X, n_components)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 524, in _fit_full
+    raise ValueError(
+ValueError: n_components=200 must be between 0 and min(n_samples, n_features)=8 with svd_solver='full'
+2023-10-12 12:09:48,550 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:09:48,551 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic PCA', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-12 12:09:48,551 - INFO - Generate function failed to fully complete successfully.
+2023-10-12 12:11:20,802 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:11:20,802 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 12:11:20,802 - INFO - {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 12:11:20,802 - INFO - {'step': 3, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 12:11:20,802 - INFO - {'step': 4, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 12:11:20,814 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 12:12:58,652 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 234, in reduce_columns
+    X_pca = pca.fit_transform(X)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 460, in fit_transform
+    U, S, Vt = self._fit(X)
+               ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 510, in _fit
+    return self._fit_full(X, n_components)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\decomposition\_pca.py", line 524, in _fit_full
+    raise ValueError(
+ValueError: n_components=2000 must be between 0 and min(n_samples, n_features)=9 with svd_solver='full'
+2023-10-12 12:12:58,653 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:12:58,654 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic PCA', 'args': {'a': 2000, 'b': '', 'c': ''}, 'column': '1', 'outcome': 'Failed'}
+2023-10-12 12:12:58,654 - INFO - {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '23', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Pending'}
+2023-10-12 12:12:58,654 - INFO - Generate function failed to fully complete successfully.

@@ -1,4 +1,6 @@
 from utils.logger_utils import Logger
+from tkinter import filedialog as fd
+import os
 class ManipulateController:
     def __init__(self, model, view):
         """
@@ -101,7 +103,8 @@ class ManipulateController:
         self.frame.action_selection_menu.configure(state="normal")
         self.frame.step_count = 0
         self.frame.generate_button.configure(state="disabled")
-                 
+        self.frame.generate_warning.configure(text="")
+            
     def _generate(self):
         """
         Method to call manipulations churner located in the manipulations model which generates a dataset based on
@@ -122,11 +125,11 @@ class ManipulateController:
             match generated_df:
                 case False:
                     error_msg = self.model.manipulations.error_msg
-                    self.frame.generate_warning.configure(text=f"Generate has failed. {error_msg}")
+                    self.frame.generate_warning.configure(text=f"Generate has failed. Reason: {error_msg}")
                     self.frame.generate_warning.configure(text_color="yellow")
                     
                     # Logger INFO add
-                    self.logger.log_info(f"Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.")
+                    self.logger.log_info(f"Generate function failed to fully complete successfully.")
                 case _:
                     self.model.DATASET.add_generated_dataset_to_snapshot(self.model.manipulations.schedule_set, 
                                                                          "Generated Dataset", generated_df)
@@ -187,3 +190,4 @@ class ManipulateController:
         for item in logger_manips:
             item.pop("df")
             self.logger.log_info(f"{item}")
+        
