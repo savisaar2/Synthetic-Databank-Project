@@ -1022,3 +1022,191 @@ ValueError: could not convert string to float: 'no-recurrence-events'
 2023-10-11 19:03:42,283 - INFO - User changed view to 'accounts'.
 2023-10-11 20:15:05,133 - INFO - User changed view to 'accounts'.
 >>>>>>> main
+2023-10-11 22:19:36,061 - INFO - User changed view to 'save'.
+2023-10-11 22:19:56,460 - INFO - User changed view to 'manipulate'.
+2023-10-11 22:19:57,274 - INFO - User changed view to 'sample'.
+2023-10-11 22:19:58,166 - INFO - User changed view to 'save'.
+2023-10-11 22:19:59,096 - INFO - User changed view to 'analyse'.
+2023-10-11 22:19:59,677 - INFO - User changed view to 'library'.
+2023-10-11 22:20:01,809 - INFO - User changed view to 'save'.
+2023-10-11 22:20:19,960 - INFO - User changed view to 'analyse'.
+2023-10-11 22:20:20,503 - INFO - User changed view to 'manipulate'.
+2023-10-11 22:20:29,486 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:20:29,487 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'Enter column name', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 22:20:29,508 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 22:20:51,575 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:20:51,575 - INFO - {'step': 1, 'action': 'Change Column Name', 'sub_action': '', 'args': {'a': 'gsdr', 'b': '', 'c': ''}, 'column': 'CHAS', 'outcome': 'Success'}
+2023-10-11 22:20:51,597 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 22:49:35,102 - INFO - User changed view to 'manipulate'.
+2023-10-11 22:50:21,509 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:50:21,509 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Bootstrap Resamping', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 22:50:21,510 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 22:58:49,752 - INFO - User changed view to 'manipulate'.
+2023-10-11 22:58:52,097 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:00:11,387 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:00:11,387 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Bootstrap Resamping', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 23:00:51,286 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 23:03:32,375 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:05:44,580 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:07:19,527 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:07:19,527 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Bootstrap Resampling', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 23:07:19,538 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 23:08:10,880 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 484, in add_rows
+    X_resampled, y_resampled = smote.fit_resample(X, y)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 208, in fit_resample
+    return super().fit_resample(X, y)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 112, in fit_resample
+    output = self._fit_resample(X, y)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\over_sampling\_smote\base.py", line 364, in _fit_resample
+    nns = self.nn_k_.kneighbors(X_class, return_distance=False)[:, 1:]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\neighbors\_base.py", line 808, in kneighbors
+    raise ValueError(
+ValueError: Expected n_neighbors <= n_samples,  but n_samples = 2, n_neighbors = 6
+2023-10-11 23:08:10,891 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:08:10,891 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'SMOTE', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-11 23:08:10,892 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 23:10:49,423 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:11:12,035 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:11:12,035 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'SMOTE', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Outcome', 'outcome': 'Success'}
+2023-10-11 23:11:12,046 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 23:11:55,467 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:11:55,467 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'SMOTE', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Outcome', 'outcome': 'Success'}
+2023-10-11 23:11:55,476 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 23:12:14,947 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 484, in add_rows
+    X_resampled, y_resampled = smote.fit_resample(X, y)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 208, in fit_resample
+    return super().fit_resample(X, y)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 112, in fit_resample
+    output = self._fit_resample(X, y)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\over_sampling\_smote\base.py", line 364, in _fit_resample
+    nns = self.nn_k_.kneighbors(X_class, return_distance=False)[:, 1:]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\neighbors\_base.py", line 808, in kneighbors
+    raise ValueError(
+ValueError: Expected n_neighbors <= n_samples,  but n_samples = 1, n_neighbors = 6
+2023-10-11 23:12:14,950 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:12:14,950 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'SMOTE', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'SkinThickness', 'outcome': 'Failed'}
+2023-10-11 23:12:14,951 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 23:12:48,037 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:12:48,037 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Random Sampling', 'args': {'a': 5, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 23:12:48,048 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 23:13:11,841 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:13:11,841 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'SMOTE', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Outcome', 'outcome': 'Success'}
+2023-10-11 23:13:11,851 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 23:13:40,366 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 484, in add_rows
+    X_resampled, y_resampled = smote.fit_resample(X, y)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 208, in fit_resample
+    return super().fit_resample(X, y)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 112, in fit_resample
+    output = self._fit_resample(X, y)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\over_sampling\_smote\base.py", line 364, in _fit_resample
+    nns = self.nn_k_.kneighbors(X_class, return_distance=False)[:, 1:]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\neighbors\_base.py", line 808, in kneighbors
+    raise ValueError(
+ValueError: Expected n_neighbors <= n_samples,  but n_samples = 1, n_neighbors = 6
+2023-10-11 23:13:40,367 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:13:40,367 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'SMOTE', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'BloodPressure', 'outcome': 'Failed'}
+2023-10-11 23:13:40,368 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 23:16:22,274 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:16:22,275 - INFO - {'step': 1, 'action': 'Change Column Name', 'sub_action': '', 'args': {'a': '45645', 'b': '', 'c': ''}, 'column': 'Insulin', 'outcome': 'Success'}
+2023-10-11 23:16:22,285 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 23:20:39,482 - INFO - User changed view to 'save'.
+2023-10-11 23:23:15,307 - INFO - User changed view to 'library'.
+2023-10-11 23:23:34,215 - INFO - User changed view to 'save'.
+2023-10-11 23:26:01,023 - INFO - User changed view to 'library'.
+2023-10-11 23:26:58,379 - INFO - User changed view to 'save'.
+2023-10-11 23:27:05,349 - INFO - User changed view to 'library'.
+2023-10-11 23:27:09,154 - INFO - User changed view to 'save'.
+2023-10-11 23:27:10,618 - INFO - User changed view to 'library'.
+2023-10-11 23:27:12,786 - INFO - User changed view to 'save'.
+2023-10-11 23:27:18,290 - INFO - User changed view to 'library'.
+2023-10-11 23:27:20,854 - INFO - User changed view to 'save'.
+2023-10-11 23:27:36,414 - INFO - User changed view to 'library'.
+2023-10-11 23:27:39,971 - INFO - User changed view to 'save'.
+2023-10-11 23:30:57,874 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:30:59,655 - INFO - User changed view to 'analyse'.
+2023-10-11 23:31:00,369 - INFO - User changed view to 'library'.
+2023-10-11 23:31:03,462 - INFO - User changed view to 'analyse'.
+2023-10-11 23:31:50,442 - INFO - User changed view to 'library'.
+2023-10-11 23:38:44,291 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:40:27,865 - INFO - User changed view to 'sample'.
+2023-10-11 23:40:28,917 - INFO - User changed view to 'analyse'.
+2023-10-11 23:40:29,224 - INFO - User changed view to 'library'.
+2023-10-11 23:40:29,695 - INFO - User changed view to 'library'.
+2023-10-11 23:40:29,992 - INFO - User changed view to 'analyse'.
+2023-10-11 23:40:30,307 - INFO - User changed view to 'library'.
+2023-10-11 23:40:30,566 - INFO - User changed view to 'analyse'.
+2023-10-11 23:40:30,844 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:40:31,365 - INFO - User changed view to 'sample'.
+2023-10-11 23:40:31,983 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:40:32,435 - INFO - User changed view to 'sample'.
+2023-10-11 23:40:36,600 - INFO - User changed view to 'sample'.
+2023-10-11 23:40:36,968 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:40:44,172 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:40:46,488 - INFO - User changed view to 'sample'.
+2023-10-11 23:40:47,048 - INFO - User changed view to 'save'.
+2023-10-11 23:40:47,347 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:41:01,921 - INFO - User changed view to 'library'.
+2023-10-11 23:41:32,766 - INFO - User changed view to 'manipulate'.
+2023-10-11 23:41:40,148 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:41:40,148 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '345', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 23:41:40,150 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 23:41:53,307 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:41:53,307 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '234', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 23:41:53,309 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 23:42:07,209 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 459, in add_rows
+    random_rows = df.sample(n=a, replace=False)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 6029, in sample
+    sampled_indices = sample.sample(obj_len, size, replace, weights, rs)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\sample.py", line 152, in sample
+    return random_state.choice(obj_len, size=size, replace=replace, p=weights).astype(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "numpy\\random\\mtrand.pyx", line 944, in numpy.random.mtrand.RandomState.choice
+ValueError: a must be greater than 0 unless no samples are taken
+2023-10-11 23:42:07,220 - INFO - User initiated generate function with schedule set:
+2023-10-11 23:42:07,220 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Random Sampling', 'args': {'a': 5, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-11 23:42:07,220 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 23:43:09,769 - INFO - User changed view to 'library'.
+2023-10-11 23:43:11,144 - INFO - User changed view to 'sample'.
+2023-10-11 23:43:12,022 - INFO - User changed view to 'library'.
+2023-10-11 23:43:56,108 - INFO - User changed view to 'sample'.
+2023-10-12 10:04:20,027 - INFO - User changed view to 'sample'.
+2023-10-12 10:04:21,142 - INFO - User changed view to 'manipulate'.
+2023-10-12 10:04:21,800 - INFO - User changed view to 'analyse'.
+2023-10-12 10:04:34,037 - INFO - User changed view to 'library'.
+2023-10-12 10:07:33,949 - INFO - User changed view to 'manipulate'.
+2023-10-12 10:07:35,629 - INFO - User changed view to 'analyse'.
+2023-10-12 10:09:26,650 - INFO - User changed view to 'analyse'.
+2023-10-12 10:09:42,924 - INFO - User changed view to 'library'.
+2023-10-12 10:09:48,419 - INFO - User changed view to 'manipulate'.
+2023-10-12 10:09:49,694 - INFO - User changed view to 'library'.
+2023-10-12 10:09:50,313 - INFO - User changed view to 'analyse'.
+2023-10-12 10:09:56,179 - INFO - User changed view to 'library'.
+2023-10-12 10:10:02,490 - INFO - User changed view to 'analyse'.
+2023-10-12 10:18:19,905 - INFO - User changed view to 'manipulate'.
+2023-10-12 10:22:45,776 - INFO - User changed view to 'analyse'.
+2023-10-12 10:28:15,649 - INFO - User changed view to 'manipulate'.
+2023-10-12 10:29:07,788 - INFO - User initiated generate function with schedule set:
+2023-10-12 10:29:07,788 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 1, 'b': '', 'c': ''}, 'column': 'cut', 'outcome': 'Success'}
+2023-10-12 10:29:07,803 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.

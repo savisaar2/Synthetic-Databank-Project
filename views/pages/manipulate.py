@@ -437,7 +437,7 @@ class ManipulateView(BaseView):
                                                                     "1. Enter a string", 200)
             case "Expand (add rows)":
                 self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
-                ["Random Sampling", "Bootstrap Resamping", "SMOTE", "Add Noise(NA)"], self._expand_rows_callback, 2)  
+                ["Random Sampling", "Bootstrap Resampling", "SMOTE", "Add Noise(NA)"], self._expand_rows_callback, 2)  
             
             case "Data Transformation":
                 self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
@@ -709,7 +709,7 @@ class ManipulateView(BaseView):
         self._refresh_menu_widgets(3)
 
         match choice:
-            case "Random Sampling" | "Bootstrap Resamping":
+            case "Random Sampling" | "Bootstrap Resampling":
                 self.pos_3_entry_box = self._user_entry_box_template(3, 0, self._entry_box_int_arg_a_callback, 
                                                                     "1. Enter an integer", 150)
                 self.entry_description.configure(text="1. Enter number of rows to generate")

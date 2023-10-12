@@ -484,7 +484,7 @@ class ManipulationsModel():
                     X_resampled, y_resampled = smote.fit_resample(X, y)
 
                     # Create a new DataFrame with the resampled data
-                    df_resampled = pd.concat([pd.DataFrame(X_resampled), pd.DataFrame({'Outcome': y_resampled})], axis=1)
+                    df_resampled = pd.concat([pd.DataFrame(X_resampled), pd.DataFrame({column: y_resampled})], axis=1)
                     return df_resampled
             
         except Exception as error:
