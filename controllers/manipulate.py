@@ -1,6 +1,4 @@
 from utils.logger_utils import Logger
-from tkinter import filedialog as fd
-import os
 class ManipulateController:
     def __init__(self, model, view):
         """

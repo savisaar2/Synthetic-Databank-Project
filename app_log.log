@@ -1517,3 +1517,157 @@ ValueError: n_components=2000 must be between 0 and min(n_samples, n_features)=9
 2023-10-12 12:12:58,654 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic PCA', 'args': {'a': 2000, 'b': '', 'c': ''}, 'column': '1', 'outcome': 'Failed'}
 2023-10-12 12:12:58,654 - INFO - {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '23', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Pending'}
 2023-10-12 12:12:58,654 - INFO - Generate function failed to fully complete successfully.
+2023-10-12 12:18:26,157 - INFO - User changed view to 'manipulate'.
+2023-10-12 12:20:11,787 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:20:11,787 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 4, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 12:20:11,801 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 12:22:55,399 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:22:55,399 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Random Custom Value', 'args': {'a': 5.0, 'b': 55, 'c': ''}, 'column': 'Glucose', 'outcome': 'Success'}
+2023-10-12 12:22:55,412 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 12:42:02,336 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 253, in reduce_columns
+    X_lda = lda.fit_transform(X, y)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 919, in fit_transform
+    return self.fit(X, y, **fit_params).transform(X)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1145, in wrapper
+    estimator._validate_params()
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 638, in _validate_params
+    validate_parameter_constraints(
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_param_validation.py", line 95, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'n_components' parameter of LinearDiscriminantAnalysis must be an int in the range [1, inf) or None. Got -1 instead.
+2023-10-12 12:42:02,351 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:42:02,351 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Algorithmic LDA', 'args': {'a': -1, 'b': '', 'c': ''}, 'column': 'Glucose', 'outcome': 'Failed'}
+2023-10-12 12:42:02,351 - INFO - Generate function failed to fully complete successfully.
+2023-10-12 12:50:25,566 - INFO - User initiated generate function with schedule set:
+2023-10-12 12:50:25,566 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'Mean', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-12 12:50:25,579 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 12:53:12,187 - INFO - User changed view to 'analyse'.
+2023-10-12 12:53:12,668 - INFO - User changed view to 'library'.
+2023-10-12 12:53:16,075 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:03:46,421 - INFO - User changed view to 'library'.
+2023-10-12 13:03:49,929 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:18:28,607 - INFO - User initiated generate function with schedule set:
+2023-10-12 13:18:28,607 - INFO - {'step': 1, 'action': 'Replace Value (x) with New Value', 'sub_action': '', 'args': {'a': 3, 'b': 2, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-12 13:18:28,619 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 13:18:58,010 - INFO - User initiated generate function with schedule set:
+2023-10-12 13:18:58,011 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'sdf', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 13:18:58,022 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 13:19:14,670 - INFO - User initiated generate function with schedule set:
+2023-10-12 13:19:14,671 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Random Sampling', 'args': {'a': 100, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-12 13:19:14,682 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 13:24:33,047 - INFO - User changed view to 'analyse'.
+2023-10-12 13:24:42,355 - INFO - User changed view to 'library'.
+2023-10-12 13:25:08,676 - INFO - User changed view to 'analyse'.
+2023-10-12 13:25:09,600 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:26:15,190 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 311, in reduce_columns
+    df = df.drop(column)
+         ^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['BloodPressure'] not found in axis"
+2023-10-12 13:26:15,267 - INFO - User initiated generate function with schedule set:
+2023-10-12 13:26:15,267 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'BloodPressure', 'outcome': 'Failed'}
+2023-10-12 13:26:15,267 - INFO - Generate function failed to fully complete successfully.
+2023-10-12 13:26:34,236 - INFO - User changed view to 'library'.
+2023-10-12 13:26:40,592 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:26:48,005 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 311, in reduce_columns
+    df = df.drop(column)
+         ^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['BloodPressure'] not found in axis"
+2023-10-12 13:26:48,007 - INFO - User initiated generate function with schedule set:
+2023-10-12 13:26:48,007 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'BloodPressure', 'outcome': 'Failed'}
+2023-10-12 13:26:48,007 - INFO - Generate function failed to fully complete successfully.
+2023-10-12 13:30:54,919 - INFO - User changed view to 'library'.
+2023-10-12 13:30:55,879 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:30:56,268 - INFO - User changed view to 'analyse'.
+2023-10-12 13:30:56,893 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:30:57,229 - INFO - User changed view to 'sample'.
+2023-10-12 13:30:58,159 - INFO - User changed view to 'save'.
+2023-10-12 13:31:09,100 - INFO - User changed view to 'library'.
+2023-10-12 13:31:12,853 - INFO - User changed view to 'save'.
+2023-10-12 13:31:43,767 - INFO - User changed view to 'library'.
+2023-10-12 13:31:44,406 - INFO - User changed view to 'analyse'.
+2023-10-12 13:31:44,958 - INFO - User changed view to 'library'.
+2023-10-12 13:31:47,808 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:32:01,005 - INFO - User initiated generate function with schedule set:
+2023-10-12 13:32:01,005 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'Duplicate', 'args': {'a': 'szxcdfs', 'b': '', 'c': ''}, 'column': 'Insulin', 'outcome': 'Success'}
+2023-10-12 13:32:01,015 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-12 13:36:04,189 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:36:04,680 - INFO - User changed view to 'analyse'.
+2023-10-12 13:36:05,976 - INFO - User changed view to 'library'.
+2023-10-12 13:36:07,797 - INFO - User changed view to 'analyse'.
+2023-10-12 13:36:08,279 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:36:09,536 - INFO - User changed view to 'analyse'.
+2023-10-12 13:36:10,038 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:36:10,576 - INFO - User changed view to 'analyse'.
+2023-10-12 13:36:11,047 - INFO - User changed view to 'library'.
+2023-10-12 13:36:11,479 - INFO - User changed view to 'analyse'.
+2023-10-12 13:36:11,902 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:37:34,180 - INFO - User changed view to 'analyse'.
+2023-10-12 13:39:55,969 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:40:15,873 - INFO - User changed view to 'analyse'.
+2023-10-12 13:40:16,571 - INFO - User changed view to 'library'.
+2023-10-12 13:40:17,076 - INFO - User changed view to 'analyse'.
+2023-10-12 13:40:17,759 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:40:18,368 - INFO - User changed view to 'analyse'.
+2023-10-12 13:42:37,926 - INFO - User changed view to 'library'.
+2023-10-12 13:51:10,259 - INFO - User changed view to 'manipulate'.
+2023-10-12 13:51:12,063 - INFO - User changed view to 'library'.
+2023-10-12 13:51:15,057 - INFO - User changed view to 'save'.
+2023-10-12 14:05:33,202 - INFO - User changed view to 'manipulate'.
+2023-10-12 14:05:53,070 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 311, in reduce_columns
+    df = df.drop(column)
+         ^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['Pregnancies'] not found in axis"
+2023-10-12 14:05:53,179 - INFO - User initiated generate function with schedule set:
+2023-10-12 14:05:53,180 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-12 14:05:53,180 - INFO - Generate function failed to fully complete successfully.
+2023-10-12 21:29:35,027 - INFO - User changed view to 'analyse'.
+2023-10-12 21:29:42,665 - INFO - User changed view to 'library'.
+2023-10-12 21:29:58,263 - INFO - User changed view to 'analyse'.
+2023-10-12 22:09:05,094 - INFO - User changed view to 'manipulate'.
+2023-10-12 22:09:05,547 - INFO - User changed view to 'analyse'.
