@@ -33,16 +33,31 @@ class MenuView(CTkFrame):
 
         # Render relevant navigational buttons for application pages.
         self.library_button = self._create_button(text="Library", side="top")
-        self.analyse_button = self._create_button(text="Analyse", side="top")
-        self.manipulate_button =self._create_button(text="Manipulate", side="top")
-        self.sample_button = self._create_button(text="Sample", side="top")
-        self.save_button = self._create_button(text="Save & Export", side="top")
+        self.analyse_button = self._create_button(text="Analyse", side="top", state="disabled")
+        self.manipulate_button =self._create_button(text="Manipulate", side="top", state="disabled")
+        self.sample_button = self._create_button(text="Sample", side="top", state="disabled")
+        self.save_button = self._create_button(text="Save & Export", side="top", state="disabled")
 
         # Bottom pushed buttons.
         self.end_button = self._create_button(text="Quit", side="bottom")
         self.accounts_button = self._create_button(text="Accounts", side="bottom")
 
-    def _create_button(self, text="Text Here", side="top"):
+    def _disable_menu_buttons(self):
+        self.analyse_button.configure(state="disabled")
+        self.manipulate_button.configure(state="disabled")
+        self.sample_button.configure(state="disabled")
+        self.save_button.configure(state="disabled")
+
+    def enable_menu_buttons(self, is_new=False):
+        self._disable_menu_buttons()
+        if not is_new:
+            self.analyse_button.configure(state="normal")
+
+        self.manipulate_button.configure(state="normal")
+        self.sample_button.configure(state="normal")
+        self.save_button.configure(state="normal")
+
+    def _create_button(self, text="Text Here", side="top", state="normal"):
         """
         Renders a button widget with corrisponding text.
 
@@ -53,7 +68,7 @@ class MenuView(CTkFrame):
         side : str
             Defines top|bottom positioning.
         """
-        button = CTkButton(self.content_frame, corner_radius=0, height=40, image="", border_spacing=10, text=text, anchor="w")
+        button = CTkButton(self.content_frame, corner_radius=0, height=40, image="", border_spacing=10, text=text, anchor="w", state=state)
         button.pack(side=side, fill="x")
         return button
     
