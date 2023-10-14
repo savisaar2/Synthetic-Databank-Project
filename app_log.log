@@ -1779,3 +1779,194 @@ KeyError: "None of [Index(['tumor-zie'], dtype='object')] are in the [columns]"
 2023-10-14 11:15:39,555 - INFO - User initiated generate function with schedule set:
 2023-10-14 11:15:39,555 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Target Encoding', 'args': {'a': 'menopause', 'b': '', 'c': ''}, 'column': 'deg-malig', 'outcome': 'Success'}
 2023-10-14 11:15:39,567 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-14 12:30:16,715 - INFO - User changed view to 'manipulate'.
+2023-10-14 12:31:01,881 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\sonnyk\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 562, in data_transformation
+    X_encoded = pd.get_dummies(X, columns=[column], drop_first=True)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\reshape\encoding.py", line 164, in get_dummies
+    data_to_encode = data[columns]
+                     ~~~~^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 3902, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6114, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6175, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['Class'], dtype='object')] are in the [columns]"
+2023-10-14 12:31:02,033 - INFO - User initiated generate function with schedule set:
+2023-10-14 12:31:02,034 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-14 12:31:02,035 - INFO - Generate function failed to fully complete successfully.
+2023-10-14 12:33:34,129 - INFO - User changed view to 'manipulate'.
+2023-10-14 12:33:46,460 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\sonnyk\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 563, in data_transformation
+    X_encoded = pd.get_dummies(X, columns=[column], drop_first=True)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\reshape\encoding.py", line 164, in get_dummies
+    data_to_encode = data[columns]
+                     ~~~~^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 3902, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6114, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6175, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['Class'], dtype='object')] are in the [columns]"
+2023-10-14 12:33:46,623 - INFO - User initiated generate function with schedule set:
+2023-10-14 12:33:46,624 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-14 12:33:46,624 - INFO - Generate function failed to fully complete successfully.
+2023-10-14 12:35:49,610 - INFO - User changed view to 'manipulate'.
+2023-10-14 12:35:56,891 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\sonnyk\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 564, in data_transformation
+    X_encoded = pd.get_dummies(X, columns=[column], drop_first=True)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\reshape\encoding.py", line 164, in get_dummies
+    data_to_encode = data[columns]
+                     ~~~~^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 3902, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6114, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6175, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['Class'], dtype='object')] are in the [columns]"
+2023-10-14 12:35:56,904 - INFO - User initiated generate function with schedule set:
+2023-10-14 12:35:56,905 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-14 12:35:56,905 - INFO - Generate function failed to fully complete successfully.
+2023-10-14 12:39:56,177 - INFO - User changed view to 'manipulate'.
+2023-10-14 12:40:06,356 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\sonnyk\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 564, in data_transformation
+    X_encoded = pd.get_dummies(X, columns=[column], drop_first=True)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\reshape\encoding.py", line 164, in get_dummies
+    data_to_encode = data[columns]
+                     ~~~~^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 3902, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6114, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6175, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['Class'], dtype='object')] are in the [columns]"
+2023-10-14 12:40:06,362 - INFO - User initiated generate function with schedule set:
+2023-10-14 12:40:06,362 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-14 12:40:06,363 - INFO - Generate function failed to fully complete successfully.
+2023-10-14 12:40:59,409 - INFO - User changed view to 'manipulate'.
+2023-10-14 12:41:08,462 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\sonnyk\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 566, in data_transformation
+    X_encoded = pd.get_dummies(X, columns=[column], drop_first=True)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\reshape\encoding.py", line 164, in get_dummies
+    data_to_encode = data[columns]
+                     ~~~~^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 3902, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6114, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6175, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['Class'], dtype='object')] are in the [columns]"
+2023-10-14 12:41:08,471 - INFO - User initiated generate function with schedule set:
+2023-10-14 12:41:08,471 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-14 12:41:08,472 - INFO - Generate function failed to fully complete successfully.
+2023-10-14 12:45:29,151 - INFO - User changed view to 'manipulate'.
+2023-10-14 12:45:37,514 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\sonnyk\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 565, in data_transformation
+    X_encoded = pd.get_dummies(X, columns=[column])
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\reshape\encoding.py", line 164, in get_dummies
+    data_to_encode = data[columns]
+                     ~~~~^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 3902, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6114, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6175, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['Class'], dtype='object')] are in the [columns]"
+2023-10-14 12:45:37,520 - INFO - User initiated generate function with schedule set:
+2023-10-14 12:45:37,520 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-14 12:45:37,521 - INFO - Generate function failed to fully complete successfully.
+2023-10-14 12:49:43,878 - INFO - User changed view to 'manipulate'.
+2023-10-14 12:49:52,045 - INFO - User initiated generate function with schedule set:
+2023-10-14 12:49:52,046 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-14 12:49:52,065 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-14 12:58:09,196 - INFO - User changed view to 'manipulate'.
+2023-10-14 12:58:19,878 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Class'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\sonnyk\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 588, in data_transformation
+    X[column] = X[column].apply(label_encoder.fit_transform)
+                ~^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 3896, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Class'
+2023-10-14 12:58:19,902 - INFO - User initiated generate function with schedule set:
+2023-10-14 12:58:19,903 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Label Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-14 12:58:19,904 - INFO - Generate function failed to fully complete successfully.
+2023-10-14 13:09:02,130 - INFO - User changed view to 'manipulate'.
+2023-10-14 13:09:10,116 - INFO - User initiated generate function with schedule set:
+2023-10-14 13:09:10,116 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Label Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-14 13:09:10,142 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-14 13:15:03,655 - INFO - User initiated generate function with schedule set:
+2023-10-14 13:15:03,655 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'fg', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-14 13:15:03,674 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-14 13:15:21,493 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\sonnyk\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 310, in reduce_columns
+    df = df.drop(column)
+         ^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['fg'] not found in axis"
+2023-10-14 13:15:21,596 - INFO - User initiated generate function with schedule set:
+2023-10-14 13:15:21,596 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'fg', 'outcome': 'Failed'}
+2023-10-14 13:15:21,597 - INFO - Generate function failed to fully complete successfully.
+2023-10-14 13:18:54,711 - INFO - User changed view to 'manipulate'.
+2023-10-14 13:19:03,373 - INFO - User initiated generate function with schedule set:
+2023-10-14 13:19:03,373 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '123', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-14 13:19:03,390 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-14 13:19:11,580 - INFO - User initiated generate function with schedule set:
+2023-10-14 13:19:11,580 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '123', 'outcome': 'Success'}
+2023-10-14 13:19:11,597 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-14 13:19:35,423 - INFO - User initiated generate function with schedule set:
+2023-10-14 13:19:35,423 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'menopause', 'outcome': 'Success'}
+2023-10-14 13:19:35,450 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-14 14:10:02,914 - INFO - User changed view to 'manipulate'.
+2023-10-14 14:10:11,453 - INFO - User changed view to 'library'.
+2023-10-14 14:58:56,753 - INFO - User changed view to 'library'.

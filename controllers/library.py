@@ -205,5 +205,7 @@ class LibraryController:
         self.import_overlay.cancel_button.bind("<Button-1>", lambda _: self.import_overlay.hide_view())
         self.import_overlay.import_button.bind("<Button-1>", lambda _: self._import_dataset())
 
-        # Create new dataset config overlay
+        # Create new dataset config overlay binds
         self.frame.new_button.bind("<Button-1>", lambda _: self.config_new_dataset_overlay.show_view(), add="+")
+        #self.config_new_dataset_overlay.cancel_button.bind("<Button-1>", lambda _: self.config_new_dataset_overlay.hide_view())
+        self.config_new_dataset_overlay.add_col_button.bind("<Button-1>", lambda _: self.config_new_dataset_overlay.add_col_to_config())

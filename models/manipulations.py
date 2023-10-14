@@ -2,17 +2,16 @@ from utils.logger_utils import Logger
 import pandas as pd
 import random
 import numpy as np
-from sklearn.decomposition import PCA
+from sklearn.decomposition import PCA, TruncatedSVD
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.decomposition import TruncatedSVD
 from sklearn.feature_selection import SelectKBest, f_classif
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder, MinMaxScaler
 from sklearn.impute import KNNImputer
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.exceptions import DataConversionWarning
 from imblearn.over_sampling import SMOTE
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import MinMaxScaler
 import category_encoders as ce
+import warnings
 
 class ManipulationsModel():
     def __init__(self):
@@ -308,7 +307,7 @@ class ManipulationsModel():
 
                 case "Manual":
                     # Funtion to remove the selected column
-                    df = df.drop(column)
+                    df = df.drop(column, axis=1)
                     return df
             
         except Exception as error:
@@ -549,34 +548,54 @@ class ManipulationsModel():
                     return X_scaled_df
                 
                 case "Feature Encoding One-hot Encoding":
-                    # a = the selected column; column = dependent (target) column
-                    # Exclude the target column to get the feature columns                
-                    feature_columns = df.drop(columns=[column])
+                    target_column = column
+                    categorical_column = a  # Identify the specific categorical column you want to encode
+
                     # Separate the features and target variable
-                    X = feature_columns
-                    y = df[column]
-                    # Perform one-hot encoding on the categorical columns
-                    X_encoded = pd.get_dummies(X, columns=[column], drop_first=True)         
+                    X = df.drop(columns=[target_column])
+                    y = df[target_column]
+
+                    # Apply one-hot encoding with the sparse_output parameter specified
+                    onehot_encoder = OneHotEncoder(sparse_output=False)
+                    X_encoded = onehot_encoder.fit_transform(X[[categorical_column]].values.reshape(-1, 1))
+
+                    # Get the unique values in the 'Age' column to create feature names
+                    unique_values = X[categorical_column].unique()
+                    feature_names = [f'{categorical_column}_{value}' for value in unique_values]
+
+                    # Create a DataFrame for the one-hot encoded column
+                    encoded_column = pd.DataFrame(X_encoded, columns=feature_names)
+
+                    # Concatenate the original dataset with the encoded one and the original 'Age' column
+                    X = pd.concat([X, encoded_column], axis=1)
+
                     # Add the target column back to the encoded feature dataset
-                    X_encoded[a] = y
-                    # Now, X_encoded contains the one-hot encoded feature data with the target column
+                    X[target_column] = y
+
                     return df
                 
                 case "Feature Encoding Label Encoding":
-                    #  a = the selected column;  column= dependent (target) column         
-                    # Identify categorical columns (replace this list with your actual categorical columns)
-                    categorical_column = [a]              
-                    # Separate the features and target variable
-                    X = df.drop(columns=[column])
-                    y = df[column]
+                    # Assuming you have a target column (e.g., 'target')
+                    # Replace 'target' with your actual target column name
+                    target_column = column
 
-                    # Use LabelEncoder for categorical columns without a loop
+                    # Identify categorical columns (replace this list with your actual categorical columns)
+                    categorical_columns = [a]
+
+                    # Suppress the specific DataConversionWarning
+                    warnings.filterwarnings("ignore", category=DataConversionWarning)
+
+                    # Create a new DataFrame for the encoded features
+                    X_encoded = df.copy()
+
+                    # Use LabelEncoder for categorical columns without a for loop
                     label_encoder = LabelEncoder()
-                    X[column] = X[column].apply(label_encoder.fit_transform)
-                    # Now, X contains label encoded feature data with the target column
-                    # Add the target column back to the encoded feature dataset
-                    X[a] = y
-                    return X
+                    encoded_values = label_encoder.fit_transform(X_encoded[categorical_columns])
+                    X_encoded['Encoded_Age'] = encoded_values
+
+                    # Convert the target column to a 1D array to eliminate the warning
+                    X_encoded[target_column] = X_encoded[target_column].ravel()
+                    return X_encoded
                 
                 case "Feature Encoding Target Encoding":
                     # a = the selected column; column = dependent (target) column         

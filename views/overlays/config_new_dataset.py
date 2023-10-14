@@ -15,9 +15,10 @@ class ConfigNewDatasetView(CTkFrame):
             The applicaiton's root instance.
         """
         super().__init__(root, *args, **kwargs)
-        self.variables = {}
+        self.variables = {"action": "", "arg_a": "", "arg_b": "" }
         self.widget_list = []
         self._setup_page()
+        self.col_pos= -1
 
     def _setup_page(self):
         """Renders the widgets on the AccountEditorView."""
@@ -34,10 +35,20 @@ class ConfigNewDatasetView(CTkFrame):
         self.frame_1 = CTkFrame(self.overlay_frame, fg_color="gray20", border_color="white")
         self.frame_1.pack(fill="both", padx=150, pady=(100, 0))
         self.frame_2 = CTkFrame(self.overlay_frame, fg_color="gray20", border_color="white")
-        self.frame_2.pack(fill="both", padx=150, pady=(20,100))
+        self.frame_2.pack(fill="both", padx=150, pady=(2,20))
+        self.frame_3 = CTkFrame(self.overlay_frame, fg_color="gray20", border_color="white")
+        self.frame_3.pack(fill="both", padx=150, pady=(0,0))
+        self.frame_4 = CTkFrame(self.overlay_frame, fg_color="gray20", border_color="white")
+        self.frame_4.pack(fill="both", padx=150, pady=(2,100))
+
+        self.config_col_label = CTkLabel(self.frame_1, text="Configure New Column", font=("Arial", 14, "bold"))
+        self.config_col_label.pack(padx=8,pady=8, anchor='w')
+
+        self.dataset_config_settings_label = CTkLabel(self.frame_3, text="Dataset Configuration Settings", font=("Arial", 14, "bold"))
+        self.dataset_config_settings_label.pack(padx=8,pady=8, anchor='w')
 
         self.add_col_button = CTkButton(
-            self.frame_1, 
+            self.frame_2, 
             text="Add Column", 
             corner_radius=5, 
             border_spacing=5, 
@@ -47,28 +58,83 @@ class ConfigNewDatasetView(CTkFrame):
         self.add_col_button.grid(row=0, column=3, padx=(8, 2), pady=(8, 8))
 
         # Action menu selector
-        self.action_selection_menu = self._drop_down_menu_template(self.frame_1,"Select Column Type", ["Integer", "Float", "Categorical"],
+        self.action_selection_menu = self._drop_down_menu_template(self.frame_2,"Select Column Type", ["Custom Integer Range", "Custom Float Range", "Categorical"],
                                                                   self._action_selection_callback, col_pos=0, row_pos=0)
 
     def _action_selection_callback(self, choice):
+        self.variables = {"action": "", "arg_a": "", "arg_b": "" }
         self.variables["action"] = choice
         self._refresh_menu_widgets(1)
-
+        
         match choice:
-            case "Integer":
-                self.pos_1_entry = self._user_entry_box_template(self.frame_1, "Enter min integer value", None, 150, 1)
-                self.pos_2_entry = self._user_entry_box_template(self.frame_1, "Enter max integer value", None, 150, 2)
-            case "Float":
-                self.pos_1_entry = self._user_entry_box_template(self.frame_1, "Enter min float value", None, 150, 1)
-                self.pos_2_entry = self._user_entry_box_template(self.frame_1, "Enter max float value", None, 150, 1)
+            case "Custom Integer Range":
+                self.pos_1_entry = self._user_entry_box_template(self.frame_2, "Enter min integer value", self._entry_box_int_arg_a_callback, 150, 1)
+                self.pos_2_entry = self._user_entry_box_template(self.frame_2, "Enter max integer value", self._entry_box_int_arg_b_callback, 150, 2)
+            case "Custom Float Range":
+                self.pos_1_entry = self._user_entry_box_template(self.frame_2, "Enter min float value", self._entry_box_float_arg_a_callback, 150, 1)
+                self.pos_2_entry = self._user_entry_box_template(self.frame_2, "Enter max float value", self._entry_box_float_arg_b_callback, 150, 2)
             case "Categorical":
-                self.pos_1_menu = self._drop_down_menu_template(self.frame_1,
+                self.pos_1_menu = self._drop_down_menu_template(self.frame_2,
                                                                 "Select Column Type", 
                                                                 ["first_name", "last_name", "address",
-                                                                "Add Categorical", "date_of_birth"],
-                                                                None, col_pos=1, row_pos=0)
+                                                                 "date_of_birth"],
+                                                                self._categorical_callback, col_pos=1, row_pos=0)
+    
+    def _categorical_callback(self, choice):
+        self.variables["arg_a"] = choice
+        self.add_col_button.configure(state="normal")
 
+    def _entry_box_float_arg_a_callback(self, choice):
+        """Entry box for float callback function. Sets arg a as user choice.
 
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
+        try:
+            self.variables["arg_a"] = float(choice)
+        except ValueError:
+            self.add_col_button.configure(state="disabled")
+        return True
+    
+    def _entry_box_float_arg_b_callback(self, choice):
+        """Entry box for float callback function. Sets arg a as user choice.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
+        try:
+            self.variables["arg_b"] = float(choice)
+            if self.variables["arg_b"] > self.variables["arg_a"]:
+                self.add_col_button.configure(state="normal")
+        except ValueError:
+            self.add_col_button.configure(state="disabled")
+        return True
+      
+    def _entry_box_int_arg_a_callback(self, choice):
+        """Entry box for float callback function. Sets arg a as user choice.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
+        try:
+            self.variables["arg_a"] = int(choice)
+        except ValueError:
+            self.add_col_button.configure(state="disabled")
+        return True
+    
+    def _entry_box_int_arg_b_callback(self, choice):
+        """Entry box for int callback function. Sets arg a as user choice.
+
+            Args:
+                choice (str): User selection via dropdown menu or entry box.
+        """
+        try:
+            self.variables["arg_b"] = int(choice)
+            if self.variables["arg_b"] > self.variables["arg_a"]:
+                self.add_col_button.configure(state="normal")
+        except ValueError:
+            self.add_col_button.configure(state="disabled")
+        return True
 
     def show_view(self):
         """Shows the AccountEditorView overlay."""
@@ -140,6 +206,7 @@ class ConfigNewDatasetView(CTkFrame):
         # Refresh UI widget variables.
         self.add_col_button.configure(state="disabled")
 
+
         # Remove widgets from view based on column of current widget.
         match col_ref:
             case 1:
@@ -162,3 +229,37 @@ class ConfigNewDatasetView(CTkFrame):
                 for widget in self.widget_list:
                     if widget["col_pos"] != 1 and widget["col_pos"] != 2 and widget["col_pos"] != 3 and widget["col_pos"] != 4:
                         widget["widget"].grid_forget()
+
+    def add_col_to_config(self):
+        if self.add_col_button._state == "normal":
+            self.col_pos += 1
+
+            # col # label
+            self.col_pos_label = CTkLabel(
+                self.frame_4, 
+                text=str(self.col_pos),
+                )
+            self.col_pos_label.grid(row=self.col_pos, column=0, padx=(8, 8), pady=(8, 8), sticky='w')
+
+            # Label for scheduled manipulation outcome
+            self.action_label = CTkLabel(
+                self.frame_4, 
+                text=self.variables["action"],
+                )
+            self.action_label.grid(row=self.col_pos, column=1, padx=(8, 8), pady=(8, 8), sticky='w')
+
+            # Label for variables
+            arg_a = self.variables["arg_a"]
+            arg_b = self.variables["arg_b"]
+            if arg_b == "":
+                label_text = arg_a
+            else:
+                label_text = f"Min: {arg_a}, Max: {arg_b}"
+
+            self.action_label = CTkLabel(
+                self.frame_4, 
+                text=label_text
+                )
+            self.action_label.grid(row=self.col_pos, column=2, padx=(8, 8), pady=(8, 8), sticky='w')
+
+            self._refresh_menu_widgets(1)
