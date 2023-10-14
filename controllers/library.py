@@ -23,6 +23,7 @@ class LibraryController:
         self.frame = self.view.frames["library"]
         self.import_overlay = self.view.frames["import"]
         self.exception = self.view.frames["exception"]
+        self.config_new_dataset_overlay = self.view.frames["config_new_dataset"]
         
         # Trigger to determine if new_file has been selected from import overlay.
         self.new_file = None
@@ -197,9 +198,12 @@ class LibraryController:
         """
         self.frame.search_input.bind("<Key>", lambda event: self._search_databank())
         self.frame.import_button.bind("<Button-1>", lambda _: self.import_overlay.show_view())
-        self.frame.new_button.bind("<Button-1>", lambda event: self._create_new_dataset())
+        self.frame.new_button.bind("<Button-1>", lambda event: self._create_new_dataset(), add="+")
         self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._show_metadata())
         self.frame.tree_view.bind("<Double-1>", lambda event: self._load_dataset())
         self.import_overlay.add_file_button.bind("<Button-1>", lambda _: self._import_new_dataset())
         self.import_overlay.cancel_button.bind("<Button-1>", lambda _: self.import_overlay.hide_view())
         self.import_overlay.import_button.bind("<Button-1>", lambda _: self._import_dataset())
+
+        # Create new dataset config overlay
+        self.frame.new_button.bind("<Button-1>", lambda _: self.config_new_dataset_overlay.show_view(), add="+")
