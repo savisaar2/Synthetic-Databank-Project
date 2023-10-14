@@ -3,6 +3,7 @@ from .analyse import AnalyseModel
 from .library import LibraryModel
 from .user import UserModel
 from .manipulations import ManipulationsModel
+from .config_new_dataset import ConfigNewDatasetModel
 
 class Model:
     def __init__(self):
@@ -17,3 +18,4 @@ class Model:
         self.library = LibraryModel()
         self.user = UserModel()
         self.manipulations = ManipulationsModel()
+        self.config_new_dataset = ConfigNewDatasetModel()

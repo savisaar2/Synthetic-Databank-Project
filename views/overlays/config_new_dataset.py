@@ -32,30 +32,31 @@ class ConfigNewDatasetView(CTkFrame):
         self.logo_label = CTkLabel(self.overlay_frame, text="Configure New Dataset")
         self.logo_label.pack(padx=100,pady=10)
 
-        self.frame_1 = CTkFrame(self.overlay_frame, fg_color="gray20", border_color="white")
+        self.frame_1 = CTkFrame(self.overlay_frame, fg_color="gray20")
         self.frame_1.pack(fill="both", padx=150, pady=(100, 0))
-        self.frame_2 = CTkFrame(self.overlay_frame, fg_color="gray20", border_color="white")
-        self.frame_2.pack(fill="both", padx=150, pady=(2,20))
-        self.frame_3 = CTkFrame(self.overlay_frame, fg_color="gray20", border_color="white")
-        self.frame_3.pack(fill="both", padx=150, pady=(0,0))
-        self.frame_4 = CTkFrame(self.overlay_frame, fg_color="gray20", border_color="white")
-        self.frame_4.pack(fill="both", padx=150, pady=(2,100))
-
         self.config_col_label = CTkLabel(self.frame_1, text="Configure New Column", font=("Arial", 14, "bold"))
         self.config_col_label.pack(padx=8,pady=8, anchor='w')
 
+        self.frame_2 = CTkFrame(self.overlay_frame, fg_color="gray20")
+        self.frame_2.pack(fill="both", padx=150, pady=(2,20))
+        self.add_col_button = CTkButton(self.frame_2, text="Add Column", corner_radius=5, border_spacing=5, anchor="center", 
+                                        state="disabled")
+        self.add_col_button.grid(row=0, column=3, padx=(8, 2), pady=(8, 8))
+
+        self.frame_3 = CTkFrame(self.overlay_frame, fg_color="gray20")
+        self.frame_3.pack(fill="both", padx=150, pady=(0,0))
         self.dataset_config_settings_label = CTkLabel(self.frame_3, text="Dataset Configuration Settings", font=("Arial", 14, "bold"))
         self.dataset_config_settings_label.pack(padx=8,pady=8, anchor='w')
 
-        self.add_col_button = CTkButton(
-            self.frame_2, 
-            text="Add Column", 
-            corner_radius=5, 
-            border_spacing=5, 
-            anchor="center", 
-            state="disabled",
-            )
-        self.add_col_button.grid(row=0, column=3, padx=(8, 2), pady=(8, 8))
+        self.frame_4 = CTkFrame(self.overlay_frame, fg_color="gray20")
+        self.frame_4.pack(fill="both", padx=150, pady=(2,0))
+
+        self.frame_5 = CTkFrame(self.overlay_frame, fg_color="gray20")
+        self.frame_5.pack(fill="both", padx=150, pady=(2,100))
+        self.confirm_button = CTkButton(self.frame_5, text="Confirm", corner_radius=5, border_spacing=5, anchor="center")
+        self.confirm_button.pack(padx=8,pady=8, side="right")
+        self.cancel_button = CTkButton(self.frame_5, text="Cancel", corner_radius=5, border_spacing=5, anchor="center")
+        self.cancel_button.pack(padx=8,pady=8, side="right")
 
         # Action menu selector
         self.action_selection_menu = self._drop_down_menu_template(self.frame_2,"Select Column Type", ["Custom Integer Range", "Custom Float Range", "Categorical"],
