@@ -1,4 +1,4 @@
-from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkOptionMenu
+from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkOptionMenu, CTkEntry
 from tkinter import StringVar
 
 class ConfigNewDatasetView(CTkFrame):
@@ -15,8 +15,9 @@ class ConfigNewDatasetView(CTkFrame):
             The applicaiton's root instance.
         """
         super().__init__(root, *args, **kwargs)
-        self._setup_page()
         self.variables = {}
+        self.widget_list = []
+        self._setup_page()
 
     def _setup_page(self):
         """Renders the widgets on the AccountEditorView."""
@@ -43,25 +44,29 @@ class ConfigNewDatasetView(CTkFrame):
             anchor="center", 
             state="disabled",
             )
-        self.add_col_button.grid(row=0, column=3, padx=(0, 2), pady=(8, 8))
+        self.add_col_button.grid(row=0, column=3, padx=(8, 2), pady=(8, 8))
 
         # Action menu selector
         self.action_selection_menu = self._drop_down_menu_template(self.frame_1,"Select Column Type", ["Integer", "Float", "Categorical"],
-                                                                  None, col_pos=0, row_pos=0)
+                                                                  self._action_selection_callback, col_pos=0, row_pos=0)
 
     def _action_selection_callback(self, choice):
         self.variables["action"] = choice
+        self._refresh_menu_widgets(1)
 
         match choice:
             case "Integer":
-                self.pos_1_menu = self._drop_down_menu_template(self.frame_1,"Select Column Type", ["Add Integer", "Add Float", "Add Categorical"],
-                                                                            None, col_pos=0, row_pos=0)
+                self.pos_1_entry = self._user_entry_box_template(self.frame_1, "Enter min integer value", None, 150, 1)
+                self.pos_2_entry = self._user_entry_box_template(self.frame_1, "Enter max integer value", None, 150, 2)
             case "Float":
-                self.pos_1_menu = self._drop_down_menu_template(self.frame_1,"Select Column Type", ["Add Integer", "Add Float", "Add Categorical"],
-                                                                            None, col_pos=0, row_pos=0)
+                self.pos_1_entry = self._user_entry_box_template(self.frame_1, "Enter min float value", None, 150, 1)
+                self.pos_2_entry = self._user_entry_box_template(self.frame_1, "Enter max float value", None, 150, 1)
             case "Categorical":
-                self.pos_1_menu = self._drop_down_menu_template(self.frame_1,"Select Column Type", ["Add Integer", "Add Float", "Add Categorical"],
-                                                                            None, col_pos=0, row_pos=0)
+                self.pos_1_menu = self._drop_down_menu_template(self.frame_1,
+                                                                "Select Column Type", 
+                                                                ["first_name", "last_name", "address",
+                                                                "Add Categorical", "date_of_birth"],
+                                                                None, col_pos=1, row_pos=0)
 
 
 
@@ -73,7 +78,7 @@ class ConfigNewDatasetView(CTkFrame):
         """Hides the AccountEditorView overlay."""
         self.overlay_frame.lower()
 
-    def _drop_down_menu_template(self, frame, start_text:str, menu_options:list, command_func, col_pos:int, row_pos:int=0):    
+    def _drop_down_menu_template(self, frame, start_text:str, menu_options:list, callback, col_pos:int, row_pos:int=0):    
         """Drop down menu widget template.
 
         Args:
@@ -92,8 +97,68 @@ class ConfigNewDatasetView(CTkFrame):
             fg_color="gray10", 
             width=3, 
             values=menu_options, 
-            command=command_func,
+            command=callback,
             variable=StringVar(value=start_text)
             )
         drop_down_menu.grid(row=row_pos, column=col_pos, padx=(8, 8), pady=(8, 8))
+        self.widget_list.append({"col_pos": col_pos, "widget": drop_down_menu})
         return drop_down_menu
+    
+    def _user_entry_box_template(self, frame, start_text:str, callback, width:int, col_pos:int, row_pos:int=0):
+        """Entry box widget template.
+
+        Args:
+            frame (Ctk frame widget): Frame to place entry box widget
+            start_text (str): Placeholder text of entry widget.
+            callback (function): Callback function associated with widget.
+            width (int): width of entry box
+            col_pos (int): Column position to place on grid.
+            row_pos (int): Row position to place on grid.
+
+        Returns:
+            Ctk widget: A Ctk entry box widget object.
+        """
+        entry_box_command = self.register(callback)
+        user_entry_box = CTkEntry(
+            frame,
+            corner_radius=5, 
+            width=width,
+            validate='key',
+            validatecommand=(entry_box_command, '%P')
+            ) 
+        user_entry_box.grid(column=col_pos, row=row_pos,  padx=(0, 2), pady=(8, 8), sticky="w")
+        user_entry_box.configure(placeholder_text=start_text)
+        self.widget_list.append({"col_pos": col_pos, "widget": user_entry_box})
+        return user_entry_box
+    
+    def _refresh_menu_widgets(self, col_ref:int):
+        """Method to refresh menu widget in manipulations frame.
+
+        Args:
+            col_ref (int): Refrence to widget column position.
+        """
+        # Refresh UI widget variables.
+        self.add_col_button.configure(state="disabled")
+
+        # Remove widgets from view based on column of current widget.
+        match col_ref:
+            case 1:
+                for widget in self.widget_list:
+                    if widget["col_pos"] != 0:
+                        widget["widget"].grid_forget()
+            case 2:
+                for widget in self.widget_list:
+                    if widget["col_pos"] != 1:
+                        widget["widget"].grid_forget()
+            case 3:
+                for widget in self.widget_list:
+                    if widget["col_pos"] != 1 and widget["col_pos"] != 2:
+                        widget["widget"].grid_forget()
+            case 4:
+                for widget in self.widget_list:
+                    if widget["col_pos"] != 1 and widget["col_pos"] != 2 and widget["col_pos"] != 3:
+                        widget["widget"].grid_forget()
+            case 5:
+                for widget in self.widget_list:
+                    if widget["col_pos"] != 1 and widget["col_pos"] != 2 and widget["col_pos"] != 3 and widget["col_pos"] != 4:
+                        widget["widget"].grid_forget()
