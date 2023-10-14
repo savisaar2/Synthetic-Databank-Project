@@ -44,9 +44,11 @@ class LoginController:
             else:
                 # Display generic error for failure.
                 self.exception.display_error("AUTH: Invalid username or password.")
+                self.logger.log_warning(f"AUTH - User '{username}' failed to authenticate.")
         else:
             # Display generic error for failure.
             self.exception.display_error("AUTH: Invalid username or password.")
+            self.logger.log_warning(f"AUTH - A nonexistent user '{username}' attempted to authenticate.")
 
     def _bind(self):
         """

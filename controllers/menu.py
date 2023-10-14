@@ -18,6 +18,7 @@ class MenuController:
         self.model = model
         self.view = view
         self.frame = self.view.frames["menu"]
+        self._highlight_active_button(self.frame.library_button)
         self._bind()
 
     def _switch_view(self, event, view_name):
@@ -28,9 +29,24 @@ class MenuController:
         """
         button = event.widget
         parent_frame = button.master
+
+        # If button is not disabled change button focus color and switch view.
         if parent_frame.cget("state") == "normal":
+            self._highlight_active_button(parent_frame)
             self.logger.log_info(f"User changed view to '{view_name}'.")
             self.view.switch_view(view_name)
+
+    def _highlight_active_button(self, button):
+        """
+        Defaults button colors and sets focus to active button.
+        """
+        self.frame.library_button.configure(fg_color="#336aa0")
+        self.frame.analyse_button.configure(fg_color="#336aa0")
+        self.frame.manipulate_button.configure(fg_color="#336aa0")
+        self.frame.sample_button.configure(fg_color="#336aa0")
+        self.frame.save_button.configure(fg_color="#336aa0")
+        self.frame.accounts_button.configure(fg_color="#336aa0")
+        button.configure(fg_color="#22486d")
 
     def _bind(self):
         """

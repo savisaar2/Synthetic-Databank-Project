@@ -14,3 +14,80 @@
 2023-10-11 19:03:38,275 - INFO - User changed view to 'accounts'.
 2023-10-11 19:03:42,283 - INFO - User changed view to 'accounts'.
 2023-10-11 20:15:05,133 - INFO - User changed view to 'accounts'.
+2023-10-14 22:40:08,533 - INFO - User changed view to 'accounts'.
+2023-10-14 23:05:11,586 - INFO - User changed view to 'accounts'.
+2023-10-14 23:19:11,798 - INFO - User changed view to 'accounts'.
+2023-10-14 23:44:37,659 - INFO - User changed view to 'accounts'.
+2023-10-14 23:46:19,125 - INFO - User changed view to 'accounts'.
+2023-10-14 23:51:24,990 - INFO - User changed view to 'accounts'.
+2023-10-14 23:54:16,806 - INFO - User changed view to 'accounts'.
+2023-10-14 23:54:47,266 - INFO - User changed view to 'accounts'.
+2023-10-14 23:55:52,141 - INFO - User changed view to 'accounts'.
+2023-10-14 23:56:07,497 - INFO - User changed view to 'accounts'.
+2023-10-14 23:56:41,595 - INFO - User changed view to 'accounts'.
+2023-10-15 00:06:02,505 - INFO - User changed view to 'accounts'.
+2023-10-15 00:06:31,091 - INFO - User admin has created user savisaar2.
+2023-10-15 00:06:40,735 - INFO - User admin has removed user savisaar2 from accounts database.
+2023-10-15 00:17:01,347 - INFO - User changed view to 'accounts'.
+2023-10-15 00:17:10,711 - INFO - ACCOUNTS - User 'admin' has created user 'asddf'.
+2023-10-15 00:22:16,793 - WARNING - AUTH - {username} failed to authenticate.
+2023-10-15 00:22:41,113 - WARNING - AUTH - admin failed to authenticate.
+2023-10-15 00:23:00,606 - WARNING - AUTH - A nonexistent user 'asdf' attempted to authenticate.
+2023-10-15 00:39:20,346 - WARNING - AUTH - User 'admin' failed to authenticate.
+2023-10-15 00:39:21,105 - WARNING - AUTH - User 'admin' failed to authenticate.
+2023-10-15 00:39:21,887 - WARNING - AUTH - User 'admin' failed to authenticate.
+2023-10-15 00:42:34,018 - INFO - User changed view to 'accounts'.
+2023-10-15 00:43:33,180 - INFO - User changed view to 'accounts'.
+2023-10-15 00:43:35,908 - INFO - ACCOUNTS - User 'admin' has removed user 'asddf' from accounts database.
+2023-10-15 01:31:30,927 - INFO - User changed view to 'library'.
+2023-10-15 01:36:43,738 - INFO - User changed view to 'library'.
+2023-10-15 01:36:46,668 - INFO - User changed view to 'manipulate'.
+2023-10-15 01:36:47,516 - INFO - User changed view to 'sample'.
+2023-10-15 01:36:48,213 - INFO - User changed view to 'save'.
+2023-10-15 01:36:48,997 - INFO - User changed view to 'sample'.
+2023-10-15 01:36:49,539 - INFO - User changed view to 'manipulate'.
+2023-10-15 01:39:29,621 - INFO - User changed view to 'library'.
+2023-10-15 01:39:37,126 - INFO - User changed view to 'manipulate'.
+2023-10-15 01:39:37,860 - INFO - User changed view to 'sample'.
+2023-10-15 01:39:38,548 - INFO - User changed view to 'save'.
+2023-10-15 01:39:39,936 - INFO - User changed view to 'manipulate'.
+2023-10-15 01:39:41,420 - INFO - User changed view to 'sample'.
+2023-10-15 01:39:48,118 - INFO - User changed view to 'manipulate'.
+2023-10-15 01:40:21,267 - INFO - User changed view to 'manipulate'.
+2023-10-15 01:40:22,869 - INFO - User changed view to 'sample'.
+2023-10-15 01:40:23,611 - INFO - User changed view to 'save'.
+2023-10-15 01:40:25,936 - INFO - User changed view to 'sample'.
+2023-10-15 01:40:31,369 - INFO - User changed view to 'library'.
+2023-10-15 01:40:36,756 - INFO - User changed view to 'accounts'.
+2023-10-15 02:26:56,904 - INFO - User changed view to 'accounts'.
+2023-10-15 02:29:32,945 - INFO - User changed view to 'accounts'.
+2023-10-15 02:35:12,042 - INFO - User changed view to 'manipulate'.
+2023-10-15 02:35:13,129 - INFO - User changed view to 'sample'.
+2023-10-15 02:35:13,704 - INFO - User changed view to 'save'.
+2023-10-15 02:35:14,470 - INFO - User changed view to 'library'.
+2023-10-15 02:35:16,758 - INFO - User changed view to 'analyse'.
+2023-10-15 02:35:17,324 - INFO - User changed view to 'manipulate'.
+2023-10-15 02:35:18,000 - INFO - User changed view to 'sample'.
+2023-10-15 02:35:18,512 - INFO - User changed view to 'save'.
+2023-10-15 02:35:19,293 - INFO - User changed view to 'analyse'.
+2023-10-15 02:35:21,349 - INFO - User changed view to 'sample'.
+2023-10-15 02:35:22,747 - INFO - User changed view to 'accounts'.
+2023-10-15 02:35:25,951 - INFO - User changed view to 'library'.
+2023-10-15 02:35:27,477 - INFO - User changed view to 'accounts'.
+2023-10-15 02:36:04,586 - INFO - User changed view to 'accounts'.
+2023-10-15 02:36:21,576 - INFO - ACCOUNTS - User 'admin' has updated their own profile.
+2023-10-15 02:36:29,772 - WARNING - AUTH - User 'admin' failed to authenticate.
+2023-10-15 02:36:37,148 - INFO - User changed view to 'accounts'.
+2023-10-15 02:36:39,898 - INFO - ACCOUNTS - User 'admin' has updated their own profile.
+2023-10-15 02:39:16,584 - INFO - User changed view to 'accounts'.
+2023-10-15 02:39:37,321 - INFO - User changed view to 'accounts'.
+2023-10-15 02:40:00,083 - INFO - User changed view to 'accounts'.
+2023-10-15 02:40:38,860 - INFO - User changed view to 'accounts'.
+2023-10-15 02:40:54,746 - WARNING - AUTH - User 'admin' failed to authenticate.
+2023-10-15 02:41:00,063 - INFO - User changed view to 'accounts'.
+2023-10-15 02:41:19,904 - INFO - User changed view to 'accounts'.
+2023-10-15 02:41:31,620 - INFO - User changed view to 'library'.
+2023-10-15 02:43:54,443 - INFO - User changed view to 'manipulate'.
+2023-10-15 02:43:55,034 - INFO - User changed view to 'sample'.
+2023-10-15 02:43:55,563 - INFO - User changed view to 'save'.
+2023-10-15 02:43:56,183 - INFO - User changed view to 'library'.

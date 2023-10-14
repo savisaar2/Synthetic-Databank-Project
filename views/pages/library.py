@@ -147,6 +147,6 @@ class LibraryView(BaseView):
         Renders a button widget with specified parameters. Then returns the object 
         to the calling variable.
         """
-        button = CTkButton(frame, corner_radius=5, height=40, image="", border_spacing=10, text=text, anchor="n")
+        button = CTkButton(frame, corner_radius=5, height=40, border_spacing=10, text=text, anchor="n")
         button.pack(side=side, fill="x", padx=5)
         return button

@@ -42,16 +42,18 @@ class View:
         self._add_frame(LoginView, "login")
         self._add_frame(ImportView, "import")
         self._add_frame(ChangePwView, "change_password")
+        self._add_frame(ChangePwView, "change_global_password", admin=True)
         self._add_frame(AccountMgmtView, "accounts_manager")
         self._add_frame(AccountEditorView, "accounts_editor")
         self._add_frame(ExceptionView, "exception")
+        self._add_frame(AccountEditorView, "new_account", new_account=True)
 
         self.current_view = None
 
         # Display application after rendering completed.
         self.root.after(100, self.root.deiconify)
 
-    def _add_frame(self, view_class, name):
+    def _add_frame(self, view_class, name, **kwargs):
         """
         Create an instance of a view class and add it to the frames dictionary.
 
@@ -62,7 +64,7 @@ class View:
         name : str
             The name to identify the instance.
         """
-        self.frames[name] = view_class(self.root)
+        self.frames[name] = view_class(self.root, **kwargs)
 
     def switch_view(self, name):
         """
