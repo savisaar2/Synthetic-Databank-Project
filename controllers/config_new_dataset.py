@@ -28,8 +28,8 @@ class ConfigNewDatasetController:
         for user interactions with widgets on the view related to the config_new_dataset overlay.
         """
         self.frame.cancel_button.bind("<Button-1>", lambda _: self.frame.hide_view())
+        self.frame.add_col_button.bind("<Button-1>", lambda _: self.add_action_to_model(), add="+")
         self.frame.add_col_button.bind("<Button-1>", lambda _: self.frame.add_col_to_config(), add="+")
-        self.frame.add_col_button.bind("<Button-1>", self.add_action_to_model(), add="+")
         self.frame.confirm_button.bind("<Button-1>", lambda _: self.populate_dataset())
 
     def add_action_to_model(self):
@@ -37,13 +37,12 @@ class ConfigNewDatasetController:
         Method to populate user actions to the action set in the UI and model.
         Bound to "add_col_button" located in the config_new_dataset overlay.
         """
-        print("in add action to model func")
         if self.frame.add_col_button._state == "normal":
-        
             action_set = {
                 "action": self.frame.variables["action"],
                 "arg_a": self.frame.variables["arg_a"],
                 "arg_b": self.frame.variables["arg_b"],
+                "col_name": self.frame.variables["col_name"],
                 "rows": 100,
                 "df": self.model.DATASET.get_reference_to_current_snapshot()
             }
