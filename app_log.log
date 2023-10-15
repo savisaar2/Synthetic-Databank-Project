@@ -1086,5 +1086,211 @@ ValueError: Cannot take a larger sample than population when 'replace=False'
 2023-10-15 22:03:49,382 - INFO - User initiated generate function with schedule set:
 2023-10-15 22:03:49,382 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Manual Categorical', 'args': {'a': 'Jessica', 'b': '', 'c': ''}, 'column': 'first name', 'outcome': 'Success'}
 2023-10-15 22:03:49,390 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
-2023-10-15 22:08:16,955 - INFO - User changed view to 'accounts'.
-2023-10-15 22:08:19,544 - INFO - User changed view to 'library'.
+2023-10-15 22:39:42,820 - INFO - User changed view to 'accounts'.
+2023-10-15 22:39:48,113 - INFO - User changed view to 'library'.
+2023-10-15 22:46:01,445 - INFO - User changed view to 'manipulate'.
+2023-10-15 22:46:04,079 - INFO - User changed view to 'library'.
+2023-10-15 22:46:36,633 - INFO - User changed view to 'manipulate'.
+2023-10-15 22:46:45,725 - INFO - User changed view to 'library'.
+2023-10-15 22:47:20,728 - INFO - User changed view to 'analyse'.
+2023-10-15 22:47:49,371 - INFO - User changed view to 'manipulate'.
+2023-10-15 22:47:54,622 - INFO - User changed view to 'analyse'.
+2023-10-15 22:52:53,199 - INFO - User changed view to 'manipulate'.
+2023-10-15 22:52:54,390 - INFO - User changed view to 'analyse'.
+2023-10-15 22:54:36,181 - INFO - User changed view to 'library'.
+2023-10-15 22:54:36,954 - INFO - User changed view to 'analyse'.
+2023-10-15 22:54:40,880 - INFO - User changed view to 'sample'.
+2023-10-15 22:54:46,835 - INFO - User changed view to 'library'.
+2023-10-15 22:59:28,357 - INFO - User changed view to 'analyse'.
+2023-10-15 23:00:19,043 - INFO - User changed view to 'manipulate'.
+2023-10-15 23:00:21,618 - INFO - User changed view to 'library'.
+2023-10-15 23:03:24,811 - INFO - User changed view to 'manipulate'.
+2023-10-15 23:03:58,004 - INFO - User initiated generate function with schedule set:
+2023-10-15 23:03:58,004 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1234', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 23:03:58,008 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 23:04:26,317 - INFO - User initiated generate function with schedule set:
+2023-10-15 23:04:26,317 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Random Sampling', 'args': {'a': 4, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 23:04:26,321 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 23:05:16,782 - INFO - User changed view to 'library'.
+2023-10-15 23:05:17,170 - INFO - User changed view to 'library'.
+2023-10-15 23:05:19,119 - INFO - User changed view to 'manipulate'.
+2023-10-15 23:05:48,094 - INFO - User initiated generate function with schedule set:
+2023-10-15 23:05:48,094 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-15 23:05:48,095 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 23:08:37,609 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 506, in data_transformation
+    feature_columns = df.drop(columns=[target_column])
+                      ^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'drop'
+2023-10-15 23:08:37,610 - INFO - User initiated generate function with schedule set:
+2023-10-15 23:08:37,610 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Scaling Min/Max Scaler', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-15 23:08:37,611 - INFO - Generate function failed to fully complete successfully.
+2023-10-15 23:08:46,893 - INFO - User changed view to 'library'.
+2023-10-15 23:08:51,363 - INFO - User changed view to 'sample'.
+2023-10-15 23:08:51,793 - INFO - User changed view to 'manipulate'.
+2023-10-15 23:09:08,031 - INFO - User initiated generate function with schedule set:
+2023-10-15 23:09:08,031 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-15 23:09:08,042 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 23:11:19,670 - INFO - User changed view to 'library'.
+2023-10-16 09:06:12,963 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:07:32,143 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:07:32,143 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 4, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 09:07:32,144 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:10:27,555 - INFO - User changed view to 'library'.
+2023-10-16 09:10:29,543 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:10:32,159 - INFO - User changed view to 'library'.
+2023-10-16 09:10:34,517 - INFO - User changed view to 'sample'.
+2023-10-16 09:10:34,876 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:10:45,801 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:10:45,801 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'Mean', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 09:10:45,811 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:26:39,527 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:26:51,832 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:26:51,832 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'BMI', 'outcome': 'Success'}
+2023-10-16 09:26:51,833 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:28:14,811 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:28:24,352 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:28:24,352 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'BMI', 'outcome': 'Success'}
+2023-10-16 09:28:24,353 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:31:47,933 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:32:01,002 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:32:01,002 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 09:32:01,003 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:35:04,502 - INFO - User changed view to 'analyse'.
+2023-10-16 09:35:04,898 - INFO - User changed view to 'library'.
+2023-10-16 09:35:08,489 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:35:20,216 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 394, in replace_null_values
+    df[column] = knn_imputer.fit_transform(df[[column]])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 916, in fit_transform
+    return self.fit(X, **fit_params).transform(X)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\impute\_knn.py", line 229, in fit
+    X = self._validate_data(
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 605, in _validate_data
+    out = check_array(X, input_name="X", **check_params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 915, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_array_api.py", line 380, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 2084, in __array__
+    arr = np.asarray(values, dtype=dtype)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: 'premeno'
+2023-10-16 09:35:20,251 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:35:20,251 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'menopause', 'outcome': 'Failed'}
+2023-10-16 09:35:20,252 - INFO - Generate function failed to fully complete successfully.
+2023-10-16 09:37:14,559 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:37:29,431 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:37:29,431 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'Glucose', 'outcome': 'Success'}
+2023-10-16 09:37:29,432 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:40:30,265 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:40:39,839 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:40:39,840 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 09:40:39,850 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:40:56,815 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 387, in replace_null_values
+    imputed_values = rf_imputer.predict(df_missing.drop(columns=[column]))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 984, in predict
+    X = self._validate_X_predict(X)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 599, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr", reset=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 605, in _validate_data
+    out = check_array(X, input_name="X", **check_params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 967, in check_array
+    raise ValueError(
+ValueError: Found array with 0 sample(s) (shape=(0, 8)) while a minimum of 1 is required by RandomForestRegressor.
+2023-10-16 09:40:56,818 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:40:56,818 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'BloodPressure', 'outcome': 'Failed'}
+2023-10-16 09:40:56,819 - INFO - Generate function failed to fully complete successfully.
+2023-10-16 09:41:33,491 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 387, in replace_null_values
+    imputed_values = rf_imputer.predict(df_missing.drop(columns=[column]))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 984, in predict
+    X = self._validate_X_predict(X)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 599, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr", reset=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 605, in _validate_data
+    out = check_array(X, input_name="X", **check_params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 967, in check_array
+    raise ValueError(
+ValueError: Found array with 0 sample(s) (shape=(0, 8)) while a minimum of 1 is required by RandomForestRegressor.
+2023-10-16 09:41:33,493 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:41:33,493 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'Insulin', 'outcome': 'Failed'}
+2023-10-16 09:41:33,493 - INFO - Generate function failed to fully complete successfully.
+2023-10-16 09:41:43,924 - INFO - User changed view to 'library'.
+2023-10-16 09:41:48,705 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:41:57,170 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 432, in replace_null_values
+    rf_imputer.fit(X, y)
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 348, in fit
+    X, y = self._validate_data(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 622, in _validate_data
+    X, y = check_X_y(X, y, **check_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 1146, in check_X_y
+    X = check_array(
+        ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 915, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_array_api.py", line 380, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 2084, in __array__
+    arr = np.asarray(values, dtype=dtype)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '30-39'
+2023-10-16 09:41:57,173 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:41:57,173 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-16 09:41:57,174 - INFO - Generate function failed to fully complete successfully.
+2023-10-16 09:42:31,807 - INFO - User changed view to 'library'.
+2023-10-16 09:42:33,394 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:42:52,840 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 387, in replace_null_values
+    imputed_values = rf_imputer.predict(df_missing.drop(columns=[column]))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 984, in predict
+    X = self._validate_X_predict(X)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 599, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr", reset=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 605, in _validate_data
+    out = check_array(X, input_name="X", **check_params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 967, in check_array
+    raise ValueError(
+ValueError: Found array with 0 sample(s) (shape=(0, 8)) while a minimum of 1 is required by RandomForestRegressor.
+2023-10-16 09:42:52,841 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:42:52,841 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'BMI', 'outcome': 'Failed'}
+2023-10-16 09:42:52,842 - INFO - Generate function failed to fully complete successfully.
