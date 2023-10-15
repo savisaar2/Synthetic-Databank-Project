@@ -1021,3 +1021,70 @@ ValueError: could not convert string to float: 'no-recurrence-events'
 2023-10-11 19:03:38,275 - INFO - User changed view to 'accounts'.
 2023-10-11 19:03:42,283 - INFO - User changed view to 'accounts'.
 2023-10-11 20:15:05,133 - INFO - User changed view to 'accounts'.
+2023-10-15 21:19:14,770 - INFO - User changed view to 'library'.
+2023-10-15 21:19:17,244 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:19:19,272 - INFO - User changed view to 'sample'.
+2023-10-15 21:19:20,598 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:19:21,372 - INFO - User changed view to 'save'.
+2023-10-15 21:19:22,274 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:19:23,601 - INFO - User changed view to 'accounts'.
+2023-10-15 21:19:40,629 - INFO - User changed view to 'save'.
+2023-10-15 21:19:41,925 - INFO - User changed view to 'sample'.
+2023-10-15 21:19:44,560 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:20:01,608 - INFO - User changed view to 'library'.
+2023-10-15 21:20:03,609 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:20:04,071 - INFO - User changed view to 'library'.
+2023-10-15 21:20:08,221 - INFO - User changed view to 'analyse'.
+2023-10-15 21:22:59,887 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:23:22,265 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:23:22,265 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'Duplicate', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '123', 'outcome': 'Success'}
+2023-10-15 21:23:22,272 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 21:23:41,744 - INFO - User changed view to 'sample'.
+2023-10-15 21:23:43,351 - INFO - User changed view to 'save'.
+2023-10-15 21:23:44,709 - INFO - User changed view to 'library'.
+2023-10-15 21:24:04,441 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:53:42,781 - INFO - User changed view to 'sample'.
+2023-10-15 21:53:43,724 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:53:45,909 - INFO - User changed view to 'library'.
+2023-10-15 21:53:50,280 - INFO - User changed view to 'sample'.
+2023-10-15 21:53:51,833 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:54:11,158 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:54:11,158 - INFO - {'step': 1, 'action': 'Reduce Remove Rows', 'sub_action': 'Duplicate Rows', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 21:54:11,164 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 21:54:44,616 - INFO - User changed view to 'library'.
+2023-10-15 21:55:16,207 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:55:29,092 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:55:29,092 - INFO - {'step': 1, 'action': 'Reduce Remove Rows', 'sub_action': 'Duplicate Rows', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 21:55:29,096 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 21:56:09,078 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 458, in add_rows
+    random_rows = df.sample(n=a, replace=False)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 6029, in sample
+    sampled_indices = sample.sample(obj_len, size, replace, weights, rs)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\sample.py", line 152, in sample
+    return random_state.choice(obj_len, size=size, replace=replace, p=weights).astype(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "numpy\\random\\mtrand.pyx", line 1000, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+2023-10-15 21:56:09,127 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:56:09,127 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Random Sampling', 'args': {'a': 5, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-15 21:56:09,128 - INFO - Generate function failed to fully complete successfully.
+2023-10-15 21:56:25,980 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:56:25,981 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Random Sampling', 'args': {'a': 2, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 21:56:25,984 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 21:56:45,465 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:56:45,465 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Scaling Min/Max Scaler', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '1', 'outcome': 'Success'}
+2023-10-15 21:56:45,470 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 21:57:59,178 - INFO - User changed view to 'library'.
+2023-10-15 22:02:39,943 - INFO - User changed view to 'manipulate'.
+2023-10-15 22:03:11,861 - INFO - User initiated generate function with schedule set:
+2023-10-15 22:03:11,861 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 50, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 22:03:11,868 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 22:03:49,382 - INFO - User initiated generate function with schedule set:
+2023-10-15 22:03:49,382 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Manual Categorical', 'args': {'a': 'Jessica', 'b': '', 'c': ''}, 'column': 'first name', 'outcome': 'Success'}
+2023-10-15 22:03:49,390 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 22:08:16,955 - INFO - User changed view to 'accounts'.
+2023-10-15 22:08:19,544 - INFO - User changed view to 'library'.
