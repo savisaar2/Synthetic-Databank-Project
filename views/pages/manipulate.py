@@ -1052,3 +1052,6 @@ class ManipulateView(BaseView):
 
                 # Reset action menu
                 self.action_selection_menu.set("Select Action")
+
+    def get_rollback_index(self):
+        return self.rollback_dataset_selector.get()

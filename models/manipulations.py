@@ -357,6 +357,36 @@ class ManipulationsModel():
                             # Replace missing values in 'BMI' with the median
                             df[column].fillna(median_column, inplace=True)
                             return df
+                        
+                        case "KNN":
+                            # column = the selected column; b = the desired number of neighbours (int)
+                            # Function to replace missing value using K-Nearest Neighbors (KNN) Imputation
+                            # Initialize the KNNImputer with the desired number of neighbors (e.g. 5)
+                            knn_imputer = KNNImputer(n_neighbors=b)
+                            # Perform KNN imputation on the column
+                            df[column] = knn_imputer.fit_transform(df[[column]])
+                            return df    
+                        
+                        case "ML":
+                            # column = the selected column
+                            # Function to replace missing value using Machince Learning-Based Imputation
+                            # Separate the dataset into two parts: one with missing  values and one without
+                            df_missing = df[df[column].isna()].copy()  # Make a copy to avoid SettingWithCopyWarning
+                            df_not_missing = df[~df[column].isna()]
+
+                            # Prepare the features and target for imputation
+                            X = df_not_missing.drop(columns=[column])
+                            y = df_not_missing[column]
+                            # Initialize the Random Forest Regressor 
+                            rf_imputer = RandomForestRegressor(n_estimators=100, random_state=42)
+
+                            # Train the model on non-missing data
+                            rf_imputer.fit(X, y)
+
+                            # Impute missing values using the trained model
+                            imputed_values = rf_imputer.predict(df_missing.drop(columns=[column]))
+                            df.loc[df[column].isna(), column] = imputed_values
+                            return df
                             
                 case "Manual Numerical":  
                     # column = the selected column; a = new value
@@ -365,7 +395,7 @@ class ManipulationsModel():
                     df[column].fillna(a, inplace=True)                        
                     return df
                 
-                case "Algorithmic Categorial":
+                case "Algorithmic Categorical":
                     match a:
                         case "Mode":
                             # column = the selected colum
@@ -376,24 +406,15 @@ class ManipulationsModel():
                             df[column].fillna(mode_val, inplace=True)
                             return df
                         
-                case "Manual Categorical":
-                    # column = the selected column; a = new value
-                    # Function to replace all missing value in the selected column with fixed value
-                    # Replace all missing 'BMI' values with a fixed value of 180
-                    df[column].fillna(a, inplace=True)                        
-                    return df
-                
-                case "Algorithmic Categorial" | "Algorithmic Numerical":
-                    match a:
                         case "KNN":
                             # column = the selected column; b = the desired number of neighbours (int)
                             # Function to replace missing value using K-Nearest Neighbors (KNN) Imputation
                             # Initialize the KNNImputer with the desired number of neighbors (e.g. 5)
                             knn_imputer = KNNImputer(n_neighbors=b)
-                            # Perform KNN imputation on the 'BMI' column
-                            df[column] = knn_imputer.fit_transform(df[[column]])                    
-                            return df                       
-
+                            # Perform KNN imputation on the column
+                            df[column] = knn_imputer.fit_transform(df[[column]])
+                            return df    
+                        
                         case "ML":
                             # column = the selected column
                             # Function to replace missing value using Machince Learning-Based Imputation
@@ -415,6 +436,13 @@ class ManipulationsModel():
                             df.loc[df[column].isna(), column] = imputed_values
                             return df
                         
+                case "Manual Categorical":
+                    # column = the selected column; a = new value
+                    # Function to replace all missing value in the selected column with fixed value
+                    # Replace all missing 'BMI' values with a fixed value of 180
+                    df[column].fillna(a, inplace=True)                        
+                    return df
+                                     
         except Exception as error:
             self.logger.log_exception("Manipulation failed to complete. Traceback:")
             self.error_msg = error

@@ -44,6 +44,9 @@ class ManipulateController:
         # Generate button bind
         self.frame.generate_button.bind("<Button-1>", lambda _: self._generate(), add="+")
         self.frame.generate_button.bind("<Button-1>", self._refresh_manipulate_widgets, add="+")
+
+        # Rollback button bind
+        self.frame.rollback_button.bind("<Button-1>", lambda _: self._rollback())
         
     def _refresh_manipulate_widgets(self, event): 
         """
@@ -188,4 +191,8 @@ class ManipulateController:
         for item in logger_manips:
             item.pop("df")
             self.logger.log_info(f"{item}")
-        
+
+    def _rollback(self):
+        index = self.frame.get_rollback_index()
+        print("index:", index)
+        self.model.DATASET.rollback(index)
