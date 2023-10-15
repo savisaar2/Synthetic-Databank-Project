@@ -1978,3 +1978,123 @@ KeyError: "['fg'] not found in axis"
 2023-10-14 23:28:28,910 - INFO - User changed view to 'manipulate'.
 2023-10-14 23:28:29,668 - INFO - User changed view to 'library'.
 2023-10-14 23:31:49,356 - INFO - User changed view to 'manipulate'.
+2023-10-15 18:11:47,000 - INFO - User changed view to 'manipulate'.
+2023-10-15 18:12:01,777 - INFO - User initiated generate function with schedule set:
+2023-10-15 18:12:01,777 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '3', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 18:12:01,784 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 18:12:07,638 - INFO - User changed view to 'analyse'.
+2023-10-15 18:12:44,637 - INFO - User changed view to 'manipulate'.
+2023-10-15 18:13:03,123 - INFO - User initiated generate function with schedule set:
+2023-10-15 18:13:03,123 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'Mode', 'b': '', 'c': ''}, 'column': '3', 'outcome': 'Success'}
+2023-10-15 18:13:03,124 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 18:13:05,501 - INFO - User changed view to 'analyse'.
+2023-10-15 18:13:13,143 - INFO - User changed view to 'manipulate'.
+2023-10-15 18:14:09,060 - INFO - User initiated generate function with schedule set:
+2023-10-15 18:14:09,060 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'KNN', 'b': 1, 'c': ''}, 'column': '3', 'outcome': 'Success'}
+2023-10-15 18:14:09,061 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 18:14:11,658 - INFO - User changed view to 'manipulate'.
+2023-10-15 18:14:12,256 - INFO - User changed view to 'analyse'.
+2023-10-15 18:14:22,804 - INFO - User changed view to 'manipulate'.
+2023-10-15 18:14:29,022 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 310, in reduce_columns
+    df = df.drop(column, axis=1)
+         ^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'drop'
+2023-10-15 18:14:29,023 - INFO - User initiated generate function with schedule set:
+2023-10-15 18:14:29,023 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '3', 'outcome': 'Failed'}
+2023-10-15 18:14:29,023 - INFO - Generate function failed to fully complete successfully.
+2023-10-15 18:14:51,141 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 310, in reduce_columns
+    df = df.drop(column, axis=1)
+         ^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'drop'
+2023-10-15 18:14:51,141 - INFO - User initiated generate function with schedule set:
+2023-10-15 18:14:51,141 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '2', 'outcome': 'Failed'}
+2023-10-15 18:14:51,142 - INFO - Generate function failed to fully complete successfully.
+2023-10-15 18:15:39,365 - INFO - User changed view to 'library'.
+2023-10-15 18:20:01,481 - INFO - User changed view to 'manipulate'.
+2023-10-15 18:20:13,199 - INFO - User changed view to 'library'.
+2023-10-15 18:24:49,654 - INFO - User changed view to 'analyse'.
+2023-10-15 18:24:50,279 - INFO - User changed view to 'manipulate'.
+2023-10-15 18:24:50,891 - INFO - User changed view to 'library'.
+2023-10-15 19:12:46,622 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:13:05,232 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:13:05,232 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Outliers Z-score', 'args': {'a': 5.0, 'b': '', 'c': ''}, 'column': '1', 'outcome': 'Success'}
+2023-10-15 19:13:05,238 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:13:52,088 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:13:52,088 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 2, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 19:13:52,094 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:14:50,089 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:14:50,089 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Bootstrap Resampling', 'args': {'a': 4, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 19:14:50,096 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:15:16,188 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:15:16,189 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Random Sampling', 'args': {'a': 14, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 19:15:16,199 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:15:42,498 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:15:42,498 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'new', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 19:15:42,508 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:15:57,733 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:15:57,733 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Manual Categorical', 'args': {'a': '1234', 'b': '', 'c': ''}, 'column': 'new', 'outcome': 'Success'}
+2023-10-15 19:15:57,744 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:17:48,946 - INFO - User changed view to 'analyse'.
+2023-10-15 19:18:22,870 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:18:26,685 - INFO - User changed view to 'analyse'.
+2023-10-15 19:18:47,673 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:18:48,194 - INFO - User changed view to 'analyse'.
+2023-10-15 19:18:48,632 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:18:51,798 - INFO - User changed view to 'library'.
+2023-10-15 19:23:38,467 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:23:51,690 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:23:51,690 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-15 19:23:51,699 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:27:41,992 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:27:41,992 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 3, 'c': ''}, 'column': 'Glucose', 'outcome': 'Success'}
+2023-10-15 19:27:41,993 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:27:59,481 - INFO - User changed view to 'library'.
+2023-10-15 19:28:01,285 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:28:41,034 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:28:41,034 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-15 19:28:41,035 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:34:56,177 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:35:04,263 - INFO - User changed view to 'library'.
+2023-10-15 19:35:10,438 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:35:36,430 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:35:36,430 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 4, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-15 19:35:36,431 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:35:48,753 - INFO - User changed view to 'analyse'.
+2023-10-15 19:36:01,777 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:36:03,166 - INFO - User changed view to 'analyse'.
+2023-10-15 19:36:05,773 - INFO - User changed view to 'analyse'.
+2023-10-15 19:36:06,903 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:37:43,876 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:38:00,922 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:38:00,922 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-15 19:38:00,923 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:41:26,921 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:41:28,814 - INFO - User changed view to 'library'.
+2023-10-15 19:41:41,025 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:43:31,451 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:43:31,451 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-15 19:43:31,452 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:44:12,856 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 207, in add_column
+    df[a]=None
+    ~~^^^
+TypeError: 'NoneType' object does not support item assignment
+2023-10-15 19:44:12,857 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:44:12,857 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '657', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-15 19:44:12,857 - INFO - Generate function failed to fully complete successfully.
+2023-10-15 19:44:37,038 - INFO - User changed view to 'analyse'.
+2023-10-15 19:44:37,465 - INFO - User changed view to 'library'.
+2023-10-15 19:44:57,844 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:45:07,462 - INFO - User initiated generate function with schedule set:
+2023-10-15 19:45:07,462 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'SkinThickness', 'outcome': 'Success'}
+2023-10-15 19:45:07,463 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 19:48:20,355 - INFO - User changed view to 'analyse'.
+2023-10-15 19:48:28,690 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:48:31,433 - INFO - User changed view to 'library'.
+2023-10-15 19:48:34,713 - INFO - User changed view to 'manipulate'.
+2023-10-15 19:48:35,123 - INFO - User changed view to 'analyse'.

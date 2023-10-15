@@ -391,7 +391,7 @@ class ManipulationsModel():
                             # Initialize the KNNImputer with the desired number of neighbors (e.g. 5)
                             knn_imputer = KNNImputer(n_neighbors=b)
                             # Perform KNN imputation on the 'BMI' column
-                            df[column] = knn_imputer.fit_transform(df[[column]])                        
+                            df[column] = knn_imputer.fit_transform(df[[column]])                    
                             return df                       
 
                         case "ML":
