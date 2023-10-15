@@ -67,6 +67,8 @@ class LibraryController:
         # Provide visual cue.
         self.frame.dataset_status.configure(text=f"New Unsaved Data Set", text_color="yellow")
 
+        self.view.frames["menu"].enable_menu_buttons(is_new=True)
+
     def _show_metadata(self):
         """
         Retrieves metadata for selected dataset item in treeview list of library page and displays
@@ -105,6 +107,8 @@ class LibraryController:
             self.model.DATASET.load_dataset(file_path=file_path, dataset_name=name)
             # Provide visual cue.
             self.frame.dataset_status.configure(text=f"{name} has been loaded", text_color="lime")
+
+        self.view.frames["menu"].enable_menu_buttons()
 
     def _import_dataset(self):
         """

@@ -18,16 +18,35 @@ class MenuController:
         self.model = model
         self.view = view
         self.frame = self.view.frames["menu"]
+        self._highlight_active_button(self.frame.library_button)
         self._bind()
 
-    def _switch_view(self, view_name):
+    def _switch_view(self, event, view_name):
         """Switch views.
 
         Args:
             view_name (str): View to switch to
         """
-        self.logger.log_info(f"User changed view to '{view_name}'.")
-        self.view.switch_view(view_name)    
+        button = event.widget
+        parent_frame = button.master
+
+        # If button is not disabled change button focus color and switch view.
+        if parent_frame.cget("state") == "normal":
+            self._highlight_active_button(parent_frame)
+            self.logger.log_info(f"User changed view to '{view_name}'.")
+            self.view.switch_view(view_name)
+
+    def _highlight_active_button(self, button):
+        """
+        Defaults button colors and sets focus to active button.
+        """
+        self.frame.library_button.configure(fg_color="#336aa0")
+        self.frame.analyse_button.configure(fg_color="#336aa0")
+        self.frame.manipulate_button.configure(fg_color="#336aa0")
+        self.frame.sample_button.configure(fg_color="#336aa0")
+        self.frame.save_button.configure(fg_color="#336aa0")
+        self.frame.accounts_button.configure(fg_color="#336aa0")
+        button.configure(fg_color="#22486d")
 
     def _bind(self):
         """
@@ -36,10 +55,10 @@ class MenuController:
         for user interactions with widgets on the view related to the menu.
         """
         # Add event click event bindings to menu items.
-        self.frame.library_button.bind("<Button-1>", lambda _: self._switch_view("library"))
-        self.frame.analyse_button.bind("<Button-1>", lambda _: self._switch_view("analyse"))
-        self.frame.manipulate_button.bind("<Button-1>", lambda _: self._switch_view("manipulate"))
-        self.frame.sample_button.bind("<Button-1>", lambda _: self._switch_view("sample"))
-        self.frame.save_button.bind("<Button-1>", lambda _: self._switch_view("save"))
-        self.frame.accounts_button.bind("<Button-1>", lambda _: self._switch_view("accounts"))
+        self.frame.library_button.bind("<Button-1>", lambda event, args="library": self._switch_view(event, args))
+        self.frame.analyse_button.bind("<Button-1>", lambda event, args="analyse": self._switch_view(event, args))
+        self.frame.manipulate_button.bind("<Button-1>", lambda event, args="manipulate": self._switch_view(event, args))
+        self.frame.sample_button.bind("<Button-1>", lambda event, args="sample": self._switch_view(event, args))
+        self.frame.save_button.bind("<Button-1>", lambda event, args="save": self._switch_view(event, args))
+        self.frame.accounts_button.bind("<Button-1>", lambda event, args="accounts": self._switch_view(event, args))
         self.frame.end_button.bind("<Button-1>", lambda _: self.view.root.quit())
