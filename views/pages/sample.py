@@ -30,7 +30,7 @@ class SampleView(BaseView):
         self.algorithm_label = CTkLabel(self.s_frame, text="Sampling Algorithm:", anchor="w")
         self.algorithm_label.pack(side="left", padx=(8, 0))
         self.sampling_algo_options = [
-            "------", "Simple Random", "Stratified", "Systematic", "Under", "Over"
+            "------", "Simple Random", "Stratified", "Systematic", "Under", "Over", "Cluster", "Quota", "Judgement"
             ]
         self.sampling_algo_menu = CTkOptionMenu(
             self.s_frame, fg_color="gray10", width=3, values=self.sampling_algo_options, 
@@ -50,7 +50,31 @@ class SampleView(BaseView):
         self.sampling_interval_label = CTkLabel(self.s_frame, text="Sampling Interval:", anchor="w")
         self.sampling_interval_entry = CTkEntry(self.s_frame, corner_radius=5, width=50, state="disabled")
 
-        # Common widgets - used by stratified, under, over.
+        # Cluster - sub widgets
+        self.cluster_column_label = CTkLabel(self.s_frame, text="Cluster Column:", anchor="w")
+        self.num_of_clusters_label = CTkLabel(self.s_frame, text="Number of Clusters:", anchor="w")
+        self.num_of_clusters_entry = CTkEntry(self.s_frame, corner_radius=5, width=50, state="disabled")
+
+        # Quota - sub widgets
+        self.column_to_build_quota_label = CTkLabel(self.s_frame, text="Column to Build Quota:", anchor="w")
+        self.q_sample_size_label = CTkLabel(self.s_frame, text="Sample Size:", anchor="w")
+        self.quota_sample_size_entry = CTkEntry(self.s_frame, corner_radius=5, width=50, state="disabled")
+
+        # Judgement - sub widgets
+        self.define_criteria_label = CTkLabel(self.s_frame, text="Column to Define Criteria:", anchor="w")
+        self.comparison_operators_label = CTkLabel(self.s_frame, text="Comparison Operator:", anchor="w")
+        self.comparison_operator_menu = CTkOptionMenu(
+            self.s_frame, fg_color="gray10", width=3, values=(["------", "EQUAL", "LESS", "MORE", "NOT EQUAL"]),
+            command=lambda option: self.reconfig_widgets(option, "sampling")
+        )
+        self.condition_label = CTkLabel(self.s_frame, text="Condition:", anchor="w")
+        self.condition_entry = CTkEntry(self.s_frame, corner_radius=5, width=50, state="disabled")
+        self.logical_operator_label = CTkLabel(self.s_frame, text="Logical Operator:", anchor="w")
+        self.logical_operator_menu = CTkOptionMenu(
+            self.s_frame, fg_color="gray10", width=3, values=(["------", "AND", "OR", "NOT"]), 
+            command=lambda option: self.reconfig_widgets(option, "sampling")
+        )
+        # Common widgets - used by stratified, under, over, cluster, quota, 
         self.dependant_col_label = CTkLabel(self.s_frame, text="Dependent Column:", anchor="w")
         self.dependant_col_menu = CTkOptionMenu(
             self.s_frame, fg_color="gray10", width=3, values=("------",), 
@@ -84,6 +108,27 @@ class SampleView(BaseView):
         self.under_over_widgets = [
             self.dependant_col_label, self.dependant_col_menu
         ]
+
+        self.cluster_widgets = [
+            self.cluster_column_label, self.dependant_col_menu, self.num_of_clusters_label, self.num_of_clusters_entry
+        ]
+
+        self.quota_widgets = [
+            self.column_to_build_quota_label, self.dependant_col_menu, self.q_sample_size_label, 
+            self.quota_sample_size_entry
+        ]
+
+        self.judgement_widgets = [
+            self.define_criteria_label, self.dependant_col_menu, self.comparison_operators_label, 
+            self.comparison_operator_menu, self.condition_label, self.condition_entry,
+            self.logical_operator_label, self.logical_operator_menu
+        ]
+
+        self.algo_to_widget_set_mapping = {
+            "Simple Random": self.simple_widgets, "Stratified": self.stratified_widgets, 
+            "Systematic": self.systematic_widgets, "Under": self.under_over_widgets, "Over": self.under_over_widgets,
+            "Cluster": self.cluster_widgets, "Quota": self.quota_widgets, "Judgement": self.judgement_widgets
+        }
 
     def _render_rollback(self):
         self.rollback_label = CTkLabel(self, text="Rollback", anchor="w")
@@ -218,43 +263,13 @@ class SampleView(BaseView):
                     w.set("------") 
 
         if option_set == "sampling": 
-            match option: 
-                case "------":
-                    bulk_toggle("hide", self.all_widgets)
-                case "Simple Random":
-                    bulk_toggle("hide", [
-                        widget for widget in self.all_widgets if widget not in self.simple_widgets
-                        ])
-                    bulk_toggle("show", self.simple_widgets)
-                    bulk_toggle("off", [
-                        widget for widget in self.all_widgets if widget not in self.simple_widgets
-                    ])
-                    bulk_toggle("on", self.simple_widgets)
-                case "Stratified": 
-                    bulk_toggle("hide", [
-                        widget for widget in self.all_widgets if widget not in self.stratified_widgets
-                        ])
-                    bulk_toggle("show", self.stratified_widgets)
-                    bulk_toggle("off", [
-                        widget for widget in self.all_widgets if widget not in self.stratified_widgets
-                    ])
-                    bulk_toggle("on", self.stratified_widgets)
-                case "Systematic": 
-                    bulk_toggle("hide", [
-                        widget for widget in self.all_widgets if widget not in self.systematic_widgets
-                        ])
-                    bulk_toggle("show", self.systematic_widgets)
-                    bulk_toggle("off", [
-                        widget for widget in self.all_widgets if widget not in self.systematic_widgets
-                    ])
-                    bulk_toggle("on", self.systematic_widgets)
-                case "Under" | "Over": 
-                    bulk_toggle("hide", [
-                        widget for widget in self.all_widgets if widget not in self.under_over_widgets
-                        ])
-                    bulk_toggle("show", self.under_over_widgets)
-                    bulk_toggle("off", [
-                        widget for widget in self.all_widgets if widget not in self.under_over_widgets
-                    ])
-                    bulk_toggle("on", self.under_over_widgets)
+            bulk_toggle("hide", [
+                widget for widget in self.all_widgets if widget not in self.algo_to_widget_set_mapping[option]
+            ])
+            bulk_toggle("show", self.algo_to_widget_set_mapping[option])
+            bulk_toggle("off", [
+                widget for widget in self.all_widgets if widget not in self.algo_to_widget_set_mapping[option]
+            ])
+            bulk_toggle("on", self.algo_to_widget_set_mapping[option])
+            
                         
