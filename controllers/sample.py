@@ -77,4 +77,4 @@ class SampleController:
         """
         self.view.frames["menu"].sample_button.bind("<Button-1>", self._refresh_sample_widgets)
         self.view.frames["menu"].sample_button.bind("<Button-1>", self._update_view(self.model.DATASET.get_reference_to_all_snapshots()))
-        self.frame.sample_button.bind("<Button-1>", self._run)
+        self.frame.run.bind("<Button-1>", self._run)
