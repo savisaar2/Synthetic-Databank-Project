@@ -165,6 +165,7 @@ class ManipulateController:
         self.step_count = 0
         self.frame.step_count = 0
         self.frame.generate_button.configure(state="disabled")
+        self._update_rollback_selector()
         self._refresh_manipulate_widgets
 
     def _scan_dataset(self):  
@@ -196,3 +197,14 @@ class ManipulateController:
         index = self.frame.get_rollback_index()
         print("index:", index)
         self.model.DATASET.rollback(index)
+        print("current DF", self.model.DATASET.get_reference_to_current_snapshot())
+
+    def _update_rollback_selector(self):
+        snapshots = self.model.DATASET.get_snapshot_list()
+        selector_list = []
+        snapshot_count = 0
+        for dataset in snapshots:
+            selector_list.append(f'{dataset["Name"]} #{str(snapshot_count)}')
+            snapshot_count +=1
+        print(selector_list)
+        self.frame.rollback_dataset_selector.configure(values=selector_list)

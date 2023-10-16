@@ -151,13 +151,12 @@ class ManipulateView(BaseView):
         # Rollback button
         self.rollback_button = self._button_template(self.rollback_frame_1, "Rollback")
         self.rollback_button.pack(side="right", padx=8, pady=8)
-        self.rollback_button.configure(state="disabled")
 
         # Rollback dataset selector
         self.rollback_dataset_var = StringVar(value="Current")
         self.rollback_dataset_selector = CTkSegmentedButton(
             self.rollback_frame_1,
-            values=["1", "2", "3", "Current"],
+            values=["Current"],
             variable=self.rollback_dataset_var,
         )
         self.rollback_dataset_selector.pack(side="right", padx=8, pady=8)
@@ -512,7 +511,7 @@ class ManipulateView(BaseView):
                     case "Algorithmic":
                         self.variables["sub_action"] = f"{choice} Numerical"
                         self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
-                                                                        ["Mean", "Median", "KNN", "ML"], 
+                                                                        ["Mean", "Median", "KNN", "Random Forest"], 
                                                                         self._replace_missing_technique_selection, 4)
                     case "Manual":
                         self.variables["sub_action"] = f"{choice} Numerical"
@@ -524,7 +523,7 @@ class ManipulateView(BaseView):
                     case "Algorithmic":
                         self.variables["sub_action"] = f"{choice} Categorical"
                         self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
-                                                                        ["Mode", "KNN", "ML"], 
+                                                                        ["Mode"], 
                                                                         self._replace_missing_technique_selection, 4)
                     case "Manual":
                         self.variables["sub_action"] = f"{choice} Categorical"
@@ -542,7 +541,7 @@ class ManipulateView(BaseView):
         self._refresh_menu_widgets(5)
 
         match choice:
-            case "Mean" | "Median" | "Mode" | "ML":
+            case "Mean" | "Median" | "Mode" | "Random Forest":
                 self.pos_4_menu.configure(state='disabled')
                 self.schedule_button.configure(state="normal")
             case "KNN":
@@ -1055,3 +1054,6 @@ class ManipulateView(BaseView):
 
     def get_rollback_index(self):
         return self.rollback_dataset_selector.get()
+    
+    def update_rollback_selector(self):
+        pass

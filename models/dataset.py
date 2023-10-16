@@ -134,7 +134,11 @@ class DatasetModel:
         Args:
             index (int): User specified index of dataset to define as current.
         """
-        self._SNAPSHOTS[:index + 1] # Slicing to truncate.
+        self._SNAPSHOTS[:(int(index) + 1)] # Slicing to truncate.
+        index  = 0
+        for snap in self._SNAPSHOTS:
+            print(f"index: {index} {snap['Name']}")
+            index +=1
 
     def get_df_row_by_range(self, start_row, end_row):
         """Method to obtain rows of current dataset within a defined range.
@@ -355,3 +359,7 @@ class DatasetModel:
             }
         )
         print("Generated data set:", self._SNAPSHOTS[-1]["Dataframe"])
+        print(f"Length of SNAPSHOTS: {len(self._SNAPSHOTS)}")
+
+    def get_snapshot_list(self):
+        return self._SNAPSHOTS
