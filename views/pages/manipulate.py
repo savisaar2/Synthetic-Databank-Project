@@ -153,11 +153,12 @@ class ManipulateView(BaseView):
         self.rollback_button.pack(side="right", padx=8, pady=8)
 
         # Rollback dataset selector
-        self.rollback_dataset_var = StringVar(value="Current")
+        self.rollback_dataset_var = StringVar(value="0")
         self.rollback_dataset_selector = CTkSegmentedButton(
             self.rollback_frame_1,
-            values=["Current"],
+            values=["0"],
             variable=self.rollback_dataset_var,
+            command=self.dataset_selector_callback
         )
         self.rollback_dataset_selector.pack(side="right", padx=8, pady=8)
 
@@ -973,7 +974,14 @@ class ManipulateView(BaseView):
                         self.columns_all_numerical = False
                         break
 
-    def refresh_manipulate_widgets(self, column_headers, column_dtypes):
+    def dataset_selector_callback(self, choice):
+        snapshot_name = self.snapshots[int(choice)]["Name"]
+        rows = self.snapshots[int(choice)]["Dataframe"].shape[0]
+        columns = self.snapshots[int(choice)]["Dataframe"].shape[1]
+        self.current_dataset_label.configure(text=f"Selected Dataset: {snapshot_name} | Rows: {rows} | Columns: {columns}")
+
+
+    def refresh_manipulate_widgets(self, column_headers, column_dtypes, snapshots):
         """Refresh values of various widgets on Manipulate view with appropriate
         information pulled from the loaded dataset.
 
@@ -983,6 +991,8 @@ class ManipulateView(BaseView):
         """
         self.column_headers = column_headers
         self.column_dtypes = column_dtypes
+        self.snapshots = snapshots
+        self.dataset_selector_callback(0)
         self._refresh_menu_widgets(1)
 
     def add_manipulation_to_scheduler(self):
@@ -1055,5 +1065,3 @@ class ManipulateView(BaseView):
     def get_rollback_index(self):
         return self.rollback_dataset_selector.get()
     
-    def update_rollback_selector(self):
-        pass

@@ -53,10 +53,11 @@ class ManipulationsModel():
             pandas dataframe | Bool: dataframe with applied manipulations 
                                         or False to indicate the manipulation set failed.
         """
+        df_copy = scheduler_row[0]["df"].copy()
         # Set dataframe as current, but not for the first item. 
         for index, r in enumerate(scheduler_row):
             if not index:
-                self.current_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], 
+                self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"], 
                                                    r["args"])
                 match self.current_df:
                     case False:
@@ -68,9 +69,8 @@ class ManipulationsModel():
                     case False:
                         r["outcome"] = "Pending"
                     case _:
-                        r["df"] = self.current_df
                         self.current_df  = self.manip_collection[r["action"]](r["sub_action"], 
-                                                                r["df"], r["column"], r["args"])
+                                                                self.current_df, r["column"], r["args"])
                         match self.current_df:
                             case False:
                                 r["outcome"] = "Failed"
