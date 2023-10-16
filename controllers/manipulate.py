@@ -219,7 +219,7 @@ class ManipulateController:
         snapshots = self.model.DATASET.get_snapshot_list()
         selector_list = []
         self.snapshot_count = 0
-        for dataset in snapshots:
+        for k in snapshots:
             selector_list.append(str(self.snapshot_count))
             self.snapshot_count +=1
         self.frame.rollback_dataset_selector.configure(values=selector_list)

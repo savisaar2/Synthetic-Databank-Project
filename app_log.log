@@ -1668,3 +1668,36 @@ ValueError: could not convert string to float: '30-39'
 2023-10-16 17:12:15,079 - INFO - User initiated generate function with schedule set:
 2023-10-16 17:12:15,079 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'Random Forest', 'b': '', 'c': ''}, 'column': 'Insulin', 'outcome': 'Success'}
 2023-10-16 17:12:15,089 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 18:31:13,506 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:32:34,756 - INFO - User initiated generate function with schedule set:
+2023-10-16 18:32:34,756 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Scaling Min/Max Scaler', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 18:32:34,769 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 18:32:49,991 - INFO - User changed view to 'library'.
+2023-10-16 18:32:53,388 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:33:08,655 - INFO - User initiated generate function with schedule set:
+2023-10-16 18:33:08,655 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Class', 'b': '', 'c': ''}, 'column': 'Age', 'outcome': 'Success'}
+2023-10-16 18:33:08,668 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 18:33:36,341 - INFO - User initiated generate function with schedule set:
+2023-10-16 18:33:36,341 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '123', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 18:33:36,352 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 18:35:02,806 - INFO - User changed view to 'sample'.
+2023-10-16 18:35:14,220 - INFO - User changed view to 'library'.
+2023-10-16 18:35:31,535 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:36:15,921 - INFO - User initiated generate function with schedule set:
+2023-10-16 18:36:15,921 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'menopause', 'outcome': 'Success'}
+2023-10-16 18:36:15,931 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 18:36:32,806 - INFO - User changed view to 'library'.
+2023-10-16 18:36:36,087 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:37:41,220 - INFO - User changed view to 'analyse'.
+2023-10-16 18:38:18,013 - INFO - User changed view to 'sample'.
+2023-10-16 18:39:07,728 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:39:33,852 - INFO - User changed view to 'analyse'.
+2023-10-16 18:42:46,890 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:42:56,329 - INFO - User changed view to 'analyse'.
+2023-10-16 18:43:19,260 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:43:20,052 - INFO - User changed view to 'analyse'.
+2023-10-16 18:43:20,700 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:43:21,276 - INFO - User changed view to 'analyse'.
+2023-10-16 18:46:39,258 - INFO - User changed view to 'library'.
+2023-10-16 18:46:41,476 - INFO - User changed view to 'analyse'.
+2023-10-16 18:50:50,196 - INFO - User changed view to 'analyse'.
