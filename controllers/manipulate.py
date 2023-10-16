@@ -118,63 +118,63 @@ class ManipulateController:
         Calls logger utility to populate log file.
         Bound to generate button loacted in manipulation frame.
         """
-        self.frame.generate_warning.configure(text="")
+        try:
+            self.frame.generate_warning.configure(text="")
 
-        if len(self.model.manipulations.schedule_set) > 0:   
-            generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
-            # Logger INFO add
-            self._add_manips_to_log()
+            if len(self.model.manipulations.schedule_set) > 0:   
+                generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                # Logger INFO add
+                self._add_manips_to_log()
 
-            # If the generated dataframe returned from the churner failed, log and display user message.
-            # Updates to current dataframe in SNAPSHOTS if successful, logs and dsplays user message.
-            match generated_df:
-                case False:
-                    error_msg = self.model.manipulations.error_msg
-                    self.frame.generate_warning.configure(text=f"Generate has failed. Reason: {error_msg}")
-                    self.frame.generate_warning.configure(text_color="yellow")
-                    
-                    # Logger INFO add
-                    self.logger.log_info(f"Generate function failed to fully complete successfully.")
-                case _:
-                    self.model.DATASET.add_generated_dataset_to_snapshot(self.model.manipulations.schedule_set, 
-                                                                         "Generated Dataset", generated_df)
-                    self.frame.generate_warning.configure(text="Generate was successful.")
-                    self.frame.generate_warning.configure(text_color="green")
-                    # Logger INFO add
-                    self.logger.log_info(f"Generated dataset added to SNAPSHOTS as current dataframe.")
-                    
-            # Logic to change outcome label of manipulations.
-            for item in self.model.manipulations.schedule_set:
-                index = item["step"]
-                widget = self.frame.scheduler_items[index-1]["outcome"]
-        
-                match item["outcome"]:
-                    case "Success":
-                        widget.configure(text="Success")
-                        widget.configure(text_color="green")
-                    case "Failed":
-                        widget.configure(text="Failed")
-                        widget.configure(text_color="red")
-                    case "Pending":
-                        widget.configure(text="Pending")
-                        widget.configure(text_color="yellow")           
-        
-        # User warning if no manipulations are scheduled and manipulate in clicked.
-        else:
-             self.frame.generate_warning.configure(text="Must have at least 1 pending manipulation scheduled")
-             self.frame.generate_warning.configure(text_color="yellow")
+                # If the generated dataframe returned from the churner failed, log and display user message.
+                # Updates to current dataframe in SNAPSHOTS if successful, logs and dsplays user message.
+                match generated_df:
+                    case False:
+                        error_msg = self.model.manipulations.error_msg
+                        self.frame.generate_warning.configure(text=f"Generate has failed. Reason: {error_msg}")
+                        self.frame.generate_warning.configure(text_color="yellow")
+                        
+                        # Logger INFO add
+                        self.logger.log_info(f"Generate function failed to fully complete successfully.")
+                    case _:
+                        self.model.DATASET.add_generated_dataset_to_snapshot(self.model.manipulations.schedule_set, 
+                                                                            "Generated Dataset", generated_df)
+                        self.frame.generate_warning.configure(text="Generate was successful.")
+                        self.frame.generate_warning.configure(text_color="green")
+                        # Logger INFO add
+                        self.logger.log_info(f"Generated dataset added to SNAPSHOTS as current dataframe.")
+                        
+                # Logic to change outcome label of manipulations.
+                for item in self.model.manipulations.schedule_set:
+                    index = item["step"]
+                    widget = self.frame.scheduler_items[index-1]["outcome"]
+            
+                    match item["outcome"]:
+                        case "Success":
+                            widget.configure(text="Success")
+                            widget.configure(text_color="green")
+                        case "Failed":
+                            widget.configure(text="Failed")
+                            widget.configure(text_color="red")
+                        case "Pending":
+                            widget.configure(text="Pending")
+                            widget.configure(text_color="yellow")           
+            
+            # User warning if no manipulations are scheduled and manipulate in clicked.
+            else:
+                self.frame.generate_warning.configure(text="Must have at least 1 pending manipulation scheduled")
+                self.frame.generate_warning.configure(text_color="yellow")
 
-        # Clear variables and widgets associated with post generate function.
-        self.model.manipulations.schedule_set = [] 
-        self.step_count = 0
-        self.frame.step_count = 0
-        self.frame.generate_button.configure(state="disabled")
-        self._update_rollback_selector()
-        self._refresh_manipulate_widgets
+            # Clear variables and widgets associated with post generate function.
+            self.model.manipulations.schedule_set = [] 
+            self.step_count = 0
+            self.frame.step_count = 0
+            self.frame.generate_button.configure(state="disabled")
+            self._update_rollback_selector()
+            self._refresh_manipulate_widgets
 
-        snapshots = self.model.DATASET.get_snapshot_list()
-        for item in snapshots:
-            print(len(item["Dataframe"].columns))
+        except Exception as error:
+            self.logger.log_exception("Generate failed to complete. Traceback:")
 
     def _scan_dataset(self):  
         """
@@ -202,15 +202,20 @@ class ManipulateController:
             self.logger.log_info(f"{item}")
 
     def _rollback(self):
-        index = self.frame.get_rollback_index()
-
-        self.model.DATASET.rollback(int(index))
-        self.snapshot_count = 0
-        self._update_rollback_selector()
-
-        self._refresh_manipulate_widgets
+        """Rollback function of the manipulate UI, bound to rollback button in manipulations UI.
+        """
+        try:
+            index = self.frame.get_rollback_index()
+            self.model.DATASET.rollback(int(index))
+            self.snapshot_count = 0
+            self._update_rollback_selector()
+            self._refresh_manipulate_widgets
+        except Exception as error:
+            self.logger.log_exception("Rollback failed to complete. Traceback:")
 
     def _update_rollback_selector(self):
+        """Function to update the rollback selector widget in the manipulations UI.
+        """
         snapshots = self.model.DATASET.get_snapshot_list()
         selector_list = []
         self.snapshot_count = 0

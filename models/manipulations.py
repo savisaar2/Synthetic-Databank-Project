@@ -189,7 +189,6 @@ class ManipulationsModel():
         Returns:
             pandas_dataframe: A Pandas dataframe which has been manipulated.
         """
-        print(args)
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         try:

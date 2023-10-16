@@ -48,7 +48,6 @@ class ConfigNewDatasetController:
                 "col_name": self.frame.variables["col_name"],
                 "df": self.model.DATASET.get_reference_to_current_snapshot()
             }
-            print(action_set)
             self.model.config_new_dataset.update_action_set(action_set)
 
     def populate_dataset(self):

@@ -52,7 +52,6 @@ class ConfigNewDatasetModel():
            action_set (dict): Dictionary of variables to apply to a dataset.
         """
         self.action_set.append(action_set)
-        print(self.action_set)
 
     def _custom_int_range(self, arg_a, arg_b, df, col_name):
         generated_data = []

@@ -1664,3 +1664,7 @@ ValueError: could not convert string to float: '30-39'
 2023-10-16 17:05:11,789 - INFO - User initiated generate function with schedule set:
 2023-10-16 17:05:11,789 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
 2023-10-16 17:05:11,801 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 17:07:55,673 - INFO - User changed view to 'manipulate'.
+2023-10-16 17:12:15,079 - INFO - User initiated generate function with schedule set:
+2023-10-16 17:12:15,079 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'Random Forest', 'b': '', 'c': ''}, 'column': 'Insulin', 'outcome': 'Success'}
+2023-10-16 17:12:15,089 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
