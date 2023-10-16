@@ -27,6 +27,10 @@
         "Source": "Some Source",
         "Description": "Some Description"
     },
+    "titanic": {
+        "Source": "Some Source",
+        "Description": "Some Description"
+    },
     "wdbc": {
         "Source": "Some Source",
         "Description": "Some Description"
@@ -34,5 +38,9 @@
     "wine_dataset": {
         "Source": "Some Source",
         "Description": "Some Description"
+    },
+    "diamonds": {
+        "Source": "123",
+        "Description": "abc"
     }
 }

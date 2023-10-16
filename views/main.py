@@ -13,6 +13,7 @@ from .overlays.account_manager import AccountMgmtView
 from .overlays.account_editor import AccountEditorView
 from .overlays.exception import ExceptionView
 from .overlays.login import LoginView
+from .overlays.config_new_dataset import ConfigNewDatasetView
 
 class View:
     def __init__(self):
@@ -47,6 +48,7 @@ class View:
         self._add_frame(AccountEditorView, "accounts_editor")
         self._add_frame(ExceptionView, "exception")
         self._add_frame(AccountEditorView, "new_account", new_account=True)
+        self._add_frame(ConfigNewDatasetView, "config_new_dataset")
 
         self.current_view = None
 

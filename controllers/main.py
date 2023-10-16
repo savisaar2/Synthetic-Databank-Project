@@ -7,6 +7,7 @@ from .save import SaveController
 from .login import LoginController
 from .exception import ExceptionController
 from .accounts import AccountsController
+from .config_new_dataset import ConfigNewDatasetController
 from utils.logger_utils import Logger
 
 class Controller:
@@ -38,6 +39,7 @@ class Controller:
         self.exception = ExceptionController(model, view)
         self.menu_controller = MenuController(model, view)
         self.accounts_controller = AccountsController(model, view)
+        self.config_new_dataset_controller = ConfigNewDatasetController(model, view)
 
     def start(self):
         """Start the main application."""

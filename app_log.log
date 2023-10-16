@@ -1,3 +1,1010 @@
+<<<<<<< HEAD
+2023-10-06 03:19:01,517 - INFO - User changed view to 'analyse'.
+2023-10-06 03:19:10,203 - INFO - User changed view to 'library'.
+2023-10-06 03:19:18,039 - INFO - User changed view to 'analyse'.
+2023-10-06 03:19:18,509 - INFO - User changed view to 'manipulate'.
+2023-10-06 03:19:19,144 - INFO - User changed view to 'analyse'.
+2023-10-06 03:19:19,853 - INFO - User changed view to 'library'.
+2023-10-06 03:19:20,660 - INFO - User changed view to 'library'.
+2023-10-06 03:19:21,048 - INFO - User changed view to 'analyse'.
+2023-10-06 03:19:21,477 - INFO - User changed view to 'manipulate'.
+2023-10-06 03:19:21,957 - INFO - User changed view to 'sample'.
+2023-10-06 03:19:22,460 - INFO - User changed view to 'manipulate'.
+2023-10-06 03:19:22,887 - INFO - User changed view to 'analyse'.
+2023-10-06 03:47:12,791 - INFO - User changed view to 'analyse'.
+2023-10-06 03:47:13,637 - INFO - User changed view to 'library'.
+2023-10-06 03:47:14,157 - INFO - User changed view to 'manipulate'.
+2023-10-06 03:47:15,198 - INFO - User changed view to 'manipulate'.
+2023-10-06 03:47:15,615 - INFO - User changed view to 'analyse'.
+2023-10-06 03:47:16,069 - INFO - User changed view to 'analyse'.
+2023-10-06 03:47:16,485 - INFO - User changed view to 'library'.
+2023-10-06 03:47:16,990 - INFO - User changed view to 'sample'.
+2023-10-06 03:47:17,421 - INFO - User changed view to 'sample'.
+2023-10-06 03:47:17,932 - INFO - User changed view to 'save'.
+2023-10-06 03:47:18,397 - INFO - User changed view to 'manipulate'.
+2023-10-06 03:47:18,853 - INFO - User changed view to 'analyse'.
+2023-10-06 03:47:19,261 - INFO - User changed view to 'library'.
+2023-10-06 17:08:34,749 - INFO - User changed view to 'manipulate'.
+2023-10-06 17:08:35,683 - INFO - User changed view to 'library'.
+2023-10-06 17:08:37,873 - INFO - User changed view to 'manipulate'.
+2023-10-06 17:22:08,018 - INFO - User changed view to 'manipulate'.
+2023-10-06 21:24:16,563 - INFO - User changed view to 'manipulate'.
+2023-10-06 21:27:53,659 - INFO - User changed view to 'library'.
+2023-10-06 21:28:03,940 - INFO - User changed view to 'analyse'.
+2023-10-06 21:28:05,659 - INFO - User changed view to 'manipulate'.
+2023-10-06 21:28:07,650 - INFO - User changed view to 'analyse'.
+2023-10-06 21:28:10,383 - INFO - User changed view to 'manipulate'.
+2023-10-06 21:28:14,406 - INFO - User changed view to 'sample'.
+2023-10-06 21:28:15,298 - INFO - User changed view to 'save'.
+2023-10-06 21:28:16,749 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:07:11,529 - INFO - User changed view to 'analyse'.
+2023-10-07 12:07:11,949 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:07:12,445 - INFO - User changed view to 'analyse'.
+2023-10-07 12:07:17,307 - INFO - User changed view to 'library'.
+2023-10-07 12:24:45,435 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:24:45,991 - INFO - User changed view to 'library'.
+2023-10-07 12:24:47,281 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:30:01,487 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:31:12,313 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:33:42,110 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:44:13,470 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:44:13,981 - INFO - User changed view to 'library'.
+2023-10-07 12:44:15,494 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:50:07,924 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:50:33,383 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:52:27,133 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:52:30,179 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:54:58,275 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:55:00,245 - INFO - User changed view to 'library'.
+2023-10-07 12:55:02,004 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:58:49,472 - INFO - User changed view to 'manipulate'.
+2023-10-07 12:58:51,052 - INFO - User changed view to 'library'.
+2023-10-07 12:58:52,574 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:01:10,383 - INFO - User changed view to 'library'.
+2023-10-07 13:01:11,430 - INFO - User changed view to 'sample'.
+2023-10-07 13:01:11,736 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:05:18,715 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:06:07,916 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:07:44,094 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:10:49,353 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:23:28,255 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:29:02,940 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:30:09,248 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:33:21,639 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:36:43,641 - INFO - User changed view to 'library'.
+2023-10-07 13:36:46,103 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:45:04,791 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:48:53,087 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:49:52,093 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:56:52,752 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:58:33,495 - INFO - User changed view to 'manipulate'.
+2023-10-07 13:58:35,380 - INFO - User changed view to 'library'.
+2023-10-07 13:58:36,851 - INFO - User changed view to 'sample'.
+2023-10-07 13:58:37,107 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:00:39,210 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:01:42,135 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:01:43,386 - INFO - User changed view to 'library'.
+2023-10-07 14:01:44,717 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:02:46,290 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:04:00,027 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:06:43,967 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:08:14,720 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:12:15,383 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:13:21,273 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:13:22,158 - INFO - User changed view to 'library'.
+2023-10-07 14:13:23,437 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:14:28,258 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:23:08,813 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:23:54,866 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:28:55,866 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:32:04,619 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:38:26,187 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:38:27,832 - INFO - User changed view to 'library'.
+2023-10-07 14:38:29,063 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:40:04,603 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:43:50,966 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:47:20,121 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:47:59,667 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:49:33,422 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:50:45,551 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:51:40,450 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:53:21,531 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:55:04,304 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:57:08,576 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:57:42,494 - INFO - User changed view to 'manipulate'.
+2023-10-07 14:59:25,469 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:00:55,081 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:00:57,473 - INFO - User changed view to 'library'.
+2023-10-07 15:00:58,948 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:02:01,381 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:02:02,663 - INFO - User changed view to 'library'.
+2023-10-07 15:02:03,736 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:02:59,522 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:11:14,719 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:11:18,908 - INFO - User changed view to 'library'.
+2023-10-07 15:11:20,997 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:13:51,642 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:15:37,986 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:15:39,596 - INFO - User changed view to 'library'.
+2023-10-07 15:15:41,014 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:21:07,112 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:22:31,425 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:24:44,988 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:27:05,447 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:30:04,750 - INFO - User changed view to 'sample'.
+2023-10-07 15:30:05,104 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:31:14,658 - INFO - User changed view to 'analyse'.
+2023-10-07 15:31:15,696 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:34:16,648 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:36:31,298 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:38:40,360 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:40:23,332 - INFO - User changed view to 'manipulate'.
+2023-10-07 15:41:30,149 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:09:56,586 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:11:23,106 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:24:12,776 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:28:39,165 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:28:41,883 - INFO - User changed view to 'library'.
+2023-10-07 16:28:43,288 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:32:29,249 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:33:59,205 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:37:32,543 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:38:14,229 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:40:21,345 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:43:01,212 - INFO - User changed view to 'library'.
+2023-10-07 16:43:43,906 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:50:32,422 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:51:59,608 - INFO - User changed view to 'manipulate'.
+2023-10-07 16:52:40,830 - INFO - User changed view to 'manipulate'.
+2023-10-07 17:01:59,806 - INFO - User changed view to 'manipulate'.
+2023-10-07 17:33:46,590 - INFO - User changed view to 'manipulate'.
+2023-10-07 17:35:02,616 - INFO - User changed view to 'manipulate'.
+2023-10-07 17:35:04,766 - INFO - User changed view to 'manipulate'.
+2023-10-07 17:53:45,272 - INFO - User changed view to 'manipulate'.
+2023-10-07 17:54:30,092 - INFO - User changed view to 'manipulate'.
+2023-10-07 17:59:45,239 - INFO - User changed view to 'manipulate'.
+2023-10-07 18:42:02,670 - INFO - User changed view to 'manipulate'.
+2023-10-07 18:44:14,772 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:13:54,039 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:16:59,266 - INFO - User changed view to 'library'.
+2023-10-07 19:17:01,490 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:17:51,767 - INFO - User changed view to 'analyse'.
+2023-10-07 19:17:52,595 - INFO - User changed view to 'library'.
+2023-10-07 19:17:54,296 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:26:22,004 - INFO - User changed view to 'sample'.
+2023-10-07 19:26:31,404 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:27:59,387 - INFO - User changed view to 'analyse'.
+2023-10-07 19:28:13,915 - INFO - User changed view to 'library'.
+2023-10-07 19:28:13,981 - INFO - User changed view to 'library'.
+2023-10-07 19:28:15,637 - INFO - User changed view to 'analyse'.
+2023-10-07 19:28:17,824 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:28:26,475 - INFO - User changed view to 'analyse'.
+2023-10-07 19:28:33,082 - INFO - User changed view to 'sample'.
+2023-10-07 19:29:10,284 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:30:32,160 - INFO - User changed view to 'library'.
+2023-10-07 19:30:38,829 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:36:51,572 - INFO - User changed view to 'library'.
+2023-10-07 19:36:54,076 - INFO - User changed view to 'sample'.
+2023-10-07 19:37:11,569 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:37:31,492 - INFO - User changed view to 'sample'.
+2023-10-07 19:37:44,771 - INFO - User changed view to 'library'.
+2023-10-07 19:37:50,958 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:38:00,397 - INFO - User changed view to 'sample'.
+2023-10-07 19:42:37,715 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:42:39,849 - INFO - User changed view to 'analyse'.
+2023-10-07 19:42:40,261 - INFO - User changed view to 'library'.
+2023-10-07 19:42:40,787 - INFO - User changed view to 'manipulate'.
+2023-10-07 19:42:41,959 - INFO - User changed view to 'sample'.
+2023-10-07 19:42:46,294 - INFO - User changed view to 'accounts'.
+2023-10-07 19:42:55,012 - INFO - User changed view to 'save'.
+2023-10-07 19:42:55,543 - INFO - User changed view to 'sample'.
+2023-10-07 19:50:42,299 - INFO - User changed view to 'library'.
+2023-10-07 20:13:27,800 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:16:09,300 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:25:54,717 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:26:55,493 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:26:56,525 - INFO - User changed view to 'library'.
+2023-10-07 20:26:58,256 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:29:29,061 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:38:20,686 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:39:25,977 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:41:20,928 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:43:18,985 - INFO - User changed view to 'library'.
+2023-10-07 20:43:23,911 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:50:35,041 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:51:45,274 - INFO - User changed view to 'manipulate'.
+2023-10-07 20:57:18,394 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:02:05,321 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:03:17,816 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:11:36,342 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:11:54,141 - INFO - User changed view to 'library'.
+2023-10-07 21:11:56,659 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:13:50,392 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:14:24,980 - INFO - User changed view to 'library'.
+2023-10-07 21:14:28,442 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:16:43,539 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:17:23,646 - INFO - User changed view to 'library'.
+2023-10-07 21:17:26,746 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:18:44,003 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:18:49,726 - INFO - User changed view to 'library'.
+2023-10-07 21:18:52,093 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:19:32,051 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:19:34,296 - INFO - User changed view to 'library'.
+2023-10-07 21:19:36,400 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:19:47,869 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:19:48,576 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:21:31,657 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:22:32,580 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:23:38,615 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:24:11,449 - INFO - User changed view to 'library'.
+2023-10-07 21:24:13,858 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:24:19,587 - INFO - User changed view to 'library'.
+2023-10-07 21:24:22,076 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:25:36,855 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:25:39,561 - INFO - User changed view to 'library'.
+2023-10-07 21:25:41,954 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:25:44,965 - INFO - User changed view to 'library'.
+2023-10-07 21:25:47,123 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:26:43,753 - INFO - User changed view to 'library'.
+2023-10-07 21:26:45,818 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:38:38,879 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:38:41,133 - INFO - User changed view to 'library'.
+2023-10-07 21:39:01,212 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:43:16,679 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:43:38,654 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:43:39,378 - INFO - User changed view to 'analyse'.
+2023-10-07 21:43:39,908 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:43:41,204 - INFO - User changed view to 'library'.
+2023-10-07 21:43:44,500 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:43:57,136 - INFO - User changed view to 'library'.
+2023-10-07 21:43:59,449 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:46:23,500 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:47:47,738 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:48:28,797 - INFO - User changed view to 'analyse'.
+2023-10-07 21:48:29,131 - INFO - User changed view to 'library'.
+2023-10-07 21:48:31,281 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:50:15,857 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:50:16,521 - INFO - User changed view to 'analyse'.
+2023-10-07 21:50:16,887 - INFO - User changed view to 'library'.
+2023-10-07 21:50:18,880 - INFO - User changed view to 'analyse'.
+2023-10-07 21:50:19,368 - INFO - User changed view to 'library'.
+2023-10-07 21:50:21,803 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:53:06,778 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:53:51,934 - INFO - User changed view to 'library'.
+2023-10-07 21:53:55,975 - INFO - User changed view to 'manipulate'.
+2023-10-07 21:57:46,885 - INFO - User changed view to 'library'.
+2023-10-07 21:58:08,263 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:18:27,551 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:20:52,716 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:21:18,690 - INFO - User changed view to 'analyse'.
+2023-10-07 22:21:19,438 - INFO - User changed view to 'library'.
+2023-10-07 22:21:24,355 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:26:24,298 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:30:05,012 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:36:30,822 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:37:33,422 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:41:35,553 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:43:49,345 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:46:14,760 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:49:01,839 - INFO - User changed view to 'manipulate'.
+2023-10-07 22:50:19,183 - INFO - User changed view to 'manipulate'.
+2023-10-07 23:20:29,575 - INFO - User changed view to 'manipulate'.
+2023-10-07 23:22:01,324 - INFO - User changed view to 'manipulate'.
+2023-10-07 23:23:58,668 - INFO - User changed view to 'analyse'.
+2023-10-07 23:23:59,014 - INFO - User changed view to 'manipulate'.
+2023-10-07 23:27:14,990 - INFO - User changed view to 'manipulate'.
+2023-10-07 23:27:48,958 - INFO - User changed view to 'manipulate'.
+2023-10-07 23:29:45,047 - INFO - User changed view to 'manipulate'.
+2023-10-07 23:29:45,867 - INFO - User changed view to 'analyse'.
+2023-10-07 23:29:46,092 - INFO - User changed view to 'library'.
+2023-10-07 23:29:47,467 - INFO - User changed view to 'manipulate'.
+2023-10-07 23:34:05,093 - INFO - User changed view to 'manipulate'.
+2023-10-07 23:37:12,754 - INFO - User changed view to 'manipulate'.
+2023-10-08 09:26:24,185 - INFO - User changed view to 'manipulate'.
+2023-10-08 09:38:24,643 - INFO - User changed view to 'manipulate'.
+2023-10-08 09:38:25,052 - INFO - User changed view to 'library'.
+2023-10-08 09:38:27,510 - INFO - User changed view to 'manipulate'.
+2023-10-08 09:41:51,441 - INFO - User changed view to 'manipulate'.
+2023-10-08 09:41:52,453 - INFO - User changed view to 'library'.
+2023-10-08 09:41:54,364 - INFO - User changed view to 'manipulate'.
+2023-10-08 09:53:28,485 - INFO - User changed view to 'analyse'.
+2023-10-08 09:53:29,536 - INFO - User changed view to 'library'.
+2023-10-08 09:53:33,310 - INFO - User changed view to 'manipulate'.
+2023-10-08 09:53:43,664 - INFO - User changed view to 'library'.
+2023-10-08 09:53:50,002 - INFO - User changed view to 'manipulate'.
+2023-10-08 09:53:57,101 - INFO - User changed view to 'library'.
+2023-10-08 09:53:59,124 - INFO - User changed view to 'manipulate'.
+2023-10-08 09:54:04,788 - INFO - User changed view to 'library'.
+2023-10-08 09:54:06,761 - INFO - User changed view to 'manipulate'.
+2023-10-08 09:54:36,306 - INFO - User changed view to 'library'.
+2023-10-08 09:54:38,804 - INFO - User changed view to 'manipulate'.
+2023-10-08 09:54:44,479 - INFO - User changed view to 'library'.
+2023-10-08 09:54:48,630 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:05:55,917 - INFO - User changed view to 'library'.
+2023-10-08 10:05:58,180 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:25:33,814 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:26:47,128 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:30:45,747 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:33:45,978 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:34:16,135 - INFO - User changed view to 'library'.
+2023-10-08 10:34:19,516 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:34:35,371 - INFO - User changed view to 'library'.
+2023-10-08 10:34:37,509 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:38:24,844 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:38:25,983 - INFO - User changed view to 'library'.
+2023-10-08 10:38:30,024 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:42:11,754 - INFO - User changed view to 'library'.
+2023-10-08 10:42:14,948 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:55:34,227 - INFO - User changed view to 'manipulate'.
+2023-10-08 10:55:50,802 - INFO - User changed view to 'library'.
+2023-10-08 10:56:01,857 - INFO - User changed view to 'library'.
+2023-10-08 10:56:06,483 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:00:03,662 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:02:15,572 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:03:29,280 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:05:52,954 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:07:46,214 - INFO - User changed view to 'analyse'.
+2023-10-08 11:07:46,880 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:07:48,150 - INFO - User changed view to 'analyse'.
+2023-10-08 11:07:48,834 - INFO - User changed view to 'library'.
+2023-10-08 11:07:50,664 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:19:46,845 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:22:45,266 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:25:18,460 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:26:28,108 - INFO - User changed view to 'library'.
+2023-10-08 11:26:33,781 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:31:55,668 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:33:18,413 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:37:20,627 - INFO - User changed view to 'manipulate'.
+2023-10-08 11:46:31,820 - INFO - User changed view to 'manipulate'.
+2023-10-08 12:07:53,995 - INFO - User changed view to 'manipulate'.
+2023-10-08 12:14:15,747 - INFO - User changed view to 'manipulate'.
+2023-10-08 12:15:22,581 - INFO - User changed view to 'manipulate'.
+2023-10-08 12:16:43,482 - INFO - User changed view to 'manipulate'.
+2023-10-08 12:17:37,966 - INFO - User changed view to 'manipulate'.
+2023-10-08 12:19:27,460 - INFO - User changed view to 'manipulate'.
+2023-10-08 12:19:28,254 - INFO - User changed view to 'library'.
+2023-10-08 12:19:29,759 - INFO - User changed view to 'manipulate'.
+2023-10-08 12:24:35,730 - INFO - User changed view to 'manipulate'.
+2023-10-08 22:13:28,407 - INFO - User changed view to 'manipulate'.
+2023-10-08 22:23:40,502 - INFO - User changed view to 'accounts'.
+2023-10-08 22:23:41,849 - INFO - User changed view to 'sample'.
+2023-10-08 22:23:42,253 - INFO - User changed view to 'save'.
+2023-10-08 22:23:42,848 - INFO - User changed view to 'analyse'.
+2023-10-08 22:23:43,312 - INFO - User changed view to 'manipulate'.
+2023-10-08 22:23:44,856 - INFO - User changed view to 'library'.
+2023-10-08 22:23:47,981 - INFO - User changed view to 'manipulate'.
+2023-10-08 23:08:27,080 - INFO - User changed view to 'manipulate'.
+2023-10-08 23:08:38,156 - INFO - User changed view to 'analyse'.
+2023-10-08 23:08:38,784 - INFO - User changed view to 'manipulate'.
+2023-10-08 23:08:41,079 - INFO - User changed view to 'library'.
+2023-10-08 23:08:45,380 - INFO - User changed view to 'manipulate'.
+2023-10-08 23:10:59,136 - INFO - User changed view to 'analyse'.
+2023-10-08 23:11:00,552 - INFO - User changed view to 'library'.
+2023-10-08 23:11:02,418 - INFO - User changed view to 'manipulate'.
+2023-10-08 23:15:21,950 - INFO - User changed view to 'manipulate'.
+2023-10-08 23:15:42,601 - INFO - User changed view to 'library'.
+2023-10-08 23:15:44,518 - INFO - User changed view to 'manipulate'.
+2023-10-08 23:17:39,453 - INFO - User changed view to 'manipulate'.
+2023-10-08 23:23:01,692 - INFO - User changed view to 'analyse'.
+2023-10-08 23:23:02,228 - INFO - User changed view to 'library'.
+2023-10-08 23:23:06,246 - INFO - User changed view to 'manipulate'.
+2023-10-08 23:23:27,150 - INFO - User changed view to 'library'.
+2023-10-08 23:23:29,009 - INFO - User changed view to 'manipulate'.
+2023-10-08 23:25:02,967 - INFO - User changed view to 'manipulate'.
+2023-10-09 09:40:16,173 - INFO - User changed view to 'manipulate'.
+2023-10-09 10:07:15,690 - INFO - User changed view to 'manipulate'.
+2023-10-09 10:16:18,618 - INFO - User changed view to 'manipulate'.
+2023-10-09 10:31:34,260 - INFO - User changed view to 'manipulate'.
+2023-10-09 10:32:24,112 - INFO - User changed view to 'manipulate'.
+2023-10-09 10:35:45,962 - INFO - User changed view to 'manipulate'.
+2023-10-09 10:43:55,197 - INFO - User changed view to 'manipulate'.
+2023-10-09 10:48:30,260 - INFO - User changed view to 'manipulate'.
+2023-10-09 10:55:23,272 - INFO - User changed view to 'manipulate'.
+2023-10-09 11:03:33,334 - INFO - User changed view to 'manipulate'.
+2023-10-09 11:10:31,511 - INFO - User changed view to 'manipulate'.
+2023-10-09 11:18:31,713 - INFO - User changed view to 'manipulate'.
+2023-10-09 11:21:49,655 - INFO - User changed view to 'manipulate'.
+2023-10-09 11:25:53,173 - INFO - User changed view to 'manipulate'.
+2023-10-09 11:28:51,592 - INFO - User changed view to 'manipulate'.
+2023-10-09 11:31:23,387 - INFO - User changed view to 'analyse'.
+2023-10-09 11:31:23,617 - INFO - User changed view to 'manipulate'.
+2023-10-09 11:34:41,032 - INFO - User changed view to 'manipulate'.
+2023-10-09 11:40:56,631 - INFO - User changed view to 'manipulate'.
+2023-10-09 11:43:31,286 - INFO - User changed view to 'manipulate'.
+2023-10-09 11:57:11,740 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:03:30,983 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:05:48,669 - INFO - User changed view to 'accounts'.
+2023-10-09 12:05:54,355 - INFO - User changed view to 'library'.
+2023-10-09 12:05:57,048 - INFO - User changed view to 'analyse'.
+2023-10-09 12:05:57,835 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:06:13,773 - INFO - User changed view to 'library'.
+2023-10-09 12:06:16,165 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:06:49,362 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:08:23,335 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:09:09,161 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:23:10,367 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:26:26,831 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:34:41,477 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:35:46,328 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:36:45,667 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:38:11,326 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:38:11,716 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:42:56,036 - INFO - User changed view to 'manipulate'.
+2023-10-09 12:43:18,863 - INFO - User changed view to 'library'.
+2023-10-09 12:43:20,937 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:02:43,392 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:02:43,814 - INFO - User changed view to 'library'.
+2023-10-09 13:02:45,000 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:08:35,380 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:10:53,842 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:11:46,655 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:13:35,492 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:17:45,934 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:18:20,854 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:18:42,138 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:20:54,163 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:21:18,104 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:21:50,047 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:23:18,034 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:24:02,615 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:27:34,134 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:39:31,603 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:40:55,943 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:41:56,467 - INFO - User changed view to 'analyse'.
+2023-10-09 13:41:57,163 - INFO - User changed view to 'analyse'.
+2023-10-09 13:41:57,462 - INFO - User changed view to 'analyse'.
+2023-10-09 13:41:57,700 - INFO - User changed view to 'library'.
+2023-10-09 13:42:00,868 - INFO - User changed view to 'manipulate'.
+2023-10-09 13:46:49,912 - INFO - User changed view to 'manipulate'.
+2023-10-09 14:07:53,071 - INFO - User changed view to 'manipulate'.
+2023-10-09 14:29:21,537 - INFO - User changed view to 'manipulate'.
+2023-10-09 14:34:43,701 - INFO - User changed view to 'manipulate'.
+2023-10-09 14:37:51,448 - INFO - User changed view to 'library'.
+2023-10-09 14:37:54,855 - INFO - User changed view to 'manipulate'.
+2023-10-09 14:39:34,152 - INFO - User changed view to 'manipulate'.
+2023-10-09 14:41:28,045 - INFO - User changed view to 'analyse'.
+2023-10-09 14:41:28,533 - INFO - User changed view to 'library'.
+2023-10-09 14:41:31,135 - INFO - User changed view to 'manipulate'.
+2023-10-09 14:50:06,983 - INFO - User changed view to 'manipulate'.
+2023-10-09 14:51:58,912 - INFO - User changed view to 'manipulate'.
+2023-10-09 14:52:58,935 - INFO - User changed view to 'manipulate'.
+2023-10-09 14:54:30,178 - INFO - User changed view to 'manipulate'.
+2023-10-09 14:54:42,312 - INFO - User changed view to 'library'.
+2023-10-09 14:54:43,847 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:00:11,001 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:23:18,672 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:25:27,110 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:26:18,969 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:28:34,347 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:32:06,825 - INFO - User changed view to 'sample'.
+2023-10-09 15:32:07,285 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:34:31,473 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:49:12,519 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:50:20,217 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:52:05,098 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:54:36,639 - INFO - User changed view to 'library'.
+2023-10-09 15:54:38,586 - INFO - User changed view to 'manipulate'.
+2023-10-09 15:56:23,015 - INFO - User changed view to 'manipulate'.
+2023-10-09 16:05:02,162 - INFO - User changed view to 'manipulate'.
+2023-10-09 16:09:45,801 - INFO - User changed view to 'manipulate'.
+2023-10-09 16:19:15,431 - INFO - User changed view to 'manipulate'.
+2023-10-09 16:20:49,160 - INFO - User changed view to 'manipulate'.
+2023-10-09 16:21:34,867 - INFO - User changed view to 'manipulate'.
+2023-10-09 16:26:13,868 - INFO - User changed view to 'save'.
+2023-10-09 16:26:23,446 - INFO - User changed view to 'manipulate'.
+2023-10-09 16:48:40,162 - INFO - User changed view to 'manipulate'.
+2023-10-09 16:50:40,289 - INFO - User changed view to 'manipulate'.
+2023-10-09 16:50:43,847 - INFO - User changed view to 'library'.
+2023-10-09 16:50:45,482 - INFO - User changed view to 'manipulate'.
+2023-10-09 16:54:33,823 - INFO - User changed view to 'manipulate'.
+2023-10-09 16:55:19,968 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:06:23,531 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:07:16,788 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:08:38,345 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:12:40,258 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:17:23,615 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:17:56,203 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:18:23,848 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:19:56,627 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:20:03,682 - INFO - User changed view to 'library'.
+2023-10-09 17:20:05,282 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:23:22,902 - INFO - User changed view to 'library'.
+2023-10-09 17:23:26,108 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:23:35,819 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:28:22,413 - INFO - User changed view to 'manipulate'.
+2023-10-09 17:34:39,988 - INFO - User changed view to 'library'.
+2023-10-09 17:34:42,399 - INFO - User changed view to 'manipulate'.
+2023-10-09 18:00:46,239 - INFO - User changed view to 'manipulate'.
+2023-10-09 18:27:49,142 - INFO - User changed view to 'save'.
+2023-10-09 18:27:52,208 - INFO - User changed view to 'manipulate'.
+2023-10-09 18:28:53,428 - INFO - User changed view to 'sample'.
+2023-10-09 18:29:07,656 - INFO - User changed view to 'manipulate'.
+2023-10-09 18:30:07,404 - INFO - User changed view to 'analyse'.
+2023-10-09 18:31:05,145 - INFO - User changed view to 'library'.
+2023-10-09 18:31:08,508 - INFO - User changed view to 'sample'.
+2023-10-09 18:31:15,183 - INFO - User changed view to 'analyse'.
+2023-10-09 18:31:22,036 - INFO - User changed view to 'sample'.
+2023-10-09 18:31:49,970 - INFO - User changed view to 'analyse'.
+2023-10-09 18:35:42,679 - INFO - User changed view to 'manipulate'.
+2023-10-09 18:44:35,064 - INFO - User changed view to 'library'.
+2023-10-09 18:44:39,000 - INFO - User changed view to 'manipulate'.
+2023-10-09 18:57:03,069 - INFO - User changed view to 'library'.
+2023-10-09 18:57:05,754 - INFO - User changed view to 'manipulate'.
+2023-10-09 19:21:14,049 - INFO - User changed view to 'save'.
+2023-10-09 19:21:33,209 - INFO - User changed view to 'manipulate'.
+2023-10-09 19:21:54,935 - INFO - User changed view to 'library'.
+2023-10-09 19:22:38,875 - INFO - User changed view to 'manipulate'.
+2023-10-09 19:23:30,783 - INFO - User changed view to 'library'.
+2023-10-09 19:24:06,579 - INFO - User changed view to 'manipulate'.
+2023-10-09 19:25:56,090 - INFO - User changed view to 'analyse'.
+2023-10-09 19:26:04,421 - INFO - User changed view to 'manipulate'.
+2023-10-09 19:26:05,407 - INFO - User changed view to 'sample'.
+2023-10-09 19:26:06,048 - INFO - User changed view to 'analyse'.
+2023-10-09 19:26:06,357 - INFO - User changed view to 'manipulate'.
+2023-10-09 19:26:38,828 - INFO - User changed view to 'library'.
+2023-10-09 19:26:54,557 - INFO - User changed view to 'manipulate'.
+2023-10-09 19:28:37,699 - INFO - User changed view to 'analyse'.
+2023-10-09 19:28:42,011 - INFO - User changed view to 'sample'.
+2023-10-09 19:28:42,603 - INFO - User changed view to 'manipulate'.
+2023-10-09 19:29:50,246 - INFO - User changed view to 'library'.
+2023-10-09 19:30:06,064 - INFO - User changed view to 'manipulate'.
+2023-10-09 19:30:17,225 - INFO - User changed view to 'library'.
+2023-10-09 19:30:19,644 - INFO - User changed view to 'manipulate'.
+2023-10-09 19:30:24,146 - INFO - User changed view to 'analyse'.
+2023-10-09 19:30:25,005 - INFO - User changed view to 'manipulate'.
+2023-10-09 19:54:21,168 - INFO - User changed view to 'manipulate'.
+2023-10-09 20:10:47,449 - INFO - User changed view to 'library'.
+2023-10-09 20:10:52,200 - INFO - User changed view to 'manipulate'.
+2023-10-09 20:11:48,107 - INFO - User changed view to 'library'.
+2023-10-09 20:11:48,783 - INFO - User changed view to 'analyse'.
+2023-10-09 20:11:50,231 - INFO - User changed view to 'manipulate'.
+2023-10-09 20:11:51,233 - INFO - User changed view to 'sample'.
+2023-10-09 20:11:51,829 - INFO - User changed view to 'save'.
+2023-10-09 20:11:52,344 - INFO - User changed view to 'save'.
+2023-10-09 20:11:52,687 - INFO - User changed view to 'save'.
+2023-10-09 20:11:53,023 - INFO - User changed view to 'sample'.
+2023-10-09 20:11:53,380 - INFO - User changed view to 'sample'.
+2023-10-09 20:11:53,610 - INFO - User changed view to 'manipulate'.
+2023-10-09 22:52:53,258 - INFO - User changed view to 'manipulate'.
+2023-10-09 22:56:49,764 - INFO - User changed view to 'analyse'.
+2023-10-09 22:56:50,598 - INFO - User changed view to 'library'.
+2023-10-09 22:56:52,508 - INFO - User changed view to 'manipulate'.
+2023-10-09 22:58:00,496 - INFO - User changed view to 'analyse'.
+2023-10-09 22:58:01,263 - INFO - User changed view to 'library'.
+2023-10-09 22:58:01,611 - INFO - User changed view to 'manipulate'.
+2023-10-09 22:58:07,241 - INFO - User changed view to 'library'.
+2023-10-09 22:58:07,563 - INFO - User changed view to 'library'.
+2023-10-09 22:58:09,766 - INFO - User changed view to 'manipulate'.
+2023-10-09 23:01:17,393 - INFO - User changed view to 'library'.
+2023-10-09 23:01:19,067 - INFO - User changed view to 'manipulate'.
+2023-10-09 23:10:32,839 - INFO - User changed view to 'manipulate'.
+2023-10-09 23:11:42,846 - INFO - User changed view to 'analyse'.
+2023-10-09 23:11:43,481 - INFO - User changed view to 'library'.
+2023-10-09 23:11:46,157 - INFO - User changed view to 'manipulate'.
+2023-10-09 23:14:25,705 - INFO - User changed view to 'manipulate'.
+2023-10-09 23:15:27,163 - INFO - User changed view to 'library'.
+2023-10-09 23:15:30,226 - INFO - User changed view to 'manipulate'.
+2023-10-10 09:11:17,875 - INFO - User changed view to 'manipulate'.
+2023-10-10 09:31:35,242 - INFO - User changed view to 'manipulate'.
+2023-10-10 09:37:28,190 - INFO - User changed view to 'manipulate'.
+2023-10-10 09:39:06,303 - INFO - User changed view to 'manipulate'.
+2023-10-10 09:40:27,839 - INFO - User changed view to 'manipulate'.
+2023-10-10 09:40:39,582 - INFO - User changed view to 'library'.
+2023-10-10 09:40:42,360 - INFO - User changed view to 'manipulate'.
+2023-10-10 09:54:04,410 - INFO - User changed view to 'sample'.
+2023-10-10 09:54:04,750 - INFO - User changed view to 'manipulate'.
+2023-10-10 09:57:59,027 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:01:10,254 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:08:16,087 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:10:19,734 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:14:25,740 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:20:07,251 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:20:28,732 - INFO - User changed view to 'library'.
+2023-10-10 10:20:31,035 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:22:56,628 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:23:23,551 - INFO - User changed view to 'analyse'.
+2023-10-10 10:23:23,953 - INFO - User changed view to 'library'.
+2023-10-10 10:23:25,798 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:28:18,536 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:28:47,710 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:28:48,508 - INFO - User changed view to 'analyse'.
+2023-10-10 10:28:49,166 - INFO - User changed view to 'analyse'.
+2023-10-10 10:28:49,440 - INFO - User changed view to 'library'.
+2023-10-10 10:28:51,289 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:31:59,749 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:46:13,808 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:54:51,949 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:59:25,495 - INFO - User changed view to 'analyse'.
+2023-10-10 10:59:26,400 - INFO - User changed view to 'manipulate'.
+2023-10-10 10:59:27,350 - INFO - User changed view to 'library'.
+2023-10-10 10:59:28,922 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:04:34,493 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:05:50,342 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:08:42,670 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:12:50,340 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:17:30,827 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:26:33,997 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:28:40,469 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:33:19,450 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:38:07,903 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:40:42,653 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:42:31,497 - INFO - User changed view to 'library'.
+2023-10-10 11:42:31,995 - INFO - User changed view to 'analyse'.
+2023-10-10 11:42:32,414 - INFO - User changed view to 'library'.
+2023-10-10 11:42:33,946 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:45:01,074 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:45:35,112 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:47:09,196 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:47:45,963 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:54:42,132 - INFO - User changed view to 'library'.
+2023-10-10 11:54:43,791 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:57:32,150 - INFO - User changed view to 'library'.
+2023-10-10 11:57:34,383 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:59:01,182 - INFO - User changed view to 'analyse'.
+2023-10-10 11:59:02,271 - INFO - User changed view to 'manipulate'.
+2023-10-10 11:59:04,940 - INFO - User changed view to 'library'.
+2023-10-10 11:59:06,393 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:03:21,877 - INFO - User changed view to 'library'.
+2023-10-10 12:03:24,090 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:28:28,683 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:31:30,171 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:34:30,140 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:35:01,182 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:36:58,810 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:38:29,973 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:39:20,387 - INFO - User changed view to 'analyse'.
+2023-10-10 12:39:20,731 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:43:46,230 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:45:11,546 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:47:14,196 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:49:03,481 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:50:30,030 - INFO - User changed view to 'analyse'.
+2023-10-10 12:50:30,851 - INFO - User changed view to 'library'.
+2023-10-10 12:50:32,383 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:52:17,321 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:55:29,385 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:58:12,349 - INFO - User changed view to 'manipulate'.
+2023-10-10 12:58:12,912 - INFO - User changed view to 'sample'.
+2023-10-10 12:58:13,298 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:01:39,512 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:02:54,836 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:05:15,261 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:06:42,245 - INFO - User changed view to 'library'.
+2023-10-10 13:06:44,978 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:07:59,340 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:08:59,116 - INFO - User changed view to 'library'.
+2023-10-10 13:09:02,850 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:09:04,927 - INFO - User changed view to 'library'.
+2023-10-10 13:09:06,673 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:15:37,088 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:28:39,961 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:41:06,547 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:42:42,636 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:44:45,701 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:50:26,307 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:50:35,496 - INFO - User changed view to 'library'.
+2023-10-10 13:50:37,237 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:53:51,558 - INFO - User changed view to 'analyse'.
+2023-10-10 13:53:52,230 - INFO - User changed view to 'library'.
+2023-10-10 13:53:53,995 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:55:25,558 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:56:08,275 - INFO - User changed view to 'analyse'.
+2023-10-10 13:56:09,055 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:56:09,975 - INFO - User changed view to 'library'.
+2023-10-10 13:56:11,818 - INFO - User changed view to 'manipulate'.
+2023-10-10 13:56:43,061 - INFO - User changed view to 'analyse'.
+2023-10-10 13:56:43,754 - INFO - User changed view to 'library'.
+2023-10-10 13:56:45,203 - INFO - User changed view to 'manipulate'.
+2023-10-10 14:00:58,520 - INFO - User changed view to 'manipulate'.
+2023-10-10 14:03:14,539 - INFO - User changed view to 'manipulate'.
+2023-10-10 14:09:10,354 - INFO - User changed view to 'manipulate'.
+2023-10-10 14:12:23,942 - INFO - User changed view to 'manipulate'.
+2023-10-10 14:15:52,491 - INFO - User changed view to 'manipulate'.
+2023-10-10 14:16:55,416 - INFO - User changed view to 'manipulate'.
+2023-10-10 14:20:25,334 - INFO - User changed view to 'manipulate'.
+2023-10-10 14:22:16,199 - INFO - User changed view to 'manipulate'.
+2023-10-10 14:23:37,543 - INFO - User changed view to 'manipulate'.
+2023-10-10 14:24:45,425 - INFO - User changed view to 'library'.
+2023-10-10 14:24:47,362 - INFO - User changed view to 'manipulate'.
+2023-10-10 14:35:30,198 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:12:17,855 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:27:54,577 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:27:55,218 - INFO - User changed view to 'analyse'.
+2023-10-10 22:27:55,458 - INFO - User changed view to 'library'.
+2023-10-10 22:27:57,164 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:28:03,482 - INFO - Generate function initiated.
+2023-10-10 22:31:53,422 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:32:00,441 - INFO - User initiated generate function with manpulations: [{'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '567', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success', 'df':      Pregnancies  Glucose  BloodPressure  SkinThickness  Insulin   BMI  DiabetesPedigreeFunction  Age  Outcome   567
+0              6      148             72             35        0  33.6                     0.627   50        1  None
+1              1       85             66             29        0  26.6                     0.351   31        0  None
+2              8      183             64              0        0  23.3                     0.672   32        1  None
+3              1       89             66             23       94  28.1                     0.167   21        0  None
+4              0      137             40             35      168  43.1                     2.288   33        1  None
+..           ...      ...            ...            ...      ...   ...                       ...  ...      ...   ...
+763           10      101             76             48      180  32.9                     0.171   63        0  None
+764            2      122             70             27        0  36.8                     0.340   27        0  None
+765            5      121             72             23      112  26.2                     0.245   30        0  None
+766            1      126             60              0        0  30.1                     0.349   47        1  None
+767            1       93             70             31        0  30.4                     0.315   23        0  None
+
+[768 rows x 10 columns]}].
+2023-10-10 22:46:17,135 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:46:25,779 - INFO - User changed view to 'manipulate'.
+2023-10-10 22:46:37,844 - INFO - User initiated generate function with manpulations: [{'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'dfg', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}].
+2023-10-10 22:47:49,750 - INFO - User initiated generate function with manpulations: [{'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '354', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}, {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'dfgwe', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}].
+2023-10-11 09:12:54,619 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:15:17,349 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:15:29,441 - INFO - User initiated generate function with schedule set:
+2023-10-11 09:15:29,461 - INFO - [{'step': 1, 'action': 'Add Column', 'sub_action': 'Duplicate', 'args': {'a': 'asds', 'b': '', 'c': ''}, 'column': 'Class', 'sme': 'Single', 'outcome': 'Success'}, {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asdsd', 'b': '', 'c': ''}, 'column': '', 'sme': 'No Column Required', 'outcome': 'Success', 'df':                     Class    Age menopause tumor-zie inv-nodes node-caps  deg-malig  breat breast-quad irradiat                  asds asdsd
+0    no-recurrence-events  30-39   premeno     30-34       0-2        no          3   left    left_low       no  no-recurrence-events  None
+1    no-recurrence-events  40-49   premeno     20-24       0-2        no          2  right    right_up       no  no-recurrence-events  None
+2    no-recurrence-events  40-49   premeno     20-24       0-2        no          2   left    left_low       no  no-recurrence-events  None
+3    no-recurrence-events  60-69      ge40     15-19       0-2        no          2  right     left_up       no  no-recurrence-events  None
+4    no-recurrence-events  40-49   premeno       0-4       0-2        no          2  right   right_low       no  no-recurrence-events  None
+..                    ...    ...       ...       ...       ...       ...        ...    ...         ...      ...                   ...   ...
+281     recurrence-events  30-39   premeno     30-34       0-2        no          2   left     left_up       no     recurrence-events  None
+282     recurrence-events  30-39   premeno     20-24       0-2        no          3   left     left_up      yes     recurrence-events  None
+283     recurrence-events  60-69      ge40     20-24       0-2        no          1  right     left_up       no     recurrence-events  None
+284     recurrence-events  40-49      ge40     30-34     3-May        no          3   left    left_low       no     recurrence-events  None
+285     recurrence-events  50-59      ge40     30-34     3-May        no          3   left    left_low       no     recurrence-events  None
+
+[286 rows x 12 columns]}]
+2023-10-11 09:15:29,461 - INFO - [{'step': 1, 'action': 'Add Column', 'sub_action': 'Duplicate', 'args': {'a': 'asds', 'b': '', 'c': ''}, 'column': 'Class', 'sme': 'Single', 'outcome': 'Success'}, {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asdsd', 'b': '', 'c': ''}, 'column': '', 'sme': 'No Column Required', 'outcome': 'Success'}]
+2023-10-11 09:18:52,921 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:19:05,272 - INFO - User initiated generate function with schedule set:
+2023-10-11 09:19:05,272 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'afds', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 09:19:05,272 - INFO - {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asfasfasf', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 09:45:11,201 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:45:18,194 - INFO - User initiated generate function with schedule set:
+2023-10-11 09:45:18,195 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'fghjghj', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 09:46:39,933 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:46:45,011 - INFO - User initiated generate function with schedule set:
+2023-10-11 09:46:45,012 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asd', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 09:46:45,086 - INFO - Generated dataset to SNAPSHOTS: None
+2023-10-11 09:50:06,054 - INFO - User changed view to 'manipulate'.
+2023-10-11 09:50:17,866 - INFO - User initiated generate function with schedule set:
+2023-10-11 09:50:17,866 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'sd', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 09:50:17,900 - INFO - Generated dataset added to SNAPSHOTS as current dataframe:
+2023-10-11 09:50:17,900 - INFO - None
+2023-10-11 10:02:01,383 - INFO - User changed view to 'manipulate'.
+2023-10-11 10:02:09,445 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:02:09,445 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'sr', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 10:02:09,491 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 10:02:25,026 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:02:25,027 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Scaling Z-score', 'args': {'a': ['Pregnancies', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome'], 'b': '', 'c': ''}, 'column': 'Glucose', 'sme': 'Entire', 'outcome': 'Success'}
+2023-10-11 10:02:25,042 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 10:03:36,029 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:03:36,030 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'sdfd', 'b': '', 'c': ''}, 'column': '', 'sme': 'No Column Required', 'outcome': 'Success'}
+2023-10-11 10:03:36,059 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 10:05:35,659 - INFO - User changed view to 'manipulate'.
+2023-10-11 10:05:41,845 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:05:41,846 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'sd', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 10:05:41,874 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 10:31:51,275 - INFO - User changed view to 'manipulate'.
+2023-10-11 10:32:18,184 - ERROR - test
+Traceback (most recent call last):
+  File "c:\Users\sonnyk\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 283, in reduce_columns
+    df = df.drop("break me")
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sonnyk\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['break me'] not found in axis"
+2023-10-11 10:32:18,437 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:32:18,437 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'sme': 'Single', 'outcome': 'Failed'}
+2023-10-11 10:32:18,438 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 10:49:44,954 - INFO - User changed view to 'library'.
+2023-10-11 10:49:50,321 - INFO - User changed view to 'manipulate'.
+2023-10-11 10:50:02,187 - INFO - User initiated generate function with schedule set:
+2023-10-11 10:50:02,187 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'sme': '', 'outcome': 'Success'}
+2023-10-11 10:50:02,190 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 13:37:20,296 - INFO - User changed view to 'manipulate'.
+2023-10-11 13:46:12,833 - INFO - User changed view to 'analyse'.
+2023-10-11 13:46:13,272 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:03:47,319 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:29:07,921 - INFO - User changed view to 'library'.
+2023-10-11 14:29:08,584 - INFO - User changed view to 'library'.
+2023-10-11 14:29:09,968 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:29:10,921 - INFO - User changed view to 'library'.
+2023-10-11 14:29:13,100 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:42:35,489 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:52:46,121 - INFO - User changed view to 'manipulate'.
+2023-10-11 14:59:53,808 - INFO - User changed view to 'manipulate'.
+2023-10-11 15:17:19,342 - INFO - User changed view to 'manipulate'.
+2023-10-11 15:50:25,696 - INFO - User changed view to 'manipulate'.
+2023-10-11 15:53:26,967 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:18:56,962 - INFO - User changed view to 'library'.
+2023-10-11 16:18:59,728 - INFO - User changed view to 'sample'.
+2023-10-11 16:19:00,380 - INFO - User changed view to 'analyse'.
+2023-10-11 16:19:00,637 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:27:03,745 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:27:22,236 - INFO - User changed view to 'library'.
+2023-10-11 16:27:24,509 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:31:24,750 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:35:05,412 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:35:30,808 - INFO - User changed view to 'library'.
+2023-10-11 16:35:33,232 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:37:21,274 - INFO - User changed view to 'library'.
+2023-10-11 16:37:23,552 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:43:24,386 - INFO - User changed view to 'manipulate'.
+2023-10-11 16:49:38,097 - INFO - User changed view to 'manipulate'.
+2023-10-11 20:03:24,207 - INFO - User changed view to 'manipulate'.
+2023-10-11 20:03:42,395 - INFO - User initiated generate function with schedule set:
+2023-10-11 20:03:42,395 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'dfg', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 20:03:42,406 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 20:21:07,344 - INFO - User changed view to 'library'.
+2023-10-11 20:21:09,197 - INFO - User changed view to 'manipulate'.
+2023-10-11 20:24:38,707 - INFO - User changed view to 'library'.
+2023-10-11 20:24:40,959 - INFO - User changed view to 'manipulate'.
+2023-10-11 20:37:18,220 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:04:29,384 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:04:47,676 - INFO - User changed view to 'library'.
+2023-10-11 21:04:49,881 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:23:17,883 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:27:26,006 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:38:51,579 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:39:02,895 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 299, in reduce_columns
+    df = df.drop("break me")
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['break me'] not found in axis"
+2023-10-11 21:39:02,992 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:39:02,992 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-11 21:39:02,993 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 21:42:11,680 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:42:25,681 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 299, in reduce_columns
+    df = df.drop("break me")
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['break me'] not found in axis"
+2023-10-11 21:42:25,688 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:42:25,688 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Age', 'outcome': 'Failed'}
+2023-10-11 21:42:25,689 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 21:43:31,618 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:43:31,619 - INFO - {'step': 1, 'action': 'Replace Value (x) with New Value', 'sub_action': '', 'args': {'a': '2', 'b': '0', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-11 21:43:31,630 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 21:45:21,681 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:45:21,682 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-11 21:45:21,692 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 21:46:53,799 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 299, in reduce_columns
+    df = df.drop("break me")
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['break me'] not found in axis"
+2023-10-11 21:46:53,800 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:46:53,800 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'tumor-zie', 'outcome': 'Failed'}
+2023-10-11 21:46:53,801 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 21:48:02,898 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:48:15,975 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 299, in reduce_columns
+    df = df.drop("break me")
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 5347, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4711, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 4753, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 6992, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['break me'] not found in axis"
+2023-10-11 21:48:15,982 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:48:15,983 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'menopause', 'outcome': 'Failed'}
+2023-10-11 21:48:15,983 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 21:56:23,577 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:56:28,223 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:56:28,223 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asd', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 21:56:28,235 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 21:57:15,909 - INFO - User changed view to 'manipulate'.
+2023-10-11 21:57:20,975 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 208, in add_column
+    df[abc]=None
+       ^^^
+NameError: name 'abc' is not defined
+2023-10-11 21:57:20,976 - INFO - User initiated generate function with schedule set:
+2023-10-11 21:57:20,976 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'asd', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-11 21:57:20,976 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 22:05:37,609 - INFO - User changed view to 'manipulate'.
+2023-10-11 22:05:43,194 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:05:43,194 - INFO - {'step': 1, 'action': 'Change Column Name', 'sub_action': '', 'args': {'a': 'v', 'b': '', 'c': ''}, 'column': 'Age', 'outcome': 'Success'}
+2023-10-11 22:05:43,205 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 22:05:53,602 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 484, in add_rows
+    X_resampled, y_resampled = smote.fit_resample(X, y)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 208, in fit_resample
+    return super().fit_resample(X, y)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 106, in fit_resample
+    X, y, binarize_y = self._check_X_y(X, y)
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\imblearn\base.py", line 161, in _check_X_y
+    X, y = self._validate_data(X, y, reset=True, accept_sparse=accept_sparse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 622, in _validate_data
+    X, y = check_X_y(X, y, **check_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 1146, in check_X_y
+    X = check_array(
+        ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 915, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_array_api.py", line 380, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 2084, in __array__
+    arr = np.asarray(values, dtype=dtype)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: 'no-recurrence-events'
+2023-10-11 22:05:53,618 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:05:53,618 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'SMOTE', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'v', 'outcome': 'Failed'}
+2023-10-11 22:05:53,619 - INFO - Generate function failed to complete successfully. No generated dataset added to SNAPSHOTS.
+2023-10-11 22:06:58,175 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:06:58,176 - INFO - {'step': 1, 'action': 'Change Column Name', 'sub_action': 'Algorithmic', 'args': {'a': '5', 'b': '', 'c': ''}, 'column': 'tumor-zie', 'outcome': 'Success'}
+2023-10-11 22:06:58,187 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 22:07:07,995 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:07:07,995 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'Duplicate', 'args': {'a': '4', 'b': '', 'c': ''}, 'column': '5', 'outcome': 'Success'}
+2023-10-11 22:07:08,007 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 22:10:35,227 - INFO - User changed view to 'manipulate'.
+2023-10-11 22:10:42,210 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:10:42,210 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'c', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-11 22:10:42,222 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-11 22:10:56,487 - INFO - User initiated generate function with schedule set:
+2023-10-11 22:10:56,487 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Manual Categorical', 'args': {'a': '5', 'b': '', 'c': ''}, 'column': 'c', 'outcome': 'Success'}
+2023-10-11 22:10:56,500 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+=======
 2023-10-11 18:48:09,913 - INFO - User changed view to 'accounts'.
 2023-10-11 18:48:22,394 - INFO - User changed view to 'accounts'.
 2023-10-11 18:56:18,608 - INFO - User changed view to 'accounts'.
@@ -14,80 +1021,683 @@
 2023-10-11 19:03:38,275 - INFO - User changed view to 'accounts'.
 2023-10-11 19:03:42,283 - INFO - User changed view to 'accounts'.
 2023-10-11 20:15:05,133 - INFO - User changed view to 'accounts'.
-2023-10-14 22:40:08,533 - INFO - User changed view to 'accounts'.
-2023-10-14 23:05:11,586 - INFO - User changed view to 'accounts'.
-2023-10-14 23:19:11,798 - INFO - User changed view to 'accounts'.
-2023-10-14 23:44:37,659 - INFO - User changed view to 'accounts'.
-2023-10-14 23:46:19,125 - INFO - User changed view to 'accounts'.
-2023-10-14 23:51:24,990 - INFO - User changed view to 'accounts'.
-2023-10-14 23:54:16,806 - INFO - User changed view to 'accounts'.
-2023-10-14 23:54:47,266 - INFO - User changed view to 'accounts'.
-2023-10-14 23:55:52,141 - INFO - User changed view to 'accounts'.
-2023-10-14 23:56:07,497 - INFO - User changed view to 'accounts'.
-2023-10-14 23:56:41,595 - INFO - User changed view to 'accounts'.
-2023-10-15 00:06:02,505 - INFO - User changed view to 'accounts'.
-2023-10-15 00:06:31,091 - INFO - User admin has created user savisaar2.
-2023-10-15 00:06:40,735 - INFO - User admin has removed user savisaar2 from accounts database.
-2023-10-15 00:17:01,347 - INFO - User changed view to 'accounts'.
-2023-10-15 00:17:10,711 - INFO - ACCOUNTS - User 'admin' has created user 'asddf'.
-2023-10-15 00:22:16,793 - WARNING - AUTH - {username} failed to authenticate.
-2023-10-15 00:22:41,113 - WARNING - AUTH - admin failed to authenticate.
-2023-10-15 00:23:00,606 - WARNING - AUTH - A nonexistent user 'asdf' attempted to authenticate.
-2023-10-15 00:39:20,346 - WARNING - AUTH - User 'admin' failed to authenticate.
-2023-10-15 00:39:21,105 - WARNING - AUTH - User 'admin' failed to authenticate.
-2023-10-15 00:39:21,887 - WARNING - AUTH - User 'admin' failed to authenticate.
-2023-10-15 00:42:34,018 - INFO - User changed view to 'accounts'.
-2023-10-15 00:43:33,180 - INFO - User changed view to 'accounts'.
-2023-10-15 00:43:35,908 - INFO - ACCOUNTS - User 'admin' has removed user 'asddf' from accounts database.
-2023-10-15 01:31:30,927 - INFO - User changed view to 'library'.
-2023-10-15 01:36:43,738 - INFO - User changed view to 'library'.
-2023-10-15 01:36:46,668 - INFO - User changed view to 'manipulate'.
-2023-10-15 01:36:47,516 - INFO - User changed view to 'sample'.
-2023-10-15 01:36:48,213 - INFO - User changed view to 'save'.
-2023-10-15 01:36:48,997 - INFO - User changed view to 'sample'.
-2023-10-15 01:36:49,539 - INFO - User changed view to 'manipulate'.
-2023-10-15 01:39:29,621 - INFO - User changed view to 'library'.
-2023-10-15 01:39:37,126 - INFO - User changed view to 'manipulate'.
-2023-10-15 01:39:37,860 - INFO - User changed view to 'sample'.
-2023-10-15 01:39:38,548 - INFO - User changed view to 'save'.
-2023-10-15 01:39:39,936 - INFO - User changed view to 'manipulate'.
-2023-10-15 01:39:41,420 - INFO - User changed view to 'sample'.
-2023-10-15 01:39:48,118 - INFO - User changed view to 'manipulate'.
-2023-10-15 01:40:21,267 - INFO - User changed view to 'manipulate'.
-2023-10-15 01:40:22,869 - INFO - User changed view to 'sample'.
-2023-10-15 01:40:23,611 - INFO - User changed view to 'save'.
-2023-10-15 01:40:25,936 - INFO - User changed view to 'sample'.
-2023-10-15 01:40:31,369 - INFO - User changed view to 'library'.
-2023-10-15 01:40:36,756 - INFO - User changed view to 'accounts'.
-2023-10-15 02:26:56,904 - INFO - User changed view to 'accounts'.
-2023-10-15 02:29:32,945 - INFO - User changed view to 'accounts'.
-2023-10-15 02:35:12,042 - INFO - User changed view to 'manipulate'.
-2023-10-15 02:35:13,129 - INFO - User changed view to 'sample'.
-2023-10-15 02:35:13,704 - INFO - User changed view to 'save'.
-2023-10-15 02:35:14,470 - INFO - User changed view to 'library'.
-2023-10-15 02:35:16,758 - INFO - User changed view to 'analyse'.
-2023-10-15 02:35:17,324 - INFO - User changed view to 'manipulate'.
-2023-10-15 02:35:18,000 - INFO - User changed view to 'sample'.
-2023-10-15 02:35:18,512 - INFO - User changed view to 'save'.
-2023-10-15 02:35:19,293 - INFO - User changed view to 'analyse'.
-2023-10-15 02:35:21,349 - INFO - User changed view to 'sample'.
-2023-10-15 02:35:22,747 - INFO - User changed view to 'accounts'.
-2023-10-15 02:35:25,951 - INFO - User changed view to 'library'.
-2023-10-15 02:35:27,477 - INFO - User changed view to 'accounts'.
-2023-10-15 02:36:04,586 - INFO - User changed view to 'accounts'.
-2023-10-15 02:36:21,576 - INFO - ACCOUNTS - User 'admin' has updated their own profile.
-2023-10-15 02:36:29,772 - WARNING - AUTH - User 'admin' failed to authenticate.
-2023-10-15 02:36:37,148 - INFO - User changed view to 'accounts'.
-2023-10-15 02:36:39,898 - INFO - ACCOUNTS - User 'admin' has updated their own profile.
-2023-10-15 02:39:16,584 - INFO - User changed view to 'accounts'.
-2023-10-15 02:39:37,321 - INFO - User changed view to 'accounts'.
-2023-10-15 02:40:00,083 - INFO - User changed view to 'accounts'.
-2023-10-15 02:40:38,860 - INFO - User changed view to 'accounts'.
-2023-10-15 02:40:54,746 - WARNING - AUTH - User 'admin' failed to authenticate.
-2023-10-15 02:41:00,063 - INFO - User changed view to 'accounts'.
-2023-10-15 02:41:19,904 - INFO - User changed view to 'accounts'.
-2023-10-15 02:41:31,620 - INFO - User changed view to 'library'.
-2023-10-15 02:43:54,443 - INFO - User changed view to 'manipulate'.
-2023-10-15 02:43:55,034 - INFO - User changed view to 'sample'.
-2023-10-15 02:43:55,563 - INFO - User changed view to 'save'.
-2023-10-15 02:43:56,183 - INFO - User changed view to 'library'.
+2023-10-15 21:19:14,770 - INFO - User changed view to 'library'.
+2023-10-15 21:19:17,244 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:19:19,272 - INFO - User changed view to 'sample'.
+2023-10-15 21:19:20,598 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:19:21,372 - INFO - User changed view to 'save'.
+2023-10-15 21:19:22,274 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:19:23,601 - INFO - User changed view to 'accounts'.
+2023-10-15 21:19:40,629 - INFO - User changed view to 'save'.
+2023-10-15 21:19:41,925 - INFO - User changed view to 'sample'.
+2023-10-15 21:19:44,560 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:20:01,608 - INFO - User changed view to 'library'.
+2023-10-15 21:20:03,609 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:20:04,071 - INFO - User changed view to 'library'.
+2023-10-15 21:20:08,221 - INFO - User changed view to 'analyse'.
+2023-10-15 21:22:59,887 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:23:22,265 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:23:22,265 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'Duplicate', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '123', 'outcome': 'Success'}
+2023-10-15 21:23:22,272 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 21:23:41,744 - INFO - User changed view to 'sample'.
+2023-10-15 21:23:43,351 - INFO - User changed view to 'save'.
+2023-10-15 21:23:44,709 - INFO - User changed view to 'library'.
+2023-10-15 21:24:04,441 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:53:42,781 - INFO - User changed view to 'sample'.
+2023-10-15 21:53:43,724 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:53:45,909 - INFO - User changed view to 'library'.
+2023-10-15 21:53:50,280 - INFO - User changed view to 'sample'.
+2023-10-15 21:53:51,833 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:54:11,158 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:54:11,158 - INFO - {'step': 1, 'action': 'Reduce Remove Rows', 'sub_action': 'Duplicate Rows', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 21:54:11,164 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 21:54:44,616 - INFO - User changed view to 'library'.
+2023-10-15 21:55:16,207 - INFO - User changed view to 'manipulate'.
+2023-10-15 21:55:29,092 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:55:29,092 - INFO - {'step': 1, 'action': 'Reduce Remove Rows', 'sub_action': 'Duplicate Rows', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 21:55:29,096 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 21:56:09,078 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 458, in add_rows
+    random_rows = df.sample(n=a, replace=False)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 6029, in sample
+    sampled_indices = sample.sample(obj_len, size, replace, weights, rs)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\sample.py", line 152, in sample
+    return random_state.choice(obj_len, size=size, replace=replace, p=weights).astype(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "numpy\\random\\mtrand.pyx", line 1000, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+2023-10-15 21:56:09,127 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:56:09,127 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Random Sampling', 'args': {'a': 5, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-15 21:56:09,128 - INFO - Generate function failed to fully complete successfully.
+2023-10-15 21:56:25,980 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:56:25,981 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Random Sampling', 'args': {'a': 2, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 21:56:25,984 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 21:56:45,465 - INFO - User initiated generate function with schedule set:
+2023-10-15 21:56:45,465 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Scaling Min/Max Scaler', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '1', 'outcome': 'Success'}
+2023-10-15 21:56:45,470 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 21:57:59,178 - INFO - User changed view to 'library'.
+2023-10-15 22:02:39,943 - INFO - User changed view to 'manipulate'.
+2023-10-15 22:03:11,861 - INFO - User initiated generate function with schedule set:
+2023-10-15 22:03:11,861 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 50, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 22:03:11,868 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 22:03:49,382 - INFO - User initiated generate function with schedule set:
+2023-10-15 22:03:49,382 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Manual Categorical', 'args': {'a': 'Jessica', 'b': '', 'c': ''}, 'column': 'first name', 'outcome': 'Success'}
+2023-10-15 22:03:49,390 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 22:39:42,820 - INFO - User changed view to 'accounts'.
+2023-10-15 22:39:48,113 - INFO - User changed view to 'library'.
+2023-10-15 22:46:01,445 - INFO - User changed view to 'manipulate'.
+2023-10-15 22:46:04,079 - INFO - User changed view to 'library'.
+2023-10-15 22:46:36,633 - INFO - User changed view to 'manipulate'.
+2023-10-15 22:46:45,725 - INFO - User changed view to 'library'.
+2023-10-15 22:47:20,728 - INFO - User changed view to 'analyse'.
+2023-10-15 22:47:49,371 - INFO - User changed view to 'manipulate'.
+2023-10-15 22:47:54,622 - INFO - User changed view to 'analyse'.
+2023-10-15 22:52:53,199 - INFO - User changed view to 'manipulate'.
+2023-10-15 22:52:54,390 - INFO - User changed view to 'analyse'.
+2023-10-15 22:54:36,181 - INFO - User changed view to 'library'.
+2023-10-15 22:54:36,954 - INFO - User changed view to 'analyse'.
+2023-10-15 22:54:40,880 - INFO - User changed view to 'sample'.
+2023-10-15 22:54:46,835 - INFO - User changed view to 'library'.
+2023-10-15 22:59:28,357 - INFO - User changed view to 'analyse'.
+2023-10-15 23:00:19,043 - INFO - User changed view to 'manipulate'.
+2023-10-15 23:00:21,618 - INFO - User changed view to 'library'.
+2023-10-15 23:03:24,811 - INFO - User changed view to 'manipulate'.
+2023-10-15 23:03:58,004 - INFO - User initiated generate function with schedule set:
+2023-10-15 23:03:58,004 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1234', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 23:03:58,008 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 23:04:26,317 - INFO - User initiated generate function with schedule set:
+2023-10-15 23:04:26,317 - INFO - {'step': 1, 'action': 'Expand (add rows)', 'sub_action': 'Random Sampling', 'args': {'a': 4, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-15 23:04:26,321 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 23:05:16,782 - INFO - User changed view to 'library'.
+2023-10-15 23:05:17,170 - INFO - User changed view to 'library'.
+2023-10-15 23:05:19,119 - INFO - User changed view to 'manipulate'.
+2023-10-15 23:05:48,094 - INFO - User initiated generate function with schedule set:
+2023-10-15 23:05:48,094 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-15 23:05:48,095 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 23:08:37,609 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 506, in data_transformation
+    feature_columns = df.drop(columns=[target_column])
+                      ^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'drop'
+2023-10-15 23:08:37,610 - INFO - User initiated generate function with schedule set:
+2023-10-15 23:08:37,610 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Scaling Min/Max Scaler', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Failed'}
+2023-10-15 23:08:37,611 - INFO - Generate function failed to fully complete successfully.
+2023-10-15 23:08:46,893 - INFO - User changed view to 'library'.
+2023-10-15 23:08:51,363 - INFO - User changed view to 'sample'.
+2023-10-15 23:08:51,793 - INFO - User changed view to 'manipulate'.
+2023-10-15 23:09:08,031 - INFO - User initiated generate function with schedule set:
+2023-10-15 23:09:08,031 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-15 23:09:08,042 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-15 23:11:19,670 - INFO - User changed view to 'library'.
+2023-10-16 09:06:12,963 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:07:32,143 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:07:32,143 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 4, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 09:07:32,144 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:10:27,555 - INFO - User changed view to 'library'.
+2023-10-16 09:10:29,543 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:10:32,159 - INFO - User changed view to 'library'.
+2023-10-16 09:10:34,517 - INFO - User changed view to 'sample'.
+2023-10-16 09:10:34,876 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:10:45,801 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:10:45,801 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'Mean', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 09:10:45,811 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:26:39,527 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:26:51,832 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:26:51,832 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'BMI', 'outcome': 'Success'}
+2023-10-16 09:26:51,833 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:28:14,811 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:28:24,352 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:28:24,352 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'BMI', 'outcome': 'Success'}
+2023-10-16 09:28:24,353 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:31:47,933 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:32:01,002 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:32:01,002 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 09:32:01,003 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:35:04,502 - INFO - User changed view to 'analyse'.
+2023-10-16 09:35:04,898 - INFO - User changed view to 'library'.
+2023-10-16 09:35:08,489 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:35:20,216 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 394, in replace_null_values
+    df[column] = knn_imputer.fit_transform(df[[column]])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 916, in fit_transform
+    return self.fit(X, **fit_params).transform(X)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\impute\_knn.py", line 229, in fit
+    X = self._validate_data(
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 605, in _validate_data
+    out = check_array(X, input_name="X", **check_params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 915, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_array_api.py", line 380, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 2084, in __array__
+    arr = np.asarray(values, dtype=dtype)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: 'premeno'
+2023-10-16 09:35:20,251 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:35:20,251 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'menopause', 'outcome': 'Failed'}
+2023-10-16 09:35:20,252 - INFO - Generate function failed to fully complete successfully.
+2023-10-16 09:37:14,559 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:37:29,431 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:37:29,431 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'Glucose', 'outcome': 'Success'}
+2023-10-16 09:37:29,432 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:40:30,265 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:40:39,839 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:40:39,840 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'KNN', 'b': 2, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 09:40:39,850 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 09:40:56,815 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 387, in replace_null_values
+    imputed_values = rf_imputer.predict(df_missing.drop(columns=[column]))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 984, in predict
+    X = self._validate_X_predict(X)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 599, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr", reset=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 605, in _validate_data
+    out = check_array(X, input_name="X", **check_params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 967, in check_array
+    raise ValueError(
+ValueError: Found array with 0 sample(s) (shape=(0, 8)) while a minimum of 1 is required by RandomForestRegressor.
+2023-10-16 09:40:56,818 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:40:56,818 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'BloodPressure', 'outcome': 'Failed'}
+2023-10-16 09:40:56,819 - INFO - Generate function failed to fully complete successfully.
+2023-10-16 09:41:33,491 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 387, in replace_null_values
+    imputed_values = rf_imputer.predict(df_missing.drop(columns=[column]))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 984, in predict
+    X = self._validate_X_predict(X)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 599, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr", reset=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 605, in _validate_data
+    out = check_array(X, input_name="X", **check_params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 967, in check_array
+    raise ValueError(
+ValueError: Found array with 0 sample(s) (shape=(0, 8)) while a minimum of 1 is required by RandomForestRegressor.
+2023-10-16 09:41:33,493 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:41:33,493 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'Insulin', 'outcome': 'Failed'}
+2023-10-16 09:41:33,493 - INFO - Generate function failed to fully complete successfully.
+2023-10-16 09:41:43,924 - INFO - User changed view to 'library'.
+2023-10-16 09:41:48,705 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:41:57,170 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 432, in replace_null_values
+    rf_imputer.fit(X, y)
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 348, in fit
+    X, y = self._validate_data(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 622, in _validate_data
+    X, y = check_X_y(X, y, **check_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 1146, in check_X_y
+    X = check_array(
+        ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 915, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_array_api.py", line 380, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 2084, in __array__
+    arr = np.asarray(values, dtype=dtype)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '30-39'
+2023-10-16 09:41:57,173 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:41:57,173 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-16 09:41:57,174 - INFO - Generate function failed to fully complete successfully.
+2023-10-16 09:42:31,807 - INFO - User changed view to 'library'.
+2023-10-16 09:42:33,394 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:42:52,840 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 387, in replace_null_values
+    imputed_values = rf_imputer.predict(df_missing.drop(columns=[column]))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 984, in predict
+    X = self._validate_X_predict(X)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 599, in _validate_X_predict
+    X = self._validate_data(X, dtype=DTYPE, accept_sparse="csr", reset=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 605, in _validate_data
+    out = check_array(X, input_name="X", **check_params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 967, in check_array
+    raise ValueError(
+ValueError: Found array with 0 sample(s) (shape=(0, 8)) while a minimum of 1 is required by RandomForestRegressor.
+2023-10-16 09:42:52,841 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:42:52,841 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'BMI', 'outcome': 'Failed'}
+2023-10-16 09:42:52,842 - INFO - Generate function failed to fully complete successfully.
+2023-10-16 09:48:47,083 - INFO - User changed view to 'sample'.
+2023-10-16 09:48:47,781 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:48:51,730 - INFO - User changed view to 'library'.
+2023-10-16 09:48:52,108 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:48:52,619 - INFO - User changed view to 'library'.
+2023-10-16 09:48:55,128 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:59:07,326 - INFO - User changed view to 'manipulate'.
+2023-10-16 09:59:14,186 - INFO - User initiated generate function with schedule set:
+2023-10-16 09:59:14,186 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 09:59:14,198 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 10:02:16,507 - INFO - User changed view to 'manipulate'.
+2023-10-16 10:02:29,777 - INFO - User initiated generate function with schedule set:
+2023-10-16 10:02:29,777 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'Enter column name', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 10:02:29,789 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 10:04:46,696 - INFO - User changed view to 'manipulate'.
+2023-10-16 10:05:03,395 - INFO - User initiated generate function with schedule set:
+2023-10-16 10:05:03,395 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 10:05:03,406 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 10:12:16,338 - INFO - User changed view to 'manipulate'.
+2023-10-16 10:12:24,905 - INFO - User initiated generate function with schedule set:
+2023-10-16 10:12:24,905 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 10:12:24,917 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 10:17:43,160 - INFO - User changed view to 'manipulate'.
+2023-10-16 10:17:59,289 - INFO - User initiated generate function with schedule set:
+2023-10-16 10:17:59,290 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '121', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 10:17:59,301 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 10:25:27,268 - INFO - User changed view to 'manipulate'.
+2023-10-16 10:25:37,316 - INFO - User initiated generate function with schedule set:
+2023-10-16 10:25:37,316 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 10:26:30,300 - INFO - User changed view to 'manipulate'.
+2023-10-16 10:26:36,199 - INFO - User initiated generate function with schedule set:
+2023-10-16 10:26:36,199 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 10:26:36,232 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 10:27:24,049 - INFO - User initiated generate function with schedule set:
+2023-10-16 10:27:24,049 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 10:27:24,097 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 10:29:17,309 - INFO - User changed view to 'manipulate'.
+2023-10-16 10:29:31,578 - INFO - User initiated generate function with schedule set:
+2023-10-16 10:29:31,578 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 10:29:31,590 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 10:29:42,953 - INFO - User initiated generate function with schedule set:
+2023-10-16 10:29:42,953 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'Enter column name', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 10:29:42,966 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 10:54:46,813 - INFO - User changed view to 'manipulate'.
+2023-10-16 10:55:01,563 - INFO - User initiated generate function with schedule set:
+2023-10-16 10:55:01,563 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'Insulin', 'outcome': 'Success'}
+2023-10-16 10:55:01,565 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 10:57:08,847 - INFO - User changed view to 'manipulate'.
+2023-10-16 10:57:19,678 - INFO - User initiated generate function with schedule set:
+2023-10-16 10:57:19,678 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 10:57:19,689 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 11:00:24,725 - INFO - User changed view to 'library'.
+2023-10-16 11:00:26,921 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:00:28,137 - INFO - User changed view to 'library'.
+2023-10-16 11:00:28,395 - INFO - User changed view to 'analyse'.
+2023-10-16 11:00:41,121 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:00:55,879 - INFO - User changed view to 'analyse'.
+2023-10-16 11:01:58,319 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:02:06,958 - INFO - User initiated generate function with schedule set:
+2023-10-16 11:02:06,958 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 11:02:06,959 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 11:02:20,133 - INFO - User changed view to 'analyse'.
+2023-10-16 11:02:21,043 - INFO - User changed view to 'library'.
+2023-10-16 11:02:28,418 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:02:38,055 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 435, in replace_null_values
+    rf_imputer.fit(X, y)
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\ensemble\_forest.py", line 348, in fit
+    X, y = self._validate_data(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 622, in _validate_data
+    X, y = check_X_y(X, y, **check_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 1146, in check_X_y
+    X = check_array(
+        ^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\validation.py", line 915, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_array_api.py", line 380, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 2084, in __array__
+    arr = np.asarray(values, dtype=dtype)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '30-39'
+2023-10-16 11:02:38,134 - INFO - User initiated generate function with schedule set:
+2023-10-16 11:02:38,134 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-16 11:02:38,135 - INFO - Generate function failed to fully complete successfully.
+2023-10-16 11:06:37,042 - INFO - User changed view to 'library'.
+2023-10-16 11:06:41,122 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:06:51,028 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:06:51,791 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:06:52,931 - INFO - User changed view to 'library'.
+2023-10-16 11:06:54,882 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:07:04,383 - INFO - User initiated generate function with schedule set:
+2023-10-16 11:07:04,383 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 11:07:04,385 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 11:09:58,040 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:10:08,088 - INFO - User initiated generate function with schedule set:
+2023-10-16 11:10:08,088 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 11:10:08,089 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 11:40:00,006 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:40:16,491 - INFO - User initiated generate function with schedule set:
+2023-10-16 11:40:16,491 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 11:40:16,503 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 11:41:40,275 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:41:50,309 - INFO - User initiated generate function with schedule set:
+2023-10-16 11:41:50,309 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 11:41:50,320 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 11:42:22,896 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:42:29,955 - INFO - User initiated generate function with schedule set:
+2023-10-16 11:42:29,955 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '123', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 11:42:29,967 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 11:46:55,630 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:47:03,652 - INFO - User initiated generate function with schedule set:
+2023-10-16 11:47:03,652 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 11:47:03,663 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 11:47:22,309 - INFO - User initiated generate function with schedule set:
+2023-10-16 11:47:22,309 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 11:47:22,320 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 11:48:46,109 - INFO - User changed view to 'library'.
+2023-10-16 11:48:48,819 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:50:32,531 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:50:51,352 - INFO - User initiated generate function with schedule set:
+2023-10-16 11:50:51,352 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'ML', 'b': '', 'c': ''}, 'column': 'Feature6', 'outcome': 'Success'}
+2023-10-16 11:50:51,385 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 11:58:59,594 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:59:12,013 - INFO - User changed view to 'library'.
+2023-10-16 11:59:13,533 - INFO - User changed view to 'manipulate'.
+2023-10-16 11:59:23,786 - INFO - User initiated generate function with schedule set:
+2023-10-16 11:59:23,786 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'Random Forest', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 11:59:23,796 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 12:28:48,407 - INFO - User changed view to 'manipulate'.
+2023-10-16 12:29:00,461 - INFO - User initiated generate function with schedule set:
+2023-10-16 12:29:00,462 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 12:29:00,473 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 13:49:47,966 - INFO - User changed view to 'manipulate'.
+2023-10-16 13:50:10,815 - INFO - User initiated generate function with schedule set:
+2023-10-16 13:50:10,816 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '54', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 13:50:10,827 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 13:51:15,766 - INFO - User initiated generate function with schedule set:
+2023-10-16 13:51:15,767 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '3', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 13:51:15,779 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 13:56:40,114 - INFO - User changed view to 'manipulate'.
+2023-10-16 13:57:00,036 - INFO - User initiated generate function with schedule set:
+2023-10-16 13:57:00,036 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 13:57:00,048 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:07:46,279 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:07:52,113 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:07:52,113 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:07:52,124 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:07:59,272 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:07:59,273 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:07:59,285 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:08:11,430 - INFO - User changed view to 'library'.
+2023-10-16 14:08:12,022 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:08:32,396 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:08:32,397 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '4', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:08:32,409 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:12:37,789 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:12:45,009 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:12:45,010 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:12:45,020 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:12:59,684 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:12:59,685 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:12:59,696 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:17:14,060 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:17:22,037 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:17:22,038 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:17:22,049 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:17:27,414 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:17:27,415 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:17:27,427 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:19:48,360 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:19:56,372 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:19:56,372 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'Enter column name', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:19:56,385 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:20:07,685 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:20:07,685 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '3', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:20:07,697 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:22:33,134 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:22:38,376 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:22:38,377 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:22:38,389 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:23:22,050 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:23:22,050 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:23:22,062 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:24:24,355 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:24:24,356 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '123', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:24:24,368 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:27:46,223 - INFO - User changed view to 'analyse'.
+2023-10-16 14:27:46,866 - INFO - User changed view to 'analyse'.
+2023-10-16 14:27:47,107 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:27:52,580 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:27:52,580 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:27:52,591 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:33:16,895 - INFO - User changed view to 'analyse'.
+2023-10-16 14:33:17,242 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:33:23,430 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:33:23,430 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:33:23,441 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:36:57,229 - INFO - User changed view to 'analyse'.
+2023-10-16 14:36:58,327 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:37:04,076 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:37:04,077 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'Enter column name', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:37:04,088 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:40:05,168 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:40:11,569 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:40:11,570 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:40:11,581 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:41:10,563 - INFO - User changed view to 'analyse'.
+2023-10-16 14:41:10,862 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:41:16,197 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:41:16,197 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:41:16,209 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:41:54,943 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:41:54,944 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '123', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:41:54,955 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:44:57,777 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:45:03,541 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:45:03,542 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:45:03,552 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:45:08,727 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:45:08,727 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:45:08,739 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:49:14,181 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:49:19,797 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:49:19,798 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'Enter column name', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:49:19,809 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:51:14,965 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:51:20,364 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:51:20,365 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:51:20,375 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:51:56,795 - INFO - User changed view to 'manipulate'.
+2023-10-16 14:52:02,495 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:52:02,496 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:52:02,507 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 14:52:19,209 - INFO - User initiated generate function with schedule set:
+2023-10-16 14:52:19,210 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 14:52:19,221 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:00:14,349 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:01:13,051 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:01:18,746 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:01:18,746 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:01:18,757 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:01:46,473 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:01:46,474 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:01:46,485 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:06:54,120 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:07:07,535 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:07:07,536 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:07:07,547 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:07:25,789 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:07:25,789 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:07:25,800 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:15:12,299 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:15:22,091 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:15:22,091 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:15:22,102 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:18:47,902 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:18:56,396 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:18:56,396 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:18:56,407 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:19:40,781 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:19:40,781 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '123', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:19:40,792 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:21:22,523 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:21:22,524 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '123', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:21:22,535 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:27:56,992 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:28:03,091 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:28:03,091 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:28:03,102 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:28:23,741 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:28:23,741 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:28:23,751 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:28:45,354 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:28:45,355 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '3', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:28:45,366 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:29:09,555 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:29:09,555 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '4', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:29:09,566 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:49:26,743 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:49:48,866 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:49:48,866 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:49:48,876 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:51:24,809 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:52:00,888 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:52:54,716 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:56:11,260 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:56:54,003 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:56:54,003 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:56:54,014 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 15:58:30,382 - INFO - User changed view to 'analyse'.
+2023-10-16 15:58:31,356 - INFO - User changed view to 'manipulate'.
+2023-10-16 15:58:53,885 - INFO - User initiated generate function with schedule set:
+2023-10-16 15:58:53,886 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 15:58:53,896 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:10:45,982 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:10:59,586 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:10:59,586 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:10:59,596 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:29:55,618 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:31:06,983 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:31:26,059 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:31:26,060 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:31:26,070 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:39:59,196 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:40:06,424 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:40:06,425 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:40:06,435 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:41:29,477 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:42:03,150 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:42:03,150 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:42:03,160 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:42:24,353 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:42:24,353 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '123', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:42:24,365 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:47:17,575 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:47:32,445 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:47:32,445 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:47:32,455 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:49:12,352 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:49:19,408 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:49:19,408 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '12', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:49:19,419 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:50:09,355 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:50:17,652 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:50:17,652 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:50:17,663 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:51:37,877 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:52:01,850 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:52:01,850 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:52:01,861 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:53:50,537 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:55:07,125 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:55:07,125 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:55:07,137 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:55:53,566 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:56:00,683 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:56:00,683 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:56:00,694 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 16:58:12,220 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:58:12,600 - INFO - User changed view to 'analyse'.
+2023-10-16 16:58:13,090 - INFO - User changed view to 'manipulate'.
+2023-10-16 16:58:20,905 - INFO - User initiated generate function with schedule set:
+2023-10-16 16:58:20,906 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 16:58:20,916 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 17:00:03,900 - INFO - User changed view to 'manipulate'.
+2023-10-16 17:00:09,714 - INFO - User initiated generate function with schedule set:
+2023-10-16 17:00:09,714 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 17:00:09,725 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 17:00:29,980 - INFO - User initiated generate function with schedule set:
+2023-10-16 17:00:29,980 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 17:00:29,991 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 17:01:22,799 - INFO - User initiated generate function with schedule set:
+2023-10-16 17:01:22,800 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 17:01:22,810 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 17:04:45,000 - INFO - User changed view to 'manipulate'.
+2023-10-16 17:04:55,929 - INFO - User initiated generate function with schedule set:
+2023-10-16 17:04:55,930 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 17:04:55,940 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 17:05:11,789 - INFO - User initiated generate function with schedule set:
+2023-10-16 17:05:11,789 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 17:05:11,801 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 17:07:55,673 - INFO - User changed view to 'manipulate'.
+2023-10-16 17:12:15,079 - INFO - User initiated generate function with schedule set:
+2023-10-16 17:12:15,079 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Numerical', 'args': {'a': 'Random Forest', 'b': '', 'c': ''}, 'column': 'Insulin', 'outcome': 'Success'}
+2023-10-16 17:12:15,089 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 18:31:13,506 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:32:34,756 - INFO - User initiated generate function with schedule set:
+2023-10-16 18:32:34,756 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Scaling Min/Max Scaler', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-16 18:32:34,769 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 18:32:49,991 - INFO - User changed view to 'library'.
+2023-10-16 18:32:53,388 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:33:08,655 - INFO - User initiated generate function with schedule set:
+2023-10-16 18:33:08,655 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Class', 'b': '', 'c': ''}, 'column': 'Age', 'outcome': 'Success'}
+2023-10-16 18:33:08,668 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 18:33:36,341 - INFO - User initiated generate function with schedule set:
+2023-10-16 18:33:36,341 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '123', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-16 18:33:36,352 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 18:35:02,806 - INFO - User changed view to 'sample'.
+2023-10-16 18:35:14,220 - INFO - User changed view to 'library'.
+2023-10-16 18:35:31,535 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:36:15,921 - INFO - User initiated generate function with schedule set:
+2023-10-16 18:36:15,921 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'menopause', 'outcome': 'Success'}
+2023-10-16 18:36:15,931 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-16 18:36:32,806 - INFO - User changed view to 'library'.
+2023-10-16 18:36:36,087 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:37:41,220 - INFO - User changed view to 'analyse'.
+2023-10-16 18:38:18,013 - INFO - User changed view to 'sample'.
+2023-10-16 18:39:07,728 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:39:33,852 - INFO - User changed view to 'analyse'.
+2023-10-16 18:42:46,890 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:42:56,329 - INFO - User changed view to 'analyse'.
+2023-10-16 18:43:19,260 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:43:20,052 - INFO - User changed view to 'analyse'.
+2023-10-16 18:43:20,700 - INFO - User changed view to 'manipulate'.
+2023-10-16 18:43:21,276 - INFO - User changed view to 'analyse'.
+2023-10-16 18:46:39,258 - INFO - User changed view to 'library'.
+2023-10-16 18:46:41,476 - INFO - User changed view to 'analyse'.
+2023-10-16 18:50:50,196 - INFO - User changed view to 'analyse'.
