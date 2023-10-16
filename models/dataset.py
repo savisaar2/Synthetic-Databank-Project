@@ -160,16 +160,37 @@ class DatasetModel:
     
     def get_reference_to_current_snapshot(self):
         """Use specifically when needing to refer to current snapshot i.e. as opposed to 
-        SNAPSHOTS[-1] of the model. Used for purposes of debugging and ease of comprehension. 
+        _SNAPSHOTS[-1] of the model. Used for purposes of debugging and ease of comprehension. 
         I.e. usage sytax similar to get_column_headers() etc. 
         """
         return self._SNAPSHOTS[-1]["Dataframe"]
+    
+    def get_reference_to_all_snapshots(self): 
+        """Used specifically in rollback functionality. Returns a mutable reference to _SNAPSHOTS list.
+        Note any changes to the returned list will directly modify the objects therein.
+        """
+        return self._SNAPSHOTS
+    
+    def get_length_of_snapshot_collection(self):
+        """Return the length of self._SNAPSHOTS
+        """
+        return len(self._SNAPSHOTS)
+    
+    def get_specific_snapshot(self, index): 
+        """return the particular snapshot i.e. 
+        {"Name": "", "Description": "", "Schedule Set": "", "Dataframe": pandas dataframe}
+        """
+        return self._SNAPSHOTS[index]
 
     def _clear_all_snapshots(self):
         """Method to clear all snapshots.
         """
         self._SNAPSHOTS.clear()
         print("snapshots cleared!")
+
+    def append_new_snapshot(self, snapshot):
+        self._SNAPSHOTS.append(snapshot)
+        print("snapshot appended!")
 
     def _sort_datasets_alphabetically(self, json_data):
         """
