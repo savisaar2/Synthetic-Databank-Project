@@ -123,6 +123,6 @@ class AnalyseController:
         """
         self.view.frames["menu"].analyse_button.bind("<Button-1>", self._refresh_analyse_widgets)
         self.frame.plot_button.bind("<Button-1>", self._plot_visualisation)
-        self.frame.summarise_button.bind("<Button-1>", self._summarise)
-        self.frame.pivot_button.bind("<Button-1>", self._pivot)
+        # self.frame.summarise_button.bind("<Button-1>", self._summarise)
+        # self.frame.pivot_button.bind("<Button-1>", self._pivot)
         self.frame.tabulate_button.bind("<Button-1>", self._tabulate)

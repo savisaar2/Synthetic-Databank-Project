@@ -27,70 +27,79 @@ class SampleView(BaseView):
         # Sampling options
         self.s_frame = CTkFrame(self.parent_frame, fg_color="transparent")
         self.s_frame.pack(fill='x', pady=(20, 0), padx=20)
-        self.algorithm_label = CTkLabel(self.s_frame, text="Sampling Algorithm:", anchor="w")
+        self.s_frame_row_1 = CTkFrame(self.s_frame, fg_color="gray15")
+        self.s_frame_row_1.pack(fill="x", pady=(0, 20), padx=20)
+        self.s_frame_row_2 = CTkFrame(self.s_frame, fg_color="gray15")
+        self.s_frame_row_2.pack(fill="x", pady=(0, 20), padx=20)
+        self.s_frame_row_3 = CTkFrame(self.s_frame, fg_color="gray15")
+        self.s_frame_row_3.pack(fill="x", pady=(0, 20), padx=20)
+        
+        self.algorithm_label = CTkLabel(self.s_frame_row_1, text="Sampling Algorithm:", anchor="w")
         self.algorithm_label.pack(side="left", padx=(8, 0))
         self.sampling_algo_options = [
             "------", "Simple Random", "Stratified", "Systematic", "Under", "Over", "Cluster", "Quota", "Judgement"
             ]
         self.sampling_algo_menu = CTkOptionMenu(
-            self.s_frame, fg_color="gray10", width=3, values=self.sampling_algo_options, 
+            self.s_frame_row_1, fg_color="gray10", width=3, values=self.sampling_algo_options, 
             command=lambda option: self.reconfig_widgets(option, "sampling")
             )
         self.sampling_algo_menu.pack(side="left", padx=(8, 0))
-
-        # Simple Random - sub widgets
-        self.sample_size_label = CTkLabel(self.s_frame, text="Sample Size:", anchor="w")
-        self.sample_size_entry = CTkEntry(self.s_frame, corner_radius=5, width=50, state="disabled")
-
-        # Stratified - sub widgets
-        self.num_of_splits_label = CTkLabel(self.s_frame, text="Number of Splits:", anchor="w")
-        self.num_of_splits_entry = CTkEntry(self.s_frame, corner_radius=5, width=50, state="disabled")
-
-        # Systematic - sub widgets 
-        self.sampling_interval_label = CTkLabel(self.s_frame, text="Sampling Interval:", anchor="w")
-        self.sampling_interval_entry = CTkEntry(self.s_frame, corner_radius=5, width=50, state="disabled")
-
-        # Cluster - sub widgets
-        self.cluster_column_label = CTkLabel(self.s_frame, text="Cluster Column:", anchor="w")
-        self.num_of_clusters_label = CTkLabel(self.s_frame, text="Number of Clusters:", anchor="w")
-        self.num_of_clusters_entry = CTkEntry(self.s_frame, corner_radius=5, width=50, state="disabled")
-
-        # Quota - sub widgets
-        self.column_to_build_quota_label = CTkLabel(self.s_frame, text="Column to Build Quota:", anchor="w")
-        self.q_sample_size_label = CTkLabel(self.s_frame, text="Sample Size:", anchor="w")
-        self.quota_sample_size_entry = CTkEntry(self.s_frame, corner_radius=5, width=50, state="disabled")
-
-        # Judgement - sub widgets
-        self.define_criteria_label = CTkLabel(self.s_frame, text="Column to Define Criteria:", anchor="w")
-        self.comparison_operators_label = CTkLabel(self.s_frame, text="Comparison Operator:", anchor="w")
-        self.comparison_operator_menu = CTkOptionMenu(
-            self.s_frame, fg_color="gray10", width=3, values=(["------", "EQUAL", "LESS", "MORE", "NOT EQUAL"]),
-            command=lambda option: self.reconfig_widgets(option, "sampling")
-        )
-        self.condition_label = CTkLabel(self.s_frame, text="Condition:", anchor="w")
-        self.condition_entry = CTkEntry(self.s_frame, corner_radius=5, width=50, state="disabled")
-        self.logical_operator_label = CTkLabel(self.s_frame, text="Logical Operator:", anchor="w")
-        self.logical_operator_menu = CTkOptionMenu(
-            self.s_frame, fg_color="gray10", width=3, values=(["------", "AND", "OR", "NOT"]), 
-            command=lambda option: self.reconfig_widgets(option, "sampling")
-        )
-        # Common widgets - used by stratified, under, over, cluster, quota, 
-        self.dependant_col_label = CTkLabel(self.s_frame, text="Dependent Column:", anchor="w")
-        self.dependant_col_menu = CTkOptionMenu(
-            self.s_frame, fg_color="gray10", width=3, values=("------",), 
-            command=lambda option: self.reconfig_widgets(option, "sampling")
-        )
-        # Big Button
-        self.run = CTkButton(
-            self.s_frame, text="Run", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
+        
+        self.run = CTkButton( # Run (generate sample)!
+            self.s_frame_row_3, text="Run", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
             )
         self.run.pack(side="right", padx=(8, 8))
 
+        # Simple Random - sub widgets
+        self.sample_size_label = CTkLabel(self.s_frame_row_2, text="Sample Size:", anchor="w")
+        self.sample_size_entry = CTkEntry(self.s_frame_row_2, corner_radius=5, width=50, state="disabled")
+
+        # Stratified - sub widgets
+        self.num_of_splits_label = CTkLabel(self.s_frame_row_2, text="Number of Splits:", anchor="w")
+        self.num_of_splits_entry = CTkEntry(self.s_frame_row_2, corner_radius=5, width=50, state="disabled")
+
+        # Systematic - sub widgets 
+        self.sampling_interval_label = CTkLabel(self.s_frame_row_2, text="Sampling Interval:", anchor="w")
+        self.sampling_interval_entry = CTkEntry(self.s_frame_row_2, corner_radius=5, width=50, state="disabled")
+
+        # Cluster - sub widgets
+        self.cluster_column_label = CTkLabel(self.s_frame_row_2, text="Cluster Column:", anchor="w")
+        self.num_of_clusters_label = CTkLabel(self.s_frame_row_2, text="Number of Clusters:", anchor="w")
+        self.num_of_clusters_entry = CTkEntry(self.s_frame_row_2, corner_radius=5, width=50, state="disabled")
+
+        # Quota - sub widgets
+        self.column_to_build_quota_label = CTkLabel(self.s_frame_row_2, text="Column to Build Quota:", anchor="w")
+        self.q_sample_size_label = CTkLabel(self.s_frame_row_2, text="Sample Size:", anchor="w")
+        self.quota_sample_size_entry = CTkEntry(self.s_frame_row_2, corner_radius=5, width=50, state="disabled")
+
+        # Judgement - sub widgets
+        self.define_criteria_label = CTkLabel(self.s_frame_row_2, text="Column to Define Criteria:", anchor="w")
+        self.comparison_operators_label = CTkLabel(self.s_frame_row_2, text="Comparison Operator:", anchor="w")
+        self.comparison_operator_menu = CTkOptionMenu(
+            self.s_frame_row_1, fg_color="gray10", width=3, values=(["------", "EQUAL", "LESS", "MORE", "NOT EQUAL"]),
+            command=lambda option: self.reconfig_widgets(option, "sampling")
+        )
+        self.condition_label = CTkLabel(self.s_frame_row_2, text="Condition:", anchor="w")
+        self.condition_entry = CTkEntry(self.s_frame_row_2, corner_radius=5, width=50, state="disabled")
+        self.logical_operator_label = CTkLabel(self.s_frame_row_2, text="Logical Operator:", anchor="w")
+        self.logical_operator_menu = CTkOptionMenu(
+            self.s_frame_row_1, fg_color="gray10", width=3, values=(["------", "AND", "OR", "NOT"]), 
+            command=lambda option: self.reconfig_widgets(option, "sampling")
+        )
+        # Common widgets - used by stratified, under, over, cluster, quota, 
+        self.dependant_col_label = CTkLabel(self.s_frame_row_2, text="Dependent Column:", anchor="w")
+        self.dependant_col_menu = CTkOptionMenu(
+            self.s_frame_row_2, fg_color="gray10", width=3, values=("------",), 
+            command=lambda option: self.reconfig_widgets(option, "sampling")
+        )
         # Widget toggle groupings
         self.all_widgets = [
             self.sample_size_label, self.sample_size_entry, self.num_of_splits_label, 
             self.num_of_splits_entry, self.sampling_interval_label, self.sampling_interval_entry, 
-            self.dependant_col_label, self.dependant_col_menu
+            self.dependant_col_label, self.dependant_col_menu, self.column_to_build_quota_label, 
+            self.q_sample_size_label, self.quota_sample_size_entry, self.define_criteria_label,
+            self.comparison_operators_label, self.comparison_operator_menu, self.condition_label, 
+            self.condition_entry, self.logical_operator_label, self.logical_operator_menu
             ]
         
         self.simple_widgets = [
@@ -264,11 +273,11 @@ class SampleView(BaseView):
 
         if option_set == "sampling": 
             bulk_toggle("hide", [
-                widget for widget in self.all_widgets if widget not in self.algo_to_widget_set_mapping[option]
+                widget for widget in self.all_widgets
             ])
             bulk_toggle("show", self.algo_to_widget_set_mapping[option])
             bulk_toggle("off", [
-                widget for widget in self.all_widgets if widget not in self.algo_to_widget_set_mapping[option]
+                widget for widget in self.all_widgets
             ])
             bulk_toggle("on", self.algo_to_widget_set_mapping[option])
             
