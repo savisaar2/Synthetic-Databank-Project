@@ -134,7 +134,7 @@ class DatasetModel:
         Args:
             index (int): User specified index of dataset to define as current.
         """
-        self._SNAPSHOTS[:index + 1] # Slicing to truncate.
+        del self._SNAPSHOTS[index+1:] # Slicing to truncate.
 
     def get_df_row_by_range(self, start_row, end_row):
         """Method to obtain rows of current dataset within a defined range.
@@ -355,3 +355,11 @@ class DatasetModel:
             }
         )
         print("Generated data set:", self._SNAPSHOTS[-1]["Dataframe"])
+        
+    def get_snapshot_list(self):
+        """Getter method to return current list of snapshots from rollback.
+
+        Returns:
+            list: List of snapshots.
+        """
+        return self._SNAPSHOTS

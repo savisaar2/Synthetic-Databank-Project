@@ -22,6 +22,7 @@ class ManipulateController:
         self.step_count = 0 
         self.MAX_STEPS = 4
         self.current_df =""
+        self.snapshot_count = 0
         
     def _bind(self):
         """
@@ -47,7 +48,7 @@ class ManipulateController:
 
         # Rollback button bind
         self.frame.rollback_button.bind("<Button-1>", lambda _: self._rollback())
-        
+  
     def _refresh_manipulate_widgets(self, event): 
         """
         Obtain column headers from the loaded dataset to be populated in the appropriate widgets e.g. 
@@ -55,11 +56,14 @@ class ManipulateController:
         ensure correct data.
         """
         self._scan_dataset()
-        self.frame.refresh_manipulate_widgets(self.model.DATASET.get_column_headers(), self.col_dtype_dict)
-        self.frame.current_dataset_label.configure(
-            text=f"Current Dataset: {self.model.DATASET.get_dataset_name()} | Rows: {self.model.DATASET.get_df_row_count()} | "
-                    f"Columns: {len(self.model.DATASET.get_column_headers())}")
-        
+        snapshots = self.model.DATASET.get_snapshot_list()
+        self.frame.refresh_manipulate_widgets(self.model.DATASET.get_column_headers(), self.col_dtype_dict, snapshots)
+
+        snapshot_name = snapshots[-1]["Name"]
+        rows = snapshots[-1]["Dataframe"].shape[0]
+        columns = snapshots[-1]["Dataframe"].shape[1]
+        self.frame.current_dataset_label.configure(text=f"Selected Dataset: {snapshot_name} | Rows: {rows} | Columns: {columns}")
+     
     def _populate_schedule_set(self):
         """
         Method to populate user manipulations to the schedule set in the UI and model.
@@ -165,7 +169,12 @@ class ManipulateController:
         self.step_count = 0
         self.frame.step_count = 0
         self.frame.generate_button.configure(state="disabled")
+        self._update_rollback_selector()
         self._refresh_manipulate_widgets
+
+        snapshots = self.model.DATASET.get_snapshot_list()
+        for item in snapshots:
+            print(len(item["Dataframe"].columns))
 
     def _scan_dataset(self):  
         """
@@ -194,5 +203,19 @@ class ManipulateController:
 
     def _rollback(self):
         index = self.frame.get_rollback_index()
-        print("index:", index)
-        self.model.DATASET.rollback(index)
+
+        self.model.DATASET.rollback(int(index))
+        self.snapshot_count = 0
+        self._update_rollback_selector()
+
+        self._refresh_manipulate_widgets
+
+    def _update_rollback_selector(self):
+        snapshots = self.model.DATASET.get_snapshot_list()
+        selector_list = []
+        self.snapshot_count = 0
+        for dataset in snapshots:
+            selector_list.append(str(self.snapshot_count))
+            self.snapshot_count +=1
+        self.frame.rollback_dataset_selector.configure(values=selector_list)
+        self.frame.rollback_dataset_selector.set(value=str(self.snapshot_count-1))

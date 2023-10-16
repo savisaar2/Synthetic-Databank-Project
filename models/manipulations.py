@@ -53,10 +53,11 @@ class ManipulationsModel():
             pandas dataframe | Bool: dataframe with applied manipulations 
                                         or False to indicate the manipulation set failed.
         """
+        df_copy = scheduler_row[0]["df"].copy()
         # Set dataframe as current, but not for the first item. 
         for index, r in enumerate(scheduler_row):
             if not index:
-                self.current_df = self.manip_collection[r["action"]](r["sub_action"], r["df"], r["column"], 
+                self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"], 
                                                    r["args"])
                 match self.current_df:
                     case False:
@@ -68,9 +69,8 @@ class ManipulationsModel():
                     case False:
                         r["outcome"] = "Pending"
                     case _:
-                        r["df"] = self.current_df
                         self.current_df  = self.manip_collection[r["action"]](r["sub_action"], 
-                                                                r["df"], r["column"], r["args"])
+                                                                self.current_df, r["column"], r["args"])
                         match self.current_df:
                             case False:
                                 r["outcome"] = "Failed"
@@ -189,6 +189,7 @@ class ManipulationsModel():
         Returns:
             pandas_dataframe: A Pandas dataframe which has been manipulated.
         """
+        print(args)
         a, b, c = args["a"], args["b"], args["c"]  #unpack args
 
         try:
@@ -367,25 +368,27 @@ class ManipulationsModel():
                             df[column] = knn_imputer.fit_transform(df[[column]])
                             return df    
                         
-                        case "ML":
+                        case "Random Forest":
                             # column = the selected column
                             # Function to replace missing value using Machince Learning-Based Imputation
                             # Separate the dataset into two parts: one with missing  values and one without
                             df_missing = df[df[column].isna()].copy()  # Make a copy to avoid SettingWithCopyWarning
                             df_not_missing = df[~df[column].isna()]
 
-                            # Prepare the features and target for imputation
-                            X = df_not_missing.drop(columns=[column])
-                            y = df_not_missing[column]
-                            # Initialize the Random Forest Regressor 
-                            rf_imputer = RandomForestRegressor(n_estimators=100, random_state=42)
+                            # Check if there are enough non-missing samples to train the model
+                            if len(df_not_missing) > 0:
+                                # Prepare the features and target for imputation
+                                X = df_not_missing.drop(columns=[column])
+                                y = df_not_missing[column]
+                                # Initialize the Random Forest Regressor
+                                rf_imputer = RandomForestRegressor(n_estimators=100, random_state=42)  
+                                # Train the model on non-missing data
+                                rf_imputer.fit(X, y)
+                                # Impute missing 'BMI' values using the trained model
+                                if len(df_missing) > 0:
+                                    imputed_bmi_values = rf_imputer.predict(df_missing.drop(columns=[column]))
+                                    df.loc[df[column].isna(), column] = imputed_bmi_values
 
-                            # Train the model on non-missing data
-                            rf_imputer.fit(X, y)
-
-                            # Impute missing values using the trained model
-                            imputed_values = rf_imputer.predict(df_missing.drop(columns=[column]))
-                            df.loc[df[column].isna(), column] = imputed_values
                             return df
                             
                 case "Manual Numerical":  
@@ -405,37 +408,7 @@ class ManipulationsModel():
                             # Perform fillna with mode
                             df[column].fillna(mode_val, inplace=True)
                             return df
-                        
-                        case "KNN":
-                            # column = the selected column; b = the desired number of neighbours (int)
-                            # Function to replace missing value using K-Nearest Neighbors (KNN) Imputation
-                            # Initialize the KNNImputer with the desired number of neighbors (e.g. 5)
-                            knn_imputer = KNNImputer(n_neighbors=b)
-                            # Perform KNN imputation on the column
-                            df[column] = knn_imputer.fit_transform(df[[column]])
-                            return df    
-                        
-                        case "ML":
-                            # column = the selected column
-                            # Function to replace missing value using Machince Learning-Based Imputation
-                            # Separate the dataset into two parts: one with missing  values and one without
-                            df_missing = df[df[column].isna()].copy()  # Make a copy to avoid SettingWithCopyWarning
-                            df_not_missing = df[~df[column].isna()]
-
-                            # Prepare the features and target for imputation
-                            X = df_not_missing.drop(columns=[column])
-                            y = df_not_missing[column]
-                            # Initialize the Random Forest Regressor 
-                            rf_imputer = RandomForestRegressor(n_estimators=100, random_state=42)
-
-                            # Train the model on non-missing data
-                            rf_imputer.fit(X, y)
-
-                            # Impute missing values using the trained model
-                            imputed_values = rf_imputer.predict(df_missing.drop(columns=[column]))
-                            df.loc[df[column].isna(), column] = imputed_values
-                            return df
-                        
+                                 
                 case "Manual Categorical":
                     # column = the selected column; a = new value
                     # Function to replace all missing value in the selected column with fixed value
