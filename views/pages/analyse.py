@@ -287,29 +287,18 @@ class AnalyseView(BaseView):
 
         elif mode == "numeric": 
             df.insert(0, "", ["Count", "Mean", "Std", "Min", "25%", "50%", "75%", "Max"])
-            
-            table = ttk.Treeview(self.ss_table_frame, columns=tuple(df.columns), show="headings")
-            table.pack(side="left", fill="both", expand=True)
-            table["height"] = 5
-
-            for col_name in df.columns: 
-                table.heading(col_name, text=col_name)
-            
-            for index, row in df.iterrows(): 
-                table.insert("", "end", values=row.tolist())
-
         elif mode == "categorical": 
             df.insert(0, "", ["Count", "Unique", "Top", "Freq"])
 
-            table = ttk.Treeview(self.ss_table_frame, columns=tuple(df.columns), show="headings")
-            table.pack(side="left", fill="both", expand=True)
-            table["height"] = 5
+        table = ttk.Treeview(self.ss_table_frame, columns=tuple(df.columns), show="headings")
+        table.pack(side="left", fill="both", expand=True)
+        table["height"] = 5
 
-            for col_name in df.columns: 
-                table.heading(col_name, text=col_name)
-            
-            for index, row in df.iterrows(): 
-                table.insert("", "end", values=row.tolist())
+        for col_name in df.columns: 
+            table.heading(col_name, text=col_name)
+        
+        for index, row in df.iterrows(): 
+            table.insert("", "end", values=row.tolist())
         
         if mode != "null":
             scroll_y = CTkScrollbar(
