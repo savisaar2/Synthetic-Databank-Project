@@ -202,7 +202,7 @@ class ManipulateController:
         """Method to clean up the schedule set, and populate the system log during generate function.
         """
         logger_manips = self.model.manipulations.schedule_set
-        self.logger.log_info(f"User initiated generate function with schedule set:")
+        self.logger.log_info(f"User initiated 'generate' function with schedule set:")
         for item in logger_manips:
             item.pop("df")
             self.logger.log_info(f"{item}")
@@ -213,11 +213,12 @@ class ManipulateController:
         try:
             index = self.frame.get_rollback_index()
             self.model.DATASET.rollback(int(index))
+            self.logger.log_info(f"User successfully initiated 'rollback' function to snapshot at position: {int(index)}")
             self.snapshot_count = 0
             self._update_rollback_selector()
             self._refresh_manipulate_widgets
         except Exception as error:
-            self.logger.log_exception("Rollback failed to complete. Traceback:")
+            self.logger.log_exception("'Rollback' failed to complete. Traceback:")
 
     def _update_rollback_selector(self):
         """Function to update the rollback selector widget in the manipulations UI.

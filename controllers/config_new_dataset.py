@@ -58,12 +58,18 @@ class ConfigNewDatasetController:
                 generated_df = self.model.config_new_dataset.action_churner(self.model.config_new_dataset.action_set)
                 self.model.DATASET.add_generated_dataset_to_snapshot(self.model.config_new_dataset.action_set, 
                                                                     "Generated Dataset", generated_df)
+                # Log entry
+                self.logger.log_info(f"User successfully initiated 'config new dataset' function with action set:")
+                for item in self.model.config_new_dataset.action_set:
+                    item.pop("df")
+                    self.logger.log_info(f"{item}")
                 self._delete_actions()
                 self.frame.hide_view()
                 self.model.config_new_dataset.rows = 10
                 self.frame.rows_entry_box.delete(0, END)
         except:
-            self.logger.log_error("Population of data to new data set failed.")
+            # Log entry
+            self.logger.log_error("Population of data in 'config new dataset' function to a new data set failed. Traceback:")
             
     def _delete_actions(self):
         self.model.config_new_dataset.action_set = []
