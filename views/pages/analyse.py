@@ -44,45 +44,26 @@ class AnalyseView(BaseView):
         self.desc_stats_label.pack(side="left", expand=False, padx=(8, 0))
         self.ds_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")   
         self.ds_table_frame.pack(fill="x", pady=(5, 0), padx=0)
-        self.desc_stats_tree_view = self.build_table(
-            self.ds_table_frame, ("#", "Column", "Non-Null Count", "Data Type"), height=5, width=10
+        self.desc_stats_table = self.build_custom_table(
+            self.ds_table_frame, ("#", "Column", "Non-Null Count", "Null Count", "Data Type"), height=5, width=10
             )
         self.desc_stats_y_scroll = CTkScrollbar(
             self.ds_table_frame, orientation="vertical", height=59, fg_color="gray14", 
-            command=self.desc_stats_tree_view.yview
+            command=self.desc_stats_table.yview
             )
         self.desc_stats_y_scroll.pack(side="right", fill="y")
-        self.desc_stats_tree_view.configure(yscrollcommand=self.desc_stats_y_scroll.set)
-        self.desc_stats_tree_view.pack(side="left", fill="x", expand=True)
+        self.desc_stats_table.configure(yscrollcommand=self.desc_stats_y_scroll.set)
+        self.desc_stats_table.pack(side="left", fill="x", expand=True)
 
-        # Summary Statistics - Individual Columns
+        # Summary Statistics - Entire Dataset
         self.ss_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")
         self.ss_frame.pack(fill="x", pady=(10, 0), padx=0, expand=True)
         self.summary_stats_label = CTkLabel(self.ss_frame, text="Summary", font=("Arial", 14, "bold"), anchor="w")
         self.summary_stats_label.pack(side="left", expand=False, padx=(8, 0))
         self.ss_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")   
         self.ss_table_frame.pack(fill="x", pady=(5, 0), padx=0)
-        #self.summary_table_tree_view = ttk.Treeview(self.ss_table_frame) # stub
-        self.summary_table_tree_view = self.build_table(
-            self.ss_table_frame, ("#", "Column", "Non-Null Count", "Data Type"), height=5, width=10
-            )
-        self.summary_table_y_scroll = CTkScrollbar(
-            self.ss_table_frame, orientation="vertical", height=59, fg_color="gray14", 
-            command=self.summary_table_tree_view.yview
-            )
-        self.summary_table_y_scroll.pack(side="right", fill="y")
-        self.summary_table_tree_view.configure(yscrollcommand=self.summary_table_y_scroll.set)
-        
-        self.summary_table_x_scroll = CTkScrollbar(
-            self.ss_table_frame, orientation="horizontal", width=59, fg_color="gray14", 
-            command=self.summary_table_tree_view.xview
-            )
-        self.summary_table_x_scroll.pack(side="bottom", fill="x")
-        self.summary_table_tree_view.configure(xscrollcommand=self.summary_table_x_scroll.set)
-        #self.summary_table_tree_view.pack()
-        self.summary_table_tree_view.pack(side="left", fill="x", expand=True)
 
-        # Correlation Analysis
+        # Correlation Analysis - Entire Dataset
         self.ca_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")
         self.ca_frame.pack(fill="x", pady=(10, 0), padx=0, expand=True)
         self.correlation_label = CTkLabel(
@@ -93,7 +74,7 @@ class AnalyseView(BaseView):
         self.ca_table_frame.pack(fill="x", pady=(5, 0), padx=0)
         #self.correlate_table_tree_view = ttk.Treeview(self.ca_frame) # stub
         #self.correlate_table_tree_view.pack()
-        self.correlation_table_tree_view = self.build_table(
+        self.correlation_table_tree_view = self.build_custom_table(
             self.ca_table_frame, ("#", "Column", "Non-Null Count", "Data Type"), height=5, width=10
             )
         self.correlation_table_y_scroll = CTkScrollbar(
@@ -109,7 +90,7 @@ class AnalyseView(BaseView):
             )
         self.correlation_table_x_scroll.pack(side="bottom", fill="x")
         self.correlation_table_tree_view.configure(xscrollcommand=self.correlation_table_x_scroll.set)
-        #self.summary_table_tree_view.pack()
+        #self.summary_stats_table.pack()
         self.correlation_table_tree_view.pack(side="left", fill="x", expand=True)
 
         # Individual Columns
@@ -124,21 +105,21 @@ class AnalyseView(BaseView):
         self.is_options_frame.pack(fill="x", pady=(5, 0), padx=0)
         self.select_column_label = CTkLabel(self.is_options_frame, text="Column:", anchor="w")
         self.select_column_label.pack(side="left", expand=False, pady=(0, 0), padx=(8, 0))        
-        self.select_column_menu = CTkOptionMenu(
+        self.col_summary_option_menu = CTkOptionMenu(
             self.is_options_frame, fg_color="gray10", width=3, values=("------",),
             command=lambda option: self.reconfig_widgets(option, "summarise")
             )
-        self.select_column_menu.pack(side="left", padx=(8, 0))
+        self.col_summary_option_menu.pack(side="left", padx=(8, 0))
 
         # Summary table
         self.st_frame = CTkFrame(self.individual_cols_parent_frame, fg_color="transparent")
         self.st_frame.pack(fill="x", pady=(5, 0), padx=0, expand=True)
-        self.adv_summary_tree_view = self.build_table(
+        self.adv_summary_tree_view = self.build_custom_table(
             self.st_frame, ("SD", "Variance", "IQR", "Outlier Count", "Skew", "Kurtosis"), height=1, width=10
             )
         self.adv_summary_tree_view.pack(side="bottom", fill="both", pady=(0, 5), expand=True)
         
-        self.basic_summary_tree_view = self.build_table(
+        self.basic_summary_tree_view = self.build_custom_table(
             self.st_frame, ("Min", "Max", "Mean", "Median", "Mode", "Null Count"), height=1, width=10
         )
         self.basic_summary_tree_view.pack(side="bottom", fill="both", pady=(0, 5), expand=True)
@@ -180,7 +161,7 @@ class AnalyseView(BaseView):
         self.pt_frame.pack(side="top", fill="both", pady=(0, 0), padx=0, expand=True)
         self.pt_table_frame = CTkFrame(self.pt_frame, fg_color="gray20")
         self.pt_table_frame.pack(side="left", fill="both")
-        self.pivot_table = self.build_table(self.pt_table_frame, ("Categories", "------"), height=6)
+        self.pivot_table = self.build_custom_table(self.pt_table_frame, ("Categories", "------"), height=6)
         
         self.pivot_table_y_scroll = CTkScrollbar(
             self.pt_table_frame, orientation="vertical", height=40, fg_color="gray14", command=self.pivot_table.yview
@@ -261,7 +242,7 @@ class AnalyseView(BaseView):
         self.tt_frame.pack(side="top", fill="both", expand=True, padx=0, pady=(10, 0))
         self.raw_table = ttk.Treeview(self.tt_frame) # stub
 
-    def refresh_analyse_widgets(self, dataset_attributes):
+    def refresh_open_menus(self, dataset_attributes):
         """Refresh, update or populate the values of various widgets on Analyse view with appropriate
         information pulled from the loaded dataset e.g. column headers for option menues, row count etc. 
 
@@ -272,11 +253,88 @@ class AnalyseView(BaseView):
         self.row_count_value_label.configure(text=row_count) # row count
         self.variable_a_option_menu.configure(values=column_headers) # visualisations var_a
         self.variable_b_option_menu.configure(values=column_headers) # visualisations var_b
-        self.select_column_menu.configure(values=column_headers) # summarise
+        self.col_summary_option_menu.configure(values=column_headers) # summarise
         self.categories_option_menu.configure(values=column_headers) # pivot category
         self.values_option_menu.configure(values=column_headers) # pivot value
 
-    def build_table(self, root, tuple_of_col_names, height, width=None): 
+    def populate_descriptive_stats_table(self, df): 
+        """Populate descriptive statistics table with appropriate data.
+
+        Args:
+            df (pandas dataframe): .
+        """
+        self.clear_child_widgets(mode="table", widget=self.desc_stats_table) # Clear
+        
+        for index, row in df.iterrows(): 
+            self.desc_stats_table.insert("", "end", values=row.tolist())
+
+    def populate_summary_stats_table(self, mode, df): 
+        """Populate summary statistics table with appropriate data. 
+
+        Args:
+            mode (str): "categorical", "numeric"
+            df (pandas dataframe): .
+        """
+        self.clear_child_widgets(mode="frame", widget=self.ss_table_frame)
+
+        if mode == "null": 
+            summary_stats_null_label = CTkLabel(
+                self.ss_table_frame, 
+                text="Cannot calculate descriptive statistics for chosen dataset. Try tabulating it raw."
+                )
+            summary_stats_null_label.configure(text_color="yellow")
+            summary_stats_null_label.pack()
+
+        elif mode == "numeric": 
+            df.insert(0, "", ["Count", "Mean", "Std", "Min", "25%", "50%", "75%", "Max"])
+            
+            table = ttk.Treeview(self.ss_table_frame, columns=tuple(df.columns), show="headings")
+            table.pack(side="left", fill="both", expand=True)
+            table["height"] = 5
+
+            for col_name in df.columns: 
+                table.heading(col_name, text=col_name)
+            
+            for index, row in df.iterrows(): 
+                table.insert("", "end", values=row.tolist())
+
+        elif mode == "categorical": 
+            df.insert(0, "", ["Count", "Unique", "Top", "Freq"])
+
+            table = ttk.Treeview(self.ss_table_frame, columns=tuple(df.columns), show="headings")
+            table.pack(side="left", fill="both", expand=True)
+            table["height"] = 5
+
+            for col_name in df.columns: 
+                table.heading(col_name, text=col_name)
+            
+            for index, row in df.iterrows(): 
+                table.insert("", "end", values=row.tolist())
+        
+        if mode != "null":
+            scroll_y = CTkScrollbar(
+                table, orientation="vertical", height=59, fg_color="gray14", command=table.yview
+                )
+            scroll_y.pack(side="right", fill="y")
+            table.configure(yscrollcommand=scroll_y.set)
+
+            scroll_x = CTkScrollbar(
+                table, orientation="horizontal", width=59, fg_color="gray14", command=table.xview
+                )
+            scroll_x.pack(side="bottom", fill="x")
+            table.configure(xscrollcommand=scroll_x.set)
+
+    def populate_correlation_stats_table(self, df): 
+        """_summary_
+
+        Args:
+            data (_type_): _description_
+        """
+        print("CCCCCCCCCCCCCCCCCCCCCCCCCCC")
+        print(df)
+        print("CCCCCCCCCCCCCCCCCCCCCCCCCCC")
+
+    def build_custom_table(self, root, tuple_of_col_names, height, width=None): 
         """Build a table of data for either pivot summary or for raw data view. 
         To be used specificially for treeview widget with horizontal and or vertical scrollbar. 
         Returns unpacked treeview widget.
@@ -301,24 +359,29 @@ class AnalyseView(BaseView):
         
         return table
     
-    def clear_table(self, table):
-        """Remove data values from table. 
+    def clear_child_widgets(self, mode, widget):
+        """Remove child widgets from container widget, either table or frame
 
         Args:
-            table (ttk.Treeview): Table on which to perform action.
+            mode (str): "table", "frame". 
+            widget (ttk.Treeview or ttk.Frame): table or frame.
         """
-        for item in table.get_children(): 
-            table.delete(item)
+        if mode == "table":
+            for item in widget.get_children(): 
+                widget.delete(item)
+        elif mode == "frame": 
+            for item in widget.winfo_children():
+                item.destroy()
     
-    def populate_summary_tables(self, d): 
+    def populate_summary_tables(self, d): # TODO : fix this up to match single column summary
         """Populate the summary table with descriptive statistics. 
 
         Args:
             d (dict): dictionary of values returned from calculations of model and 
             passed through by controller.
         """
-        self.clear_table(self.basic_summary_tree_view)
-        self.clear_table(self.adv_summary_tree_view)
+        self.clear_child_widgets(mode="table", widget=self.basic_summary_tree_view)
+        self.clear_child_widgets(mode="table", widget=self.adv_summary_tree_view)
         self.basic_summary_tree_view.insert("", "end", values=(
             d["Min"], d["Max"], d["Mean"], d["Median"], d["Mode"], d["Null Count"]
             )
@@ -337,7 +400,7 @@ class AnalyseView(BaseView):
         self._change_table_heading( # Change name of aggregate function column header to selected
             table=self.pivot_table, target_header="#2", new_header=self.aggfunc_option_menu.get()
             )
-        self.clear_table(self.pivot_table) # Clear
+        self.clear_child_widgets(mode="table", widget=self.pivot_table) # Clear
         
         for key, value in d.items():
             self.pivot_table.insert("", "end", values=(key, value))
@@ -353,7 +416,7 @@ class AnalyseView(BaseView):
         self._delete_child_widgets_refresh_container(parent=self.tt_frame) # Refresh
 
         # Create tabulate table
-        self.raw_table = self.build_table(
+        self.raw_table = self.build_custom_table(
             root=container_frame, tuple_of_col_names=column_headers, height=10, width=None
             )
         self.raw_table_x_scroll = CTkScrollbar(

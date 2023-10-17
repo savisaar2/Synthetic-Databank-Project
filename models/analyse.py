@@ -1,6 +1,8 @@
 import plotly.express as px
 import plotly.graph_objects as go
 from pandas import pivot_table as pt
+from pandas import DataFrame
+
 class AnalyseModel():
     def __init__(self):
         """
@@ -55,13 +57,12 @@ class AnalyseModel():
                     
         plot.show()
 
-    def summarise(self, var, rounding, null_val): 
-        """Descriptive statistics using pandas methods for speed! Bwazingly fwast!
+    def summarise_column(self, var): 
+        """Descriptive statistics of individual columns of data. 
+        Not to be confused with summary_statistics() method.
 
         Args:
-            var (str): variable (column) header
-            rounding (int): integer value of the decimal rounding value.
-            null_val (str): string value (user input)
+            var (str): variable (column) a column of dataframe 
 
         Returns:
             dict: dictionary of case to value mappings
@@ -73,7 +74,7 @@ class AnalyseModel():
         upper_bound = self._upper_bound(q3=q3, iqr=iqr)
         identified_outliers = (var < lower_bound) | (var > upper_bound)
         outlier_count = identified_outliers.sum()
-        null_series = var == self._typify(null_val) # pandas series of Boolean values
+        null_count = var.isnull().sum()
 
         summary = {
             "Min": var.min(), 
@@ -81,7 +82,7 @@ class AnalyseModel():
             "Mean": var.mean(),
             "Median": var.median(),
             "Mode": var.mode()[0], # Mode returns dataframe, index 0 is actual value
-            "Null Count": null_series.sum(), # counts all True values in series
+            "Null Count": null_count,
             "SD": var.std(),
             "Variance": var.var(),
             "IQR": iqr,
@@ -89,23 +90,8 @@ class AnalyseModel():
             "Skew": var.skew(),
             "Kurtosis": var.kurt()
         }
-        return {key: round(value, rounding) for key, value in summary.items()} # rounding
+        return {key: value for key, value in summary.items()} 
     
-    def _typify(self, null_val): 
-        """Convert null_val as specified by user into the correct type. 
-
-        Args:
-            null_val (_type_): _description_
-
-        Returns:
-            _type_: _description_
-        """
-        try: 
-            converted = float(null_val)
-            return converted
-        except Exception as e: 
-            return null_val # likely string or empty? TODO: use raise
-
     def _iqr(self, q3, q1):
         """IQR - inter quartile range
 
@@ -179,7 +165,7 @@ class AnalyseModel():
         """
         pivot_calculation = pt(data=df, values=vals, index=cat, aggfunc=agg)
         temp_dict = pivot_calculation.to_dict()[vals] # return in following sample format {"cat1": 333, "cat2": 444}
-        return {key: round(value, rounding) for key, value in temp_dict.items()} # rounding
+        return {key: value for key, value in temp_dict.items()} # rounding
     
     def convert_to_number(self, val): 
         """Convert 
@@ -194,5 +180,87 @@ class AnalyseModel():
             return int(val)
         else: 
             raise ValueError
-            
+        
+    def descriptive_statistics(self, df, row_count): 
+        """Calculate descriptive statistics for entire pandas datafram (dataset). 
 
+        Args:
+            dataframe (pandas dataframe): from dataset model method call
+            row_count (int): Number of rows 
+
+        Returns: 
+            Dictionary of results to be used in tree view.
+        """
+        non_null = df.count()
+        descriptive_stats = DataFrame({
+            "#": range(1, len(df.columns) + 1), 
+            "Column": df.columns, 
+            "Non-Null Count": non_null, 
+            "Null Count": non_null - row_count, 
+            "Data Type": df.dtypes
+        })
+        return descriptive_stats
+
+    def summary_statistics(self, df): 
+        """Pandas describe() method used to return description of entire dataset. i.e. 
+        Summary statistics in the first panel of Analyse view.
+
+        Args:
+            df (pandas dataframe): from dataset model method call.
+
+        Returns: list consisting of mode i.e. "numerical" or "categorical", and pandas dataframe
+        """
+        summary_stats = df.describe()
+
+        if self._type_compatibility(mode="numeric", df=df):
+            return ["numeric", summary_stats]
+        elif self._type_compatibility(mode="categorical", df=df):
+            return ["categorical", summary_stats]
+        else: # nothing to show!
+            return ["null", summary_stats]
+    
+    def correlation_analysis(self, df): 
+        """Pandas corr() method used to return correlation analysis of entire dataset.
+
+        Args:
+            df (pandas dataframe): from dataset model method call
+
+        Returns: either string value indicating non compatibility of analysis on 
+        the particular df or a DICTIONARY object with the results
+        """
+        result = self._type_compatibility(mode="numeric", df=df)
+        if result: # True
+            return df.corr()
+        else: 
+            return "Cannot produce correlation statistics as the dataset contains non-numeric variables."
+    
+    def _type_compatibility(self, mode, df): 
+        """Preprocessing task, check if type of column or entire dataset is or contains types
+        that will not work on particular analysis operations. 
+
+        Args:
+            mode (str): "numeric", "categorical", "boolean", "datetime".
+            df (pandas dataframe): pandas dataframe
+
+        Returns: Boolean value
+        """
+        types = {
+            "numeric": (
+                "int64", "int32", "int16", "int8", "float64", "float32", "complex", "UInt8", "UInt16",
+                "UInt32", "UInt64", "int64Dtype", "float64Dtype"
+                ), 
+            "categorical": (
+                "category", "object", "string", "StringDtype"
+                ), 
+            "boolean": (
+                "bool",
+                ), 
+            "date_time": (
+                "datetime64", "timedelta64", "period"
+                )
+        }
+        all_dtypes = set()
+        for coltype in df.dtypes: 
+            all_dtypes.add(str(coltype))
+
+        return any(_type in all_dtypes for _type in types[mode])

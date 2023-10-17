@@ -22,16 +22,38 @@ class AnalyseController:
 
         self._bind()
     
-    def _refresh_analyse_widgets(self, event): 
+    def _calculate_and_refresh_stats(self, event): 
         """
         Obtain column headers from the loaded dataset to be populated in the appropriate widgets e.g. 
         option menues and row count of Analyse view. Called whenever Analyse side panel is clicked to 
-        ensure correct data.
+        ensure correct data. 
+        Also calculate all the descriptive stats and show in first panel of three. 
         """
+        df = self.model.DATASET.get_reference_to_current_snapshot()
         column_headers = self.model.DATASET.get_column_headers()
         column_headers.insert(0, "------")
         row_count = self.model.DATASET.get_df_row_count()
-        self.frame.refresh_analyse_widgets(dataset_attributes=(row_count, column_headers))
+
+        # Get descriptive stats
+        descriptive_stats = self.model.analyse.descriptive_statistics(df=df,row_count=row_count)
+
+        # Get summary stats for entire dataset
+        mode, summary_stats = self.model.analyse.summary_statistics(df=df)
+
+        # Corr analysis
+        #correlation_stats = self.model.analyse.correlation_analysis(df=df)
+
+        # Refresh option menu with column headers & row count
+        self.frame.refresh_open_menus(dataset_attributes=(row_count, column_headers))
+
+        # Refresh table 1 of 3 (Panel: Entire Dataset) i.e. Descriptive Stats - Entire Dataset
+        self.frame.populate_descriptive_stats_table(df=descriptive_stats)
+
+        # Refresh table 2 of 3 (Panel: Entire Dataset) i.e. Summary Statistics - Entire Dataset
+        self.frame.populate_summary_stats_table(mode=mode, df=summary_stats)
+
+        # Refresh table 3 of 3 (Panel: Entire Dataset) i.e. Correlation Analysis - Entire Dataset
+        #self.frame.populate_correlation_stats_table(df=correlation_stats)
 
     def _plot_visualisation(self, event): 
         """
@@ -56,23 +78,15 @@ class AnalyseController:
             mode=graph_option, title=dataset_name, var_a=var_a_column, var_b=var_b_column, df_ref=df_ref
             )
 
-    def _summarise(self, event): 
+    def _summarise_column(self, event): 
         """
         Generate descriptive statistics based on chosen variable (column of data) in the view.
         """
-        try: 
-            rounding_val = self.model.analyse.convert_to_number(val=self.frame.summary_round_value_input.get())
-        except ValueError as e: 
-            self.exception.display_error("Specify rounding value as an integer value.")
-            return
-
-        if type(rounding_val) == int: 
-            summary = self.model.analyse.summarise(
-                var=self.model.DATASET.get_column_data(column=self.frame.summary_option_menu.get()), 
-                rounding=rounding_val,
-                null_val=self.frame.null_value_input.get()
-                )
-            self.frame.populate_summary_tables(d=summary)
+        print(self.frame.col_summary_option_menu.get())
+        summary = self.model.analyse.summarise_column(
+            var=self.model.DATASET.get_column_data(column=self.frame.col_summary_option_menu.get())
+            )
+        self.frame.populate_summary_tables(d=summary)
 
     def _pivot(self, event): 
         """
@@ -121,8 +135,8 @@ class AnalyseController:
         Implement this method to set up event handlers and connections
         for user interactions with widgets on the view related to the analyse page.
         """
-        self.view.frames["menu"].analyse_button.bind("<Button-1>", self._refresh_analyse_widgets)
+        self.view.frames["menu"].analyse_button.bind("<Button-1>", self._calculate_and_refresh_stats)
         self.frame.plot_button.bind("<Button-1>", self._plot_visualisation)
-        # self.frame.summarise_button.bind("<Button-1>", self._summarise)
-        # self.frame.pivot_button.bind("<Button-1>", self._pivot)
+        self.frame.col_summary_option_menu.bind("<Configure>", self._summarise_column)
+        self.frame.pivot_button.bind("<Button-1>", self._pivot)
         self.frame.tabulate_button.bind("<Button-1>", self._tabulate)

@@ -15,6 +15,10 @@
         "Source": "Some Source",
         "Description": "Some Description"
     },
+    "diamonds": {
+        "Source": "123",
+        "Description": "abc"
+    },
     "IHME_GBD_2019_HAQ_1990_2019_DATA_Y2022M012D21": {
         "Source": "Some Source",
         "Description": "Some Description"
@@ -39,8 +43,8 @@
         "Source": "Some Source",
         "Description": "Some Description"
     },
-    "diamonds": {
-        "Source": "123",
-        "Description": "abc"
+    "sample_categorical": {
+        "Source": "test",
+        "Description": "test"
     }
 }
