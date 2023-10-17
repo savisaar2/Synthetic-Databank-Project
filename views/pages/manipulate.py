@@ -167,7 +167,7 @@ class ManipulateView(BaseView):
         self.rollback_frame_2.pack(fill="both", pady=(0, 20), padx=20, expand=True)
 
         # Current dataset label
-        self.current_dataset_label = CTkLabel(self.rollback_frame_2)
+        self.current_dataset_label = CTkLabel(self.rollback_frame_2, justify="left")
         self.current_dataset_label.grid(row=0, column=0, padx=(8, 8), pady=(0, 0), sticky="W")
 
     def _action_callback(self, choice):
@@ -978,7 +978,13 @@ class ManipulateView(BaseView):
         snapshot_name = self.snapshots[int(choice)]["Name"]
         rows = self.snapshots[int(choice)]["Dataframe"].shape[0]
         columns = self.snapshots[int(choice)]["Dataframe"].shape[1]
-        self.current_dataset_label.configure(text=f"Selected Dataset: {snapshot_name} | Rows: {rows} | Columns: {columns}")
+        schedule_set = self.snapshots[int(choice)]["Schedule Set"]
+        manips = "\n"
+        for action in schedule_set:
+            new_line = f'{action["step"]}. {action["action"]} | {action["sub_action"]} | {action["column"]}\n' 
+            manips = manips + new_line
+        self.current_dataset_label.configure(text=f"Selected Dataset: {snapshot_name} | Rows: {rows} | Columns: {columns}\n"
+                                                        f"Manipulations:{manips}")
 
 
     def refresh_manipulate_widgets(self, column_headers, column_dtypes, snapshots):

@@ -50,7 +50,7 @@ class DatasetModel:
             {
             "Name": "New Dataset",
             "Description": "",
-            "Schedule Set": "",
+            "Schedule Set": {},
             "Dataframe": pd.DataFrame()
             }
         )
@@ -66,7 +66,7 @@ class DatasetModel:
                 {
                     "Name": f"{dataset_name}", 
                     "Description": "Initial load.", 
-                    "Schedule Set": "", 
+                    "Schedule Set": {}, 
                     "Dataframe": df
                 }
             )

@@ -1,4 +1,4 @@
-from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkOptionMenu, CTkEntry
+from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkOptionMenu, CTkEntry, CTkScrollableFrame
 from tkinter import StringVar
 
 class ConfigNewDatasetView(CTkFrame):
@@ -62,7 +62,7 @@ class ConfigNewDatasetView(CTkFrame):
         self.rows_label = CTkLabel(self.frame_4, text="Rows:")
         self.rows_label.pack(padx=8,pady=8, side="right")
 
-        self.frame_5 = CTkFrame(self.overlay_frame, fg_color="gray20")
+        self.frame_5 = CTkScrollableFrame(self.overlay_frame, fg_color="gray20", height=150)
         self.frame_5.pack(fill="both", padx=150, pady=(2,0))
 
         self.frame_6 = CTkFrame(self.overlay_frame, fg_color="gray20")

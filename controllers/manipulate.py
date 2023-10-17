@@ -62,7 +62,13 @@ class ManipulateController:
         snapshot_name = snapshots[-1]["Name"]
         rows = snapshots[-1]["Dataframe"].shape[0]
         columns = snapshots[-1]["Dataframe"].shape[1]
-        self.frame.current_dataset_label.configure(text=f"Selected Dataset: {snapshot_name} | Rows: {rows} | Columns: {columns}")
+        schedule_set = snapshots[-1]["Schedule Set"]
+        manips = "\n"
+        for action in schedule_set:
+            new_line = f'{action["step"]}. {action["action"]} | {action["sub_action"]} | {action["column"]}\n' 
+            manips = manips + new_line
+        self.frame.current_dataset_label.configure(text=f"Selected Dataset: {snapshot_name} | Rows: {rows} | Columns: {columns}\n"
+                                                        f"Manipulations:{manips}")
      
     def _populate_schedule_set(self):
         """
