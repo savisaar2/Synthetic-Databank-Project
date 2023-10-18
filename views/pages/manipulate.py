@@ -524,7 +524,7 @@ class ManipulateView(BaseView):
                     case "Algorithmic":
                         self.variables["sub_action"] = f"{choice} Categorical"
                         self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
-                                                                        ["Mode"], 
+                                                                        ["Mode", "Back Fill", "Forward Fill", "Random Sampling Fill"], 
                                                                         self._replace_missing_technique_selection, 4)
                     case "Manual":
                         self.variables["sub_action"] = f"{choice} Categorical"
@@ -542,7 +542,7 @@ class ManipulateView(BaseView):
         self._refresh_menu_widgets(5)
 
         match choice:
-            case "Mean" | "Median" | "Mode" | "Random Forest":
+            case "Mean" | "Median" | "Mode" | "Random Forest" | "Back Fill" | "Forward Fill" | "Random Sampling Fill":
                 self.pos_4_menu.configure(state='disabled')
                 self.schedule_button.configure(state="normal")
             case "KNN":

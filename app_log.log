@@ -1994,3 +1994,39 @@ ValueError: Cannot take a larger sample than population when 'replace=False'
 2023-10-18 13:25:36,145 - INFO - User initiated 'generate' function with schedule set:
 2023-10-18 13:25:36,145 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '10', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
 2023-10-18 13:25:36,163 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:28:04,409 - INFO - User changed view to 'manipulate'.
+2023-10-18 13:29:24,021 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:29:24,021 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Random Custom Value', 'args': {'a': 1000, 'b': 2, 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-18 13:29:24,031 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:44:16,477 - INFO - User changed view to 'manipulate'.
+2023-10-18 13:44:18,470 - INFO - User changed view to 'library'.
+2023-10-18 13:44:19,934 - INFO - User changed view to 'manipulate'.
+2023-10-18 13:45:35,656 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:45:35,656 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'Back Fill', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-18 13:45:35,667 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:46:32,901 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:46:32,901 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'Forward Fill', 'b': '', 'c': ''}, 'column': 'Age', 'outcome': 'Success'}
+2023-10-18 13:46:32,901 - INFO - {'step': 2, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'Forward Fill', 'b': '', 'c': ''}, 'column': 'irradiat', 'outcome': 'Success'}
+2023-10-18 13:46:32,913 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:46:49,984 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:46:49,984 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'Back Fill', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-18 13:46:49,995 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:47:04,601 - INFO - User successfully initiated 'rollback' function to snapshot at position: 0
+2023-10-18 13:47:06,057 - INFO - User changed view to 'analyse'.
+2023-10-18 13:48:13,218 - INFO - User changed view to 'manipulate'.
+2023-10-18 13:48:38,547 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:48:38,547 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'Random Samplng Fill', 'b': '', 'c': ''}, 'column': 'tumor-zie', 'outcome': 'Success'}
+2023-10-18 13:48:38,547 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:49:06,627 - INFO - User successfully initiated 'rollback' function to snapshot at position: 0
+2023-10-18 13:49:16,410 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:49:16,410 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'Mode', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-18 13:49:16,422 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:49:32,595 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:49:32,595 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'Random Samplng Fill', 'b': '', 'c': ''}, 'column': 'inv-nodes', 'outcome': 'Success'}
+2023-10-18 13:49:32,596 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:50:38,619 - INFO - User changed view to 'manipulate'.
+2023-10-18 13:50:40,748 - INFO - User changed view to 'analyse'.
+2023-10-18 13:51:14,992 - INFO - User changed view to 'manipulate'.
+2023-10-18 13:51:25,219 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:51:25,220 - INFO - {'step': 1, 'action': 'Replace Missing Values', 'sub_action': 'Algorithmic Categorical', 'args': {'a': 'Random Sampling Fill', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-18 13:51:25,231 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.

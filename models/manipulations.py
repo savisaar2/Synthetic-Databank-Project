@@ -407,6 +407,16 @@ class ManipulationsModel():
                             # Perform fillna with mode
                             df[column].fillna(mode_val, inplace=True)
                             return df
+                        case "Back Fill":
+                            df[column] = df[column].bfill()
+                            return df
+                        case "Forward Fill":
+                            df[column] = df[column].ffill()
+                            return df
+                        case "Random Sampling Fill":
+                            non_missing_values = df[column].dropna().unique()
+                            df[column] = df[column].apply(lambda x: random.choice(non_missing_values) if pd.isna(x) else x)
+                            return df
                                  
                 case "Manual Categorical":
                     # column = the selected column; a = new value
