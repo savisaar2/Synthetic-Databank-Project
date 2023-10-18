@@ -35,25 +35,25 @@ class AnalyseController:
         row_count = self.model.DATASET.get_df_row_count()
 
         # Get descriptive stats
-        descriptive_stats = self.model.analyse.descriptive_statistics(df=df,row_count=row_count)
+        desc_mode, descriptive_stats = self.model.analyse.descriptive_statistics(df=df,row_count=row_count)
 
         # Get summary stats for entire dataset
-        mode, summary_stats = self.model.analyse.summary_statistics(df=df)
+        summary_mode, summary_stats = self.model.analyse.summary_statistics(df=df)
 
         # Corr analysis
-        #correlation_stats = self.model.analyse.correlation_analysis(df=df)
+        corr_mode, correlation_stats = self.model.analyse.correlation_analysis(df=df)
 
         # Refresh option menu with column headers & row count
         self.frame.refresh_open_menus(dataset_attributes=(row_count, column_headers))
 
         # Refresh table 1 of 3 (Panel: Entire Dataset) i.e. Descriptive Stats - Entire Dataset
-        self.frame.populate_descriptive_stats_table(df=descriptive_stats)
+        self.frame.populate_stats_table(stat="descriptive", mode=".", df=descriptive_stats)
 
         # Refresh table 2 of 3 (Panel: Entire Dataset) i.e. Summary Statistics - Entire Dataset
-        self.frame.populate_summary_stats_table(mode=mode, df=summary_stats)
+        self.frame.populate_stats_table(stat="summary", mode=summary_mode, df=summary_stats)
 
         # Refresh table 3 of 3 (Panel: Entire Dataset) i.e. Correlation Analysis - Entire Dataset
-        #self.frame.populate_correlation_stats_table(df=correlation_stats)
+        self.frame.populate_stats_table(stat="correlation", mode=corr_mode, df=correlation_stats)
 
     def _plot_visualisation(self, event): 
         """

@@ -29,7 +29,7 @@ class AnalyseView(BaseView):
         self.tabview.pack()
 
         self.entire_dataset_parent_frame = CTkFrame(self.tabview.tab("Entire Dataset"), fg_color="gray14")
-        self.entire_dataset_parent_frame.pack(fill="x", expand=True, pady=0, padx=0)
+        self.entire_dataset_parent_frame.pack(fill="both", expand=True, pady=0, padx=0)
 
         self.individual_cols_parent_frame = CTkFrame(self.tabview.tab("Individual Columns"), fg_color="gray14")
         self.individual_cols_parent_frame.pack(fill="x", expand=True, pady=0, padx=0)
@@ -43,56 +43,26 @@ class AnalyseView(BaseView):
         self.desc_stats_label = CTkLabel(self.ds_frame, text="Descriptive", font=("Arial", 14, "bold"), anchor="w")
         self.desc_stats_label.pack(side="left", expand=False, padx=(8, 0))
         self.ds_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")   
-        self.ds_table_frame.pack(fill="x", pady=(5, 0), padx=0)
-        self.desc_stats_table = self.build_custom_table(
-            self.ds_table_frame, ("#", "Column", "Non-Null Count", "Null Count", "Data Type"), height=5, width=10
-            )
-        self.desc_stats_y_scroll = CTkScrollbar(
-            self.ds_table_frame, orientation="vertical", height=59, fg_color="gray14", 
-            command=self.desc_stats_table.yview
-            )
-        self.desc_stats_y_scroll.pack(side="right", fill="y")
-        self.desc_stats_table.configure(yscrollcommand=self.desc_stats_y_scroll.set)
-        self.desc_stats_table.pack(side="left", fill="x", expand=True)
+        self.ds_table_frame.pack(fill="both", expand=True, pady=(5, 0), padx=0)
 
         # Summary Statistics - Entire Dataset
         self.ss_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")
-        self.ss_frame.pack(fill="x", pady=(10, 0), padx=0, expand=True)
+        self.ss_frame.pack(fill="x", pady=(10, 0), padx=0)
         self.summary_stats_label = CTkLabel(self.ss_frame, text="Summary", font=("Arial", 14, "bold"), anchor="w")
         self.summary_stats_label.pack(side="left", expand=False, padx=(8, 0))
         self.ss_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")   
-        self.ss_table_frame.pack(fill="x", pady=(5, 0), padx=0)
+        self.ss_table_frame.pack(fill="both", expand=True, pady=(5, 0), padx=0)
 
         # Correlation Analysis - Entire Dataset
         self.ca_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")
-        self.ca_frame.pack(fill="x", pady=(10, 0), padx=0, expand=True)
+        self.ca_frame.pack(fill="x", pady=(10, 0), padx=0)
         self.correlation_label = CTkLabel(
             self.ca_frame, text="Correlation Statistics", font=("Arial", 14, "bold"), anchor="w"
             )
         self.correlation_label.pack(side="left", expand=False, padx=(8, 0))
         self.ca_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")   
-        self.ca_table_frame.pack(fill="x", pady=(5, 0), padx=0)
-        #self.correlate_table_tree_view = ttk.Treeview(self.ca_frame) # stub
-        #self.correlate_table_tree_view.pack()
-        self.correlation_table_tree_view = self.build_custom_table(
-            self.ca_table_frame, ("#", "Column", "Non-Null Count", "Data Type"), height=5, width=10
-            )
-        self.correlation_table_y_scroll = CTkScrollbar(
-            self.ca_table_frame, orientation="vertical", height=59, fg_color="gray14", 
-            command=self.correlation_table_tree_view.yview
-            )
-        self.correlation_table_y_scroll.pack(side="right", fill="y")
-        self.correlation_table_tree_view.configure(yscrollcommand=self.correlation_table_y_scroll.set)
+        self.ca_table_frame.pack(fill="both", expand=True, pady=(5, 0), padx=0)
         
-        self.correlation_table_x_scroll = CTkScrollbar(
-            self.ca_table_frame, orientation="horizontal", width=59, fg_color="gray14", 
-            command=self.correlation_table_tree_view.xview
-            )
-        self.correlation_table_x_scroll.pack(side="bottom", fill="x")
-        self.correlation_table_tree_view.configure(xscrollcommand=self.correlation_table_x_scroll.set)
-        #self.summary_stats_table.pack()
-        self.correlation_table_tree_view.pack(side="left", fill="x", expand=True)
-
         # Individual Columns
         # Summary options
         self.is_frame = CTkFrame(self.individual_cols_parent_frame, fg_color="transparent")
@@ -153,8 +123,6 @@ class AnalyseView(BaseView):
             self.piv_frame_col1_row1, fg_color="gray10", width=3, values=self.agg_func_list, state="disabled", 
             command=lambda option: self.reconfig_widgets(option, "aggfunc")
             )
-        self.pivot_round_value_label = CTkLabel(self.piv_frame_col1_row1, text="Rounding:", anchor="w")
-        self.pivot_round_value_input = CTkEntry(self.piv_frame_col1_row1, corner_radius=5, width=50)
 
         # Pivot table
         self.pt_frame = CTkFrame(self.individual_cols_parent_frame, fg_color="transparent")
@@ -257,50 +225,54 @@ class AnalyseView(BaseView):
         self.categories_option_menu.configure(values=column_headers) # pivot category
         self.values_option_menu.configure(values=column_headers) # pivot value
 
-    def populate_descriptive_stats_table(self, df): 
-        """Populate descriptive statistics table with appropriate data.
-
-        Args:
-            df (pandas dataframe): .
-        """
-        self.clear_child_widgets(mode="table", widget=self.desc_stats_table) # Clear
-        
-        for index, row in df.iterrows(): 
-            self.desc_stats_table.insert("", "end", values=row.tolist())
-
-    def populate_summary_stats_table(self, mode, df): 
+    def populate_stats_table(self, stat, mode, df): 
         """Populate summary statistics table with appropriate data. 
 
         Args:
+            stat (str): "summary" or "correlation" based on the table being populated
             mode (str): "categorical", "numeric"
             df (pandas dataframe): .
         """
-        self.clear_child_widgets(mode="frame", widget=self.ss_table_frame)
+        if stat == "descriptive": 
+            self.clear_child_widgets(mode="frame", widget=self.ds_table_frame)
+        elif stat == "summary": 
+            self.clear_child_widgets(mode="frame", widget=self.ss_table_frame)
+        elif stat == "correlation":
+            self.clear_child_widgets(mode="frame", widget=self.ca_table_frame)
 
         if mode == "null": 
-            summary_stats_null_label = CTkLabel(
-                self.ss_table_frame, 
-                text="Cannot calculate descriptive statistics for chosen dataset. Try tabulating it raw."
+            if stat == "summary":
+                text = "Cannot calculate descriptive statistics for chosen dataset. Try tabulating it raw."
+                null_label = CTkLabel(
+                    self.ss_table_frame, text = text
+                    )
+            elif stat == "correlation": 
+                text = "Cannot produce correlation statistics as the dataset contains non-numeric variables."
+                null_label = CTkLabel(
+                    self.ca_table_frame, text = text
+                    )
+            null_label.configure(text_color="yellow")
+            null_label.pack()
+        else: 
+            if stat == "descriptive":
+                table = self.build_custom_table(
+                    root=self.ds_table_frame, 
+                    tuple_of_col_names=("#", "Column", "Non-Null Count", "Null Count", "Data Type"),
+                    height=5
                 )
-            summary_stats_null_label.configure(text_color="yellow")
-            summary_stats_null_label.pack()
-
-        elif mode == "numeric": 
-            df.insert(0, "", ["Count", "Mean", "Std", "Min", "25%", "50%", "75%", "Max"])
-        elif mode == "categorical": 
-            df.insert(0, "", ["Count", "Unique", "Top", "Freq"])
-
-        table = ttk.Treeview(self.ss_table_frame, columns=tuple(df.columns), show="headings")
-        table.pack(side="left", fill="both", expand=True)
-        table["height"] = 5
-
-        for col_name in df.columns: 
-            table.heading(col_name, text=col_name)
-        
-        for index, row in df.iterrows(): 
-            table.insert("", "end", values=row.tolist())
-        
-        if mode != "null":
+            elif stat == "summary": 
+                if mode == "numeric": 
+                    df.insert(0, "", ["Count", "Mean", "Std", "Min", "25%", "50%", "75%", "Max"])
+                elif mode == "categorical": 
+                    df.insert(0, "", ["Count", "Unique", "Top", "Freq"])
+                table = self.build_custom_table(
+                    root=self.ss_table_frame, tuple_of_col_names=tuple(df.columns), height=5
+                    )
+            elif stat == "correlation":
+                df.insert(0, "", tuple(df.columns))
+                table = self.build_custom_table(
+                    root=self.ca_table_frame, tuple_of_col_names=tuple(df.columns), height=5
+                )
             scroll_y = CTkScrollbar(
                 table, orientation="vertical", height=59, fg_color="gray14", command=table.yview
                 )
@@ -312,16 +284,14 @@ class AnalyseView(BaseView):
                 )
             scroll_x.pack(side="bottom", fill="x")
             table.configure(xscrollcommand=scroll_x.set)
+            table.pack(side="top", fill="both", expand=True)
 
-    def populate_correlation_stats_table(self, df): 
-        """_summary_
-
-        Args:
-            data (_type_): _description_
-        """
-        print("CCCCCCCCCCCCCCCCCCCCCCCCCCC")
-        print(df)
-        print("CCCCCCCCCCCCCCCCCCCCCCCCCCC")
+            if stat != "descriptive": 
+                for col_name in df.columns: 
+                    table.heading(col_name, text=col_name)
+            
+            for index, row in df.iterrows(): 
+                table.insert("", "end", values=row.tolist())
 
     def build_custom_table(self, root, tuple_of_col_names, height, width=None): 
         """Build a table of data for either pivot summary or for raw data view. 
@@ -402,7 +372,7 @@ class AnalyseView(BaseView):
             column_headers (list): List of strings which contain column headers
             rows (pandas DataFrame): Specific row range.
         """
-        self._delete_child_widgets_refresh_container(parent=self.tt_frame) # Refresh
+        self._delete_child_widgets_refresh_container(parent=container_frame) # Refresh
 
         # Create tabulate table
         self.raw_table = self.build_custom_table(
@@ -501,8 +471,7 @@ class AnalyseView(BaseView):
                         self.pivot_button
                         ])
                     bulk_toggle("hide", [
-                        self.aggregate_function_label, self.aggfunc_option_menu, 
-                        self.pivot_round_value_label, self.pivot_round_value_input
+                        self.aggregate_function_label, self.aggfunc_option_menu
                         ])
                 case "values":
                     bulk_toggle("reset_menu", [
@@ -513,14 +482,10 @@ class AnalyseView(BaseView):
                         ])
                     bulk_toggle("hide", [
                         self.aggregate_function_label, self.aggfunc_option_menu, 
-                        self.pivot_round_value_label, self.pivot_round_value_input
                         ])
                 case "aggfunc":
                     bulk_toggle("off", [
                         self.pivot_button
-                    ])
-                    bulk_toggle("hide", [
-                        self.pivot_round_value_label, self.pivot_round_value_input
                     ])
         else: # != "------"
             match option_set: 
@@ -588,8 +553,5 @@ class AnalyseView(BaseView):
                 case "aggfunc":
                     bulk_toggle("on", [
                         self.pivot_button
-                    ])
-                    bulk_toggle("show", [
-                        self.pivot_round_value_label, self.pivot_round_value_input
                     ])
                     

@@ -199,7 +199,7 @@ class AnalyseModel():
             "Null Count": non_null - row_count, 
             "Data Type": df.dtypes
         })
-        return descriptive_stats
+        return ["descriptive", descriptive_stats]
 
     def summary_statistics(self, df): 
         """Pandas describe() method used to return description of entire dataset. i.e. 
@@ -212,10 +212,10 @@ class AnalyseModel():
         """
         summary_stats = df.describe()
 
-        if self._type_compatibility(mode="numeric", df=df):
+        if self._type_compatibility(mode="any", type_group="numeric", df=df):
             return ["numeric", summary_stats]
-        elif self._type_compatibility(mode="categorical", df=df):
-            return ["categorical", summary_stats]
+        elif self._type_compatibility(mode="any", type_group="categorical", df=df):
+            return ["categorical", summary_stats] # won't reach here unless non are numeric
         else: # nothing to show!
             return ["null", summary_stats]
     
@@ -228,18 +228,21 @@ class AnalyseModel():
         Returns: either string value indicating non compatibility of analysis on 
         the particular df or a DICTIONARY object with the results
         """
-        result = self._type_compatibility(mode="numeric", df=df)
+        result = self._type_compatibility(mode="all", type_group="numeric", df=df)
         if result: # True
-            return df.corr()
+            correlation_stats = df.corr() 
+            return ["numeric", correlation_stats]
         else: 
-            return "Cannot produce correlation statistics as the dataset contains non-numeric variables."
+            return ["null", 0]
     
-    def _type_compatibility(self, mode, df): 
+    def _type_compatibility(self, mode, type_group, df): 
         """Preprocessing task, check if type of column or entire dataset is or contains types
         that will not work on particular analysis operations. 
 
         Args:
-            mode (str): "numeric", "categorical", "boolean", "datetime".
+            mode (str): "any" or "all", depending on what is required, if any exists, will return true
+                otherwise, only if all exists will return true. 
+            type_group (str): "numeric", "categorical", "boolean", "datetime".
             df (pandas dataframe): pandas dataframe
 
         Returns: Boolean value
@@ -259,8 +262,22 @@ class AnalyseModel():
                 "datetime64", "timedelta64", "period"
                 )
         }
+        check = []
         all_dtypes = set()
         for coltype in df.dtypes: 
             all_dtypes.add(str(coltype))
-
-        return any(_type in all_dtypes for _type in types[mode])
+        
+        if mode == "any": 
+            for _type in all_dtypes:
+                if _type in types[type_group]:
+                    check.append(_type)
+            if len(check) >= 1:
+                return True
+            else:
+                return False
+                    
+        elif mode == "all":
+            for _type in all_dtypes:
+                if _type not in types[type_group]:
+                    return False
+            return True
