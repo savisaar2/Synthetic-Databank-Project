@@ -1933,3 +1933,64 @@ ValueError: Cannot take a larger sample than population when 'replace=False'
 2023-10-18 10:18:41,114 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '213', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
 2023-10-18 10:18:41,119 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
 2023-10-18 10:18:51,517 - INFO - User successfully initiated 'rollback' function to snapshot at position: 1
+2023-10-18 13:09:16,467 - INFO - User successfully initiated 'config new dataset' function with action set:
+2023-10-18 13:09:16,467 - INFO - {'action': 'Categorical', 'arg_a': 'last_name', 'arg_b': '', 'col_name': '123'}
+2023-10-18 13:09:17,633 - INFO - User changed view to 'manipulate'.
+2023-10-18 13:09:49,360 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:09:49,360 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '123', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:09:49,363 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:10:22,026 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:10:22,026 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '125', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:10:22,029 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:10:56,224 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:10:56,224 - INFO - {'step': 1, 'action': 'Reduce Columns (Dimensionality)', 'sub_action': 'Manual', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '123', 'outcome': 'Success'}
+2023-10-18 13:10:56,227 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:11:06,855 - INFO - User successfully initiated 'rollback' function to snapshot at position: 2
+2023-10-18 13:21:56,562 - INFO - User changed view to 'manipulate'.
+2023-10-18 13:22:06,397 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:22:06,397 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:22:06,410 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:22:14,878 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:22:14,878 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:22:14,890 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:22:25,251 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:22:25,252 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '3', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:22:25,264 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:22:35,032 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:22:35,032 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '4', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:22:35,045 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:22:49,769 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:22:49,769 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '5', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:22:49,784 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:24:18,531 - INFO - User changed view to 'manipulate'.
+2023-10-18 13:24:28,768 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:24:28,768 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '1', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:24:28,768 - INFO - {'step': 2, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '2', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:24:28,781 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:24:32,142 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:24:32,142 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'Enter column name', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:24:32,155 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:24:41,148 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:24:41,148 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': 'Enter column name', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:24:41,162 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:24:52,583 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:24:52,583 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '4', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:24:52,596 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:24:59,718 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:24:59,719 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '5', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:24:59,732 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:25:05,382 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:25:05,382 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '6', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:25:05,396 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:25:13,890 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:25:13,890 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '7', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:25:13,905 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:25:20,521 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:25:20,521 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '8', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:25:20,536 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:25:27,456 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:25:27,456 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '9', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:25:27,473 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-18 13:25:36,145 - INFO - User initiated 'generate' function with schedule set:
+2023-10-18 13:25:36,145 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '10', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-18 13:25:36,163 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
