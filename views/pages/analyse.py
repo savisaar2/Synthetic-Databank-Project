@@ -42,7 +42,7 @@ class AnalyseView(BaseView):
         self.ds_frame.pack(fill="x", pady=(0, 0), padx=0)
         self.desc_stats_label = CTkLabel(self.ds_frame, text="Descriptive", font=("Arial", 14, "bold"), anchor="w")
         self.desc_stats_label.pack(side="left", expand=False, padx=(8, 0))
-        self.ds_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")   
+        self.ds_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="gray10")   
         self.ds_table_frame.pack(fill="both", expand=True, pady=(5, 0), padx=0)
 
         # Summary Statistics - Entire Dataset
@@ -50,17 +50,17 @@ class AnalyseView(BaseView):
         self.ss_frame.pack(fill="x", pady=(10, 0), padx=0)
         self.summary_stats_label = CTkLabel(self.ss_frame, text="Summary", font=("Arial", 14, "bold"), anchor="w")
         self.summary_stats_label.pack(side="left", expand=False, padx=(8, 0))
-        self.ss_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")   
+        self.ss_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="gray10")
         self.ss_table_frame.pack(fill="both", expand=True, pady=(5, 0), padx=0)
 
         # Correlation Analysis - Entire Dataset
         self.ca_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")
         self.ca_frame.pack(fill="x", pady=(10, 0), padx=0)
         self.correlation_label = CTkLabel(
-            self.ca_frame, text="Correlation Statistics", font=("Arial", 14, "bold"), anchor="w"
+            self.ca_frame, text="Correlation", font=("Arial", 14, "bold"), anchor="w"
             )
         self.correlation_label.pack(side="left", expand=False, padx=(8, 0))
-        self.ca_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")   
+        self.ca_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="gray10")   
         self.ca_table_frame.pack(fill="both", expand=True, pady=(5, 0), padx=0)
         
         # Individual Columns
@@ -68,7 +68,7 @@ class AnalyseView(BaseView):
         self.is_frame = CTkFrame(self.individual_cols_parent_frame, fg_color="transparent")
         self.is_frame.pack(fill="x", pady=(0, 0), padx=0)
         self.summarise_label = CTkLabel(
-            self.is_frame, text="Basic Info", font=("Arial", 14, "bold"), anchor="w"
+            self.is_frame, text="Detailed Info", font=("Arial", 14, "bold"), anchor="w"
             )
         self.summarise_label.pack(side="left", expand=False, padx=(8, 0))
         self.is_options_frame = CTkFrame(self.individual_cols_parent_frame, fg_color="gray20")
@@ -252,7 +252,7 @@ class AnalyseView(BaseView):
                     self.ca_table_frame, text = text
                     )
             null_label.configure(text_color="yellow")
-            null_label.pack()
+            null_label.pack(fill="y", expand=True)
         else: 
             if stat == "descriptive":
                 table = self.build_custom_table(
@@ -332,23 +332,24 @@ class AnalyseView(BaseView):
             for item in widget.winfo_children():
                 item.destroy()
     
-    def populate_summary_tables(self, d): # TODO : fix this up to match single column summary
+    def populate_summary_tables(self, d): 
         """Populate the summary table with descriptive statistics. 
 
         Args:
             d (dict): dictionary of values returned from calculations of model and 
             passed through by controller.
         """
-        self.clear_child_widgets(mode="table", widget=self.basic_summary_tree_view)
-        self.clear_child_widgets(mode="table", widget=self.adv_summary_tree_view)
-        self.basic_summary_tree_view.insert("", "end", values=(
-            d["Min"], d["Max"], d["Mean"], d["Median"], d["Mode"], d["Null Count"]
+        if d != "null": # non numeric, no err, no summary
+            self.clear_child_widgets(mode="table", widget=self.basic_summary_tree_view)
+            self.clear_child_widgets(mode="table", widget=self.adv_summary_tree_view)
+            self.basic_summary_tree_view.insert("", "end", values=(
+                d["Min"], d["Max"], d["Mean"], d["Median"], d["Mode"], d["Null Count"]
+                )
             )
-        )
-        self.adv_summary_tree_view.insert("", "end", values=(
-            d["SD"], d["Variance"], d["IQR"], d["Outlier Count"], d["Skew"], d["Kurtosis"]
+            self.adv_summary_tree_view.insert("", "end", values=(
+                d["SD"], d["Variance"], d["IQR"], d["Outlier Count"], d["Skew"], d["Kurtosis"]
+                )
             )
-        )
         
     def populate_pivot_table(self, d): 
         """Populate the pivot table with appropriate information.
