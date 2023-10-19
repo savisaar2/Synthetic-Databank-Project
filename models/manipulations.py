@@ -40,6 +40,7 @@ class ManipulationsModel():
                 "Change Column Name": self.change_column_name,
                 "Expand (add rows)": self.add_rows,
                 "Data Transformation": self.data_transformation,
+                "Automatic": self.auto_mode
         }
 
     def generate_churner(self, scheduler_row:list):
@@ -618,3 +619,34 @@ class ManipulationsModel():
             self.logger.log_exception("Manipulation failed to complete. Traceback:")
             self.error_msg = error
             return False
+        
+    def auto_mode(self, sub_action, df, column, args): 
+        try:
+            match sub_action:
+                case "Clean Dataset":
+                    self.remove_rows("Duplicate Rows", df, column, args)
+                    for col in df:
+                        col_type = df[col].dtypes
+                        match col_type:
+                            case "int64" | "float64":
+                                self.replace_null_values("Algorithmic Numerical", df, col, args={"a": "Mean", "b":"", "c":""})
+                            case _:
+                                self.replace_null_values("Algorithmic Categorical", df, col, args={"a": "Mode", "b":"", "c":""})
+                case "Dirty Dataset":
+                    num_rows_add_missing = int(len(df) / 5)
+                    self.add_noise("Add Missing", df, column, args={"a": num_rows_add_missing, "b":"", "c":""})
+                    num_rows_add_outliers = int(len(df) / 20)
+                    for col in df:
+                        col_type = df[col].dtypes
+                        match col_type:
+                            case "int64" | "float64":
+                                self.add_noise("Add Outliers Percentile", df, col, args={"a": num_rows_add_outliers, "b":"", "c":""})
+            return df
+
+        except Exception as error:
+            self.logger.log_exception("Manipulation failed to complete. Traceback:")
+            self.error_msg = error
+            return False
+
+
+

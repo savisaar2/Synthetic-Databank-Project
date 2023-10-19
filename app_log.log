@@ -1780,3 +1780,324 @@ ValueError: could not convert string to float: '30-39'
 2023-10-19 05:09:05,733 - INFO - User changed view to 'analyse'.
 2023-10-19 05:10:42,439 - INFO - User changed view to 'analyse'.
 2023-10-19 05:12:09,795 - INFO - User changed view to 'analyse'.
+2023-10-19 11:59:48,770 - INFO - User changed view to 'analyse'.
+2023-10-19 11:59:54,020 - INFO - User changed view to 'library'.
+2023-10-19 12:00:07,029 - INFO - User successfully initiated 'config new dataset' function with action set:
+2023-10-19 12:00:07,029 - INFO - {'action': 'Custom Integer Range', 'arg_a': 1, 'arg_b': 100, 'col_name': '1'}
+2023-10-19 12:00:20,271 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:00:42,971 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:00:42,972 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Outliers Z-score', 'args': {'a': 5.0, 'b': '', 'c': ''}, 'column': '1', 'outcome': 'Success'}
+2023-10-19 12:00:42,977 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 12:00:54,731 - INFO - User changed view to 'sample'.
+2023-10-19 12:01:16,416 - INFO - User changed view to 'accounts'.
+2023-10-19 12:03:51,781 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:03:52,367 - INFO - User changed view to 'library'.
+2023-10-19 12:03:53,762 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:07:28,862 - INFO - User changed view to 'library'.
+2023-10-19 12:07:30,381 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:27:59,511 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:28:27,903 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:28:27,903 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 12:28:27,915 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 12:28:31,486 - INFO - User changed view to 'analyse'.
+2023-10-19 12:28:44,107 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:28:55,393 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 60, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: ''
+2023-10-19 12:29:00,005 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 60, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: ''
+2023-10-19 12:30:05,626 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:30:14,214 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:30:14,214 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 12:30:14,226 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 12:30:15,689 - INFO - User changed view to 'analyse'.
+2023-10-19 12:30:43,214 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:30:48,526 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: ''
+2023-10-19 12:30:53,714 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: ''
+2023-10-19 12:39:25,580 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:39:34,789 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:39:34,789 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 12:39:34,801 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 12:39:35,769 - INFO - User changed view to 'analyse'.
+2023-10-19 12:39:38,402 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:39:44,117 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ManipulationsModel.auto_clean() takes 3 positional arguments but 5 were given
+2023-10-19 12:39:48,311 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ManipulationsModel.auto_clean() takes 3 positional arguments but 5 were given
+2023-10-19 12:41:20,326 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:41:23,823 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'Automatic'
+2023-10-19 12:41:24,585 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'Automatic'
+2023-10-19 12:41:24,771 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'Automatic'
+2023-10-19 12:41:24,931 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'Automatic'
+2023-10-19 12:41:25,109 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'Automatic'
+2023-10-19 12:42:54,002 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:42:56,940 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ManipulationsModel.auto_mode() takes 3 positional arguments but 5 were given
+2023-10-19 12:42:58,088 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ManipulationsModel.auto_mode() takes 3 positional arguments but 5 were given
+2023-10-19 12:42:58,239 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ManipulationsModel.auto_mode() takes 3 positional arguments but 5 were given
+2023-10-19 12:42:58,414 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ManipulationsModel.auto_mode() takes 3 positional arguments but 5 were given
+2023-10-19 12:42:58,589 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ManipulationsModel.auto_mode() takes 3 positional arguments but 5 were given
+2023-10-19 12:42:58,761 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ManipulationsModel.auto_mode() takes 3 positional arguments but 5 were given
+2023-10-19 12:42:58,936 - ERROR - Generate failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\controllers\manipulate.py", line 131, in _generate
+    generated_df = self.model.manipulations.generate_churner(self.model.manipulations.schedule_set)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 61, in generate_churner
+    self.current_df = self.manip_collection[r["action"]](r["sub_action"], df_copy, r["column"],
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ManipulationsModel.auto_mode() takes 3 positional arguments but 5 were given
+2023-10-19 12:44:52,338 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:44:55,526 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 627, in auto_mode
+    col_list = list(df.columns())
+                    ^^^^^^^^^^^^
+TypeError: 'Index' object is not callable
+2023-10-19 12:44:55,527 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:44:55,527 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Clean Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-19 12:44:55,528 - INFO - Generate function failed to fully complete successfully.
+2023-10-19 12:46:06,314 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:46:09,358 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 629, in auto_mode
+    match col.dtype():
+          ^^^^^^^^^
+AttributeError: 'str' object has no attribute 'dtype'
+2023-10-19 12:46:09,359 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:46:09,359 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Clean Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-19 12:46:09,360 - INFO - Generate function failed to fully complete successfully.
+2023-10-19 12:47:35,218 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:47:38,076 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 629, in auto_mode
+    col_type = col.dtypes
+               ^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'dtypes'
+2023-10-19 12:47:38,077 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:47:38,077 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Clean Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-19 12:47:38,077 - INFO - Generate function failed to fully complete successfully.
+2023-10-19 12:48:37,885 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:48:41,153 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 629, in auto_mode
+    col_type = col.dtypes
+               ^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'dtypes'
+2023-10-19 12:48:41,154 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:48:41,154 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Clean Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-19 12:48:41,154 - INFO - Generate function failed to fully complete successfully.
+2023-10-19 12:49:18,447 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:49:22,436 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 630, in auto_mode
+    col_type = col.dtypes
+               ^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'dtypes'
+2023-10-19 12:49:22,437 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:49:22,437 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Clean Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-19 12:49:22,437 - INFO - Generate function failed to fully complete successfully.
+2023-10-19 12:50:41,963 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:50:47,184 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:50:47,184 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Clean Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 12:50:47,195 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 12:50:53,956 - INFO - User successfully initiated 'rollback' function to snapshot at position: 0
+2023-10-19 12:51:20,641 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:51:20,641 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 12:51:20,653 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 12:51:23,205 - INFO - User changed view to 'analyse'.
+2023-10-19 12:51:28,026 - INFO - User changed view to 'manipulate'.
+2023-10-19 12:51:32,029 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 12:51:32,029 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Clean Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 12:51:32,040 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 12:51:34,817 - INFO - User changed view to 'analyse'.
+2023-10-19 12:51:46,043 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:00:08,216 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:00:51,876 - INFO - User changed view to 'analyse'.
+2023-10-19 13:00:53,722 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:01:05,789 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 13:01:05,789 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 13:01:05,801 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 13:01:11,767 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 627, in auto_mode
+    self.remove_rows("Duplicate Rows", df, column, args=None)
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 320, in remove_rows
+    a, b, c = args["a"], args["b"], args["c"]  #unpack args
+              ~~~~^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2023-10-19 13:01:11,768 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 13:01:11,769 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Clean Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Failed'}
+2023-10-19 13:01:11,769 - INFO - Generate function failed to fully complete successfully.
+2023-10-19 13:02:14,019 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:02:21,821 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 13:02:21,821 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 200, 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 13:02:21,833 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 13:02:27,669 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 13:02:27,670 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Clean Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 13:02:27,681 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 13:04:19,429 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 13:04:19,429 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-19 13:04:19,441 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 13:18:54,981 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:18:59,974 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 13:18:59,974 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Dirty Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 13:18:59,990 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 13:19:12,925 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 13:19:12,925 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Clean Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 13:19:12,939 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 13:21:34,769 - INFO - User changed view to 'analyse'.
+2023-10-19 13:21:35,522 - INFO - User changed view to 'library'.
+2023-10-19 13:21:37,925 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:22:12,137 - INFO - User changed view to 'analyse'.
+2023-10-19 13:22:12,964 - INFO - User changed view to 'library'.
+2023-10-19 13:22:15,204 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:22:55,930 - INFO - User changed view to 'analyse'.
+2023-10-19 13:25:18,335 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:25:19,814 - INFO - User changed view to 'analyse'.
+2023-10-19 13:25:20,128 - INFO - User changed view to 'library'.
+2023-10-19 13:25:21,413 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:25:44,076 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 13:25:44,076 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Outliers Percentile', 'args': {'a': 700, 'b': '', 'c': ''}, 'column': 'Pregnancies', 'outcome': 'Success'}
+2023-10-19 13:25:44,089 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 13:32:18,525 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:32:27,452 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 13:32:27,452 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Dirty Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 13:32:27,464 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 13:36:13,139 - INFO - User changed view to 'analyse'.
+2023-10-19 13:36:40,762 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:45:31,634 - INFO - User changed view to 'analyse'.
+2023-10-19 13:47:31,305 - INFO - User changed view to 'manipulate'.
+2023-10-19 13:47:49,596 - INFO - User initiated 'generate' function with schedule set:
+2023-10-19 13:47:49,596 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Dirty Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-19 13:47:49,608 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
