@@ -97,16 +97,22 @@ class ConfigNewDatasetView(CTkFrame):
 
         match choice:
             case "Custom Integer Range":
-                self.pos_2_entry = self._user_entry_box_template(self.frame_2, "Enter min integer value", self._entry_box_int_arg_a_callback, 150, 2)
-                self.pos_3_entry = self._user_entry_box_template(self.frame_2, "Enter max integer value", self._entry_box_int_arg_b_callback, 150, 3)
+                self.pos_2_entry = self._user_entry_box_template(self.frame_2, "Enter min integer value", 
+                                                                 self._entry_box_int_arg_a_callback, 150, 2)
+                self.pos_3_entry = self._user_entry_box_template(self.frame_2, "Enter max integer value", 
+                                                                 self._entry_box_int_arg_b_callback, 150, 3)
             case "Custom Float Range":
-                self.pos_1_entry = self._user_entry_box_template(self.frame_2, "Enter min float value", self._entry_box_float_arg_a_callback, 150, 2)
-                self.pos_2_entry = self._user_entry_box_template(self.frame_2, "Enter max float value", self._entry_box_float_arg_b_callback, 150, 3)
+                self.pos_1_entry = self._user_entry_box_template(self.frame_2, "Enter min float value", 
+                                                                 self._entry_box_float_arg_a_callback, 150, 2)
+                self.pos_2_entry = self._user_entry_box_template(self.frame_2, "Enter max float value", 
+                                                                 self._entry_box_float_arg_b_callback, 150, 3)
             case "Categorical":
                 self.pos_1_menu = self._drop_down_menu_template(self.frame_2,
                                                                 "Select Column Type", 
-                                                                ["first_name", "last_name", "address",
-                                                                 "date_of_birth"],
+                                                                ["address", "company", "credit_card_number", 
+                                                                 "date_of_birth", "date_this_year", 
+                                                                 "email", "first_name", "job", "last_name",
+                                                                 "phone_number", "url", "user_name"],
                                                                 self._categorical_callback, col_pos=2, row_pos=0)
     
     def _categorical_callback(self, choice):

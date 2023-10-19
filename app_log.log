@@ -2101,3 +2101,22 @@ TypeError: 'NoneType' object is not subscriptable
 2023-10-19 13:47:49,596 - INFO - User initiated 'generate' function with schedule set:
 2023-10-19 13:47:49,596 - INFO - {'step': 1, 'action': 'Automatic', 'sub_action': 'Dirty Dataset', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
 2023-10-19 13:47:49,608 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-19 15:47:16,238 - INFO - User changed view to 'manipulate'.
+2023-10-19 16:25:16,705 - ERROR - Population of data in 'config new dataset' function to a new data set failed. Traceback:
+2023-10-19 16:25:19,910 - ERROR - Population of data in 'config new dataset' function to a new data set failed. Traceback:
+2023-10-19 16:25:21,319 - ERROR - Population of data in 'config new dataset' function to a new data set failed. Traceback:
+2023-10-19 16:25:21,487 - ERROR - Population of data in 'config new dataset' function to a new data set failed. Traceback:
+2023-10-19 16:25:25,890 - ERROR - Population of data in 'config new dataset' function to a new data set failed. Traceback:
+2023-10-19 16:25:26,079 - ERROR - Population of data in 'config new dataset' function to a new data set failed. Traceback:
+2023-10-19 16:25:41,703 - ERROR - Population of data in 'config new dataset' function to a new data set failed. Traceback:
+2023-10-19 16:26:07,824 - INFO - User successfully initiated 'config new dataset' function with action set:
+2023-10-19 16:26:07,824 - INFO - {'action': 'Categorical', 'arg_a': 'date_this_year', 'arg_b': '', 'col_name': '1'}
+2023-10-19 16:27:01,494 - INFO - User successfully initiated 'config new dataset' function with action set:
+2023-10-19 16:27:01,494 - INFO - {'action': 'Categorical', 'arg_a': 'company', 'arg_b': '', 'col_name': '1'}
+2023-10-19 16:27:01,494 - INFO - {'action': 'Categorical', 'arg_a': 'credit_card_number', 'arg_b': '', 'col_name': '2'}
+2023-10-19 16:27:01,494 - INFO - {'action': 'Categorical', 'arg_a': 'email', 'arg_b': '', 'col_name': '3'}
+2023-10-19 16:27:01,494 - INFO - {'action': 'Categorical', 'arg_a': 'job', 'arg_b': '', 'col_name': '4'}
+2023-10-19 16:27:01,494 - INFO - {'action': 'Categorical', 'arg_a': 'phone_number', 'arg_b': '', 'col_name': '5'}
+2023-10-19 16:27:01,494 - INFO - {'action': 'Categorical', 'arg_a': 'url', 'arg_b': '', 'col_name': '6'}
+2023-10-19 16:27:01,494 - INFO - {'action': 'Categorical', 'arg_a': 'user_name', 'arg_b': '', 'col_name': '7'}
+2023-10-19 16:27:49,190 - INFO - User changed view to 'manipulate'.
