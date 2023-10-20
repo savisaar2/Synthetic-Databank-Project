@@ -580,7 +580,7 @@ class ManipulationsModel():
                                 # Create a DataFrame for the one-hot encoded column
                                 encoded_column = pd.DataFrame(X_encoded, columns=feature_names)
 
-                                # Concatenate the original dataset with the encoded one and the original 'Age' column
+                                # Concatenate the original dataset with the encoded one and the original column
                                 X = pd.concat([X, encoded_column], axis=1)
                                 X = X.drop(cols, axis=1)
                             case _:
@@ -591,28 +591,21 @@ class ManipulationsModel():
                     return X
                 
                 case "Feature Encoding Label Encoding":
-                    target_column = column
-
-                    # Suppress the specific DataConversionWarning
-                    warnings.filterwarnings("ignore", category=DataConversionWarning)
-
-                    # Create a new DataFrame for the encoded features
-                    X_encoded = df.copy()
+                    X = df.drop(columns=[column])
+                    y = df[column]
 
                     # Use LabelEncoder for categorical columns without a for loop
                     label_encoder = LabelEncoder()
 
-                    for cols in X_encoded:
-                        match X_encoded[cols].dtypes:
+                    for cols in X:
+                        match X[cols].dtypes:
                             case "object":
-                                encoded_values = label_encoder.fit_transform(X_encoded[cols])
-                                X_encoded[cols] = encoded_values
-
-                                # Convert the target column to a 1D array to eliminate the warning
-                                X_encoded[target_column] = X_encoded[target_column].ravel()
+                                encoded_values = label_encoder.fit_transform(X[cols])
+                                X[cols] = encoded_values
                             case _:
                                 pass
-                    return X_encoded
+                    X[column] = y
+                    return X
                 
                 case "Feature Encoding Target Encoding":
                     # a = the selected column; column = dependent (target) column         

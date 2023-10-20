@@ -2783,3 +2783,45 @@ AttributeError: 'function' object has no attribute 'mean'
 2023-10-20 13:06:58,804 - INFO - User initiated 'generate' function with schedule set:
 2023-10-20 13:06:58,804 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Target Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'deg-malig', 'outcome': 'Success'}
 2023-10-20 13:06:58,817 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 13:07:32,067 - INFO - User changed view to 'analyse'.
+2023-10-20 13:11:07,148 - INFO - User changed view to 'manipulate'.
+2023-10-20 14:39:48,467 - INFO - User changed view to 'manipulate'.
+2023-10-20 14:39:59,061 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 3790, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Class'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 613, in data_transformation
+    X_encoded[target_column] = X_encoded[target_column].ravel()
+                               ~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py", line 3896, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py", line 3797, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Class'
+2023-10-20 14:39:59,090 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 14:39:59,090 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Label Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-20 14:39:59,090 - INFO - Generate function failed to fully complete successfully.
+2023-10-20 15:04:02,700 - INFO - User changed view to 'analyse'.
+2023-10-20 15:04:03,376 - INFO - User changed view to 'manipulate'.
+2023-10-20 15:04:13,014 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 15:04:13,014 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Label Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-20 15:04:13,025 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 15:04:16,499 - INFO - User changed view to 'library'.
+2023-10-20 15:04:17,272 - INFO - User changed view to 'analyse'.
+2023-10-20 15:05:39,193 - INFO - User changed view to 'manipulate'.
+2023-10-20 15:05:46,408 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 15:05:46,408 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Label Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-20 15:05:46,419 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 15:05:52,465 - INFO - User changed view to 'library'.
+2023-10-20 15:05:53,533 - INFO - User changed view to 'analyse'.
