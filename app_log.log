@@ -2617,3 +2617,169 @@ ValueError: Expected n_neighbors <= n_samples,  but n_samples = 2, n_neighbors =
 2023-10-20 11:55:08,702 - INFO - User changed view to 'manipulate'.
 2023-10-20 11:55:10,095 - INFO - User changed view to 'library'.
 2023-10-20 11:55:11,080 - INFO - User changed view to 'analyse'.
+2023-10-20 12:00:13,896 - INFO - User changed view to 'analyse'.
+2023-10-20 12:05:17,438 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:05:17,913 - INFO - User changed view to 'analyse'.
+2023-10-20 12:05:50,597 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:06:54,182 - INFO - User changed view to 'analyse'.
+2023-10-20 12:06:56,453 - INFO - User changed view to 'library'.
+2023-10-20 12:06:59,029 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:15:58,931 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:16:10,894 - INFO - User changed view to 'analyse'.
+2023-10-20 12:16:11,560 - INFO - User changed view to 'library'.
+2023-10-20 12:16:14,005 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:17:57,669 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:19:46,114 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:19:55,176 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_encode.py", line 174, in _unique_python
+    uniques = sorted(uniques_set)
+              ^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'str' and 'int'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 596, in data_transformation
+    X_encoded = onehot_encoder.fit_transform(X.values.reshape(-1, 1))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_set_output.py", line 157, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 916, in fit_transform
+    return self.fit(X, **fit_params).transform(X)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_encoders.py", line 985, in fit
+    self._fit(
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\preprocessing\_encoders.py", line 98, in _fit
+    result = _unique(Xi, return_counts=compute_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_encode.py", line 42, in _unique
+    return _unique_python(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\KW\AppData\Local\Programs\Python\Python311\Lib\site-packages\sklearn\utils\_encode.py", line 179, in _unique_python
+    raise TypeError(
+TypeError: Encoders require their input argument must be uniformly strings or numbers. Got ['int', 'str']
+2023-10-20 12:19:55,193 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 12:19:55,193 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-20 12:19:55,194 - INFO - Generate function failed to fully complete successfully.
+2023-10-20 12:26:45,541 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:26:50,935 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 596, in data_transformation
+    print(cols.dtypes)
+          ^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'dtypes'
+2023-10-20 12:26:50,936 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 12:26:50,936 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Failed'}
+2023-10-20 12:26:50,937 - INFO - Generate function failed to fully complete successfully.
+2023-10-20 12:27:41,799 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:27:51,470 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 12:27:51,470 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-20 12:27:51,527 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 12:28:06,953 - INFO - User changed view to 'library'.
+2023-10-20 12:28:07,619 - INFO - User changed view to 'analyse'.
+2023-10-20 12:31:48,642 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:32:06,291 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 12:32:06,291 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-20 12:32:06,341 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 12:32:09,062 - INFO - User changed view to 'library'.
+2023-10-20 12:32:09,479 - INFO - User changed view to 'analyse'.
+2023-10-20 12:39:47,691 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:39:58,316 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 12:39:58,316 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Label Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-20 12:39:58,326 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 12:40:05,076 - INFO - User changed view to 'library'.
+2023-10-20 12:40:05,813 - INFO - User changed view to 'analyse'.
+2023-10-20 12:42:22,128 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:42:27,361 - INFO - User successfully initiated 'rollback' function to snapshot at position: 0
+2023-10-20 12:42:28,885 - INFO - User changed view to 'library'.
+2023-10-20 12:42:29,363 - INFO - User changed view to 'analyse'.
+2023-10-20 12:42:34,024 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:42:56,276 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 12:42:56,276 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Label Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'deg-malig', 'outcome': 'Success'}
+2023-10-20 12:42:56,286 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 12:43:00,022 - INFO - User changed view to 'library'.
+2023-10-20 12:43:00,663 - INFO - User changed view to 'analyse'.
+2023-10-20 12:43:01,593 - INFO - User changed view to 'library'.
+2023-10-20 12:43:02,158 - INFO - User changed view to 'analyse'.
+2023-10-20 12:44:16,106 - INFO - User changed view to 'library'.
+2023-10-20 12:44:18,158 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:44:25,318 - INFO - User successfully initiated 'rollback' function to snapshot at position: 0
+2023-10-20 12:44:35,077 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 12:44:35,078 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding One-hot Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-20 12:44:35,125 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 12:44:36,503 - INFO - User changed view to 'library'.
+2023-10-20 12:44:38,046 - INFO - User changed view to 'library'.
+2023-10-20 12:44:38,408 - INFO - User changed view to 'analyse'.
+2023-10-20 12:46:10,038 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:46:12,330 - INFO - User successfully initiated 'rollback' function to snapshot at position: 0
+2023-10-20 12:46:19,452 - INFO - User successfully initiated 'rollback' function to snapshot at position: 0
+2023-10-20 12:46:21,846 - INFO - User changed view to 'library'.
+2023-10-20 12:46:24,136 - INFO - User changed view to 'sample'.
+2023-10-20 12:46:24,592 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:46:34,023 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 12:46:34,023 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Label Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'Class', 'outcome': 'Success'}
+2023-10-20 12:46:34,033 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 12:46:36,813 - INFO - User changed view to 'analyse'.
+2023-10-20 12:46:37,038 - INFO - User changed view to 'library'.
+2023-10-20 12:46:37,915 - INFO - User changed view to 'analyse'.
+2023-10-20 12:48:20,634 - INFO - User changed view to 'library'.
+2023-10-20 12:48:23,774 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:48:25,976 - INFO - User changed view to 'analyse'.
+2023-10-20 12:48:26,662 - INFO - User changed view to 'library'.
+2023-10-20 12:48:28,571 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:48:30,169 - INFO - User successfully initiated 'rollback' function to snapshot at position: 0
+2023-10-20 12:48:31,470 - INFO - User changed view to 'analyse'.
+2023-10-20 12:48:31,796 - INFO - User changed view to 'library'.
+2023-10-20 12:48:34,145 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:49:23,440 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 12:49:23,441 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Target Encoding', 'args': {'a': 'Age', 'b': '', 'c': ''}, 'column': 'deg-malig', 'outcome': 'Success'}
+2023-10-20 12:49:23,452 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 12:49:26,486 - INFO - User changed view to 'analyse'.
+2023-10-20 12:49:27,034 - INFO - User changed view to 'library'.
+2023-10-20 12:49:27,584 - INFO - User changed view to 'analyse'.
+2023-10-20 12:49:28,047 - INFO - User changed view to 'library'.
+2023-10-20 12:49:29,201 - INFO - User changed view to 'analyse'.
+2023-10-20 12:51:20,759 - INFO - User changed view to 'library'.
+2023-10-20 12:51:22,747 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:51:24,172 - INFO - User successfully initiated 'rollback' function to snapshot at position: 0
+2023-10-20 12:51:25,133 - INFO - User changed view to 'library'.
+2023-10-20 12:51:26,222 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:51:39,999 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 12:51:39,999 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Label Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'deg-malig', 'outcome': 'Success'}
+2023-10-20 12:51:40,009 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 12:51:41,763 - INFO - User changed view to 'library'.
+2023-10-20 12:51:42,561 - INFO - User changed view to 'analyse'.
+2023-10-20 12:55:17,982 - INFO - User changed view to 'manipulate'.
+2023-10-20 12:55:30,093 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 624, in data_transformation
+    encoding_map = df.groupby[column].mean()
+                   ~~~~~~~~~~^^^^^^^^
+TypeError: 'method' object is not subscriptable
+2023-10-20 12:55:30,094 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 12:55:30,094 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Target Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'deg-malig', 'outcome': 'Failed'}
+2023-10-20 12:55:30,095 - INFO - Generate function failed to fully complete successfully.
+2023-10-20 13:02:18,707 - INFO - User changed view to 'manipulate'.
+2023-10-20 13:02:27,240 - ERROR - Manipulation failed to complete. Traceback:
+Traceback (most recent call last):
+  File "c:\Users\KW\Desktop\Synthetic Databank\official-capstone-group-a\models\manipulations.py", line 624, in data_transformation
+    encoding_map = df.groupby.mean()
+                   ^^^^^^^^^^^^^^^
+AttributeError: 'function' object has no attribute 'mean'
+2023-10-20 13:02:27,241 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 13:02:27,241 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Target Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'deg-malig', 'outcome': 'Failed'}
+2023-10-20 13:02:27,242 - INFO - Generate function failed to fully complete successfully.
+2023-10-20 13:05:09,041 - INFO - User changed view to 'manipulate'.
+2023-10-20 13:05:20,954 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 13:05:20,954 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Target Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'deg-malig', 'outcome': 'Success'}
+2023-10-20 13:05:20,974 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-20 13:05:25,015 - INFO - User changed view to 'analyse'.
+2023-10-20 13:06:50,701 - INFO - User changed view to 'manipulate'.
+2023-10-20 13:06:58,804 - INFO - User initiated 'generate' function with schedule set:
+2023-10-20 13:06:58,804 - INFO - {'step': 1, 'action': 'Data Transformation', 'sub_action': 'Feature Encoding Target Encoding', 'args': {'a': '', 'b': '', 'c': ''}, 'column': 'deg-malig', 'outcome': 'Success'}
+2023-10-20 13:06:58,817 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.

@@ -679,9 +679,10 @@ class ManipulateView(BaseView):
                     self.pos_4_menu.configure(state="disabled")
                     self.pos_3_menu.configure(state="disabled")
                 else:
-                    self.pos_4_menu = self._drop_down_menu_template("Select Column to Encode", 
-                                                                    arg_a_col_list, 
-                                                                    self._arg_a_callback, 4, 1)
+                    # self.pos_4_menu = self._drop_down_menu_template("Select Column to Encode", 
+                    #                                                 arg_a_col_list, 
+                    #                                                 self._arg_a_callback, 4, 1)
+                    self.schedule_button.configure(state='normal')
             case _:
                 self.entry_description.configure(text="The dependant column must be numerical")
                 self.pos_4_menu.configure(state="disabled")
@@ -708,9 +709,10 @@ class ManipulateView(BaseView):
             self.entry_description.configure(text="There are no catergorial columns in this dataset")
             self.pos_4_menu.configure(state="disabled")
         else:
-            self.pos_4_menu = self._drop_down_menu_template("Select Column to Encode", 
-                                arg_a_col_list, 
-                                self._arg_a_callback, 4, 1)
+            # self.pos_4_menu = self._drop_down_menu_template("Select Column to Encode", 
+            #                     arg_a_col_list, 
+            #                     self._arg_a_callback, 4, 1)
+            self.schedule_button.configure(state='normal')
 
     def _expand_rows_callback(self, choice):
         """Expand rows callback function. New menu/entry box appears on user selection.

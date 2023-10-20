@@ -560,38 +560,38 @@ class ManipulationsModel():
                 
                 case "Feature Encoding One-hot Encoding":
                     target_column = column
-                    categorical_column = a  # Identify the specific categorical column you want to encode
-
+                
                     # Separate the features and target variable
                     X = df.drop(columns=[target_column])
                     y = df[target_column]
 
                     # Apply one-hot encoding with the sparse_output parameter specified
                     onehot_encoder = OneHotEncoder(sparse_output=False)
-                    X_encoded = onehot_encoder.fit_transform(X[[categorical_column]].values.reshape(-1, 1))
 
-                    # Get the unique values in the 'Age' column to create feature names
-                    unique_values = X[categorical_column].unique()
-                    feature_names = [f'{categorical_column}_{value}' for value in unique_values]
+                    for cols in X:
+                        match X[cols].dtypes:
+                            case "object":
+                                X_encoded = onehot_encoder.fit_transform(X[[cols]].values.reshape(-1, 1))
 
-                    # Create a DataFrame for the one-hot encoded column
-                    encoded_column = pd.DataFrame(X_encoded, columns=feature_names)
+                                # Get the unique values in the 'Age' column to create feature names
+                                unique_values = X[cols].unique()
+                                feature_names = [f'{cols}_{value}' for value in unique_values]
 
-                    # Concatenate the original dataset with the encoded one and the original 'Age' column
-                    X = pd.concat([X, encoded_column], axis=1)
+                                # Create a DataFrame for the one-hot encoded column
+                                encoded_column = pd.DataFrame(X_encoded, columns=feature_names)
 
+                                # Concatenate the original dataset with the encoded one and the original 'Age' column
+                                X = pd.concat([X, encoded_column], axis=1)
+                                X = X.drop(cols, axis=1)
+                            case _:
+                                pass
                     # Add the target column back to the encoded feature dataset
                     X[target_column] = y
 
                     return X
                 
                 case "Feature Encoding Label Encoding":
-                    # Assuming you have a target column (e.g., 'target')
-                    # Replace 'target' with your actual target column name
                     target_column = column
-
-                    # Identify categorical columns (replace this list with your actual categorical columns)
-                    categorical_columns = [a]
 
                     # Suppress the specific DataConversionWarning
                     warnings.filterwarnings("ignore", category=DataConversionWarning)
@@ -601,21 +601,32 @@ class ManipulationsModel():
 
                     # Use LabelEncoder for categorical columns without a for loop
                     label_encoder = LabelEncoder()
-                    encoded_values = label_encoder.fit_transform(X_encoded[categorical_columns])
-                    
-                    X_encoded['Encoded_Age'] = encoded_values
 
-                    # Convert the target column to a 1D array to eliminate the warning
-                    X_encoded[target_column] = X_encoded[target_column].ravel()
-                    X_encoded = X_encoded.drop(a, axis=1)
-                    
+                    for cols in X_encoded:
+                        match X_encoded[cols].dtypes:
+                            case "object":
+                                encoded_values = label_encoder.fit_transform(X_encoded[cols])
+                                X_encoded[cols] = encoded_values
+
+                                # Convert the target column to a 1D array to eliminate the warning
+                                X_encoded[target_column] = X_encoded[target_column].ravel()
+                            case _:
+                                pass
                     return X_encoded
                 
                 case "Feature Encoding Target Encoding":
                     # a = the selected column; column = dependent (target) column         
                     # Encode the categorical column using target encoding
-                    encoding_map = df.groupby(a)[column].mean()
-                    df[a + '_encoded'] = df[a].map(lambda x: encoding_map.get(x, encoding_map.mean()))
+                    # encoding_map = df.groupby(a)[column].mean()
+                    # df[a + '_encoded'] = df[a].map(lambda x: encoding_map.get(x, encoding_map.mean()))
+                    
+                    for cols in df:
+                        match df[cols].dtypes:
+                            case "object":
+                                encoding_map = df.groupby(cols)[column].mean()
+                                df[cols] = df[cols].map(lambda x: encoding_map.get(x, encoding_map.mean()))
+                            case _:
+                                pass
                     return df
 
         except Exception as error:
