@@ -583,7 +583,7 @@ class ManipulationsModel():
                     # Add the target column back to the encoded feature dataset
                     X[target_column] = y
 
-                    return df
+                    return X
                 
                 case "Feature Encoding Label Encoding":
                     # Assuming you have a target column (e.g., 'target')
@@ -602,10 +602,13 @@ class ManipulationsModel():
                     # Use LabelEncoder for categorical columns without a for loop
                     label_encoder = LabelEncoder()
                     encoded_values = label_encoder.fit_transform(X_encoded[categorical_columns])
+                    
                     X_encoded['Encoded_Age'] = encoded_values
 
                     # Convert the target column to a 1D array to eliminate the warning
                     X_encoded[target_column] = X_encoded[target_column].ravel()
+                    X_encoded = X_encoded.drop(a, axis=1)
+                    
                     return X_encoded
                 
                 case "Feature Encoding Target Encoding":
