@@ -42,7 +42,7 @@ class AnalyseView(BaseView):
         self.ds_frame.pack(fill="x", pady=(0, 0), padx=0)
         self.desc_stats_label = CTkLabel(self.ds_frame, text="Descriptive", font=("Arial", 14, "bold"), anchor="w")
         self.desc_stats_label.pack(side="left", expand=False, padx=(8, 0))
-        self.ds_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")   
+        self.ds_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="gray10")   
         self.ds_table_frame.pack(fill="both", expand=True, pady=(5, 0), padx=0)
 
         # Summary Statistics - Entire Dataset
@@ -50,17 +50,17 @@ class AnalyseView(BaseView):
         self.ss_frame.pack(fill="x", pady=(10, 0), padx=0)
         self.summary_stats_label = CTkLabel(self.ss_frame, text="Summary", font=("Arial", 14, "bold"), anchor="w")
         self.summary_stats_label.pack(side="left", expand=False, padx=(8, 0))
-        self.ss_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")   
+        self.ss_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="gray10")
         self.ss_table_frame.pack(fill="both", expand=True, pady=(5, 0), padx=0)
 
         # Correlation Analysis - Entire Dataset
         self.ca_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")
         self.ca_frame.pack(fill="x", pady=(10, 0), padx=0)
         self.correlation_label = CTkLabel(
-            self.ca_frame, text="Correlation Statistics", font=("Arial", 14, "bold"), anchor="w"
+            self.ca_frame, text="Correlation", font=("Arial", 14, "bold"), anchor="w"
             )
         self.correlation_label.pack(side="left", expand=False, padx=(8, 0))
-        self.ca_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")   
+        self.ca_table_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="gray10")   
         self.ca_table_frame.pack(fill="both", expand=True, pady=(5, 0), padx=0)
         
         # Individual Columns
@@ -68,7 +68,7 @@ class AnalyseView(BaseView):
         self.is_frame = CTkFrame(self.individual_cols_parent_frame, fg_color="transparent")
         self.is_frame.pack(fill="x", pady=(0, 0), padx=0)
         self.summarise_label = CTkLabel(
-            self.is_frame, text="Basic Info", font=("Arial", 14, "bold"), anchor="w"
+            self.is_frame, text="Detailed Info", font=("Arial", 14, "bold"), anchor="w"
             )
         self.summarise_label.pack(side="left", expand=False, padx=(8, 0))
         self.is_options_frame = CTkFrame(self.individual_cols_parent_frame, fg_color="gray20")
@@ -252,26 +252,32 @@ class AnalyseView(BaseView):
                     self.ca_table_frame, text = text
                     )
             null_label.configure(text_color="yellow")
-            null_label.pack()
+            null_label.pack(fill="y", expand=True)
         else: 
             if stat == "descriptive":
                 table = self.build_custom_table(
                     root=self.ds_table_frame, 
                     tuple_of_col_names=("#", "Column", "Non-Null Count", "Null Count", "Data Type"),
-                    height=5
+                    height=5, width=self._calculate_table_width(number_of_columns=5), stretch=False
                 )
             elif stat == "summary": 
                 if mode == "numeric": 
                     df.insert(0, "", ["Count", "Mean", "Std", "Min", "25%", "50%", "75%", "Max"])
+                    table = self.build_custom_table(
+                        root=self.ss_table_frame, tuple_of_col_names=tuple(df.columns), 
+                        height=5, width=self._calculate_table_width(number_of_columns=len(df.columns)), stretch=False
+                        )
                 elif mode == "categorical": 
                     df.insert(0, "", ["Count", "Unique", "Top", "Freq"])
-                table = self.build_custom_table(
-                    root=self.ss_table_frame, tuple_of_col_names=tuple(df.columns), height=5
-                    )
+                    table = self.build_custom_table(
+                        root=self.ss_table_frame, tuple_of_col_names=tuple(df.columns), 
+                        height=5, width=self._calculate_table_width(number_of_columns=len(df.columns)), stretch=False
+                        )
             elif stat == "correlation":
                 df.insert(0, "", tuple(df.columns))
                 table = self.build_custom_table(
-                    root=self.ca_table_frame, tuple_of_col_names=tuple(df.columns), height=5
+                    root=self.ca_table_frame, tuple_of_col_names=tuple(df.columns), 
+                    height=5, width=self._calculate_table_width(number_of_columns=len(df.columns)), stretch=False
                 )
             scroll_y = CTkScrollbar(
                 table, orientation="vertical", height=59, fg_color="gray14", command=table.yview
@@ -293,7 +299,7 @@ class AnalyseView(BaseView):
             for index, row in df.iterrows(): 
                 table.insert("", "end", values=row.tolist())
 
-    def build_custom_table(self, root, tuple_of_col_names, height, width=None): 
+    def build_custom_table(self, root, tuple_of_col_names, height, width=None, stretch=True): 
         """Build a table of data for either pivot summary or for raw data view. 
         To be used specificially for treeview widget with horizontal and or vertical scrollbar. 
         Returns unpacked treeview widget.
@@ -312,9 +318,9 @@ class AnalyseView(BaseView):
         for column in tuple_of_col_names: # Build headers
             table.heading(column, text=column)
             if width != None: 
-                table.column(column, width=width, stretch=True)
+                table.column(column, width=width, stretch=stretch)
             else: 
-                table.column(column, stretch=True)
+                table.column(column, stretch=stretch)
         
         return table
     
@@ -332,23 +338,35 @@ class AnalyseView(BaseView):
             for item in widget.winfo_children():
                 item.destroy()
     
-    def populate_summary_tables(self, d): # TODO : fix this up to match single column summary
+    def populate_summary_tables(self, d): 
         """Populate the summary table with descriptive statistics. 
 
         Args:
             d (dict): dictionary of values returned from calculations of model and 
             passed through by controller.
         """
-        self.clear_child_widgets(mode="table", widget=self.basic_summary_tree_view)
-        self.clear_child_widgets(mode="table", widget=self.adv_summary_tree_view)
-        self.basic_summary_tree_view.insert("", "end", values=(
-            d["Min"], d["Max"], d["Mean"], d["Median"], d["Mode"], d["Null Count"]
+        if d != "null": # non numeric, no err, no summary
+            self.clear_child_widgets(mode="table", widget=self.basic_summary_tree_view)
+            self.clear_child_widgets(mode="table", widget=self.adv_summary_tree_view)
+            self.basic_summary_tree_view.insert("", "end", values=(
+                d["Min"], d["Max"], d["Mean"], d["Median"], d["Mode"], d["Null Count"]
+                )
             )
-        )
-        self.adv_summary_tree_view.insert("", "end", values=(
-            d["SD"], d["Variance"], d["IQR"], d["Outlier Count"], d["Skew"], d["Kurtosis"]
+            self.adv_summary_tree_view.insert("", "end", values=(
+                d["SD"], d["Variance"], d["IQR"], d["Outlier Count"], d["Skew"], d["Kurtosis"]
+                )
             )
-        )
+
+    def _calculate_table_width(self, number_of_columns): 
+        """Divide table width (715) by number of columns and return round down
+        integer value for configuring of column widths. 
+
+        Args:
+            number_of_columns (int): number of columns of a given dataframe
+        Returns: 
+            integer value of idea column width for table
+        """
+        return int(715 / number_of_columns)
         
     def populate_pivot_table(self, d): 
         """Populate the pivot table with appropriate information.
@@ -372,19 +390,20 @@ class AnalyseView(BaseView):
             column_headers (list): List of strings which contain column headers
             rows (pandas DataFrame): Specific row range.
         """
-        self._delete_child_widgets_refresh_container(parent=container_frame) # Refresh
+        self.clear_child_widgets(mode="frame", widget=container_frame) # Refresh
+        col_width = self._calculate_table_width(number_of_columns=len(column_headers))
 
         # Create tabulate table
         self.raw_table = self.build_custom_table(
-            root=container_frame, tuple_of_col_names=column_headers, height=10, width=None
+            root=container_frame, tuple_of_col_names=column_headers, height=10, width=col_width, stretch=False
             )
         self.raw_table_x_scroll = CTkScrollbar(
-            container_frame, orientation="horizontal", fg_color="gray14", command=self.raw_table.xview
+            container_frame, orientation="horizontal", width=59, fg_color="gray14", command=self.raw_table.xview
             )
         self.raw_table_x_scroll.pack(side="bottom", fill="x")
         self.raw_table.configure(xscrollcommand=self.raw_table_x_scroll.set)
         self.raw_table_y_scroll = CTkScrollbar(
-            container_frame, orientation="vertical", fg_color="gray14", command=self.raw_table.yview
+            container_frame, orientation="vertical", height=59, fg_color="gray14", command=self.raw_table.yview
             )
         self.raw_table_y_scroll.pack(side="right", fill="y")
         self.raw_table.configure(yscrollcommand=self.raw_table_y_scroll.set)
@@ -394,16 +413,6 @@ class AnalyseView(BaseView):
         for index, row in rows.iterrows():
             self.raw_table.insert('', 'end', values=row.tolist())
 
-    def _delete_child_widgets_refresh_container(self, parent):
-        """Used for purposes of clearing contents of an entire container object for re-rendering.
-
-        Args:
-            parent (CTkFrame): Parent frame (container) of which the child widgets need
-            to be removed. 
-        """
-        for widget in parent.winfo_children():
-            widget.destroy()
-        
     def _change_table_heading(self, table, target_header, new_header): 
         """Change heading of table (specifically used for pivot feature. 
         

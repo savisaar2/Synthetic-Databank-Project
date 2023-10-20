@@ -67,30 +67,33 @@ class AnalyseModel():
         Returns:
             dict: dictionary of case to value mappings
         """
-        q1 = self._q1(var=var)
-        q3 = self._q3(var=var)
-        iqr = self._iqr(q3=q3, q1=q1)
-        lower_bound = self._lower_bound(q1=q1, iqr=iqr)
-        upper_bound = self._upper_bound(q3=q3, iqr=iqr)
-        identified_outliers = (var < lower_bound) | (var > upper_bound)
-        outlier_count = identified_outliers.sum()
-        null_count = var.isnull().sum()
+        if self._type_compatibility(mode="single", type_group="numeric", df=var): 
+            q1 = self._q1(var=var)
+            q3 = self._q3(var=var)
+            iqr = self._iqr(q3=q3, q1=q1)
+            lower_bound = self._lower_bound(q1=q1, iqr=iqr)
+            upper_bound = self._upper_bound(q3=q3, iqr=iqr)
+            identified_outliers = (var < lower_bound) | (var > upper_bound)
+            outlier_count = identified_outliers.sum()
+            null_count = var.isnull().sum()
 
-        summary = {
-            "Min": var.min(), 
-            "Max": var.max(),
-            "Mean": var.mean(),
-            "Median": var.median(),
-            "Mode": var.mode()[0], # Mode returns dataframe, index 0 is actual value
-            "Null Count": null_count,
-            "SD": var.std(),
-            "Variance": var.var(),
-            "IQR": iqr,
-            "Outlier Count": outlier_count,
-            "Skew": var.skew(),
-            "Kurtosis": var.kurt()
-        }
-        return {key: value for key, value in summary.items()} 
+            summary = {
+                "Min": var.min(), 
+                "Max": var.max(),
+                "Mean": var.mean(),
+                "Median": var.median(),
+                "Mode": var.mode()[0], # Mode returns dataframe, index 0 is actual value
+                "Null Count": null_count,
+                "SD": var.std(),
+                "Variance": var.var(),
+                "IQR": iqr,
+                "Outlier Count": outlier_count,
+                "Skew": var.skew(),
+                "Kurtosis": var.kurt()
+            }
+            return {key: value for key, value in summary.items()} 
+        else: 
+            return "null"
     
     def _iqr(self, q3, q1):
         """IQR - inter quartile range
@@ -150,7 +153,7 @@ class AnalyseModel():
         """
         return q3 + 1.5 * iqr
         
-    def pivot(self, df, vals, cat, agg, rounding):
+    def pivot(self, df, vals, cat, agg):
         """Pivot table. 
 
         Args:
@@ -158,14 +161,13 @@ class AnalyseModel():
             vals (str): header name of the column containing the values.
             cat (str): header name of the column containing the categories.
             agg (str): selected aggregate function e.g. "mean".
-            rounding (int): rounding value as per user intput from view.
 
         Returns:
             dict: A dictionary of category to aggregate function values.
         """
         pivot_calculation = pt(data=df, values=vals, index=cat, aggfunc=agg)
         temp_dict = pivot_calculation.to_dict()[vals] # return in following sample format {"cat1": 333, "cat2": 444}
-        return {key: value for key, value in temp_dict.items()} # rounding
+        return {key: value for key, value in temp_dict.items()}
     
     def convert_to_number(self, val): 
         """Convert 
@@ -240,7 +242,7 @@ class AnalyseModel():
         that will not work on particular analysis operations. 
 
         Args:
-            mode (str): "any" or "all", depending on what is required, if any exists, will return true
+            mode (str): "any", "all", "single", depending on what is required, if any exists, will return true
                 otherwise, only if all exists will return true. 
             type_group (str): "numeric", "categorical", "boolean", "datetime".
             df (pandas dataframe): pandas dataframe
@@ -264,6 +266,13 @@ class AnalyseModel():
         }
         check = []
         all_dtypes = set()
+
+        if mode == "single": 
+            if df.dtype not in types[type_group]: 
+                return False 
+            else: 
+                return True
+        
         for coltype in df.dtypes: 
             all_dtypes.add(str(coltype))
         

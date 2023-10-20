@@ -1,4 +1,5 @@
 from utils.logger_utils import Logger
+import threading
 
 class AnalyseController:
     def __init__(self, model, view):
@@ -74,40 +75,34 @@ class AnalyseController:
         if graph_option == "Scatter": 
             var_b_column = self.model.DATASET.get_column_data(column=self.frame.variable_b_option_menu.get())
 
-        self.model.analyse.plot_visualisation(
-            mode=graph_option, title=dataset_name, var_a=var_a_column, var_b=var_b_column, df_ref=df_ref
-            )
+        browser_task = threading.Thread(target=self.model.analyse.plot_visualisation, kwargs={
+            "mode":graph_option, "title":dataset_name, "var_a":var_a_column, "var_b":var_b_column, "df_ref":df_ref
+            })
+        browser_task.start()
 
     def _summarise_column(self, event): 
         """
         Generate descriptive statistics based on chosen variable (column of data) in the view.
         """
-        print(self.frame.col_summary_option_menu.get())
-        summary = self.model.analyse.summarise_column(
-            var=self.model.DATASET.get_column_data(column=self.frame.col_summary_option_menu.get())
-            )
-        self.frame.populate_summary_tables(d=summary)
+        selection = self.frame.col_summary_option_menu.get()
+        if selection != "------": 
+            summary = self.model.analyse.summarise_column(
+                var=self.model.DATASET.get_column_data(column=selection)
+                )
+            self.frame.populate_summary_tables(d=summary)
 
     def _pivot(self, event): 
         """
         Create pivot table based on selected variable (column) of data, i.e. categorical column, related values
         and the selected aggregate function. 
         """
-        try: 
-            rounding_val = self.model.analyse.convert_to_number(val=self.frame.pivot_round_value_input.get())
-        except ValueError as e: 
-            self.exception.display_error("Specify rounding value as an integer value.")
-            return
-
-        if type(rounding_val) == int: 
-            pivot_data = self.model.analyse.pivot(
-                df=self.model.DATASET.get_reference_to_current_snapshot(),
-                vals=self.frame.values_option_menu.get(),
-                cat=self.frame.categories_option_menu.get(), 
-                agg=self.frame.aggfunc_option_menu.get(),
-                rounding=rounding_val
-            )
-            self.frame.populate_pivot_table(d=pivot_data)
+        pivot_data = self.model.analyse.pivot(
+            df=self.model.DATASET.get_reference_to_current_snapshot(),
+            vals=self.frame.values_option_menu.get(),
+            cat=self.frame.categories_option_menu.get(), 
+            agg=self.frame.aggfunc_option_menu.get(),
+        )
+        self.frame.populate_pivot_table(d=pivot_data)
 
     def _tabulate(self, event):
         """Facilitate tabulation of dataset using start_row, end_row values in the view
