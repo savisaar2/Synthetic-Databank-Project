@@ -57,6 +57,7 @@ class ManipulateController:
         """
         self._scan_dataset()
         snapshots = self.model.DATASET.get_reference_to_all_snapshots()
+        self._update_rollback_selector()
         self.frame.refresh_manipulate_widgets(self.model.DATASET.get_column_headers(), self.col_dtype_dict, snapshots)
 
         snapshot_name = snapshots[-1]["Name"]

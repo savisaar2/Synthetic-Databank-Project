@@ -679,9 +679,6 @@ class ManipulateView(BaseView):
                     self.pos_4_menu.configure(state="disabled")
                     self.pos_3_menu.configure(state="disabled")
                 else:
-                    # self.pos_4_menu = self._drop_down_menu_template("Select Column to Encode", 
-                    #                                                 arg_a_col_list, 
-                    #                                                 self._arg_a_callback, 4, 1)
                     self.schedule_button.configure(state='normal')
             case _:
                 self.entry_description.configure(text="The dependant column must be numerical")
@@ -709,9 +706,6 @@ class ManipulateView(BaseView):
             self.entry_description.configure(text="There are no catergorial columns in this dataset")
             self.pos_4_menu.configure(state="disabled")
         else:
-            # self.pos_4_menu = self._drop_down_menu_template("Select Column to Encode", 
-            #                     arg_a_col_list, 
-            #                     self._arg_a_callback, 4, 1)
             self.schedule_button.configure(state='normal')
 
     def _expand_rows_callback(self, choice):
@@ -986,6 +980,12 @@ class ManipulateView(BaseView):
                         break
 
     def dataset_selector_callback(self, choice):
+        """Callback function for rollback's dataset selector widget. Displays currently selected dataset's info
+        in a label.
+
+        Args:
+            choice (str): User selection via dropdown menu or entry box.
+        """
         snapshot_name = self.snapshots[int(choice)]["Name"]
         rows = self.snapshots[int(choice)]["Dataframe"].shape[0]
         columns = self.snapshots[int(choice)]["Dataframe"].shape[1]
@@ -1079,5 +1079,9 @@ class ManipulateView(BaseView):
                 self.action_selection_menu.set("Select Action")
 
     def get_rollback_index(self):
+        """Getter method for manipulations controller to obtian rollback index of selected snapshot.
+        Returns:
+            int: index of selected snapshot.
+        """
         return self.rollback_dataset_selector.get()
     

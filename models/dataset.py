@@ -186,6 +186,7 @@ class DatasetModel:
         """Method to clear all snapshots.
         """
         self._SNAPSHOTS.clear()
+        print(self._SNAPSHOTS)
         print("snapshots cleared!")
 
     def append_new_snapshot(self, snapshot):
