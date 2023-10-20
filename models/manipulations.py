@@ -40,6 +40,7 @@ class ManipulationsModel():
                 "Change Column Name": self.change_column_name,
                 "Expand (add rows)": self.add_rows,
                 "Data Transformation": self.data_transformation,
+                "Automatic": self.auto_mode
         }
 
     def generate_churner(self, scheduler_row:list):
@@ -407,6 +408,16 @@ class ManipulationsModel():
                             # Perform fillna with mode
                             df[column].fillna(mode_val, inplace=True)
                             return df
+                        case "Back Fill":
+                            df[column] = df[column].bfill()
+                            return df
+                        case "Forward Fill":
+                            df[column] = df[column].ffill()
+                            return df
+                        case "Random Sampling Fill":
+                            non_missing_values = df[column].dropna().unique()
+                            df[column] = df[column].apply(lambda x: random.choice(non_missing_values) if pd.isna(x) else x)
+                            return df
                                  
                 case "Manual Categorical":
                     # column = the selected column; a = new value
@@ -549,62 +560,100 @@ class ManipulationsModel():
                 
                 case "Feature Encoding One-hot Encoding":
                     target_column = column
-                    categorical_column = a  # Identify the specific categorical column you want to encode
-
+                
                     # Separate the features and target variable
                     X = df.drop(columns=[target_column])
                     y = df[target_column]
 
                     # Apply one-hot encoding with the sparse_output parameter specified
                     onehot_encoder = OneHotEncoder(sparse_output=False)
-                    X_encoded = onehot_encoder.fit_transform(X[[categorical_column]].values.reshape(-1, 1))
 
-                    # Get the unique values in the 'Age' column to create feature names
-                    unique_values = X[categorical_column].unique()
-                    feature_names = [f'{categorical_column}_{value}' for value in unique_values]
+                    for cols in X:
+                        match X[cols].dtypes:
+                            case "object":
+                                X_encoded = onehot_encoder.fit_transform(X[[cols]].values.reshape(-1, 1))
 
-                    # Create a DataFrame for the one-hot encoded column
-                    encoded_column = pd.DataFrame(X_encoded, columns=feature_names)
+                                # Get the unique values in the 'Age' column to create feature names
+                                unique_values = X[cols].unique()
+                                feature_names = [f'{cols}_{value}' for value in unique_values]
 
-                    # Concatenate the original dataset with the encoded one and the original 'Age' column
-                    X = pd.concat([X, encoded_column], axis=1)
+                                # Create a DataFrame for the one-hot encoded column
+                                encoded_column = pd.DataFrame(X_encoded, columns=feature_names)
 
+                                # Concatenate the original dataset with the encoded one and the original column
+                                X = pd.concat([X, encoded_column], axis=1)
+                                X = X.drop(cols, axis=1)
+                            case _:
+                                pass
                     # Add the target column back to the encoded feature dataset
                     X[target_column] = y
 
-                    return df
+                    return X
                 
                 case "Feature Encoding Label Encoding":
-                    # Assuming you have a target column (e.g., 'target')
-                    # Replace 'target' with your actual target column name
-                    target_column = column
-
-                    # Identify categorical columns (replace this list with your actual categorical columns)
-                    categorical_columns = [a]
-
-                    # Suppress the specific DataConversionWarning
-                    warnings.filterwarnings("ignore", category=DataConversionWarning)
-
-                    # Create a new DataFrame for the encoded features
-                    X_encoded = df.copy()
+                    X = df.drop(columns=[column])
+                    y = df[column]
 
                     # Use LabelEncoder for categorical columns without a for loop
                     label_encoder = LabelEncoder()
-                    encoded_values = label_encoder.fit_transform(X_encoded[categorical_columns])
-                    X_encoded['Encoded_Age'] = encoded_values
 
-                    # Convert the target column to a 1D array to eliminate the warning
-                    X_encoded[target_column] = X_encoded[target_column].ravel()
-                    return X_encoded
+                    for cols in X:
+                        match X[cols].dtypes:
+                            case "object":
+                                encoded_values = label_encoder.fit_transform(X[cols])
+                                X[cols] = encoded_values
+                            case _:
+                                pass
+                    X[column] = y
+                    return X
                 
                 case "Feature Encoding Target Encoding":
                     # a = the selected column; column = dependent (target) column         
                     # Encode the categorical column using target encoding
-                    encoding_map = df.groupby(a)[column].mean()
-                    df[a + '_encoded'] = df[a].map(lambda x: encoding_map.get(x, encoding_map.mean()))
+                    # encoding_map = df.groupby(a)[column].mean()
+                    # df[a + '_encoded'] = df[a].map(lambda x: encoding_map.get(x, encoding_map.mean()))
+                    
+                    for cols in df:
+                        match df[cols].dtypes:
+                            case "object":
+                                encoding_map = df.groupby(cols)[column].mean()
+                                df[cols] = df[cols].map(lambda x: encoding_map.get(x, encoding_map.mean()))
+                            case _:
+                                pass
                     return df
 
         except Exception as error:
             self.logger.log_exception("Manipulation failed to complete. Traceback:")
             self.error_msg = error
             return False
+        
+    def auto_mode(self, sub_action, df, column, args): 
+        try:
+            match sub_action:
+                case "Clean Dataset":
+                    self.remove_rows("Duplicate Rows", df, column, args)
+                    for col in df:
+                        col_type = df[col].dtypes
+                        match col_type:
+                            case "int64" | "float64":
+                                self.replace_null_values("Algorithmic Numerical", df, col, args={"a": "Mean", "b":"", "c":""})
+                            case _:
+                                self.replace_null_values("Algorithmic Categorical", df, col, args={"a": "Mode", "b":"", "c":""})
+                case "Dirty Dataset":
+                    num_rows_add_missing = int(len(df) / 5)
+                    self.add_noise("Add Missing", df, column, args={"a": num_rows_add_missing, "b":"", "c":""})
+                    num_rows_add_outliers = int(len(df) / 20)
+                    for col in df:
+                        col_type = df[col].dtypes
+                        match col_type:
+                            case "int64" | "float64":
+                                self.add_noise("Add Outliers Percentile", df, col, args={"a": num_rows_add_outliers, "b":"", "c":""})
+            return df
+
+        except Exception as error:
+            self.logger.log_exception("Manipulation failed to complete. Traceback:")
+            self.error_msg = error
+            return False
+
+
+

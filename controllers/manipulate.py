@@ -56,13 +56,20 @@ class ManipulateController:
         ensure correct data.
         """
         self._scan_dataset()
-        snapshots = self.model.DATASET.get_snapshot_list()
+        snapshots = self.model.DATASET.get_reference_to_all_snapshots()
+        self._update_rollback_selector()
         self.frame.refresh_manipulate_widgets(self.model.DATASET.get_column_headers(), self.col_dtype_dict, snapshots)
 
         snapshot_name = snapshots[-1]["Name"]
         rows = snapshots[-1]["Dataframe"].shape[0]
         columns = snapshots[-1]["Dataframe"].shape[1]
-        self.frame.current_dataset_label.configure(text=f"Selected Dataset: {snapshot_name} | Rows: {rows} | Columns: {columns}")
+        schedule_set = snapshots[-1]["Schedule Set"]
+        manips = "\n"
+        for action in schedule_set:
+            new_line = f'{action["step"]}. {action["action"]} | {action["sub_action"]} | {action["column"]}\n' 
+            manips = manips + new_line
+        self.frame.current_dataset_label.configure(text=f"Selected Dataset: {snapshot_name} | Rows: {rows} | Columns: {columns}\n"
+                                                        f"Manipulations:{manips}")
      
     def _populate_schedule_set(self):
         """
@@ -196,7 +203,7 @@ class ManipulateController:
         """Method to clean up the schedule set, and populate the system log during generate function.
         """
         logger_manips = self.model.manipulations.schedule_set
-        self.logger.log_info(f"User initiated generate function with schedule set:")
+        self.logger.log_info(f"User initiated 'generate' function with schedule set:")
         for item in logger_manips:
             item.pop("df")
             self.logger.log_info(f"{item}")
@@ -207,16 +214,17 @@ class ManipulateController:
         try:
             index = self.frame.get_rollback_index()
             self.model.DATASET.rollback(int(index))
+            self.logger.log_info(f"User successfully initiated 'rollback' function to snapshot at position: {int(index)}")
             self.snapshot_count = 0
             self._update_rollback_selector()
             self._refresh_manipulate_widgets
         except Exception as error:
-            self.logger.log_exception("Rollback failed to complete. Traceback:")
+            self.logger.log_exception("'Rollback' failed to complete. Traceback:")
 
     def _update_rollback_selector(self):
         """Function to update the rollback selector widget in the manipulations UI.
         """
-        snapshots = self.model.DATASET.get_snapshot_list()
+        snapshots = self.model.DATASET.get_reference_to_all_snapshots()
         selector_list = []
         self.snapshot_count = 0
         for k in snapshots:

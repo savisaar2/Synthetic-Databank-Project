@@ -50,7 +50,7 @@ class DatasetModel:
             {
             "Name": "New Dataset",
             "Description": "",
-            "Schedule Set": "",
+            "Schedule Set": {},
             "Dataframe": pd.DataFrame()
             }
         )
@@ -66,7 +66,7 @@ class DatasetModel:
                 {
                     "Name": f"{dataset_name}", 
                     "Description": "Initial load.", 
-                    "Schedule Set": "", 
+                    "Schedule Set": {}, 
                     "Dataframe": df
                 }
             )
@@ -186,6 +186,7 @@ class DatasetModel:
         """Method to clear all snapshots.
         """
         self._SNAPSHOTS.clear()
+        print(self._SNAPSHOTS)
         print("snapshots cleared!")
 
     def append_new_snapshot(self, snapshot):
@@ -367,6 +368,8 @@ class DatasetModel:
     def add_generated_dataset_to_snapshot(self, schedule_set, dataset_name, df):
         """Appends the successfully generated dataframe to the SNAPSHOTS list.
         """
+        if len(self._SNAPSHOTS) > 9:
+             del self._SNAPSHOTS[0]
         self._SNAPSHOTS.append(
             {
                 "Name": f"{dataset_name}", 
@@ -376,11 +379,3 @@ class DatasetModel:
             }
         )
         print("Generated data set:", self._SNAPSHOTS[-1]["Dataframe"])
-        
-    def get_snapshot_list(self):
-        """Getter method to return current list of snapshots from rollback.
-
-        Returns:
-            list: List of snapshots.
-        """
-        return self._SNAPSHOTS

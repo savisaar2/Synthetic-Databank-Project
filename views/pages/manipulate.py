@@ -61,7 +61,7 @@ class ManipulateView(BaseView):
 
         # Action menu selector
         self.action_menu_var = StringVar(value="Select Action")
-        self.action_selector = ["Add", "Reduce", "Manipulate"]
+        self.action_selector = ["Add", "Reduce", "Manipulate", "Automatic"]
         self.action_selection_menu = CTkOptionMenu(
             self.manipulations_frame_2, 
             fg_color="gray10", 
@@ -167,7 +167,7 @@ class ManipulateView(BaseView):
         self.rollback_frame_2.pack(fill="both", pady=(0, 20), padx=20, expand=True)
 
         # Current dataset label
-        self.current_dataset_label = CTkLabel(self.rollback_frame_2)
+        self.current_dataset_label = CTkLabel(self.rollback_frame_2, justify="left")
         self.current_dataset_label.grid(row=0, column=0, padx=(8, 8), pady=(0, 0), sticky="W")
 
     def _action_callback(self, choice):
@@ -178,24 +178,39 @@ class ManipulateView(BaseView):
         """
         # Refresh widgets
         self.schedule_button.configure(state="disabled")  
-        self.variables = self.variables = {"action":"", "sub_action":"", "args":{"a":"", "b":"", "c":""},"column":""}
+        self.variables = {"action":"", "sub_action":"", "args":{"a":"", "b":"", "c":""},"column":""}
         self._refresh_menu_widgets(1)
 
         match choice:
             case "Add":
-                self.pos_0_menu = self._drop_down_menu_template("Select Sub-action", 
+                self.pos_1_menu = self._drop_down_menu_template("Select Sub-action", 
                     ["Noise", "Column"], self._add_select_callback, 1)      
             case "Reduce":
                 # Show reduce method menu drop down
-                self.pos_0_menu = self._drop_down_menu_template("Select Sub-action", 
+                self.pos_1_menu = self._drop_down_menu_template("Select Sub-action", 
                     ["Columns (Dimensionality)", "Remove Rows"], self._reduce_method_select_callback, 1) 
 
             case "Manipulate":
                 # Show variable menu drop down
-                self.pos_0_menu = self._drop_down_menu_template("Select Sub-action", 
+                self.pos_1_menu = self._drop_down_menu_template("Select Sub-action", 
                     ["Replace Missing Values", "Replace Value (x) with New Value", 
                      "Change Column Name", "Expand (add rows)", "Data Transformation"],
                     self._manipulate_col_select_callback, 1)
+            case "Automatic":   
+                self.variables["action"] = "Automatic"
+                self.pos_1_menu = self._drop_down_menu_template("Select Sub-action",
+                                                                ["Clean Dataset", "Dirty Dataset"],
+                                                                self._automatic_callback, 1)
+
+    def _automatic_callback(self, choice):
+         self.variables["sub_action"] = choice
+         self.schedule_button.configure(state="normal")
+
+         match choice:
+             case "Clean Dataset":
+                 self.entry_description.configure(text="Clean Dataset: 1. Remove any dupliacte rows. 2. Replace all missing values.")
+             case "Dirty Dataset":
+                 self.entry_description.configure(text="Dirty Dataset: 1. Add missing values to dataset. 2. Add outliers to dataset.")
 
     def _add_select_callback(self, choice):
         """Add menu selector callback function. New menu/entry box appears on user selection.
@@ -212,7 +227,7 @@ class ManipulateView(BaseView):
                 ["Add Random Custom Value", "Add Missing", "Add Outliers"], self._add_noise_technique_callback, 2)
             case "Column":
                 self.pos_2_menu = self._drop_down_menu_template("Select Technique", 
-                ["Duplicate", "New", "Feature Engineering(NA)"], self._add_column_technique_callback, 2)
+                ["Duplicate", "New"], self._add_column_technique_callback, 2)
 
     def _add_noise_technique_callback(self, choice):
         """Add noise selector callback function. New menu/entry box appears on user selection.
@@ -341,12 +356,6 @@ class ManipulateView(BaseView):
                                                                     "Enter column name", 200)
                 self.entry_description.configure(text="Enter column name")
 
-            case "Feature Engineering(NA)":
-                pass
-                # self.pos_3_menu = self._drop_down_menu_template("Select Technique", 
-                #                                                 ["Polynomial Features", "Interaction Features"], 
-                #                                                 self._feature_engineering_callback, 3)
-
     def _reduce_method_select_callback(self, choice):
         """Reduce callback function. New menu/entry box appears on user selection.
 
@@ -441,7 +450,7 @@ class ManipulateView(BaseView):
                                                                     "1. Enter a string", 200)
             case "Expand (add rows)":
                 self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
-                ["Random Sampling", "Bootstrap Resampling", "SMOTE", "Add Noise(NA)"], self._expand_rows_callback, 2)  
+                ["Random Sampling", "Bootstrap Resampling", "SMOTE"], self._expand_rows_callback, 2)  
             
             case "Data Transformation":
                 self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
@@ -524,7 +533,7 @@ class ManipulateView(BaseView):
                     case "Algorithmic":
                         self.variables["sub_action"] = f"{choice} Categorical"
                         self.pos_4_menu = self._drop_down_menu_template("Select Technique", 
-                                                                        ["Mode"], 
+                                                                        ["Mode", "Back Fill", "Forward Fill", "Random Sampling Fill"], 
                                                                         self._replace_missing_technique_selection, 4)
                     case "Manual":
                         self.variables["sub_action"] = f"{choice} Categorical"
@@ -542,7 +551,7 @@ class ManipulateView(BaseView):
         self._refresh_menu_widgets(5)
 
         match choice:
-            case "Mean" | "Median" | "Mode" | "Random Forest":
+            case "Mean" | "Median" | "Mode" | "Random Forest" | "Back Fill" | "Forward Fill" | "Random Sampling Fill":
                 self.pos_4_menu.configure(state='disabled')
                 self.schedule_button.configure(state="normal")
             case "KNN":
@@ -670,9 +679,7 @@ class ManipulateView(BaseView):
                     self.pos_4_menu.configure(state="disabled")
                     self.pos_3_menu.configure(state="disabled")
                 else:
-                    self.pos_4_menu = self._drop_down_menu_template("Select Column to Encode", 
-                                                                    arg_a_col_list, 
-                                                                    self._arg_a_callback, 4, 1)
+                    self.schedule_button.configure(state='normal')
             case _:
                 self.entry_description.configure(text="The dependant column must be numerical")
                 self.pos_4_menu.configure(state="disabled")
@@ -699,9 +706,7 @@ class ManipulateView(BaseView):
             self.entry_description.configure(text="There are no catergorial columns in this dataset")
             self.pos_4_menu.configure(state="disabled")
         else:
-            self.pos_4_menu = self._drop_down_menu_template("Select Column to Encode", 
-                                arg_a_col_list, 
-                                self._arg_a_callback, 4, 1)
+            self.schedule_button.configure(state='normal')
 
     def _expand_rows_callback(self, choice):
         """Expand rows callback function. New menu/entry box appears on user selection.
@@ -975,11 +980,22 @@ class ManipulateView(BaseView):
                         break
 
     def dataset_selector_callback(self, choice):
+        """Callback function for rollback's dataset selector widget. Displays currently selected dataset's info
+        in a label.
+
+        Args:
+            choice (str): User selection via dropdown menu or entry box.
+        """
         snapshot_name = self.snapshots[int(choice)]["Name"]
         rows = self.snapshots[int(choice)]["Dataframe"].shape[0]
         columns = self.snapshots[int(choice)]["Dataframe"].shape[1]
-        self.current_dataset_label.configure(text=f"Selected Dataset: {snapshot_name} | Rows: {rows} | Columns: {columns}")
-
+        schedule_set = self.snapshots[int(choice)]["Schedule Set"]
+        manips = "\n"
+        for action in schedule_set:
+            new_line = f'{action["step"]}. {action["action"]} | {action["sub_action"]} | {action["column"]}\n' 
+            manips = manips + new_line
+        self.current_dataset_label.configure(text=f"Selected Dataset: {snapshot_name} | Rows: {rows} | Columns: {columns}\n"
+                                                        f"Manipulations:{manips}")
 
     def refresh_manipulate_widgets(self, column_headers, column_dtypes, snapshots):
         """Refresh values of various widgets on Manipulate view with appropriate
@@ -1063,5 +1079,9 @@ class ManipulateView(BaseView):
                 self.action_selection_menu.set("Select Action")
 
     def get_rollback_index(self):
+        """Getter method for manipulations controller to obtian rollback index of selected snapshot.
+        Returns:
+            int: index of selected snapshot.
+        """
         return self.rollback_dataset_selector.get()
     

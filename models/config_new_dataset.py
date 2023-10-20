@@ -79,6 +79,22 @@ class ConfigNewDatasetModel():
                     faker_func = self.fake.address()
                 case "date_of_birth":
                     faker_func = self.fake.date_of_birth()
+                case "phone_number":
+                    faker_func = self.fake.phone_number()
+                case "job":
+                    faker_func = self.fake.job()  
+                case "email":
+                    faker_func = self.fake.ascii_email() 
+                case "date_this_year":
+                    faker_func = self.fake.date_this_year()     
+                case "credit_card_number":
+                    faker_func = self.fake.credit_card_number()  
+                case "company":
+                    faker_func = self.fake.company()
+                case "user_name":
+                    faker_func = self.fake.user_name()
+                case "url":
+                    faker_func = self.fake.url()                                              
             generated_data.append(faker_func)
         df[col_name] = generated_data
         return df
