@@ -56,8 +56,8 @@
         "Description": "Classic dataset on Titanic disaster used often for data mining tutorials and demonstrations\n\nCategory: Disaster\n\nKey Words: "
     },
     "wdbc": {
-        "Source": "Some source",
-        "Description": "Some description"
+        "Source": "https://datahub.io/machine-learning/wdbc#readme",
+        "Description": "Breast Cancer Wisconsin (Diagnostic) Data Set (WDBC). 30 features are computed from a digitized image of a fine needle aspirate (FNA) of a breast mass. They describe characteristics of the cell nuclei present in the image. The target feature records the prognosis (benign (1) or malignant (2)).\n\nCategory: Health\n\nKey Words:"
     },
     "wine_dataset": {
         "Source": "Original Owners: Forina, M. et al, PARVUS - Institute of Pharmaceutical and Food Analysis and Technologies, Via Brigata Salerno, 16147 Genoa, Italy.",
