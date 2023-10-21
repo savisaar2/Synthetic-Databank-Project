@@ -37,6 +37,7 @@ class ManipulationsModel():
                 "Reduce Columns (Dimensionality)": self.reduce_columns,
                 "Replace Missing Values": self.replace_null_values,
                 "Replace Value (x) with New Value": self.replace_x_with_new_value,
+                "Replace Outliers with Missing": self.replace_outliers,
                 "Change Column Name": self.change_column_name,
                 "Expand (add rows)": self.add_rows,
                 "Data Transformation": self.data_transformation,
@@ -328,6 +329,58 @@ class ManipulationsModel():
                 case "Duplicate Rows":
                     df_no_duplicate = df.drop_duplicates()
                     return df_no_duplicate
+                
+        except Exception as error:
+            self.logger.log_exception("Manipulation failed to complete. Traceback:")
+            self.error_msg = error
+            return False
+        
+    def replace_outliers(self, sub_action, df, column, args): 
+        a, b, c = args["a"], args["b"], args["c"]  #unpack args
+
+        try:        
+            match column:
+                case "":
+
+                    for col in df:
+                        Q1 = df[col].quantile(a/100)
+                        Q3 = df[col].quantile(b/100)
+                        IQR = Q3 - Q1
+
+                        # Calculate lower_bound and upper_bound for outliers
+                        lower_bound = Q1 - 1.5 * IQR
+                        upper_bound = Q3 + 1.5 * IQR
+                        index = 0
+                        match df[col].dtypes:
+                            case "int64" | "float64":
+                                for data in df[col]:
+                                    if float(data) < float(lower_bound):
+                                        df.loc[index, col] = np.nan
+                                    elif float(data) > float(upper_bound):
+                                        df.loc[index, col] = np.nan
+                                    index +=1
+                            case _:
+                                pass
+                case _:
+                    Q1 = df[column].quantile(a/100)
+                    Q3 = df[column].quantile(b/100)
+                    IQR = Q3 - Q1
+
+                    # Calculate lower_bound and upper_bound for outliers
+                    lower_bound = Q1 - 1.5 * IQR
+                    upper_bound = Q3 + 1.5 * IQR
+                    index = 0
+                    match df[column].dtypes:
+                        case "int64" | "float64":
+                            for data in df[column]:
+                                if float(data) < float(lower_bound):
+                                    df.loc[index, column] = np.nan
+                                elif float(data) > float(upper_bound):
+                                    df.loc[index, column] = np.nan
+                                index +=1
+                        case _:
+                            pass
+            return df
                 
         except Exception as error:
             self.logger.log_exception("Manipulation failed to complete. Traceback:")
@@ -631,7 +684,13 @@ class ManipulationsModel():
         try:
             match sub_action:
                 case "Clean Dataset":
+                    # Remove duplicate rows.
                     self.remove_rows("Duplicate Rows", df, column, args)
+
+                    # Replace values lower than the 5th percentile and 95% percentile with NaN.
+                    self.replace_outliers(sub_action="", df=df, column="", args={"a": 5, "b": 95, "c":""})
+
+                    # Replace missing values with Mean or Mode values.
                     for col in df:
                         col_type = df[col].dtypes
                         match col_type:
