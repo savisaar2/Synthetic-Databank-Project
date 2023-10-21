@@ -70,7 +70,6 @@ class ManipulateController:
             manips = manips + new_line
         self.frame.current_dataset_label.configure(text=f"Selected Dataset: {snapshot_name} | Rows: {rows} | Columns: {columns}\n"
                                                         f"Manipulations:{manips}")
-     
     def _populate_schedule_set(self):
         """
         Method to populate user manipulations to the schedule set in the UI and model.

@@ -2825,3 +2825,87 @@ KeyError: 'Class'
 2023-10-20 15:05:46,419 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
 2023-10-20 15:05:52,465 - INFO - User changed view to 'library'.
 2023-10-20 15:05:53,533 - INFO - User changed view to 'analyse'.
+2023-10-21 14:02:10,174 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:02:13,101 - INFO - User successfully initiated 'rollback' function to snapshot at position: 0
+2023-10-21 14:02:49,324 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:03:10,494 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:04:28,318 - INFO - User initiated 'generate' function with schedule set:
+2023-10-21 14:04:28,318 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '45', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-21 14:04:28,329 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-21 14:08:14,368 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:08:31,463 - INFO - User initiated 'generate' function with schedule set:
+2023-10-21 14:08:31,463 - INFO - {'step': 1, 'action': 'Add Noise', 'sub_action': 'Add Missing', 'args': {'a': 5, 'b': '', 'c': ''}, 'column': 'Glucose', 'outcome': 'Success'}
+2023-10-21 14:08:31,474 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-21 14:09:20,147 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:13:39,182 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:16:17,400 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:17:55,742 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:19:06,626 - INFO - User changed view to 'analyse'.
+2023-10-21 14:19:06,939 - INFO - User changed view to 'library'.
+2023-10-21 14:23:58,034 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:39:59,929 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:40:11,499 - INFO - User changed view to 'library'.
+2023-10-21 14:40:35,655 - INFO - User changed view to 'analyse'.
+2023-10-21 14:40:36,150 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:40:41,561 - INFO - User changed view to 'analyse'.
+2023-10-21 14:40:41,976 - INFO - User changed view to 'library'.
+2023-10-21 14:41:54,178 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:42:12,321 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:42:12,651 - INFO - User changed view to 'analyse'.
+2023-10-21 14:42:13,111 - INFO - User changed view to 'library'.
+2023-10-21 14:44:02,873 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:44:04,147 - INFO - User changed view to 'library'.
+2023-10-21 14:44:15,778 - INFO - User changed view to 'manipulate'.
+2023-10-21 14:44:17,250 - INFO - User successfully initiated 'rollback' function to snapshot at position: 0
+2023-10-21 14:44:25,607 - INFO - User initiated 'generate' function with schedule set:
+2023-10-21 14:44:25,607 - INFO - {'step': 1, 'action': 'Reduce Remove Rows', 'sub_action': 'Missing Values', 'args': {'a': '', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-21 14:44:25,618 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-21 14:44:28,101 - INFO - User changed view to 'library'.
+2023-10-21 15:23:42,796 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:23:43,763 - INFO - User changed view to 'library'.
+2023-10-21 15:24:40,740 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:25:22,038 - INFO - User changed view to 'library'.
+2023-10-21 15:26:07,304 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:08,688 - INFO - User changed view to 'library'.
+2023-10-21 15:26:10,967 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:11,536 - INFO - User changed view to 'library'.
+2023-10-21 15:26:12,774 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:13,153 - INFO - User changed view to 'library'.
+2023-10-21 15:26:14,401 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:14,814 - INFO - User changed view to 'library'.
+2023-10-21 15:26:16,196 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:16,618 - INFO - User changed view to 'library'.
+2023-10-21 15:26:19,290 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:20,218 - INFO - User changed view to 'library'.
+2023-10-21 15:26:21,844 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:22,620 - INFO - User changed view to 'analyse'.
+2023-10-21 15:26:23,137 - INFO - User changed view to 'library'.
+2023-10-21 15:26:24,781 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:25,468 - INFO - User changed view to 'library'.
+2023-10-21 15:26:26,978 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:27,639 - INFO - User changed view to 'library'.
+2023-10-21 15:26:29,610 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:30,134 - INFO - User changed view to 'library'.
+2023-10-21 15:26:33,141 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:33,750 - INFO - User changed view to 'library'.
+2023-10-21 15:26:35,537 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:36,488 - INFO - User changed view to 'library'.
+2023-10-21 15:26:38,263 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:26:39,133 - INFO - User changed view to 'library'.
+2023-10-21 15:27:05,435 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:27:09,023 - INFO - User changed view to 'library'.
+2023-10-21 15:27:12,484 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:27:14,211 - INFO - User changed view to 'library'.
+2023-10-21 15:31:49,592 - INFO - User changed view to 'analyse'.
+2023-10-21 15:31:50,926 - INFO - User changed view to 'analyse'.
+2023-10-21 15:31:51,141 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:31:52,026 - INFO - User changed view to 'library'.
+2023-10-21 15:34:04,471 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:34:18,713 - INFO - User initiated 'generate' function with schedule set:
+2023-10-21 15:34:18,713 - INFO - {'step': 1, 'action': 'Add Column', 'sub_action': 'New', 'args': {'a': '123', 'b': '', 'c': ''}, 'column': '', 'outcome': 'Success'}
+2023-10-21 15:34:18,725 - INFO - Generated dataset added to SNAPSHOTS as current dataframe.
+2023-10-21 15:34:19,560 - INFO - User changed view to 'save'.
+2023-10-21 15:34:39,718 - INFO - User changed view to 'library'.
+2023-10-21 15:35:30,323 - INFO - User changed view to 'analyse'.
+2023-10-21 15:35:30,510 - INFO - User changed view to 'manipulate'.
+2023-10-21 15:35:31,081 - INFO - User changed view to 'library'.

@@ -193,7 +193,7 @@ class ManipulateView(BaseView):
             case "Manipulate":
                 # Show variable menu drop down
                 self.pos_1_menu = self._drop_down_menu_template("Select Sub-action", 
-                    ["Replace Missing Values", "Replace Value (x) with New Value", 
+                    ["Replace Missing Values", "Replace Value (x) with New Value", "Replace Outliers with Missing",
                      "Change Column Name", "Expand (add rows)", "Data Transformation"],
                     self._manipulate_col_select_callback, 1)
             case "Automatic":   
@@ -208,9 +208,12 @@ class ManipulateView(BaseView):
 
          match choice:
              case "Clean Dataset":
-                 self.entry_description.configure(text="Clean Dataset: 1. Remove any dupliacte rows. 2. Replace all missing values.")
+                 self.entry_description.configure(text= f"1. Remove dupliacte rows | "
+                                                        f"2. Replace outliers @ 1st & 99th percentile | "
+                                                        f"3. Replace missing values")
              case "Dirty Dataset":
-                 self.entry_description.configure(text="Dirty Dataset: 1. Add missing values to dataset. 2. Add outliers to dataset.")
+                 self.entry_description.configure(text= f"1. Add missing values | "
+                                                        f"2. Add outliers")
 
     def _add_select_callback(self, choice):
         """Add menu selector callback function. New menu/entry box appears on user selection.
@@ -364,17 +367,16 @@ class ManipulateView(BaseView):
         """
         self.variables["action"] = f"Reduce {choice}"
         self._refresh_menu_widgets(2)
+        match choice:
+            case "Columns (Dimensionality)":
+                # Add technique selection drop down menu
+                self.pos_2_menu = self._drop_down_menu_template("Select Technique", 
+                    ["Algorithmic", "Manual"], self._dimensionality_reduction_callback, 2) 
+            case "Remove Rows":
+                # Add drop down menu for column selection
+                self.pos_2_menu = self._drop_down_menu_template("Select Variable", 
+                    ["Missing Values", "Duplicate Rows"], self._sub_action_callback, 2)
 
-        if choice == "Columns (Dimensionality)":
-            # Add technique selection drop down menu
-            self.pos_1_menu = self._drop_down_menu_template("Select Technique", 
-                ["Algorithmic", "Manual"], self._dimensionality_reduction_callback, 2) 
-
-        elif choice == "Remove Rows":
-            # Add drop down menu for column selection
-            self.pos_1_menu = self._drop_down_menu_template("Select Variable", 
-                ["Missing Values", "Duplicate Rows"], self._sub_action_callback, 2)
-            
     def _dimensionality_reduction_callback(self, choice):
         """Dimensionality reduction callback function. New menu/entry box appears on user selection.
 
@@ -442,10 +444,13 @@ class ManipulateView(BaseView):
                                                                  self._replace_missing_values_callback, 2)
             case "Replace Value (x) with New Value":
                 self.pos_2_menu = self._drop_down_menu_template("Select Column", self.column_headers, 
-                                                    self._replace_value_x_callaback, 2)
+                                                                self._replace_value_x_callaback, 2)         
+            case "Replace Outliers with Missing":
+                self.pos_2_menu = self._drop_down_menu_template("Select Column", ["Single", "Entire"], 
+                                                                self._replace_outliers_callback, 2)    
             case "Change Column Name":
                 self.pos_2_menu = self._drop_down_menu_template("Select Column", self.column_headers, 
-                                                    self._set_column_var, 2)
+                                                                self._set_column_var, 2)
                 self.pos_3_entry_box = self._user_entry_box_template(3, 0, self._entry_box_standard_arg_a_callback, 
                                                                     "1. Enter a string", 200)
             case "Expand (add rows)":
@@ -455,6 +460,38 @@ class ManipulateView(BaseView):
             case "Data Transformation":
                 self.pos_2_menu = self._drop_down_menu_template("Select Manipulation", 
                 ["Feature Encoding", "Feature Scaling"], self._data_transformation_callback, 2) 
+
+    def _replace_outliers_callback(self, choice):
+        self._refresh_menu_widgets(3)
+
+        match choice:
+            case "Single":
+                self.temp_col_dtypes = self.column_dtypes.copy()
+                col_list = []
+                
+                for column in self.temp_col_dtypes:
+                    match self.temp_col_dtypes[column]:
+                        case "int64" | "float64":
+                            col_list.append(column)
+                if col_list == []:
+                    self.entry_description.configure(text="There are no numerical columns in this dataset")
+                    self.pos_4_menu.configure(state="disabled")
+                else:
+                    self.pos_3_menu = self._drop_down_menu_template("Select Column", 
+                        col_list, self._replace_outliers_percentile_callback, 3)
+
+            case "Entire":
+                self._replace_outliers_percentile_callback(choice="")
+
+    def _replace_outliers_percentile_callback(self, choice):
+        self.variables["column"] = choice
+        self._refresh_menu_widgets(4)
+
+        self.pos_4_entry_box = self._user_entry_box_template(4, 0, self._entry_box_int_arg_a_callback,
+                                                            "1. Enter an integer (1-99)", 150)
+        self.pos_5_entry_box = self._user_entry_box_template(4, 1, self._entry_box_int_arg_b_callback,
+                                                            "2. Enter an integer (1-99)", 150)
+        self.entry_description.configure(text="1. Enter percentile at lower bounds. | 2. Enter percentile at upper bounds.")
 
     def _change_col_name_callback(self, choice):
         """Change column name callback function. New menu/entry box appears on user selection.
