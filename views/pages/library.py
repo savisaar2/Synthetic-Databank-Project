@@ -35,12 +35,12 @@ class LibraryView(BaseView):
         self.import_button = self._create_button(row_1, "Import", "left")
         self.new_button = self._create_button(row_1, "New", "left")
 
-        self.tree_view = self._create_treeview(row_2)                   # Render treeview on row 2.
-        self.info_scrollable = CTkScrollableFrame(master=row_2, width=320, height=220)
-        self.info_scrollable.grid(column=2, row=0, columnspan=2, padx=(0,10))
+        self.tree_view = self._create_treeview(row_2)                                   # Render treeview on row 2.
+        self.info_scrollable = CTkScrollableFrame(master=row_2, width=320, height=220)  
+        self.info_scrollable.grid(column=2, row=0, columnspan=2, padx=(0,10))           # Render scrollable frame on row 2.
         self.info = CTkLabel(self.info_scrollable, text="", justify="left", pady=0)
-        self.info.grid()
-        self.dataset_meta = self._create_label(self.row_3, "", height=140)   # Render metadata on row 3.
+        self.info.grid()                                                                # Render info in scrollable frame row 2.
+        self.dataset_meta = self._create_label(self.row_3, "", height=140)              # Render metadata on row 3.
 
         # Render status message when dataset is loaded or not loaded into memory.
         self.dataset_status = self._create_label(row_4, "No Dataset Loaded", height=50, font=CTkFont(size=17, weight="normal"), color="red", anchor="n", fill="x")
@@ -87,8 +87,6 @@ class LibraryView(BaseView):
         tree_view.configure(yscrollcommand=scrollbar.set)
         scrollbar.grid(column=1, row=0)
 
-
-
         # Returns tree_view widget.
         return tree_view
     
@@ -108,11 +106,10 @@ class LibraryView(BaseView):
             widget.destroy()
 
         if metadata:
-            info = metadata.get("Info", "")
             source = metadata.get("Source", "")
             description = metadata.get("Description", "")
 
-            metadata_text = self._create_textbox(self.row_3, height=140, info=info, source=source, description=description)
+            metadata_text = self._create_textbox(self.row_3, height=140, source=source, description=description)
 
     def _create_frame(self, parent_frame, padx=0, pady=0, fill="x", expand=False, color="gray20"):
         """
@@ -132,7 +129,7 @@ class LibraryView(BaseView):
         label.pack(padx=20, anchor=anchor, side=side, fill=fill)
         return label
     
-    def _create_textbox(self, frame, height, info, source, description):
+    def _create_textbox(self, frame, height, source, description):
         # Source and description
         metadata_text = CTkTextbox(frame, wrap="word", fg_color="gray20", height=height)
         metadata_text.insert("1.0", f"Source: {source}\n\nDescription: {description}")

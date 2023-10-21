@@ -209,7 +209,7 @@ class ManipulateView(BaseView):
          match choice:
              case "Clean Dataset":
                  self.entry_description.configure(text= f"1. Remove dupliacte rows | "
-                                                        f"2. Replace outliers | "
+                                                        f"2. Replace outliers @ 1st & 99th percentile | "
                                                         f"3. Replace missing values")
              case "Dirty Dataset":
                  self.entry_description.configure(text= f"1. Add missing values | "

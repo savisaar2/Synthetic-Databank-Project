@@ -688,7 +688,7 @@ class ManipulationsModel():
                     self.remove_rows("Duplicate Rows", df, column, args)
 
                     # Replace values lower than the 5th percentile and 95% percentile with NaN.
-                    self.replace_outliers(sub_action="", df=df, column="", args={"a": 5, "b": 95, "c":""})
+                    self.replace_outliers(sub_action="", df=df, column="", args={"a": 1, "b": 99, "c":""})
 
                     # Replace missing values with Mean or Mode values.
                     for col in df:

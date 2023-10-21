@@ -1,58 +1,70 @@
 {
+    "Accidental_Drug_Related_Deaths_2012-2022": {
+        "Source": "data.gov",
+        "Description": "A listing of each accidental death associated with drug overdose in Connecticut from 2012 to 2022. A 'Y' value under the different substance columns indicates that a particular substance was detected.\n\nCategory: Health, Society\n\nKey Words: drug death"
+    },
+    "Algerian_forest_fires_dataset_UPDATE": {
+        "Source": "UC Irvine Machine Learning Repository",
+        "Description": "The dataset includes 244 instances nd 12 attributes that group a data of two regions of Algeria,namely the Bejaia region located in the northeast of Algeria and the Sidi Bel-abbes region located in the northwest of Algeria. \n\nCategory: Natural Disasters\n\nKey Words: machine learning ML"
+    },
+    "BankChurners": {
+        "Source": "https://github.com/cmdraghici/BankChurners/blob/main/BankChurners.csv",
+        "Description": "The bank dataset with 10127 records and 32 columns\n\nCategory: Finance\n\nKey Words: "
+    },
     "bcdata": {
-        "Source": null,
-        "Description": null
+        "Source": "Breast Cancer Wisconsin (Diagnostic)",
+        "Description": "Features are computed from a digitized image of a fine needle aspirate (FNA) of a breast mass. They describe characteristics of the cell nuclei present in the image.\n\nCategory: Health\n\nKey Words: breast cancer"
     },
     "boston": {
-        "Source": null,
-        "Description": null
+        "Source": "kaggle or Python library scilit-learn",
+        "Description": "It contains information about houses in the suburbs of Boston collected by D. Harrison and D.L. Rubinfeld in 1978.\n\nCategory: Finance\n\nKey Words: real estate housing property "
     },
     "breast-cancer": {
-        "Source": null,
-        "Description": null
+        "Source": "Matjaz Zwitter & Milan Soklic (physicians) Institute of Oncology University Medical Center Ljubljana, Yugoslavia ",
+        "Description": "This data set includes 201 instances of one class and 85 instances of another class. The instances are described by 9 attributes, some of which are linear and some are nominal.\n\nCategory: Health\n\nKey Words: breast cancer"
     },
     "diabetes": {
-        "Source": null,
-        "Description": null
+        "Source": "In Proceedings of the Symposium on Computer Applications and Medical Care (pp. 261--265). IEEE Computer Society Press",
+        "Description": "This dataset is originally from the National Institute of Diabetes and Digestive and Kidney Diseases. The objective of the dataset is to diagnostically predict whether or not a patient has diabetes, based on certain diagnostic measurements included in the dataset. Several constraints were placed on the selection of these instances from a larger database. In particular, all patients here are females at least 21 years old of Pima Indian heritage. The datasets consists of several medical predictor variables and one target variable, Outcome. Predictor variables includes the number of pregnancies the patient has had, their BMI, insulin level, age.\n\nCategory: Health\n\nKey Words: diabetes pregnancies pregant blood sugar"
     },
     "diamonds": {
-        "Source": null,
-        "Description": null
-    },
-    "Generated Dataset": {
-        "Source": null,
-        "Description": null
+        "Source": "kaggle",
+        "Description": "Dataset contains the prices and other attributes of approx. 54,000 diamonds.\n\nCategory: Miscellaneous\n\nKey Words: "
     },
     "IHME_GBD_2019_HAQ_1990_2019_DATA_Y2022M012D21": {
-        "Source": null,
-        "Description": null
+        "Source": "Global Burden of Disease (GBD) | GHDx (healthdata.org)",
+        "Description": "The Global Burden of Disease is collected and analyzed by a consortium of more than 9,000 researchers in 162 countries and territories. The data capture premature death and disability from 370 diseases and injuries in 204 countries and territories, by age and sex, from 1990 to the present. The GBD's flexible design allows it to be used at the global, national, and local levels to understand health trends over time. The dataset contains over 45,000 observations and 12 attribues.\n\nCategory: Health\n\nKey Words: disease premature death disability"
     },
     "loan_prediction": {
-        "Source": null,
-        "Description": null
+        "Source": "https://datahack.analyticsvidhya.com/contest/practice-problem-loan-prediction-iii/#ProblemStatement",
+        "Description": "Predict Loan Eligibility. There are 480 instances and 12 attributes. The target is Loan_status.\n\nCategory: Finance\n\nKey Words: home loan"
     },
-    "new ": {
-        "Source": null,
-        "Description": null
+    "Real estate valuation data set": {
+        "Source": "UC Irvine Machine Learning Repository",
+        "Description": "The Real estate valuation is a regression problem. The market historical data set of real estate valuation are collected from Sindian Dist., New Taipei City, Taiwan. The dataset has no missing values\n\nCategory: Business, Real Estate\n\nKey Words: machine learning ML"
     },
     "sample_categorical": {
-        "Source": null,
-        "Description": null
+        "Source": "Some source",
+        "Description": "Some description"
     },
     "time_series_covid19_confirmed_global": {
-        "Source": null,
-        "Description": null
+        "Source": "HUMANITARIAN DATA EXCHANGE",
+        "Description": "The dataset contains time-series data of confirmed COVID-19 cases on a global scale. Each row in the dataset typically represents a specific location (country or region), and each column represents a specific date. The values in the cells of the dataset represent the cumulative number of confirmed COVID-19 cases for each location and date. It contains time-series data of confirmed COVID-19 cases on a global scale. Each row in the dataset typically represents a specific location (country or region), and each column represents a specific date. The values in the cells of the dataset represent the cumulative number of confirmed COVID-19 cases for each location and date\n\nCategory: Health\n\nKey Words: disease covid 19 covid-19"
     },
     "titanic": {
-        "Source": null,
-        "Description": null
+        "Source": "data.world",
+        "Description": "Classic dataset on Titanic disaster used often for data mining tutorials and demonstrations\n\nCategory: Disaster\n\nKey Words: "
     },
     "wdbc": {
-        "Source": null,
-        "Description": null
+        "Source": "Some source",
+        "Description": "Some description"
     },
     "wine_dataset": {
-        "Source": null,
-        "Description": null
+        "Source": "Original Owners: Forina, M. et al, PARVUS - Institute of Pharmaceutical and Food Analysis and Technologies, Via Brigata Salerno, 16147 Genoa, Italy.",
+        "Description": "An Extendible Package for Data Exploration, Classification and Correlation. These data are the results of a chemical analysis of wines grown in the same region in Italy but derived from three different cultivars. The analysis determined the quantities of 13 constituents found in each of the three types of wines.\n\nCategory: Food and Drink\n\nKey Words: beverage wine alcohol"
+    },
+    "World Happiness Report 2023": {
+        "Source": "kaggle",
+        "Description": "The happiness scores and rankings use data from the Gallup World Poll . The columns following the happiness score estimate the extent to which each of six factors – economic production, social support, life expectancy, freedom, absence of corruption, and generosity – contribute to making life evaluations higher in each country than they are in Dystopia, a hypothetical country that has values equal to the world’s lowest national averages for each of the six factors. They have no impact on the total score reported for each country, but they do explain why some countries rank higher than others.\n\nCategory: Social\n\nKey Words: behaviour"
     }
 }

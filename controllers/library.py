@@ -194,7 +194,8 @@ class LibraryController:
         self.new_file = self.import_overlay.import_new_dataset()
 
     def _get_dataset_info(self):
-
+        """Gets the dataset info of the user selected dataset in library view and displays info to UI.
+        """
         selected_items = self.frame.tree_view.selection()
 
         if selected_items:
