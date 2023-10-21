@@ -102,10 +102,11 @@ class LibraryView(BaseView):
             widget.destroy()
 
         if metadata:
+            info = metadata.get("Info", "")
             source = metadata.get("Source", "")
             description = metadata.get("Description", "")
 
-            metadata_text = self._create_textbox(self.row_3, height=140, source=source, description=description)
+            metadata_text = self._create_textbox(self.row_3, height=140, info=info, source=source, description=description)
 
     def _create_frame(self, parent_frame, padx=0, pady=0, fill="x", expand=False, color="gray20"):
         """
@@ -125,10 +126,10 @@ class LibraryView(BaseView):
         label.pack(padx=20, anchor=anchor, side=side, fill=fill)
         return label
     
-    def _create_textbox(self, frame, height, source, description):
+    def _create_textbox(self, frame, height, info, source, description):
         # Source and description
         metadata_text = CTkTextbox(frame, wrap="word", fg_color="gray20", height=height)
-        metadata_text.insert("1.0", f"Source: {source}\n\nDescription: {description}")
+        metadata_text.insert("1.0", f"Info: {info}\n\nSource: {source}\n\nDescription: {description}")
         metadata_text.configure(state="disabled")
         metadata_text.pack(side="left", fill="both", expand=True, padx=10)
         return metadata_text
