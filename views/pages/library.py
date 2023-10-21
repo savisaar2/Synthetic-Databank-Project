@@ -1,5 +1,5 @@
 from tkinter import ttk
-from customtkinter import CTkFrame, CTkFont, CTkLabel, CTkEntry, CTkButton, CENTER, CTkScrollbar, CTkTextbox
+from customtkinter import CTkFrame, CTkFont, CTkLabel, CTkEntry, CTkButton, CENTER, CTkScrollbar, CTkTextbox, CTkScrollableFrame
 from .base import BaseView
 
 class LibraryView(BaseView):
@@ -36,6 +36,10 @@ class LibraryView(BaseView):
         self.new_button = self._create_button(row_1, "New", "left")
 
         self.tree_view = self._create_treeview(row_2)                   # Render treeview on row 2.
+        self.info_scrollable = CTkScrollableFrame(master=row_2, width=320, height=220)
+        self.info_scrollable.grid(column=2, row=0, columnspan=2, padx=(0,10))
+        self.info = CTkLabel(self.info_scrollable, text="", justify="left", pady=0)
+        self.info.grid()
         self.dataset_meta = self._create_label(self.row_3, "", height=140)   # Render metadata on row 3.
 
         # Render status message when dataset is loaded or not loaded into memory.
@@ -72,16 +76,18 @@ class LibraryView(BaseView):
         tree_view = ttk.Treeview(frame, columns=("Name", "Size"), show="headings", selectmode="browse", height=10)
         tree_view.heading("Name", text="Name")
         tree_view.heading("Size", text="Size")
-        tree_view.column("Name", width=500, stretch=True)
-        tree_view.column("Size", width=100, stretch=True)
+        tree_view.column("Name", width=300, stretch=True)
+        tree_view.column("Size", width=70, stretch=True)
+
+        # Pack last for rendering issues.
+        tree_view.grid(padx=(10,0), pady=10, column=0, row=0)
 
         # Setup vertical scrolling when treeview overflows.
         scrollbar = CTkScrollbar(frame, orientation="vertical", command=tree_view.yview)
         tree_view.configure(yscrollcommand=scrollbar.set)
-        scrollbar.pack(side="right", fill="y")
+        scrollbar.grid(column=1, row=0)
 
-        # Pack last for rendering issues.
-        tree_view.pack(fill="x", padx=20, pady=10)
+
 
         # Returns tree_view widget.
         return tree_view
@@ -129,7 +135,7 @@ class LibraryView(BaseView):
     def _create_textbox(self, frame, height, info, source, description):
         # Source and description
         metadata_text = CTkTextbox(frame, wrap="word", fg_color="gray20", height=height)
-        metadata_text.insert("1.0", f"Info: {info}\n\nSource: {source}\n\nDescription: {description}")
+        metadata_text.insert("1.0", f"Source: {source}\n\nDescription: {description}")
         metadata_text.configure(state="disabled")
         metadata_text.pack(side="left", fill="both", expand=True, padx=10)
         return metadata_text

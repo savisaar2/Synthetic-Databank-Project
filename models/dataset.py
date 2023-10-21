@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 from os import path
+import io
 
 class DatasetModel:
     """Singleton. Working collection of datasets. _SNAPSHOTS is a list of dictionaries with keys representing 
@@ -379,3 +380,12 @@ class DatasetModel:
             }
         )
         print("Generated data set:", self._SNAPSHOTS[-1]["Dataframe"])
+
+    def get_dataset_info(self, file_path):
+        buffer = io.StringIO()
+        temp_df = pd.read_csv(file_path)
+        temp_df.info(buf=buffer)
+        info = buffer.getvalue()
+        info = info.split("\n",1)[1]
+        info = f"Info:\n{info}"
+        return info

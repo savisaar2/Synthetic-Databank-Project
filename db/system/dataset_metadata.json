@@ -1,71 +1,57 @@
 {
     "bcdata": {
-        "Info": "\nRangeIndex: 569 entries, 0 to 568\nData columns (total 33 columns):\n #   Column                   Non-Null Count  Dtype  \n---  ------                   --------------  -----  \n 0   id                       569 non-null    int64  \n 1   diagnosis                569 non-null    object \n 2   radius_mean              569 non-null    float64\n 3   texture_mean             569 non-null    float64\n 4   perimeter_mean           569 non-null    float64\n 5   area_mean                569 non-null    float64\n 6   smoothness_mean          569 non-null    float64\n 7   compactness_mean         569 non-null    float64\n 8   concavity_mean           569 non-null    float64\n 9   concave points_mean      569 non-null    float64\n 10  symmetry_mean            569 non-null    float64\n 11  fractal_dimension_mean   569 non-null    float64\n 12  radius_se                569 non-null    float64\n 13  texture_se               569 non-null    float64\n 14  perimeter_se             569 non-null    float64\n 15  area_se                  569 non-null    float64\n 16  smoothness_se            569 non-null    float64\n 17  compactness_se           569 non-null    float64\n 18  concavity_se             569 non-null    float64\n 19  concave points_se        569 non-null    float64\n 20  symmetry_se              569 non-null    float64\n 21  fractal_dimension_se     569 non-null    float64\n 22  radius_worst             569 non-null    float64\n 23  texture_worst            569 non-null    float64\n 24  perimeter_worst          569 non-null    float64\n 25  area_worst               569 non-null    float64\n 26  smoothness_worst         569 non-null    float64\n 27  compactness_worst        569 non-null    float64\n 28  concavity_worst          569 non-null    float64\n 29  concave points_worst     569 non-null    float64\n 30  symmetry_worst           569 non-null    float64\n 31  fractal_dimension_worst  569 non-null    float64\n 32  Unnamed: 32              0 non-null      float64\ndtypes: float64(31), int64(1), object(1)\nmemory usage: 146.8+ KB\n",
         "Source": null,
         "Description": null
     },
     "boston": {
-        "Info": "\nRangeIndex: 506 entries, 0 to 505\nData columns (total 15 columns):\n #   Column      Non-Null Count  Dtype  \n---  ------      --------------  -----  \n 0   Unnamed: 0  506 non-null    int64  \n 1   CRIM        506 non-null    float64\n 2   ZN          506 non-null    float64\n 3   INDUS       506 non-null    float64\n 4   CHAS        506 non-null    float64\n 5   NOX         506 non-null    float64\n 6   RM          506 non-null    float64\n 7   AGE         506 non-null    float64\n 8   DIS         506 non-null    float64\n 9   RAD         506 non-null    float64\n 10  TAX         506 non-null    float64\n 11  PTRATIO     506 non-null    float64\n 12  B           506 non-null    float64\n 13  LSTAT       506 non-null    float64\n 14  Price       506 non-null    float64\ndtypes: float64(14), int64(1)\nmemory usage: 59.4 KB\n",
         "Source": null,
         "Description": null
     },
     "breast-cancer": {
-        "Info": "\nRangeIndex: 286 entries, 0 to 285\nData columns (total 10 columns):\n #   Column       Non-Null Count  Dtype \n---  ------       --------------  ----- \n 0   Class        286 non-null    object\n 1   Age          286 non-null    object\n 2   menopause    286 non-null    object\n 3   tumor-zie    286 non-null    object\n 4   inv-nodes    286 non-null    object\n 5   node-caps    286 non-null    object\n 6   deg-malig    286 non-null    int64 \n 7   breat        286 non-null    object\n 8   breast-quad  286 non-null    object\n 9   irradiat     286 non-null    object\ndtypes: int64(1), object(9)\nmemory usage: 22.5+ KB\n",
         "Source": null,
         "Description": null
     },
     "diabetes": {
-        "Info": "\nRangeIndex: 768 entries, 0 to 767\nData columns (total 9 columns):\n #   Column                    Non-Null Count  Dtype  \n---  ------                    --------------  -----  \n 0   Pregnancies               768 non-null    int64  \n 1   Glucose                   768 non-null    int64  \n 2   BloodPressure             768 non-null    int64  \n 3   SkinThickness             768 non-null    int64  \n 4   Insulin                   768 non-null    int64  \n 5   BMI                       768 non-null    float64\n 6   DiabetesPedigreeFunction  768 non-null    float64\n 7   Age                       768 non-null    int64  \n 8   Outcome                   768 non-null    int64  \ndtypes: float64(2), int64(7)\nmemory usage: 54.1 KB\n",
         "Source": null,
         "Description": null
     },
     "diamonds": {
-        "Info": "\nRangeIndex: 53940 entries, 0 to 53939\nData columns (total 11 columns):\n #   Column      Non-Null Count  Dtype  \n---  ------      --------------  -----  \n 0   Unnamed: 0  53940 non-null  int64  \n 1   carat       53940 non-null  float64\n 2   cut         53940 non-null  object \n 3   color       53940 non-null  object \n 4   clarity     53940 non-null  object \n 5   depth       53940 non-null  float64\n 6   table       53940 non-null  float64\n 7   price       53940 non-null  int64  \n 8   x           53940 non-null  float64\n 9   y           53940 non-null  float64\n 10  z           53940 non-null  float64\ndtypes: float64(6), int64(2), object(3)\nmemory usage: 4.5+ MB\n",
         "Source": null,
         "Description": null
     },
     "Generated Dataset": {
-        "Info": "\nRangeIndex: 286 entries, 0 to 285\nData columns (total 11 columns):\n #   Column       Non-Null Count  Dtype \n---  ------       --------------  ----- \n 0   Class        286 non-null    object\n 1   Age          286 non-null    object\n 2   menopause    286 non-null    object\n 3   tumor-zie    286 non-null    object\n 4   inv-nodes    286 non-null    object\n 5   node-caps    286 non-null    object\n 6   deg-malig    286 non-null    int64 \n 7   breat        286 non-null    object\n 8   breast-quad  286 non-null    object\n 9   irradiat     286 non-null    object\n 10  123          0 non-null      object\ndtypes: int64(1), object(10)\nmemory usage: 24.7+ KB\n",
         "Source": null,
         "Description": null
     },
     "IHME_GBD_2019_HAQ_1990_2019_DATA_Y2022M012D21": {
-        "Info": "\nRangeIndex: 45288 entries, 0 to 45287\nData columns (total 12 columns):\n #   Column              Non-Null Count  Dtype  \n---  ------              --------------  -----  \n 0   location_id         45288 non-null  int64  \n 1   location_name       45288 non-null  object \n 2   year_id             45288 non-null  int64  \n 3   age_group_id        45288 non-null  int64  \n 4   age_group_name      45288 non-null  object \n 5   haq_index_age_type  45288 non-null  object \n 6   indicator_id        45288 non-null  int64  \n 7   indicator_name      45288 non-null  object \n 8   measure             45288 non-null  object \n 9   val                 45288 non-null  float64\n 10  upper               45288 non-null  float64\n 11  lower               45288 non-null  float64\ndtypes: float64(3), int64(4), object(5)\nmemory usage: 4.1+ MB\n",
         "Source": null,
         "Description": null
     },
     "loan_prediction": {
-        "Info": "\nRangeIndex: 480 entries, 0 to 479\nData columns (total 13 columns):\n #   Column             Non-Null Count  Dtype  \n---  ------             --------------  -----  \n 0   Loan_ID            480 non-null    object \n 1   Gender             480 non-null    object \n 2   Married            480 non-null    object \n 3   Dependents         480 non-null    object \n 4   Education          480 non-null    object \n 5   Self_Employed      480 non-null    object \n 6   ApplicantIncome    480 non-null    int64  \n 7   CoapplicantIncome  480 non-null    float64\n 8   LoanAmount         480 non-null    float64\n 9   Loan_Amount_Term   480 non-null    float64\n 10  Credit_History     480 non-null    float64\n 11  Property_Area      480 non-null    object \n 12  Loan_Status        480 non-null    object \ndtypes: float64(4), int64(1), object(8)\nmemory usage: 48.9+ KB\n",
         "Source": null,
         "Description": null
     },
     "new ": {
-        "Info": "\nRangeIndex: 286 entries, 0 to 285\nData columns (total 11 columns):\n #   Column       Non-Null Count  Dtype  \n---  ------       --------------  -----  \n 0   Class        286 non-null    object \n 1   Age          286 non-null    object \n 2   menopause    286 non-null    object \n 3   tumor-zie    286 non-null    object \n 4   inv-nodes    286 non-null    object \n 5   node-caps    286 non-null    object \n 6   deg-malig    286 non-null    int64  \n 7   breat        286 non-null    object \n 8   breast-quad  286 non-null    object \n 9   irradiat     286 non-null    object \n 10  123          0 non-null      float64\ndtypes: float64(1), int64(1), object(9)\nmemory usage: 24.7+ KB\n",
         "Source": null,
         "Description": null
     },
     "sample_categorical": {
-        "Info": "\nRangeIndex: 3 entries, 0 to 2\nData columns (total 3 columns):\n #   Column      Non-Null Count  Dtype \n---  ------      --------------  ----- \n 0   Unnamed: 0  3 non-null      int64 \n 1   FRUIT       3 non-null      object\n 2   VEHICLE     3 non-null      object\ndtypes: int64(1), object(2)\nmemory usage: 204.0+ bytes\n",
         "Source": null,
         "Description": null
     },
     "time_series_covid19_confirmed_global": {
-        "Info": "\nRangeIndex: 289 entries, 0 to 288\nColumns: 1147 entries, Province/State to 3/9/23\ndtypes: float64(2), int64(1143), object(2)\nmemory usage: 2.5+ MB\n",
         "Source": null,
         "Description": null
     },
     "titanic": {
-        "Info": "\nRangeIndex: 1310 entries, 0 to 1309\nData columns (total 14 columns):\n #   Column     Non-Null Count  Dtype  \n---  ------     --------------  -----  \n 0   pclass     1309 non-null   float64\n 1   survived   1309 non-null   float64\n 2   name       1309 non-null   object \n 3   sex        1309 non-null   object \n 4   age        1046 non-null   float64\n 5   sibsp      1309 non-null   float64\n 6   parch      1309 non-null   float64\n 7   ticket     1309 non-null   object \n 8   fare       1308 non-null   float64\n 9   cabin      295 non-null    object \n 10  embarked   1307 non-null   object \n 11  boat       486 non-null    object \n 12  body       121 non-null    float64\n 13  home.dest  745 non-null    object \ndtypes: float64(7), object(7)\nmemory usage: 143.4+ KB\n",
         "Source": null,
         "Description": null
     },
     "wdbc": {
-        "Info": "\nRangeIndex: 569 entries, 0 to 568\nData columns (total 31 columns):\n #   Column     Non-Null Count  Dtype  \n---  ------     --------------  -----  \n 0   Feature1   569 non-null    float64\n 1   Feature2   569 non-null    float64\n 2   Feature3   569 non-null    float64\n 3   Feature4   569 non-null    float64\n 4   Feature5   569 non-null    float64\n 5   Feature6   569 non-null    float64\n 6   Feature7   569 non-null    float64\n 7   Feature8   569 non-null    float64\n 8   Feature9   569 non-null    float64\n 9   Feature10  569 non-null    float64\n 10  Feature11  569 non-null    float64\n 11  Feature12  569 non-null    float64\n 12  Feature13  569 non-null    float64\n 13  Feature14  569 non-null    float64\n 14  Feature15  569 non-null    float64\n 15  Feature16  569 non-null    float64\n 16  Feature17  569 non-null    float64\n 17  Feature18  569 non-null    float64\n 18  Feature19  569 non-null    float64\n 19  Feature20  569 non-null    float64\n 20  Feature21  569 non-null    float64\n 21  Feature22  569 non-null    float64\n 22  Feature23  569 non-null    float64\n 23  Feature24  569 non-null    float64\n 24  Feature25  569 non-null    float64\n 25  Feature26  569 non-null    float64\n 26  Feature27  569 non-null    float64\n 27  Feature28  569 non-null    float64\n 28  Feature29  569 non-null    float64\n 29  Feature30  569 non-null    float64\n 30  y          569 non-null    int64  \ndtypes: float64(30), int64(1)\nmemory usage: 137.9 KB\n",
         "Source": null,
         "Description": null
     },
     "wine_dataset": {
-        "Info": "\nRangeIndex: 6497 entries, 0 to 6496\nData columns (total 13 columns):\n #   Column                Non-Null Count  Dtype  \n---  ------                --------------  -----  \n 0   fixed_acidity         6497 non-null   float64\n 1   volatile_acidity      6497 non-null   float64\n 2   citric_acid           6497 non-null   float64\n 3   residual_sugar        6497 non-null   float64\n 4   chlorides             6497 non-null   float64\n 5   free_sulfur_dioxide   6497 non-null   float64\n 6   total_sulfur_dioxide  6497 non-null   float64\n 7   density               6497 non-null   float64\n 8   pH                    6497 non-null   float64\n 9   sulphates             6497 non-null   float64\n 10  alcohol               6497 non-null   float64\n 11  quality               6497 non-null   int64  \n 12  style                 6497 non-null   object \ndtypes: float64(11), int64(1), object(1)\nmemory usage: 660.0+ KB\n",
         "Source": null,
         "Description": null
     }
