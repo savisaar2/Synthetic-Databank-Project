@@ -382,6 +382,14 @@ class DatasetModel:
         print("Generated data set:", self._SNAPSHOTS[-1]["Dataframe"])
 
     def get_dataset_info(self, file_path):
+        """Reads the selected dataframe, calls the pandas.info() function and returns the dataframe info, such as
+        columns: dtypes, count, null count, row count etc.
+        Args:
+            file_path (str): Path to dataset in databank.
+
+        Returns:
+            string: info of the selected dataset.
+        """
         buffer = io.StringIO()
         temp_df = pd.read_csv(file_path)
         temp_df.info(buf=buffer)
