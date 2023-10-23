@@ -42,6 +42,13 @@ class SampleController:
         )
         snapshots = self.model.DATASET.get_reference_to_all_snapshots()
 
+    def _get_algorithm_info(self, event):
+        """Get text description of algorithm. 
+        """
+        selection = self.frame.get_sample_algo_menu_selection()
+        description = self.model.sample.get_algorithm_info(selection=selection)
+        self.frame.update_algorithm_description_info(text=description)
+
     def _bind(self):
         """
         Private method to establish event bindings.
@@ -53,3 +60,4 @@ class SampleController:
             )
         self.frame.add_row.bind("<Button-1>", lambda event, mode="rows": self._refresh_sample_widgets(event, mode))
         self.frame.generate.bind("<Button-1>", self._generate)
+        self.frame.sampling_algo_menu.bind("<Configure>", self._get_algorithm_info)

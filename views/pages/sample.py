@@ -1,4 +1,4 @@
-from customtkinter import CTkFrame, CTkLabel, CTkOptionMenu, CTkButton, CTkEntry, CTkCanvas, CTkScrollbar, CTkTextbox
+from customtkinter import CTkFrame, CTkLabel, CTkOptionMenu, CTkButton, CTkEntry, CTkCanvas, CTkScrollbar, CTkTextbox, CTkFont
 from .base import BaseView
 
 class SampleView(BaseView):
@@ -43,12 +43,16 @@ class SampleView(BaseView):
         self.scrollable_frame = CTkFrame(self.canvas, fg_color="gray14") # target
         self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
 
-        self.description_frame_row1 = CTkFrame(self.s_frame, fg_color="gray10")
-        self.description_frame_row1.pack(fill="x", pady=(5, 0))
+        self.description_frame = CTkFrame(self.s_frame, fg_color="gray10")
+        self.description_frame.pack(side="bottom", fill="both", pady=(5, 0))
 
-        self.description_frame_row2 = CTkFrame(self.s_frame, fg_color="gray10")
-        self.description_frame_row2.pack(fill='x')
-        
+        self.status_frame = CTkFrame(self.s_frame, fg_color="gray20")
+        self.status_frame.pack(side="top", fill='both', pady=(10, 10), expand=True)
+        self.sample_status_label = CTkLabel(
+           master=self.status_frame, text="No Sample Yet Generated", text_color="yellow"
+           )
+        self.sample_status_label.pack(expand=True)
+
         self.algorithm_label = CTkLabel(self.s_frame_row_1, text="Algorithm:", anchor="w")
         self.algorithm_label.pack(side="left", padx=(8, 0))
         self.sampling_algo_options = [
@@ -202,6 +206,23 @@ class SampleView(BaseView):
             self.logical_operator_menu = CTkOptionMenu(self.row, fg_color="gray10", width=3, values=(self.logical_operators))
             self.logical_operator_menu.pack(side="left", padx=(8, 0))
 
+    def _create_textbox(self, frame, text, height):
+        """_summary_
+
+        Args:
+            frame (tkinter frame widget): parent frame
+            text (str): text to add to textbox
+            height (int): height of the text box
+
+        Returns:
+            tkinter textbox widget: non self referenced widget for display!
+        """
+        text_block = CTkTextbox(frame, wrap="word", fg_color="gray10", height=height)
+        text_block.insert("1.0", text)
+        text_block.configure(state="disabled")
+        text_block.pack(side="left", fill="both", expand=True, padx=20, pady=20)
+        return text_block
+
     def add_judgment_snowball_row(self): 
         """For use with "judgment" and "snowball" algorithms of sampling. Will add new rows of widgets 
         at user discretion based on last known logical operator selected. 
@@ -225,6 +246,14 @@ class SampleView(BaseView):
         """
         self.canvas.update_idletasks() # refresh canvas
         self.on_configure("x")
+
+    def update_sample_status(self, text): 
+        """Update the sample status with new text e.g. sample generated
+
+        Args:
+            text (str): update label text with arg text
+        """
+        self.sample_status_label.configure(text=text)
 
     def clear_child_widgets(self, mode, widget):
         """Remove child widgets from container widget, either table or frame
@@ -264,6 +293,22 @@ class SampleView(BaseView):
             if len(self.rows_of_operations) > 0: 
                 for row in self.rows_of_operations: 
                     row.criteria_menu.configure(values=column_headers)
+
+    def update_algorithm_description_info(self, text):
+        """Display examples and information for the selected algorithm.
+
+        Args:
+            text (str): description information of particular algorithm.
+        """
+        for widget in self.description_frame.winfo_children(): 
+            widget.destroy()
+
+        self._create_textbox(frame=self.description_frame, text=text, height=190)
+
+    def get_sample_algo_menu_selection(self): 
+        """Get the name of the selected item.
+        """
+        return self.sampling_algo_menu.get()
 
     def bulk_toggle(self, mode, list_of_widgets):
         """To be used with reconfig_widgets method.
