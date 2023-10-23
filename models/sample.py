@@ -12,7 +12,7 @@ class SampleModel():
         super().__init__()
         self.sample_example_descriptions = {
             "------": 
-                "Reminder, a new snapshot will be created in the process of generating a sample. To under or" +
+                "Reminder, a new snapshot will be created in the process of generating a sample. To undo or" +
                 " roll-back the dataframe to a state prior to the sample generation, do so at the Manipulation" +
                 " page's rollback section.",
             "Simple Random": 
