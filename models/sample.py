@@ -77,3 +77,99 @@ class SampleModel():
         """
         return self.sample_example_descriptions[selection]
     
+    def convert_to_number(self, val, custom_error_warning): 
+        """Convert user input / entry to number
+
+        Args:
+            val (str): user specified input.
+
+        Returns:
+            int: value
+        """
+        assert val.isdigit(), custom_error_warning
+        return int(val.strip())
+    
+    def simple_random(self, df, sample_size): 
+        """simple random algorithm. Hardcode random_state of 42.
+
+        Args:
+            df (pandas dataframe): reference to current pandas dataframe.
+            sample_size (int): user input for sample size.
+        """
+        new_sample = df.sample(n=sample_size, replace=False, random_state=42)
+        return new_sample
+    
+    def stratified(self, df, num_of_splits, dependant_col): 
+        """_summary_
+
+        Args:
+            df (_type_): _description_
+            num_of_splits (_type_): _description_
+            dependant_col (_type_): _description_
+        """
+        ...
+
+    def systematic(self, df, interval): 
+        """_summary_
+
+        Args:
+            df (_type_): _description_
+            interval (_type_): _description_
+        """
+        ...
+
+    def under_sampling(self, df, dependant_col): 
+        """_summary_
+
+        Args:
+            df (_type_): _description_
+            dependant_col (_type_): _description_
+        """
+        ...
+
+    def over_sampling(self, df, dependant_col):
+        """_summary_
+
+        Args:
+            df (_type_): _description_
+            dependant_col (_type_): _description_
+        """
+        ...
+
+    def cluster(self, df, cluster_col, cluster_entry): 
+        """_summary_
+
+        Args:
+            df (_type_): _description_
+            cluster_col (_type_): _description_
+            cluster_entry (_type_): _description_
+        """
+        ...
+
+    def quota(self, df, col, sample_size): 
+        """_summary_
+
+        Args:
+            df (_type_): _description_
+            col (_type_): _description_
+            sample_size (_type_): _description_
+        """
+        ...
+
+    def judgment(self, df, rows_of_args): 
+        """_summary_
+
+        Args:
+            df (_type_): _description_
+            rows_of_args (_type_): _description_
+        """
+        ...
+
+    def snowball(self, df, rows_of_args): 
+        """_summary_
+
+        Args:
+            df (_type_): _description_
+            rows_of_args (_type_): _description_
+        """
+        ...

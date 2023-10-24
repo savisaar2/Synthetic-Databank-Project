@@ -84,8 +84,8 @@ class SampleView(BaseView):
             command=lambda option: self.reconfig_widgets(level="sub", option=option)
         )
         # Systematic - sub widgets 
-        self.sampling_interval_label = CTkLabel(self.s_frame_row_1, text="Sampling Interval:", anchor="w")
-        self.sampling_interval_entry = CTkEntry(self.s_frame_row_1, corner_radius=5, width=50, state="disabled")
+        self.systematic_interval_label = CTkLabel(self.s_frame_row_1, text="Sampling Interval:", anchor="w")
+        self.systematic_interval_entry = CTkEntry(self.s_frame_row_1, corner_radius=5, width=50, state="disabled")
 
         # Under
         self.under_dependant_col_label = CTkLabel(self.s_frame_row_1, text="Dependent Column:", anchor="w")
@@ -130,10 +130,10 @@ class SampleView(BaseView):
         # Widget toggle groupings - used for both toggling and input validation
         self.all_widgets = [
             self.sample_size_label, self.sample_size_entry, self.num_of_splits_label, self.num_of_splits_entry, 
-            self.sampling_interval_label, self.under_dependant_col_label, self.under_dependant_col_menu, 
+            self.systematic_interval_label, self.under_dependant_col_label, self.under_dependant_col_menu, 
             self.stratified_dependant_col_label, self.stratified_dependant_col_menu, self.over_dependant_col_label,
             self.over_dependant_col_menu, self.cluster_column_label, self.cluster_column_menu, 
-            self.num_of_clusters_label, self.num_of_clusters_entry, self.sampling_interval_entry, 
+            self.num_of_clusters_label, self.num_of_clusters_entry, self.systematic_interval_entry, 
             self.column_to_build_quota_label, self.column_to_build_quota_menu, self.q_sample_size_label, 
             self.quota_sample_size_entry, self.add_row, self.remove_row
             ]
@@ -148,7 +148,7 @@ class SampleView(BaseView):
         ]
 
         self.systematic_widgets = [
-            self.sampling_interval_label, self.sampling_interval_entry
+            self.systematic_interval_label, self.systematic_interval_entry
         ]
 
         self.under_widgets = [
@@ -307,16 +307,17 @@ class SampleView(BaseView):
         self.canvas.update_idletasks() # refresh canvas
         self.on_configure("x")
 
-    def update_sample_status(self, text): 
+    def update_sample_status(self, text, colour): 
         """Update the sample status with new text e.g. sample generated
 
         Args:
             text (str): update label text with arg text
+            colour (str): colour value in hex or name e.g. "green"
         """
-        self.sample_status_label.configure(text=text)
+        self.sample_status_label.configure(text=text, text_color=colour)
 
     def clear_child_widgets(self, mode, widget):
-        """Remove child widgets from container widget, either table or frame
+        """Remove child widgets from container widget, either table or frame.
 
         Args:
             mode (str): "last", "all"
@@ -370,6 +371,56 @@ class SampleView(BaseView):
         """
         return self.sampling_algo_menu.get()
     
+    def get_sample_size_entry(self): 
+        """Simple Random entry prop
+        """
+        return self.sample_size_entry.get()
+    
+    def get_num_of_splits_entry(self): 
+        """Stratified entry prop
+        """
+        return self.num_of_splits_entry.get()
+    
+    def get_stratified_dependant_col_menu(self): 
+        """Stratified dependant col menu prop
+        """
+        return self.stratified_dependant_col_menu.get()
+    
+    def get_systematic_interval_entry(self): 
+        """Systematic entry prop
+        """
+        return self.systematic_interval_entry.get()
+    
+    def get_under_dependant_col_menu(self): 
+        """Under dependant col menu prop
+        """
+        return self.under_dependant_col_menu.get()
+    
+    def get_over_dependant_col_menu(self): 
+        """Over dependant col menu prop
+        """
+        return self.over_dependant_col_menu.get()
+    
+    def get_cluster_column_menu(self): 
+        """Cluster column menu prop
+        """
+        return self.cluster_column_menu.get()
+    
+    def get_num_of_clusters_entry(self): 
+        """Cluster num of clusters entry prop
+        """
+        self.num_of_clusters_entry.get()
+    
+    def get_column_to_build_quota_menu(self): 
+        """Quota column to build quota menu prop
+        """
+        self.column_to_build_quota_menu.get()
+
+    def get_quota_sample_size_entry(self):
+        """Quota sample size entry prop
+        """ 
+        self.quota_sample_size_entry.get()
+    
     def row_object_validation(self, rows): 
         """Reconfigure generate state based on selection of widgets in judgment_snowball_row objects.
 
@@ -401,6 +452,11 @@ class SampleView(BaseView):
             self.generate.configure(state="normal")
         else: 
             self.generate.configure(state="disabled")
+
+    def reset_algo_menu(self): 
+        """Used post successful sampling algorithm.
+        """
+        self.sampling_algo_menu.set("------")
     
     def bulk_toggle(self, mode, list_of_widgets):
         """To be used with reconfig_widgets method.
@@ -423,7 +479,7 @@ class SampleView(BaseView):
                 w.pack(side="left", padx=(8, 0))
         elif mode == "reset_menu": 
             for w in list_of_widgets: 
-                w.set("------") 
+                w.set("------")
 
     def reconfig_widgets(self, level, option): 
         """Toggle (disable or enable) the appropriate widget based on predefined conditions.
@@ -450,6 +506,8 @@ class SampleView(BaseView):
                     self.generate.configure(state="normal")
                 else: 
                     self.generate.configure(state="disabled")
+            else: 
+                self.generate.configure(state="disabled")
         elif level == "sub": 
             if option == "------":
                 self.generate.configure(state="disabled")
