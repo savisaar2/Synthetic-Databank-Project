@@ -5,7 +5,7 @@
     },
     "Algerian_forest_fires_dataset_UPDATE": {
         "Source": "UC Irvine Machine Learning Repository",
-        "Description": "The dataset includes 244 instances nd 12 attributes that group a data of two regions of Algeria,namely the Bejaia region located in the northeast of Algeria and the Sidi Bel-abbes region located in the northwest of Algeria. \n\nCategory: Natural Disasters\n\nKey Words: machine learning ML"
+        "Description": "The dataset includes 244 instances and 12 attributes that group a data of two regions of Algeria,namely the Bejaia region located in the northeast of Algeria and the Sidi Bel-abbes region located in the northwest of Algeria. \n\nCategory: Natural Disasters\n\nKey Words: machine learning ML"
     },
     "BankChurners": {
         "Source": "https://github.com/cmdraghici/BankChurners/blob/main/BankChurners.csv",
@@ -23,13 +23,25 @@
         "Source": "Matjaz Zwitter & Milan Soklic (physicians) Institute of Oncology University Medical Center Ljubljana, Yugoslavia ",
         "Description": "This data set includes 201 instances of one class and 85 instances of another class. The instances are described by 9 attributes, some of which are linear and some are nominal.\n\nCategory: Health\n\nKey Words: breast cancer"
     },
+    "Customer Churn": {
+        "Source": "https://archive.ics.uci.edu/dataset/563/iranian+churn+dataset",
+        "Description": "This dataset is randomly collected from an Iranian telecom company's database over a period of 12 months. A total of 3150 rows of data, each representing a customer, bear information for 13 columns. No missing data\n\nCategory: Telecommunications\n\nKey Words: "
+    },
     "diabetes": {
         "Source": "In Proceedings of the Symposium on Computer Applications and Medical Care (pp. 261--265). IEEE Computer Society Press",
         "Description": "This dataset is originally from the National Institute of Diabetes and Digestive and Kidney Diseases. The objective of the dataset is to diagnostically predict whether or not a patient has diabetes, based on certain diagnostic measurements included in the dataset. Several constraints were placed on the selection of these instances from a larger database. In particular, all patients here are females at least 21 years old of Pima Indian heritage. The datasets consists of several medical predictor variables and one target variable, Outcome. Predictor variables includes the number of pregnancies the patient has had, their BMI, insulin level, age.\n\nCategory: Health\n\nKey Words: diabetes pregnancies pregant blood sugar"
     },
+    "diabetes_prediction": {
+        "Source": "https://archive.ics.uci.edu/dataset/529/early+stage+diabetes+risk+prediction+dataset",
+        "Description": "This dataset contains the sign and symptpom data of newly diabetic or would be diabetic patient. This has been collected using direct questionnaires from the patients of Sylhet DiabetesHospital in Sylhet, Bangladesh and approved by a doctor. It has 520 instances and 17 features. No missing values\n\nCategory: Health\n\nKey Words: diabetes"
+    },
     "diamonds": {
         "Source": "kaggle",
         "Description": "Dataset contains the prices and other attributes of approx. 54,000 diamonds.\n\nCategory: Miscellaneous\n\nKey Words: "
+    },
+    "heart_failure_clinical_records_dataset": {
+        "Source": "https://archive.ics.uci.edu/dataset/519/heart+failure+clinical+records",
+        "Description": "This dataset contains the medical records of 299 patients who had heart failure, collected during their follow-up period, where each patient profile has 13 clinical features. No missing data. A detailed description of the dataset can be found in the Dataset section of the following paper: Davide Chicco, Giuseppe Jurman: Machine learning can predict survival of patients with heart failure from serum creatinine and ejection fraction alone. BMC Medical Informatics and Decision Making 20, 16 (2020). https://doi.org/10.1186/s12911-020-1023-5 \n\nCategory: Health\n\nKey Words: "
     },
     "IHME_GBD_2019_HAQ_1990_2019_DATA_Y2022M012D21": {
         "Source": "Global Burden of Disease (GBD) | GHDx (healthdata.org)",
@@ -39,6 +51,10 @@
         "Source": "https://datahack.analyticsvidhya.com/contest/practice-problem-loan-prediction-iii/#ProblemStatement",
         "Description": "Predict Loan Eligibility. There are 480 instances and 12 attributes. The target is Loan_status.\n\nCategory: Finance\n\nKey Words: home loan"
     },
+    "nba-players": {
+        "Source": "https://www.kaggle.com/datasets/yakhyojon/national-basketball-association-nba",
+        "Description": "The National Basketball Association (NBA) is a professional basketball league in North America. The data consists of performance statistics from each player's rookie year. There are 1,341 observations, and each observation in the data represents a different player in the NBA. The target variable is a Boolean value that indicates whether a given player will last in the league for five years..\n\nCategory: Sports\n\nKey Words: "
+    },
     "Real estate valuation data set": {
         "Source": "UC Irvine Machine Learning Repository",
         "Description": "The Real estate valuation is a regression problem. The market historical data set of real estate valuation are collected from Sindian Dist., New Taipei City, Taiwan. The dataset has no missing values\n\nCategory: Business, Real Estate\n\nKey Words: machine learning ML"
@@ -46,6 +62,14 @@
     "sample_categorical": {
         "Source": "Some source",
         "Description": "Some description"
+    },
+    "Steel_industry_data": {
+        "Source": "https://archive.ics.uci.edu/dataset/851/steel+industry+energy+consumption",
+        "Description": "The data is collected from a smart small-sacle steel industry in South Korea. 35,040 instances, 10 features and a class lable. No missing values\n\nCategory: Physical Science\n\nKey Words:"
+    },
+    "Taiwanese Bankruptcy Prediction": {
+        "Source": "https://archive.ics.uci.edu/dataset/572/taiwanese+bankruptcy+prediction",
+        "Description": "The data were collected from the Taiwan Economic Journal for the years 1999 to 2009. Company bankruptcy was defined based on the business regulations of the Taiwan Stock Exchange. The dataset contians 6,819 instances and 96 features\n\nCategory: Finance\n\nKey Words:"
     },
     "time_series_covid19_confirmed_global": {
         "Source": "HUMANITARIAN DATA EXCHANGE",
