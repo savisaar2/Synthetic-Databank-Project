@@ -58,6 +58,7 @@ class ConfigNewDatasetController:
                 generated_df = self.model.config_new_dataset.action_churner(self.model.config_new_dataset.action_set)
                 self.model.DATASET.add_generated_dataset_to_snapshot(self.model.config_new_dataset.action_set, 
                                                                     "Generated Dataset", generated_df)
+                self.model.DATASET.rollback(0)
                 # Log entry
                 self.logger.log_info(f"User successfully initiated 'config new dataset' function with action set:")
                 for item in self.model.config_new_dataset.action_set:

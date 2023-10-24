@@ -48,11 +48,8 @@ class MenuView(CTkFrame):
         self.sample_button.configure(state="disabled")
         self.save_button.configure(state="disabled")
 
-    def enable_menu_buttons(self, is_new=False):
-        self._disable_menu_buttons()
-        if not is_new:
-            self.analyse_button.configure(state="normal")
-
+    def enable_menu_buttons(self):   
+        self.analyse_button.configure(state="normal")
         self.manipulate_button.configure(state="normal")
         self.sample_button.configure(state="normal")
         self.save_button.configure(state="normal")
