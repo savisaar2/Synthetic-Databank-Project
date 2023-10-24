@@ -3,6 +3,7 @@ from .analyse import AnalyseModel
 from .library import LibraryModel
 from .user import UserModel
 from .manipulations import ManipulationsModel
+from .sample import SampleModel
 from .config_new_dataset import ConfigNewDatasetModel
 
 class Model:
@@ -18,4 +19,5 @@ class Model:
         self.library = LibraryModel()
         self.user = UserModel()
         self.manipulations = ManipulationsModel()
+        self.sample = SampleModel()
         self.config_new_dataset = ConfigNewDatasetModel()
