@@ -67,7 +67,7 @@ class LibraryController:
         # Provide visual cue.
         self.frame.dataset_status.configure(text=f"New Unsaved Data Set", text_color="yellow")
 
-        self.view.frames["menu"].enable_menu_buttons(is_new=True)
+        self.view.frames["menu"].enable_menu_buttons()
 
     def _show_metadata(self):
         """
