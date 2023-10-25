@@ -54,7 +54,7 @@ class SaveView(BaseView):
         self.save_button_frame = CTkFrame(self.save_frame, fg_color="transparent")
         self.save_button_frame.pack(pady=10)
         self.save_button = CTkButton(
-            self.save_button_frame, corner_radius=5, text="Save", font=("Arial", 16), width=150, height=40
+            self.save_button_frame, corner_radius=5, text="Overwrite", font=("Arial", 16), width=150, height=40
             )
         self.save_button.pack(side="left", padx=5)
 
@@ -114,12 +114,12 @@ class SaveView(BaseView):
         """Get the string value in self.save_name_entry or self.export_name_entry for different purposes.
 
         Args:
-            mode (str): "Save", "Save As" or "Export"
+            mode (str): "Overwrite", "Save As" or "Export"
 
         Returns:
             str: value in text entry box
         """
-        if mode == "Save" or mode == "Save As":
+        if mode == "Overwrite" or mode == "Save As":
             return self.save_name_entry.get()
         elif mode == "Export": 
             return self.export_name_entry.get()
@@ -128,12 +128,12 @@ class SaveView(BaseView):
         """Get the string value in self.save_desc_entry
 
         Args:
-            mode (str): "Save", "Save As" or "Export"
+            mode (str): "Overwrite", "Save As" or "Export"
 
         Returns:
             str: value in text entry box
         """
-        if mode == "Save" or mode == "Save As":
+        if mode == "Overwrite" or mode == "Save As":
             return self.save_desc_entry.get("1.0", END)
         elif mode == "Export": 
             return self.export_desc_entry.get("1.0", END)
@@ -143,12 +143,12 @@ class SaveView(BaseView):
         depending on mode.
 
         Args:
-            mode (str): "Save", "Save As" or "Export"
+            mode (str): "Overwrite", "Save As" or "Export"
 
         Returns:
             str: value in text entry box
         """
-        if mode == "Save" or mode == "Save As": 
+        if mode == "Overwrite" or mode == "Save As": 
             return self.save_source_entry.get()
         elif mode == "Export": 
             return self.export_source_entry.get()
@@ -158,11 +158,11 @@ class SaveView(BaseView):
         """
         if mode == "Save As":
             self.save_button.configure(text="Save As")
-        elif mode == "Save": 
-            self.save_button.configure(text="Save")
+        elif mode == "Overwrite": 
+            self.save_button.configure(text="Overwrite")
 
     def get_save_button_mode(self): 
-        """Either return "Save" or "Save As" i.e. mode of the save button.
+        """Either return "Overwrite" or "Save As" i.e. mode of the save button.
         """
         return self.save_button.cget("text")
     

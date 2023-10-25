@@ -44,10 +44,18 @@ class SaveController:
         except Exception as e: 
             print(e)
 
-        if mode == "Save" or mode == "Save As": 
+        if mode == "Save As": 
             self.model.DATASET.save_export_dataset(full_path=self.model.DATASET.databank_dir + name + ".csv")
             self.model.DATASET.add_metadata(name, description, source)
             self._update_databank_library()
+        elif mode == "Overwrite": 
+            confirm_overwrite = self.exception.display_confirm(
+                message="Are you sure you wish to overwrite a built-in dataset with modifications?"
+                )
+            if confirm_overwrite: 
+                self.model.DATASET.save_export_dataset(full_path=self.model.DATASET.databank_dir + name + ".csv")
+                self.model.DATASET.add_metadata(name, description, source)
+                self._update_databank_library()
         elif mode == "Export": 
             file_for_export = self.frame.show_export_dialogue(file_name=name) # Entire path including filename.
             self.model.DATASET.save_export_dataset(full_path=file_for_export) # Export to user specified location.
@@ -85,8 +93,8 @@ class SaveController:
         change back to "Save".
         """
         name = self.model.DATASET.get_dataset_name()
-        if self.frame.get_name_entry(mode="Save") == name: # no change
-            self.frame.change_save_button_text(mode="Save")
+        if self.frame.get_name_entry(mode="Overwrite") == name: # no change
+            self.frame.change_save_button_text(mode="Overwrite")
         else: 
             self.frame.change_save_button_text(mode="Save As")
 
