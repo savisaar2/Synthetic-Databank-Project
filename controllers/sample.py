@@ -29,6 +29,12 @@ class SampleController:
         Obtain column headers from the loaded dataset to be populated in the appropriate widgets e.g. 
         option menues. Called whenever Sample side panel is clicked to ensure correct data.
         """
+        button = event.widget
+        parent_frame = button.master
+
+        if parent_frame.cget("state") == "disabled":
+            return
+        
         column_headers = self.model.DATASET.get_column_headers()
         column_headers.insert(0, "------")
         self.frame.refresh_sample_widgets(mode=mode, column_headers=column_headers)

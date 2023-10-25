@@ -66,6 +66,12 @@ class SaveController:
         Obtain metadata info for the loaded dataset to be populated in the appropriate widgets for 
         save / export.
         """
+        button = event.widget
+        parent_frame = button.master
+
+        if parent_frame.cget("state") == "disabled":
+            return
+        
         metadata_repository = self.model.DATASET.load_all_metadata()
         name = self.model.DATASET.get_dataset_name()
         loaded_dataset = self.model.DATASET.get_file_metadata(metadata_collection=metadata_repository, name=name)

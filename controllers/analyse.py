@@ -30,6 +30,12 @@ class AnalyseController:
         ensure correct data. 
         Also calculate all the descriptive stats and show in first panel of three. 
         """
+        button = event.widget
+        parent_frame = button.master
+
+        if parent_frame.cget("state") == "disabled":
+            return
+
         df = self.model.DATASET.get_reference_to_current_snapshot()
         column_headers = self.model.DATASET.get_column_headers()
         column_headers.insert(0, "------")

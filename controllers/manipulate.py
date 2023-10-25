@@ -31,8 +31,8 @@ class ManipulateController:
         for user interactions with widgets on the view related to the manipulate page.
         """
         # Refreshes widgets and scan of datatypes in dataframe.
-        self.view.frames["menu"].manipulate_button.bind("<Button-1>", lambda _: self._scan_dataset(), add="+")
-        self.view.frames["menu"].manipulate_button.bind("<Button-1>", self._refresh_manipulate_widgets, add="+")
+        self.view.frames["menu"].manipulate_button.bind("<Button-1>", lambda event: self._scan_dataset(event), add="+")
+        self.view.frames["menu"].manipulate_button.bind("<Button-1>", lambda event: self._refresh_manipulate_widgets(event), add="+")
         
         # Add manipulations to scheduler
         self.frame.schedule_button.bind("<Button-1>", lambda _: self._clear_generated_manips_from_scheduler(), add="+")
@@ -55,6 +55,12 @@ class ManipulateController:
         option menues and row count of Manipulate view. Called whenever Manipulate side panel is clicked to 
         ensure correct data.
         """
+        button = event.widget
+        parent_frame = button.master
+
+        if parent_frame.cget("state") == "disabled":
+            return
+
         self._scan_dataset()
         snapshots = self.model.DATASET.get_reference_to_all_snapshots()
         self._update_rollback_selector()
@@ -182,10 +188,16 @@ class ManipulateController:
         except Exception as error:
             self.logger.log_exception("Generate failed to complete. Traceback:")
 
-    def _scan_dataset(self):  
+    def _scan_dataset(self, event):  
         """
         Function creates a dictionary of column headers and datatypes. Used for type checking in manipulation UI.
         """
+        button = event.widget
+        parent_frame = button.master
+
+        if parent_frame.cget("state") == "disabled":
+            return
+        
         df = self.model.DATASET.get_reference_to_current_snapshot()
         self.col_dtype_dict ={}
         for col in self.model.DATASET.get_column_headers():

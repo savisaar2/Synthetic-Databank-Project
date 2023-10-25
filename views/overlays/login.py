@@ -32,7 +32,7 @@ class LoginView(CTkFrame):
         self.login_frame.place(rely=0.5, relx=0.5, anchor="c")
 
         # Feature image.
-        self.logo_image = CTkImage(Image.open("views/static/images/unisa_logo.png"), size=(150, 150))
+        self.logo_image = CTkImage(Image.open("views/static/images/unisa2.png"), size=(300, 300))
         self.logo_label = CTkLabel(self.login_frame, text="", image=self.logo_image)
         self.logo_label.pack(padx=100,pady=10)
 

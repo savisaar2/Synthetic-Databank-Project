@@ -46,7 +46,7 @@ class MenuController:
         self.frame.sample_button.configure(fg_color="#336aa0")
         self.frame.save_button.configure(fg_color="#336aa0")
         self.frame.accounts_button.configure(fg_color="#336aa0")
-        button.configure(fg_color="#22486d")
+        button.configure(fg_color="#0a3556")
 
     def _confirm_quit(self):
         result = self.view.frames["exception"].display_confirm("Are you sure you want to quit?")

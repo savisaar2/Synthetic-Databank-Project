@@ -29,18 +29,18 @@ class MenuView(CTkFrame):
         self.content_frame.pack(fill="both", expand=True)
 
         # Render logo with application title.
-        self.logo_label = self._create_logo_label(img="views/static/images/unisa_logo.png", text="Synthetic Databank")
+        self.logo_label = self._create_logo_label(img="views/static/images/unisa1.png", text="Synthetic Databank")
 
         # Render relevant navigational buttons for application pages.
-        self.library_button = self._create_button(text="Library", side="top")
-        self.analyse_button = self._create_button(text="Analyse", side="top", state="disabled")
-        self.manipulate_button =self._create_button(text="Manipulate", side="top", state="disabled")
-        self.sample_button = self._create_button(text="Sample", side="top", state="disabled")
-        self.save_button = self._create_button(text="Save & Export", side="top", state="disabled")
+        self.library_button = self._create_button(text="Library", side="top", image="views/static/images/Library.png")
+        self.analyse_button = self._create_button(text="Analyse", side="top", state="disabled", image="views/static/images/Analyse.png")
+        self.manipulate_button =self._create_button(text="Manipulate", side="top", state="disabled", image="views/static/images/Manipulate.png")
+        self.sample_button = self._create_button(text="Sample", side="top", state="disabled", image="views/static/images/sample.png")
+        self.save_button = self._create_button(text="Save & Export", side="top", state="disabled", image="views/static/images/saveandexport.png")
 
         # Bottom pushed buttons.
-        self.end_button = self._create_button(text="Quit", side="bottom")
-        self.accounts_button = self._create_button(text="Accounts", side="bottom")
+        self.end_button = self._create_button(text="Quit", side="bottom", image="views/static/images/quit.png")
+        self.accounts_button = self._create_button(text="Accounts", side="bottom", image="views/static/images/Accounts.png")
 
     def _disable_menu_buttons(self):
         self.analyse_button.configure(state="disabled")
@@ -54,7 +54,7 @@ class MenuView(CTkFrame):
         self.sample_button.configure(state="normal")
         self.save_button.configure(state="normal")
 
-    def _create_button(self, text="Text Here", side="top", state="normal"):
+    def _create_button(self, text="Text Here", side="top", state="normal", image=""):
         """
         Renders a button widget with corrisponding text.
 
@@ -65,7 +65,9 @@ class MenuView(CTkFrame):
         side : str
             Defines top|bottom positioning.
         """
-        button = CTkButton(self.content_frame, corner_radius=0, height=40, image="", border_spacing=10, text=text, anchor="w", state=state)
+        if image != "":
+            image = CTkImage(Image.open(image), size=(20, 20))
+        button = CTkButton(self.content_frame, corner_radius=0, height=40, image=image, border_spacing=10, text=text, anchor="w", state=state)
         button.pack(side=side, fill="x")
         return button
     
@@ -80,7 +82,7 @@ class MenuView(CTkFrame):
         text : str
             Text to appear on the label.
         """
-        image = CTkImage(Image.open(img), size=(150, 150))
+        image = CTkImage(Image.open(img), size=(100, 100))
         label = CTkLabel(self.content_frame, text="Synthetic Databank", image=image, compound="top", font=CTkFont(size=18, weight="bold"))
-        label.pack(side="top", padx=20, pady=(0, 20), anchor="w")
+        label.pack(side="top", padx=20, pady=(10, 20), anchor="w")
         return label
