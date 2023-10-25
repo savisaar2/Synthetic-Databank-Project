@@ -85,14 +85,14 @@ class AccountsView(BaseView):
         self.bio_entry.delete(0, END)
 
         # Write new values to our entry widgets.
-        self.first_name_entry.insert(0, user["profile_info"]["first"])
-        self.last_name_entry.insert(0, user["profile_info"]["last"])
+        self.first_name_entry.insert(0, user["firstname"])
+        self.last_name_entry.insert(0, user["lastname"])
         self.username_entry.insert(0, user["username"])
-        self.initial_entry.insert(0, user["profile_info"]["initials"])
-        self.department_entry.insert(0, user["profile_info"]["department"])
-        self.office_entry.insert(0, user["profile_info"]["office"])
-        self.email_entry.insert(0, user["profile_info"]["email"])
-        self.bio_entry.insert(0, user["profile_info"]["bio"])
+        self.initial_entry.insert(0, user["initials"])
+        self.department_entry.insert(0, user["department"])
+        self.office_entry.insert(0, user["office"])
+        self.email_entry.insert(0, user["email"])
+        self.bio_entry.insert(0, user["bio"])
 
         self.disable_entries()
 

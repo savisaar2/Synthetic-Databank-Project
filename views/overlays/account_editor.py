@@ -134,13 +134,13 @@ class AccountEditorView(CTkFrame):
         """
         # Defines our payload with entry widgets and expected values.
         fields_to_populate = {
-            self.first_name_entry: profile["profile_info"]["first"],
-            self.last_name_entry: profile["profile_info"]["last"],
+            self.first_name_entry: profile["firstname"],
+            self.last_name_entry: profile["lastname"],
             self.username_entry: profile["username"],
-            self.initial_entry: profile["profile_info"]["initials"],
-            self.department_entry: profile["profile_info"]["department"],
-            self.office_entry: profile["profile_info"]["office"],
-            self.email_entry: profile["profile_info"]["email"],
+            self.initial_entry: profile["initials"],
+            self.department_entry: profile["department"],
+            self.office_entry: profile["office"],
+            self.email_entry: profile["email"],
         }
 
         # Loop through dictionary and delete existing data and write new data.
@@ -150,7 +150,7 @@ class AccountEditorView(CTkFrame):
 
         # Textbox needs a different solution.
         self.bio_entry.delete(0.0, END)
-        self.bio_entry.insert(0.0, profile["profile_info"]["bio"])
+        self.bio_entry.insert(0.0, profile["bio"])
         self.role_entry.set(profile["role"])
 
     def show_view(self):

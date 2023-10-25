@@ -124,7 +124,7 @@ class AccountsController:
 
         # Find the user's account by username
         user_account = None
-        user_account = self.model.user.get_profile_by_username(username)
+        user_account = self.model.user.get_user_by_username(username)
 
         # Check if user exists in accounts db.
         if not user_account:
@@ -133,7 +133,7 @@ class AccountsController:
 
         # Old password needs to match current authenticated user password.
         if not isAdmin:
-            if self.model.user.decrypt(user_account["password"]) != old_password:
+            if user_account["password"] != old_password:
                 self.exception.display_error("Invalid Password")
                 return
 
@@ -213,7 +213,7 @@ class AccountsController:
         account = {
             "username": username,
             "password": vpassword,
-            "profile_info": {"first": firstname, "last": lastname, "initials": initials, "department": department, "office": office, "email": email, "bio": bio},
+            "profile_info": {"firstname": firstname, "lastname": lastname, "initials": initials, "department": department, "office": office, "email": email, "bio": bio},
             "role": role
         }
 
@@ -222,7 +222,7 @@ class AccountsController:
         self.logger.log_info(f"ACCOUNTS - User '{self.model.user.get_username()}' has created user '{username}'.")
 
         # Update administrative accounts manager view with new account.
-        self.accounts_manager.populate_user_accounts(self.model.user.accounts)
+        self.accounts_manager.populate_user_accounts(self.model.user.get_all_accounts())
 
         # Bind new buttons on account manager and hide new account view.
         self._dynamic_row_binds()
@@ -245,7 +245,7 @@ class AccountsController:
         # and remove from view.
         if result:
             self.model.user.delete_user(username)
-            self.accounts_manager.remove_frame(grand_frame)
+            self.accounts_manager.populate_user_accounts(self.model.user.get_all_accounts())
             self.logger.log_info(f"ACCOUNTS - User '{self.model.user.get_username()}' has removed user '{username}' from accounts database.")
 
     def _show_user_editor(self, event):

@@ -94,12 +94,12 @@ class AccountMgmtView(CTkFrame):
 
             # Create labels to display user information.
             # TODO: Might remove variables (unused).
-            firstname_label = self.create_label(row_frame, user["profile_info"]["first"])
-            lastname_label = self.create_label(row_frame, user["profile_info"]["last"])
+            firstname_label = self.create_label(row_frame, user["firstname"])
+            lastname_label = self.create_label(row_frame, user["lastname"])
             username_label = self.create_label(row_frame, user["username"])
             role_label = self.create_label(row_frame, user["role"])
-            initials_label = self.create_label(row_frame, user["profile_info"]["initials"], width=30)
-            email_label = self.create_label(row_frame, user["profile_info"]["email"], width=260)
+            initials_label = self.create_label(row_frame, user["initials"], width=30)
+            email_label = self.create_label(row_frame, user["email"], width=260)
 
             # Create edit and delete buttons for each row.
             edit_button = self.create_button(row_frame, "Edit", width=60, padx=10)

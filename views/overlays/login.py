@@ -25,7 +25,7 @@ class LoginView(CTkFrame):
             relwidth=1, relheight=1
         )
         # Comment below to show authentication page (production).
-        self.overlay_frame.lower()
+        # self.overlay_frame.lower()
 
         # Primary frame to house login widgets.
         self.login_frame = CTkFrame(self.overlay_frame)
