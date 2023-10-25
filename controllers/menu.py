@@ -48,6 +48,11 @@ class MenuController:
         self.frame.accounts_button.configure(fg_color="#336aa0")
         button.configure(fg_color="#22486d")
 
+    def _confirm_quit(self):
+        result = self.view.frames["exception"].display_confirm("Are you sure you want to quit?")
+        if result:
+            self.view.root.quit()
+
     def _bind(self):
         """
         Private method to establish event bindings.
@@ -61,4 +66,4 @@ class MenuController:
         self.frame.sample_button.bind("<Button-1>", lambda event, args="sample": self._switch_view(event, args))
         self.frame.save_button.bind("<Button-1>", lambda event, args="save": self._switch_view(event, args))
         self.frame.accounts_button.bind("<Button-1>", lambda event, args="accounts": self._switch_view(event, args))
-        self.frame.end_button.bind("<Button-1>", lambda _: self.view.root.quit())
+        self.frame.end_button.bind("<Button-1>", lambda _: self._confirm_quit())

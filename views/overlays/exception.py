@@ -1,10 +1,12 @@
 from tkinter import ttk, Entry
-from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkImage, CTkFont, CTkCanvas, CTkEntry
+from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkImage, CTkFont, CTkCanvas, CTkEntry, BooleanVar
 from PIL import Image
 
 class ExceptionView(CTkFrame):
     def __init__(self, root, *args, **kwargs):
         super().__init__(root, fg_color="transparent", *args, **kwargs)
+
+        self.confirm_result = BooleanVar(value=False)
 
         self.error_frame = CTkFrame(self.master)
         self.error_frame.place(
@@ -18,8 +20,15 @@ class ExceptionView(CTkFrame):
             relwidth=1, relheight=1
         )
 
+        self.confirm_frame = CTkFrame(self.master)
+        self.confirm_frame.place(
+            relx=0.5, rely=0.5, anchor="center",
+            relwidth=1, relheight=1
+        )
+
         self._load_error()
         self._load_info()
+        self._load_confirm()
 
     def _load_error(self):
         """Render the unchanging aspects of exception UI.
@@ -65,6 +74,31 @@ class ExceptionView(CTkFrame):
 
         self.hide_info_view()
 
+    def _load_confirm(self):
+        """Render specific exception passed through from calling object.
+        """
+        self.confirm_content_frame = CTkFrame(self.confirm_frame, fg_color="transparent")
+        self.confirm_content_frame.pack(expand=True, padx=20, pady=20)
+
+        self.confirm_image = CTkImage(Image.open("views/static/images/error.png"), size=(150, 150))
+
+        self.confirm_image_label = CTkLabel(self.confirm_content_frame, text="", image=self.error_image)
+        self.confirm_image_label.pack(padx=20)
+
+        self.confirm_type = CTkLabel(self.confirm_content_frame, text="INFO", font=("Arial", 28, "bold"))
+        self.confirm_type.pack(pady=25)
+
+        self.confirm_msg = CTkLabel(self.confirm_content_frame, font=("Arial", 18))
+        self.confirm_msg.pack()
+
+        self.confirm_button = CTkButton(self.confirm_content_frame, corner_radius=5, text="YES", font=("Arial", 21), width=150, height=40, fg_color="green", command=lambda: self.set_confirm(True))
+        self.confirm_button.pack(side="left", padx=10, pady=(50, 0))  # Set side to "left" and add some padding
+
+        self.cancel_button = CTkButton(self.confirm_content_frame, corner_radius=5, text="NO", font=("Arial", 21), width=150, height=40, fg_color="red", command=lambda: self.set_confirm(False))
+        self.cancel_button.pack(side="left", padx=10, pady=(50, 0))  # Set side to "left" and add some padding
+
+        self.confirm_frame.lower()
+
     def display_error(self, error):
         """Display a custom error from caller. 
 
@@ -92,3 +126,24 @@ class ExceptionView(CTkFrame):
         """Hide frame for info.
         """
         self.info_frame.lower()
+
+    def display_confirm(self, message):
+        """Display a confirmation message and return True or False based on user response.
+
+        Args:
+            message (str): String to describe the confirmation message.
+
+        Returns:
+            bool: True if the user confirms with 'YES', False if the user confirms with 'NO'.
+        """
+        self.confirm_msg.configure(text=message)
+        self.confirm_result.set(False)  # Reset the BooleanVar to False
+        self.confirm_frame.lift()
+        self.master.wait_variable(self.confirm_result)  # Wait for the user's choice
+        return self.confirm_result.get()
+    
+    def set_confirm(self, choice):
+        """User confirm is set as boolean.
+        """
+        self.confirm_result.set(choice)  # Set the BooleanVar to True
+        self.confirm_frame.lower()
