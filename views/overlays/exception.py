@@ -95,7 +95,7 @@ class ExceptionView(CTkFrame):
         self.confirm_button.pack(side="left", padx=10, pady=(50, 0))  # Set side to "left" and add some padding
 
         self.cancel_button = CTkButton(self.confirm_content_frame, corner_radius=5, text="NO", font=("Arial", 21), width=150, height=40, fg_color="red", command=lambda: self.set_confirm(False))
-        self.cancel_button.pack(side="left", padx=10, pady=(50, 0))  # Set side to "left" and add some padding
+        self.cancel_button.pack(side="right", padx=10, pady=(50, 0))  # Set side to "left" and add some padding
 
         self.confirm_frame.lower()
 

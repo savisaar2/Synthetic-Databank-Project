@@ -76,8 +76,8 @@ class SampleView(BaseView):
         self.sample_size_entry = CTkEntry(self.s_frame_row_1, corner_radius=5, width=50, state="disabled")
 
         # Stratified - sub widgets
-        self.num_of_splits_label = CTkLabel(self.s_frame_row_1, text="Number of Splits:", anchor="w")
-        self.num_of_splits_entry = CTkEntry(self.s_frame_row_1, corner_radius=5, width=50, state="disabled")
+        self.strat_sample_size_label = CTkLabel(self.s_frame_row_1, text="Sample Size:", anchor="w")
+        self.strat_sample_size_entry = CTkEntry(self.s_frame_row_1, corner_radius=5, width=50, state="disabled")
         self.stratified_dependant_col_label = CTkLabel(self.s_frame_row_1, text="Dependent Column:", anchor="w")
         self.stratified_dependant_col_menu = CTkOptionMenu(
             self.s_frame_row_1, fg_color="gray10", width=3, values=("------",), 
@@ -89,24 +89,24 @@ class SampleView(BaseView):
 
         # Under
         self.under_dependant_col_label = CTkLabel(self.s_frame_row_1, text="Dependent Column:", anchor="w")
-        self.under_dependant_col_menu = CTkOptionMenu(
+        self.under_target_col_menu = CTkOptionMenu(
             self.s_frame_row_1, fg_color="gray10", width=3, values=("------",), 
             command=lambda option: self.reconfig_widgets(level="sub", option=option)
         )
         # Over
         self.over_dependant_col_label = CTkLabel(self.s_frame_row_1, text="Dependent Column:", anchor="w")
-        self.over_dependant_col_menu = CTkOptionMenu(
+        self.over_target_col_menu = CTkOptionMenu(
             self.s_frame_row_1, fg_color="gray10", width=3, values=("------",), 
             command=lambda option: self.reconfig_widgets(level="sub", option=option)
         )
         # Cluster - sub widgets
+        self.cluster_sample_size_label = CTkLabel(self.s_frame_row_1, text="Sample Size:", anchor="w")
+        self.cluster_sample_size_entry = CTkEntry(self.s_frame_row_1, corner_radius=5, width=50, state="disabled")
         self.cluster_column_label = CTkLabel(self.s_frame_row_1, text="Cluster Column:", anchor="w")
         self.cluster_column_menu = CTkOptionMenu(
             self.s_frame_row_1, fg_color="gray10", width=3, values=("------",), 
             command=lambda option: self.reconfig_widgets(level="sub", option=option)
         )
-        self.num_of_clusters_label = CTkLabel(self.s_frame_row_1, text="Number of Clusters:", anchor="w")
-        self.num_of_clusters_entry = CTkEntry(self.s_frame_row_1, corner_radius=5, width=50, state="disabled")
 
         # Quota - sub widgets
         self.column_to_build_quota_label = CTkLabel(self.s_frame_row_1, text="Column to Build Quota:", anchor="w")
@@ -129,11 +129,11 @@ class SampleView(BaseView):
 
         # Widget toggle groupings - used for both toggling and input validation
         self.all_widgets = [
-            self.sample_size_label, self.sample_size_entry, self.num_of_splits_label, self.num_of_splits_entry, 
-            self.systematic_interval_label, self.under_dependant_col_label, self.under_dependant_col_menu, 
+            self.sample_size_label, self.sample_size_entry, self.strat_sample_size_label, self.strat_sample_size_entry, 
+            self.systematic_interval_label, self.under_dependant_col_label, self.under_target_col_menu, 
             self.stratified_dependant_col_label, self.stratified_dependant_col_menu, self.over_dependant_col_label,
-            self.over_dependant_col_menu, self.cluster_column_label, self.cluster_column_menu, 
-            self.num_of_clusters_label, self.num_of_clusters_entry, self.systematic_interval_entry, 
+            self.over_target_col_menu, self.cluster_column_label, self.cluster_column_menu, 
+            self.cluster_sample_size_label, self.cluster_sample_size_entry, self.systematic_interval_entry, 
             self.column_to_build_quota_label, self.column_to_build_quota_menu, self.q_sample_size_label, 
             self.quota_sample_size_entry, self.add_row, self.remove_row
             ]
@@ -143,7 +143,7 @@ class SampleView(BaseView):
         ]
 
         self.stratified_widgets = [
-            self.num_of_splits_label, self.num_of_splits_entry, self.stratified_dependant_col_label, 
+            self.strat_sample_size_label, self.strat_sample_size_entry, self.stratified_dependant_col_label, 
             self.stratified_dependant_col_menu
         ]
 
@@ -152,20 +152,21 @@ class SampleView(BaseView):
         ]
 
         self.under_widgets = [
-            self.under_dependant_col_label, self.under_dependant_col_menu
+            self.under_dependant_col_label, self.under_target_col_menu
         ]
 
         self.over_widgets = [
-            self.over_dependant_col_label, self.over_dependant_col_menu
+            self.over_dependant_col_label, self.over_target_col_menu
         ]
 
         self.cluster_widgets = [
-            self.cluster_column_label, self.cluster_column_menu, self.num_of_clusters_label, self.num_of_clusters_entry
+            self.cluster_sample_size_label, self.cluster_sample_size_entry, self.cluster_column_label, 
+            self.cluster_column_menu
         ]
 
         self.quota_widgets = [
-            self.column_to_build_quota_label, self.column_to_build_quota_menu, self.q_sample_size_label, 
-            self.quota_sample_size_entry
+            self.q_sample_size_label, self.quota_sample_size_entry, self.column_to_build_quota_label, 
+            self.column_to_build_quota_menu, 
         ]
 
         self.judgment_snowball_widgets = [
@@ -180,7 +181,7 @@ class SampleView(BaseView):
         }
 
         self.all_menu_option_widgets = { # hack to reset upon algo selection - needed to toggle "generate" button
-            self.stratified_dependant_col_menu, self.under_dependant_col_menu, self.over_dependant_col_menu, 
+            self.stratified_dependant_col_menu, self.under_target_col_menu, self.over_target_col_menu, 
             self.cluster_column_menu, self.column_to_build_quota_menu, 
         }
 
@@ -260,6 +261,18 @@ class SampleView(BaseView):
                 rows (list): list of instantiated judgment_snowball_row objects
             """
             self.row_object_validation(rows=rows)
+
+        def convert_condition_entry_to_float(self): 
+            value = float(self.get_condition_entry())
+            return value
+    
+    def get_generate_button_state(self):
+        """Get the state of the generate button.
+
+        Returns:
+            str: state of button i.e., disabled or normal
+        """
+        return self.generate.cget("state")
 
     def _create_textbox(self, frame, text, height):
         """Create a text box for the purposes of displaying sample algorithm description / examples. 
@@ -346,8 +359,8 @@ class SampleView(BaseView):
         """
         if mode == "menus": 
             self.stratified_dependant_col_menu.configure(values=column_headers)
-            self.under_dependant_col_menu.configure(values=column_headers)
-            self.over_dependant_col_menu.configure(values=column_headers)
+            self.under_target_col_menu.configure(values=column_headers)
+            self.over_target_col_menu.configure(values=column_headers)
             self.cluster_column_menu.configure(values=column_headers)
             self.column_to_build_quota_menu.configure(values=column_headers)
         elif mode == "rows": 
@@ -366,6 +379,11 @@ class SampleView(BaseView):
 
         self._create_textbox(frame=self.description_frame, text=text, height=190)
 
+    def get_reference_to_rows_of_operations(self): 
+        """ref to self.rows_of_operations
+        """
+        return self.rows_of_operations
+
     def get_sample_algo_menu_selection(self): 
         """Get the name of the selected item.
         """
@@ -376,10 +394,10 @@ class SampleView(BaseView):
         """
         return self.sample_size_entry.get()
     
-    def get_num_of_splits_entry(self): 
+    def get_strat_sample_size_entry(self): 
         """Stratified entry prop
         """
-        return self.num_of_splits_entry.get()
+        return self.strat_sample_size_entry.get()
     
     def get_stratified_dependant_col_menu(self): 
         """Stratified dependant col menu prop
@@ -391,35 +409,35 @@ class SampleView(BaseView):
         """
         return self.systematic_interval_entry.get()
     
-    def get_under_dependant_col_menu(self): 
-        """Under dependant col menu prop
+    def get_under_target_col_menu(self): 
+        """Under target col menu prop
         """
-        return self.under_dependant_col_menu.get()
+        return self.under_target_col_menu.get()
     
-    def get_over_dependant_col_menu(self): 
-        """Over dependant col menu prop
+    def get_over_target_col_menu(self): 
+        """Over target col menu prop
         """
-        return self.over_dependant_col_menu.get()
+        return self.over_target_col_menu.get()
+    
+    def get_cluster_sample_size_entry(self): 
+        """Cluster num of clusters entry prop
+        """
+        self.cluster_sample_size_entry.get()
     
     def get_cluster_column_menu(self): 
         """Cluster column menu prop
         """
         return self.cluster_column_menu.get()
     
-    def get_num_of_clusters_entry(self): 
-        """Cluster num of clusters entry prop
-        """
-        self.num_of_clusters_entry.get()
-    
-    def get_column_to_build_quota_menu(self): 
-        """Quota column to build quota menu prop
-        """
-        self.column_to_build_quota_menu.get()
-
     def get_quota_sample_size_entry(self):
         """Quota sample size entry prop
         """ 
         self.quota_sample_size_entry.get()
+
+    def get_column_to_build_quota_menu(self): 
+        """Quota column to build quota menu prop
+        """
+        self.column_to_build_quota_menu.get()
     
     def row_object_validation(self, rows): 
         """Reconfigure generate state based on selection of widgets in judgment_snowball_row objects.
@@ -457,7 +475,7 @@ class SampleView(BaseView):
         """Used post successful sampling algorithm.
         """
         self.sampling_algo_menu.set("------")
-    
+
     def bulk_toggle(self, mode, list_of_widgets):
         """To be used with reconfig_widgets method.
 
@@ -466,22 +484,25 @@ class SampleView(BaseView):
             list_of_widgets (_type_): _description_
         """
         if mode == "off": 
-            for w in list_of_widgets: 
-                w.configure(state="disabled")
+            for widget in list_of_widgets: 
+                widget.configure(state="disabled")
         elif mode == "on": 
-            for w in list_of_widgets: 
-                w.configure(state="normal")
+            for widget in list_of_widgets: 
+                widget.configure(state="normal")
         elif mode == "hide": 
-            for w in list_of_widgets: 
-                w.pack_forget()
+            for widget in list_of_widgets: 
+                widget.pack_forget()
         elif mode == "show": 
-            for w in list_of_widgets: 
-                w.pack(side="left", padx=(8, 0))
-        elif mode == "reset_menu": 
-            for w in list_of_widgets: 
-                w.set("------")
+            for widget in list_of_widgets: 
+                widget.pack(side="left", padx=(8, 0))
+        elif mode == "reset": 
+            for widget in list_of_widgets:
+                if isinstance(widget, CTkEntry): 
+                    widget.delete(0, "end")
+                elif isinstance(widget, CTkOptionMenu): 
+                    widget.set("------")
 
-    def reconfig_widgets(self, level, option): 
+    def reconfig_widgets(self, level, option):
         """Toggle (disable or enable) the appropriate widget based on predefined conditions.
 
         Args:

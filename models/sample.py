@@ -1,5 +1,9 @@
+import os
 import pandas as pd
-import random
+from sklearn.model_selection import StratifiedShuffleSplit
+from sklearn.utils import resample
+import numpy as np
+
 
 class SampleModel():
     def __init__(self):
@@ -97,54 +101,89 @@ class SampleModel():
             sample_size (int): user input for sample size.
         """
         new_sample = df.sample(n=sample_size, replace=False, random_state=42)
+        
         return new_sample
     
-    def stratified(self, df, num_of_splits, dependant_col): 
-        """_summary_
+    def stratified(self, df, sample_size, dependant_col): 
+        """Stratified sampling technique.
 
         Args:
-            df (_type_): _description_
-            num_of_splits (_type_): _description_
-            dependant_col (_type_): _description_
+            df (pandas dataframe): current loaded dataset.
+            sample_size (int): size of sample in integer value.
+            dependant_col (str): selected column name. 
         """
-        ...
+        stratified_shuffle_split = StratifiedShuffleSplit(n_splits=1, test_size=sample_size, random_state=42)
+        for _, test_index in stratified_shuffle_split.split(df, df[dependant_col]): 
+            new_sample = df.iloc[test_index]
+        
+        return new_sample
 
     def systematic(self, df, interval): 
-        """_summary_
+        """Systematic sampling technique
 
         Args:
-            df (_type_): _description_
-            interval (_type_): _description_
+            df (pandas dataframe): current loaded dataset.
+            interval (int): sampling interval
         """
-        ...
+        return df.iloc[::interval]
 
-    def under_sampling(self, df, dependant_col): 
-        """_summary_
+    def under_or_over_sampling(self, df, target_col, mode): 
+        """Under sampling technique
 
         Args:
-            df (_type_): _description_
-            dependant_col (_type_): _description_
+            df (pandas dataframe): current loaded dataset.
+            target_col (str): value of selected column.
+            mode (str): "over", or "under".
         """
-        ...
+        mode_toggle = {"under": False, "over": True}
 
-    def over_sampling(self, df, dependant_col):
-        """_summary_
+        new_sample = df.dropna(subset=[target_col]) # drop rows with missing vals in the target col
+        
+        class_data = {} # separate data into classes
+        for class_label in new_sample[target_col].unique(): 
+            class_data[class_label] = new_sample[new_sample[target_col] == class_label]
+
+        # specify desired sample size for under or over sampling (e.g., to balance classes)
+        # adjust sample size based on your requirements, it may be set to the size of the smollest or largest class
+        if mode == "under": 
+            under_over_sample_size = min(len(class_data[class_label]) for class_label in new_sample[target_col].unique())
+        elif mode == "over": 
+            under_over_sample_size = max(len(class_data[class_label]) for class_label in new_sample[target_col].unique())
+
+        under_over_sampled_classes = [] 
+        for class_label in new_sample[target_col].unique(): # perform under or over sampling on each class
+            class_data_under_over_sampled = resample(
+                class_data[class_label], 
+                replace=mode_toggle[mode], # no replacement to reduce samples
+                n_samples=under_over_sample_size, # set size of smollest or largest class
+                random_state=42
+            )
+            under_over_sampled_classes.append(class_data_under_over_sampled)
+
+        balanced_data = pd.concat(under_over_sampled_classes) # combine under or sampled classes
+
+        return balanced_data
+
+    def cluster(self, df, sample_size, cluster_col): 
+        """Cluster sampling technique
 
         Args:
-            df (_type_): _description_
-            dependant_col (_type_): _description_
+            df (pandas dataframe): current loaded dataset.
+            sample_size (int): size of sample
+            cluster_col (str): target column
         """
-        ...
+        # calculate the proportion of each cluster in the population
+        cluster_proportions = df[cluster_col].value_counts(normalize=True).to_dict()
 
-    def cluster(self, df, cluster_col, cluster_entry): 
-        """_summary_
+        new_sample = pd.DataFrame() # empty df
 
-        Args:
-            df (_type_): _description_
-            cluster_col (_type_): _description_
-            cluster_entry (_type_): _description_
-        """
-        ...
+        # iterate through unique clusters & sample with desired size
+        for cluster, proportion in cluster_proportions.items(): 
+            cluster_size = int(sample_size * proportion)
+            cluster_sample = df[df[cluster_col] == cluster].sample(cluster_size)
+            new_sample.concat([new_sample, cluster_sample])
+
+        return new_sample
 
     def quota(self, df, col, sample_size): 
         """_summary_

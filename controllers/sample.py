@@ -45,6 +45,9 @@ class SampleController:
         Args:
             event (_type_): _description_
         """
+        if self.frame.get_generate_button_state() == "disabled": 
+            return
+        
         output = self._validate_user_input()
         algo_selection = self.frame.get_sample_algo_menu_selection()
 
@@ -55,27 +58,43 @@ class SampleController:
 
             match algo_selection: 
                 case "Simple Random": 
-                    self._simple_random(df=df, dataset_name=ds_name, sample_size=output["sample_size"])
+                    self._simple_random(df=df, dataset_name=ds_name, sample_size=output["sample size"])
                 case "Stratified": 
-                    ...
+                    self._stratified(
+                        df=df, dataset_name=ds_name, sample_size=output["sample size"], 
+                        dependant_col=self.frame.get_stratified_dependant_col_menu()
+                        )
                 case "Systematic": 
-                    ...
+                    self._systematic(df=df, dataset_name=ds_name, interval=output["sampling interval"])
                 case "Under":
-                    ...
+                    self._under_sampling(
+                        df=df, dataset_name=ds_name, target_col=self.frame.get_under_target_col_menu()
+                        )
                 case "Over": 
-                    ...
+                    self._over_sampling(
+                        df=df, dataset_name=ds_name, target_col=self.frame.get_over_target_col_menu()
+                    )
                 case "Cluster": 
-                    ...
+                    self._cluster(
+                        df=df, dataset_name=ds_name, sample_size=output["sample size"], 
+                        cluster_col=self.frame.get_cluster_column_menu()
+                    )
                 case "Quota": 
-                    ...
+                    ... # TODO final algo
                 case "Judgment": 
-                    ...
+                    self._judgment(
+                        df=df, dataset_name=ds_name, rows_of_args=self.frame.get_reference_to_rows_of_operations()
+                    )
                 case "Snowball": 
-                    ...
+                    self._showball(
+                        df=df, dataset_name=ds_name, rows_of_args=self.frame.get_reference_to_rows_of_operations()
+                    )
+            
             self.logger.log_info(f"Sample - generated using: {algo_selection} technique.")
             self._update_sample_status(
                 text=f"Sample generated using: {algo_selection} technique at {now}.", colour="lime"
                 )
+            self.frame.bulk_toggle(mode="reset", list_of_widgets=self.frame.algo_to_widget_set_mapping[algo_selection])
             self.frame.reset_algo_menu()
             self.frame.reconfig_widgets(level="main", option="------") # reset
 
@@ -88,6 +107,29 @@ class SampleController:
         """
         self.frame.update_sample_status(text=text, colour=colour)
     
+    def _assert_property(self, getter, row_count, label): 
+        """Generalised for use with various view methods.
+
+        Args:
+            getter (function): method from view passed through
+            row_count (int): row count of dataset
+            label (str): label e.g. sample size
+
+        Returns: Boolean value for process continuation or halt.
+        """
+        try: 
+            _input = self.model.sample.convert_to_number(
+                val=getter(), 
+                custom_error_warning=f"Specify {label} input as integer value above 0."
+            )
+            assert _input <= row_count, f"{label.capitalize()} input exceeds dataset row count."
+            assert _input >= -1, f"{label.capitalize()} input is below zero. Specify 0 or more as value."
+        except AssertionError as e: 
+            self.exception.display_error(error=e)
+            return False
+        else: 
+            return {f"{label}": _input}
+        
     def _validate_user_input(self): 
         """First step prior to generation of samples.
         Returns False if exception occurs. Otherwise returns dictionary of user inputs.
@@ -97,34 +139,38 @@ class SampleController:
 
         match algo_selection: 
             case "Simple Random":
-                try: 
-                    _input = self.model.sample.convert_to_number(
-                        val=self.frame.get_sample_size_entry(), 
-                        custom_error_warning="Specify sample size input as an integer value above 0."
-                        )
-                    assert _input <= row_count, "Sample size input exceeds dataset row count."
-                    assert _input >= -1, "Sample size input is below zero. Specify 0 or more as value."
-                except AssertionError as e: 
-                    self.exception.display_error(error=e)
-                    return False
-                else: 
-                    return {"sample_size": _input}
+                return self._assert_property(
+                    self.frame.get_sample_size_entry, row_count=row_count, label="sample size"
+                    )
             case "Stratified": 
-                ...
+                return self._assert_property(
+                    self.frame.get_strat_sample_size_entry, row_count=row_count, label="sample size"
+                    )
             case "Systematic": 
-                ...
-            case "Under":
-                ...
-            case "Over": 
-                ...
+                return self._assert_property(
+                    self.frame.get_systematic_interval_entry, row_count=row_count, label="sampling interval"
+                    )
+            case "Under" | "Over":
+                return True # no validation required
             case "Cluster": 
-                ...
+                return self._assert_property(
+                    self.frame.get_cluster_sample_size_entry, row_count=row_count, label="sample size"
+                )
             case "Quota": 
                 ...
-            case "Judgment": 
-                ...
-            case "Snowball": 
-                ...
+            case "Judgment" | "Snowball": 
+                all_true_lock = []
+                for index, row in enumerate(self.frame.get_reference_to_rows_of_operations()): 
+                    try: 
+                        condition_value = row.convert_condition_entry_to_float()
+                    except ValueError as e: 
+                        self.exception.display_error(error=f"Row {index + 1}'s condition is not a float value.")
+                        return False
+                    else: 
+                        all_true_lock.append(True)
+                
+                if all(all_true_lock): # True
+                    return {f"{algo_selection}": condition_value}
     
     def _add_generated_dataset_to_snapshot(self, df, dataset_name, description, schedule_set): 
         """_summary_
@@ -142,94 +188,120 @@ class SampleController:
         """Simple random sampling.
 
         Args:
-            dataset_name (_type_): _description_
-            df (_type_): _description_
+            dataset_name (str): name of dataset
+            df (pandas dataframe): currently loaded dataset
         """
         try: 
-            new_sample = self.model.sample.simple_random(df=df,sample_size=sample_size)
-            # self._add_generated_dataset_to_snapshot(self)
+            new_sample = self.model.sample.simple_random(df=df, sample_size=sample_size)
+            # self._add_generated_dataset_to_snapshot(self) # TODO: add to snapshots
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)
 
-    def _stratified(self, df, dataset_name, num_of_splits, dependant_col): 
-        """_summary_
+    def _stratified(self, df, dataset_name, sample_size, dependant_col): 
+        """Stratified sampling algo
 
         Args:
-            df (_type_): _description_
-            dataset_name (_type_): _description_
-            num_of_splits (_type_): _description_
-            dependant_col (_type_): _description_
+            df (pandas dataframe): current loaded dataset
+            dataset_name (str): name of dataset
+            sample_size (int): integer value
+            dependant_col (str): dataset column name
         """
-        ...
+        try: 
+            new_sample = self.model.sample.stratified(df=df, sample_size=sample_size, dependant_col=dependant_col)
+            # TODO: add to snapshots
+        except Exception as e: 
+            self.logger.log_exception("Sample generation failed to complete. Traceback:")
+            self.exception.display_error(error=e)
 
     def _systematic(self, df, dataset_name, interval): 
-        """_summary_
+        """Systematic sampling algo
 
         Args:
-            df (_type_): _description_
-            dataset_name (_type_): _description_
-            interval (_type_): _description_
+            df (pandas dataframe): currently loaded dataset
+            dataset_name (str): name of dataset
+            interval (integer): interval
         """
-        ...
+        try: 
+            new_sample = self.model.sample.systematic(df=df, interval=interval)
+            # TODO: add to snapshots
+        except Exception as e: 
+            self.logger.log_exception("Sample generation failed to complete. Traceback:")
+            self.exception.display_error(error=e)
     
-    def _under_sampling(self, df, dataset_name, dependant_col): 
-        """_summary_
+    def _under_sampling(self, df, dataset_name, target_col): 
+        """Under sampling algo
 
         Args:
-            df (_type_): _description_
-            dataset_name (_type_): _description_
-            dependant_col (_type_): _description_
+            df (pandas dataframe): currently loaded dataset
+            dataset_name (str): name of dataset
+            target_col (str): selected column from drop down
         """
-        ...
+        try: 
+            new_sample = self.model.sample.under_or_over_sampling(df=df, target_col=target_col, mode="under")
+            # TODO: add to snapshots
+        except Exception as e: 
+            self.logger.log_exception("Sample generation failed to complete. Traceback:")
+            self.exception.display_error(error=e)
 
-    def _over_sampling(self, df, dataset_name, dependant_col):
-        """_summary_
+    def _over_sampling(self, df, dataset_name, target_col):
+        """Over sampling algo
 
         Args:
-            df (_type_): _description_
-            dataset_name (_type_): _description_
-            dependant_col (_type_): _description_
+            df (pandas dataframe): currently loaded dataset
+            dataset_name (str): name of dataset
+            target_col (str): selected column from drop down
         """
-        ...
+        try: 
+            new_sample = self.model.sample.under_or_over_sampling(df=df, target_col=target_col, mode="over")
+            # TODO: add to snapshots
+        except Exception as e: 
+            self.logger.log_exception("Sample generation failed to complete. Traceback:")
+            self.exception.display_error(error=e)
 
-    def _cluster(self, df, dataset_name, cluster_col, cluster_entry): 
-        """_summary_
+    def _cluster(self, df, dataset_name, sample_size, cluster_col): 
+        """Cluster sampling algo
 
         Args:
-            df (_type_): _description_
-            dataset_name (_type_): _description_
-            cluster_col (_type_): _description_
-            cluster_entry (_type_): _description_
+            df (pandas dataframe): currently loaded dataset
+            dataset_name (str): name of dataset
+            sample_size (int): number of clusters!
+            cluster_col (str): selected cluster column
         """
-        ...
+        try: 
+            new_sample = self.model.sample.cluster(df=df, sample_size=sample_size, cluster_col=cluster_col)
+            print('indy')
+            print(new_sample)
+            # TODO: add to snapshots
+        except Exception as e: 
+            self.logger.log_exception("Sample generation failed to complete. Traceback:")
+            self.exception.display_error(error=e)
 
     def _quota(self, df, dataset_name, col, sample_size): 
-        """_summary_
+        """Quota sampling algo
 
         Args:
-            df (_type_): _description_
-            dataset_name (_type_): _description_
+            df (pandas dataframe): currently loaded dataset
+            dataset_name (str): name of dataset
             col (_type_): _description_
             sample_size (_type_): _description_
         """
         ...
 
     def _judgment(self, df, dataset_name, rows_of_args): 
-        """_summary_
+        """Judgment sampling algo
 
         Args:
-            df (_type_): _description_
-            dataset_name (_type_): _description_
+            df (pandas dataframe): currently loaded dataset
+            dataset_name (str): name of dataset
             rows_of_args (list): List of nested list of widget values.
         """
-        # TODO: use judgment_snowball_row_arg_builder
-        ...
-
-    def _judgment_snowball_row_arg_builder(self): 
-        """_summary_
-        """
-        ...
+        # TODO: heavy lifting to be in model
+        try: 
+            ...
+        except Exception as e: 
+            self.logger.log_exception("Sample generation failed to complete. Traceback:")
+            self.exception.display_error(error=e)
 
     def _showball(self, df, dataset_name, rows_of_args): 
         """_summary_
@@ -239,9 +311,12 @@ class SampleController:
             dataset_name (_type_): _description_
             rows_of_args (_type_): _description_
         """
-        # TODO: use judgment_snowball_row_arg_builder
-        ...
-
+        # TODO: heavy lifting to be in model
+        try: 
+            ...
+        except Exception as e: 
+            self.logger.log_exception("Sample generation failed to complete. Traceback:")
+            self.exception.display_error(error=e)
 
     def _get_algorithm_info(self, event):
         """Get text description of algorithm. 
