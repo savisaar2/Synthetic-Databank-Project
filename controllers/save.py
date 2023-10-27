@@ -47,7 +47,6 @@ class SaveController:
         if mode == "Save As": 
             self.model.DATASET.save_export_dataset(full_path=self.model.DATASET.databank_dir + name + ".csv")
             self.model.DATASET.add_metadata(name, description, source)
-            self._update_databank_library()
         elif mode == "Overwrite": 
             confirm_overwrite = self.exception.display_confirm(
                 message="Are you sure you wish to overwrite a built-in dataset with modifications?"
@@ -55,7 +54,6 @@ class SaveController:
             if confirm_overwrite: 
                 self.model.DATASET.save_export_dataset(full_path=self.model.DATASET.databank_dir + name + ".csv")
                 self.model.DATASET.add_metadata(name, description, source)
-                self._update_databank_library()
         elif mode == "Export": 
             file_for_export = self.frame.show_export_dialogue(file_name=name) # Entire path including filename.
             self.model.DATASET.save_export_dataset(full_path=file_for_export) # Export to user specified location.
@@ -63,7 +61,8 @@ class SaveController:
                 selected_dir = file_for_export.replace(name+".csv", "")
                 self.model.DATASET.export_metadata_to_file(
                     destination_dir=selected_dir, name=name, desc=description, source=source)
-            self._update_databank_library()
+            
+        self._update_databank_library()
 
     def _update_databank_library(self):
         data = self.model.library.get_datasets(mode="all")
