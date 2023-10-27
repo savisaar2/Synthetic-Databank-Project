@@ -217,7 +217,7 @@ class LibraryController:
         self.frame.import_button.bind("<Button-1>", lambda _: self.import_overlay.show_view())
         self.frame.new_button.bind("<Button-1>", lambda event: self._create_new_dataset(), add="+")
         self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._show_metadata(), add="+")
-        #self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._get_dataset_info(), add="+")
+        self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._get_dataset_info(), add="+")
         self.frame.tree_view.bind("<Double-1>", lambda event: self._load_dataset())
         self.import_overlay.add_file_button.bind("<Button-1>", lambda _: self._import_new_dataset())
         self.import_overlay.cancel_button.bind("<Button-1>", lambda _: self.import_overlay.hide_view())
