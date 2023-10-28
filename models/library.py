@@ -48,10 +48,10 @@ class LibraryModel():
 
     def get_datasets(self, mode, subset=None):
         """
-        Returns list of tuples. Tuples of datasets to file size. 
+        Returns list of tuples. Tuples of datasets to file size.
         """
-        file_size = []
-        
+        dataset_file_sizes = {}
+
         if mode == "all":
             # Load all metadata and extract datasets.
             self._metadata = self.load_all_metadata()
@@ -70,13 +70,13 @@ class LibraryModel():
                 # Check if the file exists
                 if os.path.exists(file_path):
                     # Get the file size and convert it to megabytes.
-                    file_size.append(self.convert_to_megabytes(os.path.getsize(file_path)))
+                    dataset_file_sizes[d] = self.convert_to_megabytes(os.path.getsize(file_path))
                 else:
                     # If the file doesn't exist, add "-" to indicate missing data.
-                    file_size.append("-")
+                    dataset_file_sizes[d] = "-"
 
-        # Return list of dataset names and their file sizes.
-        return [(file, size) for file, size in zip(datasets, file_size)]
+        # Convert the dictionary to a list of tuples
+        return [(dataset, size) for dataset, size in dataset_file_sizes.items()]
     
     def get_file_metadata(self, file_name):
         """
