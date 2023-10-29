@@ -46,7 +46,7 @@ class DatasetModel:
         """Method to generate a blank frame for the purpose of creating a user
         defined dataset from scratch. 
         """
-        self._clear_all_snapshots() # Clear first!
+        self.clear_all_snapshots() # Clear first!
         self._SNAPSHOTS.append(
             {
             "Name": "New Dataset",
@@ -61,7 +61,7 @@ class DatasetModel:
         """Loads a csv file stored in the databank into memory i.e. _SNAPSHOTS list.
         """
         if file_path: 
-            self._clear_all_snapshots()
+            self.clear_all_snapshots()
             df = pd.read_csv(file_path)
             self._SNAPSHOTS.append(
                 {
@@ -183,12 +183,10 @@ class DatasetModel:
         """
         return self._SNAPSHOTS[index]
 
-    def _clear_all_snapshots(self):
+    def clear_all_snapshots(self):
         """Method to clear all snapshots.
         """
         self._SNAPSHOTS.clear()
-        print(self._SNAPSHOTS)
-        print("snapshots cleared!")
 
     def append_new_snapshot(self, snapshot):
         self._SNAPSHOTS.append(snapshot)
