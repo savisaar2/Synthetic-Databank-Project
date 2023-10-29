@@ -53,7 +53,7 @@ class LibraryController:
         Search for meta-data upon each key press inside search (input widget).
         """
         keywords = self.frame.search_input.get()            # Get search term from library view.
-        mode = "specific" if len(keywords) > 1 else "all"   # If keywords has content then execute search otherwise list all.
+        mode = "specific" if keywords else "all"   # If keywords has content then execute search otherwise list all.
 
         # Execute the search and update the dataset list.
         self._display_dataset_list(mode=mode, subset=self.model.library.search_metadata(keywords))
@@ -213,7 +213,7 @@ class LibraryController:
         Implement this method to set up event handlers and connections
         for user interactions with widgets on the view related to the library page.
         """
-        self.frame.search_input.bind("<Key>", lambda event: self._search_databank())
+        self.frame.search_input.bind("<KeyRelease>", lambda event: self._search_databank())
         self.frame.import_button.bind("<Button-1>", lambda _: self.import_overlay.show_view())
         self.frame.new_button.bind("<Button-1>", lambda event: self._create_new_dataset(), add="+")
         self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._show_metadata(), add="+")

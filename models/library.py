@@ -48,10 +48,10 @@ class LibraryModel():
 
     def get_datasets(self, mode, subset=None):
         """
-        Returns list of tuples. Tuples of datasets to file size. 
+        Returns list of tuples. Tuples of datasets to file size.
         """
-        file_size = []
-        
+        dataset_file_sizes = {}
+
         if mode == "all":
             # Load all metadata and extract datasets.
             self._metadata = self.load_all_metadata()
@@ -70,13 +70,13 @@ class LibraryModel():
                 # Check if the file exists
                 if os.path.exists(file_path):
                     # Get the file size and convert it to megabytes.
-                    file_size.append(self.convert_to_megabytes(os.path.getsize(file_path)))
+                    dataset_file_sizes[d] = self.convert_to_megabytes(os.path.getsize(file_path))
                 else:
                     # If the file doesn't exist, add "-" to indicate missing data.
-                    file_size.append("-")
+                    dataset_file_sizes[d] = "-"
 
-        # Return list of dataset names and their file sizes.
-        return [(file, size) for file, size in zip(datasets, file_size)]
+        # Convert the dictionary to a list of tuples
+        return [(dataset, size) for dataset, size in dataset_file_sizes.items()]
     
     def get_file_metadata(self, file_name):
         """
@@ -101,16 +101,16 @@ class LibraryModel():
     def search_metadata(self, keywords):
         """
         Search for specified keywords in metadata and return a dictionary of identified datasets.
-        Matches string in filename, source and description fields of metadata (json) file. 
+        Matches string in filename, source, and description fields of metadata (json) file. 
 
         Parameters
         ----------
         keywords : str
             Search string.
         """
-        # Convert the input keywords to lowercase and split into a list
-        keyword_list = keywords.lower().split()
-        # Initialise a set to store matching metadata
+        # Split the input keywords into individual words
+        keyword_list = keywords.split()
+        # Initialize a set to store matching metadata
         matching_metadata = set()
 
         # Iterate through metadata items (string is the key, metadata is the value)
@@ -118,14 +118,15 @@ class LibraryModel():
             description_lower = string.lower()
             meta_source_lower = metadata["Source"].lower()
             meta_description_lower = metadata["Description"].lower()
-            
-            # Check if any of the keywords match the key, Source, or Description
-            if any(re.search(word, description_lower) or re.search(word, meta_source_lower) or re.search(word, meta_description_lower) for word in keyword_list):
+
+            # Check if all the keywords match the key, Source, or Description
+            if all(re.search(word, description_lower) or re.search(word, meta_source_lower) or re.search(word, meta_description_lower) for word in keyword_list):
                 # Add the matching metadata to the set
                 matching_metadata.add(string)
 
         # Convert the set of matching metadata to a list and return it
         return list(matching_metadata)
+
     
     def add_metadata(self, obj):
         """
