@@ -81,12 +81,9 @@ class LibraryController:
         metadata = None
         if selected_items:
             item = selected_items[0]
-            values = self.frame.tree_view.item(item, "values")
-            name, size = values
+            name, size = self.frame.tree_view.item(item, "values")
             metadata = self.model.library.get_file_metadata(name)
-
-        # Update the view with the selected file's metadata
-        self.frame.update_metadata_display(metadata)
+            self.frame.update_metadata_display(metadata)
 
     def _load_dataset(self):
         """
@@ -95,17 +92,15 @@ class LibraryController:
         # Get the selected item(s) from the Treeview
         selected_items = self.frame.tree_view.selection()
 
-        # Get the name of the file
         if selected_items:
             item = selected_items[0]
-            values = self.frame.tree_view.item(item, "values")
-            name, size = values
+            name, size = self.frame.tree_view.item(item, "values")
             file_path = self.model.library.databank_dir + name + ".csv"
-            #print(f"Double-clicked on file: {name}")
             
-            # Loads selected items corrisponding file to memory.
+            # Loads the selected item's corresponding file into memory.
             self.model.DATASET.load_dataset(file_path=file_path, dataset_name=name)
-            # Provide visual cue.
+            
+            # Provide a visual cue.
             self.frame.dataset_status.configure(text=f"{name} has been loaded", text_color="lime")
 
         self.view.frames["menu"].enable_menu_buttons()
@@ -194,17 +189,18 @@ class LibraryController:
         self.new_file = self.import_overlay.import_new_dataset()
 
     def _get_dataset_info(self):
-        """Gets the dataset info of the user selected dataset in library view and displays info to UI.
-        """
+        """Gets the dataset info of the user selected dataset in the library view and displays info to the UI."""
         selected_items = self.frame.tree_view.selection()
 
-        if selected_items:
-            item = selected_items[0]
-            values = self.frame.tree_view.item(item, "values")
-            name, size = values
-            file_path = self.model.library.databank_dir + name + ".csv"
-            info = self.model.DATASET.get_dataset_info(file_path)
-            self.frame.info.configure(text=info)
+        if not selected_items:
+            return  # No item selected, nothing to do
+
+        item = selected_items[0]
+        values = self.frame.tree_view.item(item, "values")
+        name, size = values
+        file_path = self.model.library.databank_dir + name + ".csv"
+        info = self.model.DATASET.get_dataset_info(file_path)
+        self.frame.info.configure(text=info)
 
     def _bind(self):
         """
@@ -214,14 +210,14 @@ class LibraryController:
         for user interactions with widgets on the view related to the library page.
         """
         self.frame.search_input.bind("<KeyRelease>", lambda event: self._search_databank())
-        self.frame.import_button.bind("<Button-1>", lambda _: self.import_overlay.show_view())
+        self.frame.import_button.bind("<Button-1>", lambda event: self.import_overlay.show_view())
         self.frame.new_button.bind("<Button-1>", lambda event: self._create_new_dataset(), add="+")
         self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._show_metadata(), add="+")
         self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._get_dataset_info(), add="+")
         self.frame.tree_view.bind("<Double-1>", lambda event: self._load_dataset())
-        self.import_overlay.add_file_button.bind("<Button-1>", lambda _: self._import_new_dataset())
-        self.import_overlay.cancel_button.bind("<Button-1>", lambda _: self.import_overlay.hide_view())
-        self.import_overlay.import_button.bind("<Button-1>", lambda _: self._import_dataset())
+        self.import_overlay.add_file_button.bind("<Button-1>", lambda event: self._import_new_dataset())
+        self.import_overlay.cancel_button.bind("<Button-1>", lambda event: self.import_overlay.hide_view())
+        self.import_overlay.import_button.bind("<Button-1>", lambda event: self._import_dataset())
 
         # Create new dataset config overlay binds
         self.frame.new_button.bind("<Button-1>", lambda _: self.config_new_dataset_overlay.show_view(), add="+")
