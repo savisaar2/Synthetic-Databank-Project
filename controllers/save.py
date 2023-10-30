@@ -44,12 +44,9 @@ class SaveController:
         name = description = source = None
 
         # Try to obtain metadata info from entry widgets
-        try:
-            name = self.frame.get_name_entry(mode=mode)
-            description = self.frame.get_desc_entry(mode=mode)
-            source = self.frame.get_source_entry(mode=mode)
-        except Exception as e:
-            self.logger.log_exception("Error while obtaining metadata from save page:", e)
+        name = self.frame.get_name_entry(mode=mode)
+        description = self.frame.get_desc_entry(mode=mode)
+        source = self.frame.get_source_entry(mode=mode)
 
         # Execute relevant action based on mode.
         if mode == "Save As":
