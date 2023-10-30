@@ -347,5 +347,5 @@ class SampleController:
             "<Button-1>", lambda event, mode="menus": self._refresh_sample_widgets(event, mode)
             )
         self.frame.add_row.bind("<Button-1>", lambda event, mode="rows": self._refresh_sample_widgets(event, mode))
-        self.frame.generate.bind("<Button-1>", self._generate)
+        self.frame.generate_button.bind("<Button-1>", self._generate)
         self.frame.sampling_algo_menu.bind("<Configure>", self._get_algorithm_info)

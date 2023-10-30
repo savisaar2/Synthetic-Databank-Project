@@ -65,11 +65,11 @@ class SampleView(BaseView):
             )
         self.sampling_algo_menu.pack(side="left", padx=(8, 0))
         
-        self.generate = CTkButton( # Run (generate sample)!
+        self.generate_button = CTkButton( # Run (generate sample)!
             self.s_frame_row_1, text="Generate", corner_radius=5, border_spacing=5, anchor="center", state="disabled", 
             width=30 
             )
-        self.generate.pack(side="right", padx=(8, 8))
+        self.generate_button.pack(side="right", padx=(8, 8))
 
         # Simple Random - sub widgets
         self.sample_size_label = CTkLabel(self.s_frame_row_1, text="Sample Size:", anchor="w")
@@ -187,7 +187,7 @@ class SampleView(BaseView):
             "Snowball": self.snowball_widgets
         }
 
-        self.all_menu_option_widgets = { # hack to reset upon algo selection - needed to toggle "generate" button
+        self.all_menu_option_widgets = { # hack to reset upon algo selection - needed to toggle generate button
             self.stratified_dependant_col_menu, self.under_target_col_menu, self.over_target_col_menu, 
             self.cluster_column_menu, self.column_to_build_quota_menu, 
         }
@@ -365,7 +365,7 @@ class SampleView(BaseView):
         Returns:
             str: state of button i.e., disabled or normal
         """
-        return self.generate.cget("state")
+        return self.generate_button.cget("state")
 
     def _create_textbox(self, frame, text, height):
         """Create a text box for the purposes of displaying sample algorithm description / examples. 
@@ -402,7 +402,7 @@ class SampleView(BaseView):
     def remove_judgment_snowball_row(self):
         if len(self._rows_of_operations) > 0: 
             last_row = self._rows_of_operations[-1]
-            last_row.row.destroy() # mojo
+            last_row._row.destroy() # mojo
             self._rows_of_operations.pop()
         self.refresh_canvas()
         self._row_object_validation(rows=self._rows_of_operations) 
@@ -539,7 +539,7 @@ class SampleView(BaseView):
         return self.js_sample_size_entry.get()
     
     def _row_object_validation(self, rows): 
-        """Reconfigure generate state based on selection of widgets in judgment_snowball_row objects.
+        """Reconfigure generate button state based on selection of widgets in judgment_snowball_row objects.
 
         Args:
             rows (list): list of row instance objects
@@ -552,7 +552,7 @@ class SampleView(BaseView):
             else: 
                 cipher_lock.append(False)
 
-        cipher_lock = [] # a series of Truthy values will unlock generate
+        cipher_lock = [] # a series of Truthy values will unlock generate button
 
         match len(rows): 
             case 1: 
@@ -566,9 +566,9 @@ class SampleView(BaseView):
                 check_last_row(rows=rows, cipher_lock=cipher_lock)
         
         if len(cipher_lock) != 0 and all(cipher_lock): 
-            self.generate.configure(state="normal")
+            self.generate_button.configure(state="normal")
         else: 
-            self.generate.configure(state="disabled")
+            self.generate_button.configure(state="disabled")
 
     def reset_algo_menu(self): 
         """Used post successful sampling algorithm.
@@ -623,14 +623,14 @@ class SampleView(BaseView):
                 self.bulk_toggle("on", self.algo_to_widget_set_mapping[option])
 
                 if option in ["Simple Random", "Systematic"]: 
-                    self.generate.configure(state="normal")
+                    self.generate_button.configure(state="normal")
                 else: 
-                    self.generate.configure(state="disabled")
+                    self.generate_button.configure(state="disabled")
             else: 
-                self.generate.configure(state="disabled")
+                self.generate_button.configure(state="disabled")
         elif level == "sub": 
             if option == "------":
-                self.generate.configure(state="disabled")
+                self.generate_button.configure(state="disabled")
             else: 
-                self.generate.configure(state="normal")
+                self.generate_button.configure(state="normal")
         
