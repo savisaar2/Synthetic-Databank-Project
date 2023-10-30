@@ -79,7 +79,7 @@ class ConfigNewDatasetController:
             
     def _delete_actions(self):
         self.model.config_new_dataset.action_set = []
-        
+        self.frame.col_pos = -1
         for widget in self.frame.frame_5.winfo_children():
             widget.destroy()
 
