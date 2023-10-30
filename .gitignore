@@ -4,3 +4,4 @@ __pycache__/
 .DS_Store
 .app_log.log
 app_log.log
+.env
