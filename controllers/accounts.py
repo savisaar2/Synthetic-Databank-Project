@@ -109,7 +109,7 @@ class AccountsController:
         # Add click event binds to role generated buttons.
         self.frame.edit_button.bind("<Button-1>", lambda event: self._save_user_details())
         self.frame.edit_pw_button.bind("<Button-1>", lambda event: self.view.frames["change_password"].show_view())
-        self.frame.manage_button.bind("<Button-1>", lambda _: self._load_and_populate_global_accounts())
+        self.frame.manage_button.bind("<Button-1>", lambda event: self._load_and_populate_global_accounts())
 
     def _update_password(self, editor, username, isAdmin=False):
         """
@@ -119,35 +119,34 @@ class AccountsController:
         # Get our form values from view.
         if not isAdmin:
             old_password = editor.old_pw_entry.get()
-        new_password1 = editor.new1_pw_entry.get()
-        new_password2 = editor.new2_pw_entry.get()
 
-        # Find the user's account by username
-        user_account = None
-        user_account = self.model.user.get_user_by_username(username)
+            # Retrieve the user's account by username.
+            user_account = self.model.user.get_user_by_username(username)
 
-        # Check if user exists in accounts db.
-        if not user_account:
-            self.exception.display_error("User account not found")
-            return
+            # Check if the user exists in the accounts database.
+            if not user_account:
+                self.exception.display_error("User account not found")
+                return
 
-        # Old password needs to match current authenticated user password.
-        if not isAdmin:
+            # Validate the old password (only for non-admin users).
             if user_account["password"] != old_password:
                 self.exception.display_error("Invalid Password")
                 return
 
-        # New password and new password2 nees to match.
+        new_password1 = editor.new1_pw_entry.get()
+        new_password2 = editor.new2_pw_entry.get()
+
+        # Validate the new passwords.
         if new_password1 != new_password2:
             self.exception.display_error("New Password Mismatch")
             return
 
-        # Passwords cannot be blank.
+        # Check for blank passwords.
         if not new_password1 or not new_password2:
-            self.exception.display_info("New Password cannot be blank")
+            self.exception.display_error("New Password cannot be blank")
             return
-        
-        # Create our password payload and send to model for processing.
+
+        # Create the password payload and send it to the model for processing.
         user_account["password"] = new_password2
         self.model.user.save_user_password(username, user_account)
 
@@ -213,7 +212,15 @@ class AccountsController:
         account = {
             "username": username,
             "password": vpassword,
-            "profile_info": {"firstname": firstname, "lastname": lastname, "initials": initials, "department": department, "office": office, "email": email, "bio": bio},
+            "profile_info": {
+                "firstname": firstname,
+                "lastname": lastname,
+                "initials": initials,
+                "department": department,
+                "office": office,
+                "email": email,
+                "bio": bio,
+            },
             "role": role
         }
 
@@ -252,16 +259,14 @@ class AccountsController:
         """
         Opens a specific users profile.
         """
-        # Identify the master frame containing user's username.
-        button = event.widget
-        parent_frame = button.master
-        grand_frame = parent_frame.master
+        # Identify the master frame containing the user's username.
+        grand_frame = event.widget.master.master
 
-        # Define the username selected and retrieve profile from model.
-        self.user_to_edit = list(grand_frame.children.values())[3].cget("text")
+        # Retrieve the username (use of name in dictionary) selected and retrieve the user's profile from the model.
+        self.user_to_edit = grand_frame.children["!ctklabel3"].cget("text")
         profile = self.model.user.get_profile_by_username(self.user_to_edit)
 
-        # Populate profile data into the profile view and reveal view.
+        # Populate the profile data into the profile view and show the view.
         self.accounts_editor.populate_fields(profile)
         self.accounts_editor.show_view()
 
@@ -285,23 +290,23 @@ class AccountsController:
         self.menu.accounts_button.bind("<Button-1>", lambda event: self._load_profile())
 
         # Bind events to password editor widgets.
-        self.password_editor.cancel_button.bind("<Button-1>", lambda _: self.password_editor.hide_view())
-        self.password_editor.save_button.bind("<Button-1>", lambda _: self._save_user_password())
-        self.password_editor.old_pw_entry.bind("<Return>", lambda _: self._save_user_password())
-        self.password_editor.new1_pw_entry.bind("<Return>", lambda _: self._save_user_password())
-        self.password_editor.new2_pw_entry.bind("<Return>", lambda _: self._save_user_password())
+        self.password_editor.cancel_button.bind("<Button-1>", lambda event: self.password_editor.hide_view())
+        self.password_editor.save_button.bind("<Button-1>", lambda event: self._save_user_password())
+        self.password_editor.old_pw_entry.bind("<Return>", lambda event: self._save_user_password())
+        self.password_editor.new1_pw_entry.bind("<Return>", lambda event: self._save_user_password())
+        self.password_editor.new2_pw_entry.bind("<Return>", lambda event: self._save_user_password())
 
         # Bind events to global password editor widgets.
-        self.global_password_editor.cancel_button.bind("<Button-1>", lambda _: self.global_password_editor.hide_view())
-        self.global_password_editor.save_button.bind("<Button-1>", lambda _: self._save_global_pass())
+        self.global_password_editor.cancel_button.bind("<Button-1>", lambda event: self.global_password_editor.hide_view())
+        self.global_password_editor.save_button.bind("<Button-1>", lambda event: self._save_global_pass())
 
         # Bind events to Administrator Accounts Manager widgets.
-        self.accounts_manager.cancel_button.bind("<Button-1>", lambda _: self.accounts_manager.hide_view())
-        self.accounts_manager.new_user_button.bind("<Button-1>", lambda _: self.view.frames["new_account"].show_view())
+        self.accounts_manager.cancel_button.bind("<Button-1>", lambda event: self.accounts_manager.hide_view())
+        self.accounts_manager.new_user_button.bind("<Button-1>", lambda event: self.view.frames["new_account"].show_view())
 
         # Bind events to new account editor widgets.
-        self.new_account.save_button.bind("<Button-1>", lambda _: self._create_new_account())
-        self.new_account.cancel_button.bind("<Button-1>", lambda _: self.new_account.hide_view())
+        self.new_account.save_button.bind("<Button-1>", lambda event: self._create_new_account())
+        self.new_account.cancel_button.bind("<Button-1>", lambda event: self.new_account.hide_view())
 
         # Bind events to account editor.
         self.accounts_editor.save_button.bind("<Button-1>", lambda _: self._save_user_details_manager())
