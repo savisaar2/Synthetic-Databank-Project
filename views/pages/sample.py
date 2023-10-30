@@ -16,7 +16,7 @@ class SampleView(BaseView):
         """
         # Pass some base title and description to our BaseView class.
         super().__init__(root, "Sample", "Create a Sample of your Dataset.", *args, **kwargs)
-        self.rows_of_operations = []
+        self._rows_of_operations = []
         self._render_page()
 
     def _render_page(self):
@@ -118,6 +118,8 @@ class SampleView(BaseView):
         self.quota_sample_size_entry = CTkEntry(self.s_frame_row_1, corner_radius=5, width=50, state="disabled")
 
         # Judgment & Snowball - sub widgets
+        self.js_sample_size_label = CTkLabel(self.s_frame_row_1, text="Sample Size:", anchor="w")
+        self.js_sample_size_entry = CTkEntry(self.s_frame_row_1, corner_radius=5, width=50, state="disabled")
         self.add_row = CTkButton(
             self.s_frame_row_1, text="Add", corner_radius=5, border_spacing=5, anchor="center",state="normal", width=20,
             command=self.add_judgment_snowball_row 
@@ -135,7 +137,8 @@ class SampleView(BaseView):
             self.over_target_col_menu, self.cluster_column_label, self.cluster_column_menu, 
             self.cluster_sample_size_label, self.cluster_sample_size_entry, self.systematic_interval_entry, 
             self.column_to_build_quota_label, self.column_to_build_quota_menu, self.q_sample_size_label, 
-            self.quota_sample_size_entry, self.add_row, self.remove_row
+            self.quota_sample_size_entry, self.js_sample_size_label, self.js_sample_size_entry, self.add_row, 
+            self.remove_row
             ]
         
         self.simple_widgets = [
@@ -169,15 +172,19 @@ class SampleView(BaseView):
             self.column_to_build_quota_menu, 
         ]
 
-        self.judgment_snowball_widgets = [
+        self.judgment_widgets = [
             self.add_row, self.remove_row
+        ]
+
+        self.snowball_widgets = [
+            self.js_sample_size_label, self.js_sample_size_entry, self.add_row, self.remove_row
         ]
 
         self.algo_to_widget_set_mapping = {
             "Simple Random": self.simple_widgets, "Stratified": self.stratified_widgets, 
             "Systematic": self.systematic_widgets, "Under": self.under_widgets, "Over": self.over_widgets,
-            "Cluster": self.cluster_widgets, "Quota": self.quota_widgets, "Judgment": self.judgment_snowball_widgets,
-            "Snowball": self.judgment_snowball_widgets
+            "Cluster": self.cluster_widgets, "Quota": self.quota_widgets, "Judgment": self.judgment_widgets,
+            "Snowball": self.snowball_widgets
         }
 
         self.all_menu_option_widgets = { # hack to reset upon algo selection - needed to toggle "generate" button
@@ -189,83 +196,169 @@ class SampleView(BaseView):
         """Instance of a row of widgets
         """
         def __init__(self, parent_frame, row_object_validation, rows): 
-            self.row_object_validation = row_object_validation # outside method
-            self.rows = rows # outside collection of rows
-            self.row = CTkFrame(parent_frame, fg_color="gray20")
-            self.row.pack(side="top", pady=(5, 5), fill="x")
-            self.criteria_label = CTkLabel(self.row, text="Criteria:", anchor="w")
-            self.criteria_label.pack(side="left", padx=(8, 0))
-            self.criteria_menu = CTkOptionMenu(
-                self.row, fg_color="gray10", width=3, values=("------",), command=lambda x: self.validate(self.rows)
+            self._col_dtypes = dict() # used to store column headers to pandas types - used for refreshing on instantiation
+            self._pandas_datatype_groups = {
+            "numeric": (
+                "int64", "int32", "int16", "int8", "float64", "float32", "complex", "UInt8", "UInt16",
+                "UInt32", "UInt64", "int64Dtype", "float64Dtype"
+                ), 
+            "categorical": (
+                "category", "object", "string", "StringDtype"
+                ), 
+            "boolean": (
+                "bool",
+                ), 
+            "date_time": (
+                "datetime64", "timedelta64", "period"
                 )
-            self.criteria_menu.pack(side="left", padx=(8, 0))
-            self.comparison_label = CTkLabel(self.row, text="IS", anchor="w")
-            self.comparison_label.pack(side="left", padx=(8, 0))
-            self.comparison_operators = [
+            }
+            self._row_object_validation = row_object_validation # outside method
+            self._rows = rows # outside collection of rows
+            self._row = CTkFrame(parent_frame, fg_color="gray20")
+            self._row.pack(side="top", pady=(5, 5), fill="x")
+            self._criteria_label = CTkLabel(self._row, text="Criteria:", anchor="w")
+            self._criteria_label.pack(side="left", padx=(8, 0))
+            self._criteria_menu = CTkOptionMenu(
+                self._row, fg_color="gray10", width=3, values=("------",), command=lambda x: self._validate(self._rows)
+                )
+            self._criteria_menu.pack(side="left", padx=(8, 0))
+            self._comparison_label = CTkLabel(self._row, text="IS", anchor="w")
+            self._comparison_label.pack(side="left", padx=(8, 0))
+            self._comparison_operators = [
                 "------", "EQUAL", "LESS", "MORE", "NOT EQUAL"
                 ]
-            self.comparison_menu = CTkOptionMenu(
-                self.row, fg_color="gray10", width=3, values=(self.comparison_operators), 
-                command=lambda x: self.validate(self.rows)
+            self._comparison_menu = CTkOptionMenu(
+                self._row, fg_color="gray10", width=3, values=(self._comparison_operators), 
+                command=lambda x: self._validate(self._rows)
                 )
-            self.comparison_menu.pack(side="left", padx=(8, 0))
-            self.condition_label = CTkLabel(self.row, text="Condition:", anchor="w")
-            self.condition_label.pack(side="left", padx=(8, 0))
-            self.condition_entry = CTkEntry(self.row, corner_radius=5, width=50)
-            self.condition_entry.pack(side="left", padx=(8, 0))
-            self.logical_operators = [
-                "------", "AND", "OR", "NOT"
+            self._comparison_menu.pack(side="left", padx=(8, 0))
+            self._condition_label = CTkLabel(self._row, text="Condition:", anchor="w")
+            self._condition_label.pack(side="left", padx=(8, 0))
+            self._condition_entry = CTkEntry(self._row, corner_radius=5, width=50)
+            self._condition_entry.pack(side="left", padx=(8, 0))
+            self._logical_operators = [
+                "------", "AND", "OR"
                 ]
-            self.logical_operator_menu = CTkOptionMenu(
-                self.row, fg_color="gray10", width=3, values=(self.logical_operators), 
-                command=lambda x: self.validate(self.rows)
+            self._logical_operator_menu = CTkOptionMenu(
+                self._row, fg_color="gray10", width=3, values=(self._logical_operators), 
+                command=lambda x: self._validate(self._rows)
                 )
-            self.logical_operator_menu.pack(side="left", padx=(8, 0))
+            self._logical_operator_menu.pack(side="left", padx=(8, 0))
+            
             self.validate_all_menus()
         
         def validate_all_menus(self): 
             """Returns increment value of validations, each integer increment signifying the option menu validated.
             """
             three_turn = []
-            if self.criteria_menu.get() != "------":
+            if self._get_criteria() != "------":
                 three_turn.append(True)
             else:
                 three_turn.append(False)
-            if self.comparison_menu.get() != "------": 
+            if self._get_comparison_operator() != "------": 
                 three_turn.append(True)
             else: 
                 three_turn.append(False)
-            if self.logical_operator_menu.get() != "------": 
+            if self._get_logical_operator() != "------": 
                 three_turn.append(True)
             else:
                 three_turn.append(False)
 
             return three_turn
         
-        def get_criteria(self): 
-            return self.criteria_menu.get()
+        def _get_criteria(self): 
+            return self._criteria_menu.get()
         
-        def get_comparison_operator(self): 
-            return self.comparison_menu.get()
+        def _get_comparison_operator(self): 
+            return self._comparison_menu.get()
         
-        def get_condition_entry(self): 
-            return self.condition_entry.get()
+        def _get_condition_entry(self): 
+            return self._condition_entry.get()
         
-        def get_logical_operator(self): 
-            return self.logical_operator_menu.get()
+        def _get_logical_operator(self): 
+            return self._logical_operator_menu.get()
         
-        def validate(self, rows): 
-            """Initiate outer method call for cipher lock.
+        def get_value_set(self): 
+            """Returns a dictionary of single row conditions i.e., no logical operator to chain.
+            """
+            return {
+                "criteria": self._get_criteria(),
+                "comparison_op": self._get_comparison_operator(), 
+                "conditional_val": float(self._get_condition_entry()), # only called post validation # TODO - not necessarily float? 
+            }
+        
+        def _validate(self, rows): 
+            """Initiate outer method call for cipher lock and to make available / unavilable various options 
+            in comparison_menu and logical_operator_menu. 
 
             Args:
                 rows (list): list of instantiated judgment_snowball_row objects
             """
-            self.row_object_validation(rows=rows)
+            self._row_object_validation(rows=rows) # check if ready for generation i.e. unlocking of cipher lock
+            
+            criteria_selection = self._get_criteria()
+            if criteria_selection != "------": # type check criteria_menu for adjusting other menus
+                self._configure_widgets(column=criteria_selection) # menu restrictions
+                
+
+        def _configure_widgets(self, column):
+            """Used to configure comparison_menu and logical_operator_menu based on the data type of 
+            the criteria_menu selection.
+
+            Args:
+                column (str): value of selected criteria menu
+            """
+            criteria_dtype = self._get_col_type(column=column)
+            match self._get_pandas_datatype_group(criteria_dtype): 
+                case "numeric" | "date_time": 
+                    self._comparison_menu.configure(values=["------", "EQUAL", "LESS", "MORE", "NOT EQUAL"])
+                case "categorical" | "boolean": 
+                    self._comparison_menu.configure(values=["------", "EQUAL", "NOT EQUAL"])
 
         def convert_condition_entry_to_float(self): 
-            value = float(self.get_condition_entry())
+            value = float(self._get_condition_entry())
             return value
-    
+        
+        def refresh_widgets(self, column_headers, dtypes): 
+            """depending 
+
+            Args:
+                column_headers (_type_): _description_
+                dtypes (_type_): _description_
+            """
+            self._set_col_dtypes(dtypes=dtypes)
+            self._set_criteria_menu(column_headers=column_headers)
+        
+        def _get_col_type(self, column): 
+            """Return datatype from self._col_dtypes for the selected criteria menu.
+            """
+            return self._col_dtypes[column]
+                
+        def _set_col_dtypes(self, dtypes): 
+            """Populate self._col_dtypes with a dictionary of column names to pandas datatypes for usage in 
+            limiting which menu options are available for conditional / logical menus. 
+
+            Args:
+                dtypes (dict): Dictionary of column name to pandas type (string) value mappings.
+            """
+            if len(self._col_dtypes) == 0: # new instance! Populate - first time only
+                self._col_dtypes = dtypes
+
+        def _set_criteria_menu(self, column_headers):
+            """_summary_
+            """
+            self._criteria_menu.configure(values=column_headers)
+
+        def _get_pandas_datatype_group(self, dtype): 
+            """Return the group of a particular data type.
+
+            Args: 
+                dtype (str): data type of the selected criteria menu.
+            """
+            for category in self._pandas_datatype_groups: 
+                if dtype in self._pandas_datatype_groups[category]:
+                    return category
+
     def get_generate_button_state(self):
         """Get the state of the generate button.
 
@@ -299,20 +392,20 @@ class SampleView(BaseView):
             container (frame or canvas widget): the container object in which to render rows of widgets.
         """
         new_row = self.judgment_snowball_row( # instantiate!
-            self.scrollable_frame, row_object_validation=self.row_object_validation, 
-            rows = self.rows_of_operations
+            self.scrollable_frame, row_object_validation=self._row_object_validation, 
+            rows = self._rows_of_operations
             ) 
-        self.rows_of_operations.append(new_row)
+        self._rows_of_operations.append(new_row)
         self.refresh_canvas()
-        self.row_object_validation(rows=self.rows_of_operations) # ABV - always be validating, AIDA! 
+        self._row_object_validation(rows=self._rows_of_operations) # ABV - always be validating, AIDA! 
 
     def remove_judgment_snowball_row(self):
-        if len(self.rows_of_operations) > 0: 
-            last_row = self.rows_of_operations[-1]
+        if len(self._rows_of_operations) > 0: 
+            last_row = self._rows_of_operations[-1]
             last_row.row.destroy() # mojo
-            self.rows_of_operations.pop()
+            self._rows_of_operations.pop()
         self.refresh_canvas()
-        self.row_object_validation(rows=self.rows_of_operations) 
+        self._row_object_validation(rows=self._rows_of_operations) 
 
     def refresh_canvas(self): 
         """Refresh canvas object.
@@ -347,7 +440,7 @@ class SampleView(BaseView):
         """
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
-    def refresh_sample_widgets(self, mode, column_headers):
+    def refresh_sample_widgets(self, mode, dtypes, column_headers):
         """Populate / update the values of the dropdown menus view with appropriate column headers 
         of the working dataset.
 
@@ -355,6 +448,7 @@ class SampleView(BaseView):
             mode (str): "menus" or "rows", latter == Refresh criteria
                 menus of judgment / snowball rows with column headers.
                 former == standard menus outside of the rows. 
+            dtypes (str): data type of the menu.
             column_headers (list): A list of column headers (str).
         """
         if mode == "menus": 
@@ -364,9 +458,9 @@ class SampleView(BaseView):
             self.cluster_column_menu.configure(values=column_headers)
             self.column_to_build_quota_menu.configure(values=column_headers)
         elif mode == "rows": 
-            if len(self.rows_of_operations) > 0: 
-                for row in self.rows_of_operations: 
-                    row.criteria_menu.configure(values=column_headers)
+            if len(self._rows_of_operations) > 0: 
+                for row in self._rows_of_operations: 
+                    row.refresh_widgets(column_headers=column_headers, dtypes=dtypes)
 
     def update_algorithm_description_info(self, text):
         """Display examples and information for the selected algorithm.
@@ -380,9 +474,9 @@ class SampleView(BaseView):
         self._create_textbox(frame=self.description_frame, text=text, height=190)
 
     def get_reference_to_rows_of_operations(self): 
-        """ref to self.rows_of_operations
+        """ref to self._rows_of_operations
         """
-        return self.rows_of_operations
+        return self._rows_of_operations
 
     def get_sample_algo_menu_selection(self): 
         """Get the name of the selected item.
@@ -422,7 +516,7 @@ class SampleView(BaseView):
     def get_cluster_sample_size_entry(self): 
         """Cluster num of clusters entry prop
         """
-        self.cluster_sample_size_entry.get()
+        return self.cluster_sample_size_entry.get()
     
     def get_cluster_column_menu(self): 
         """Cluster column menu prop
@@ -432,14 +526,19 @@ class SampleView(BaseView):
     def get_quota_sample_size_entry(self):
         """Quota sample size entry prop
         """ 
-        self.quota_sample_size_entry.get()
+        return self.quota_sample_size_entry.get()
 
     def get_column_to_build_quota_menu(self): 
         """Quota column to build quota menu prop
         """
-        self.column_to_build_quota_menu.get()
+        return self.column_to_build_quota_menu.get()
+
+    def get_snowball_sample_size_entry(self): 
+        """Snowball sample size value
+        """
+        return self.js_sample_size_entry.get()
     
-    def row_object_validation(self, rows): 
+    def _row_object_validation(self, rows): 
         """Reconfigure generate state based on selection of widgets in judgment_snowball_row objects.
 
         Args:
@@ -510,7 +609,7 @@ class SampleView(BaseView):
             option (str): selected item of an options menu
         """
         if level == "main": 
-            self.rows_of_operations.clear()
+            self._rows_of_operations.clear()
             self.bulk_toggle("hide", [
                 widget for widget in self.all_widgets
             ])

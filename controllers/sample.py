@@ -25,9 +25,11 @@ class SampleController:
         self._bind()
 
     def _refresh_sample_widgets(self, event, mode): 
-        """
-        Obtain column headers from the loaded dataset to be populated in the appropriate widgets e.g. 
+        """Obtain column headers from the loaded dataset to be populated in the appropriate widgets e.g.
         option menues. Called whenever Sample side panel is clicked to ensure correct data.
+        Also pulls type information of columns of the loaded dataframe and aids in readjusting
+        the available comparison operator and attempt to convert the condition entry to match 
+        column type. 
         """
         button = event.widget
         parent_frame = button.master
@@ -36,8 +38,10 @@ class SampleController:
             return
         
         column_headers = self.model.DATASET.get_column_headers()
-        column_headers.insert(0, "------")
-        self.frame.refresh_sample_widgets(mode=mode, column_headers=column_headers)
+        column_to_data_type_mapping = self.model.DATASET.get_all_column_datatypes()
+
+        column_headers.insert(0, "------") 
+        self.frame.refresh_sample_widgets(mode=mode, dtypes=column_to_data_type_mapping, column_headers=column_headers)
 
     def _generate(self, event): # Generate Sample
         """Generate sample as per chosen algorithm.
@@ -48,8 +52,12 @@ class SampleController:
         if self.frame.get_generate_button_state() == "disabled": 
             return
         
-        output = self._validate_user_input()
         algo_selection = self.frame.get_sample_algo_menu_selection()
+        
+        if algo_selection in ["Judgment", "Snowball"]: 
+            self._type_check_dataset()
+
+        output = self._validate_user_input()
 
         if output != False: # passed all validation! 
             now = datetime.now().strftime("%Y-%m-%d %H:%M:%S,%f")[:-7]
@@ -83,11 +91,11 @@ class SampleController:
                     ... # TODO final algo
                 case "Judgment": 
                     self._judgment(
-                        df=df, dataset_name=ds_name, rows_of_args=self.frame.get_reference_to_rows_of_operations()
+                        df=df, dataset_name=ds_name, rows_of_operations=self.frame.get_reference_to_rows_of_operations()
                     )
                 case "Snowball": 
                     self._showball(
-                        df=df, dataset_name=ds_name, rows_of_args=self.frame.get_reference_to_rows_of_operations()
+                        df=df, dataset_name=ds_name, rows_of_operations=self.frame.get_reference_to_rows_of_operations()
                     )
             
             self.logger.log_info(f"Sample - generated using: {algo_selection} technique.")
@@ -130,6 +138,12 @@ class SampleController:
         else: 
             return {f"{label}": _input}
         
+    def _type_check_dataset(self): 
+        """Get all types of the columns of the dataset for the purposes of limiting user actions 
+        for the instances of judgment_snowball_row.
+        """
+        ...
+        
     def _validate_user_input(self): 
         """First step prior to generation of samples.
         Returns False if exception occurs. Otherwise returns dictionary of user inputs.
@@ -170,7 +184,7 @@ class SampleController:
                         all_true_lock.append(True)
                 
                 if all(all_true_lock): # True
-                    return {f"{algo_selection}": condition_value}
+                    return {f"{algo_selection}": condition_value}        
     
     def _add_generated_dataset_to_snapshot(self, df, dataset_name, description, schedule_set): 
         """_summary_
@@ -270,8 +284,6 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.cluster(df=df, sample_size=sample_size, cluster_col=cluster_col)
-            print('indy')
-            print(new_sample)
             # TODO: add to snapshots
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
@@ -288,32 +300,32 @@ class SampleController:
         """
         ...
 
-    def _judgment(self, df, dataset_name, rows_of_args): 
+    def _judgment(self, df, dataset_name, rows_of_operations): 
         """Judgment sampling algo
 
         Args:
             df (pandas dataframe): currently loaded dataset
             dataset_name (str): name of dataset
-            rows_of_args (list): List of nested list of widget values.
+            rows_of_operations (list): List of nested row objects.
         """
-        # TODO: heavy lifting to be in model
         try: 
-            ...
+            new_sample = self.model.sample.judgment(df=df, rows_of_operations=rows_of_operations)
+            # TODO: add to snapshots
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)
 
-    def _showball(self, df, dataset_name, rows_of_args): 
-        """_summary_
+    def _showball(self, df, dataset_name, rows_of_operations): 
+        """Snowball sampling algo
 
         Args:
-            df (_type_): _description_
-            dataset_name (_type_): _description_
-            rows_of_args (_type_): _description_
+            df (pandas dataframe): currently loaded dataset
+            dataset_name (str): name of dataset
+            rows_of_operations (list): list of nested row objects
         """
-        # TODO: heavy lifting to be in model
         try: 
-            ...
+            new_sample = self.model.sample.snowball(df=df, rows_of_operations=rows_of_operations)
+            # TODO: add to snapshots
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)

@@ -16,8 +16,8 @@ class SampleModel():
         super().__init__()
         self.sample_example_descriptions = {
             "------": 
-                "Reminder, a new snapshot will be created in the process of generating a sample. To undo or" +
-                " roll-back the dataframe to a state prior to the sample generation, do so at the Manipulation" +
+                "Reminder, a new snapshot is created in the process of generating a sample. To undo or" +
+                " roll-back the dataframe to a state prior to the sample generation, navigate to the Manipulation" +
                 " page's rollback section.",
             "Simple Random": 
                 "Simple Random Sampling (without replacement) \n\nInvolves randomly" +
@@ -186,29 +186,142 @@ class SampleModel():
         return new_sample
 
     def quota(self, df, col, sample_size): 
-        """_summary_
+        """Quota sampling technique
 
         Args:
-            df (_type_): _description_
-            col (_type_): _description_
-            sample_size (_type_): _description_
+            df (pandas dataframe): currently loaded dataset.
+            col (str): target column
+            sample_size (int): size of the sample
         """
         ...
 
-    def judgment(self, df, rows_of_args): 
-        """_summary_
+    def judgment(self, df, rows_of_operations): 
+        """Judgment sampling technique
 
         Args:
-            df (_type_): _description_
-            rows_of_args (_type_): _description_
+            df (pandas dataframe): currently loaded dataset.
+            rows_of_operations (list): list of all the row objects (instances)
+        """
+        def two_series_criteria(x, op, y): 
+            """Returns x & y or x | y
+            """
+            if op == "AND": 
+                return x & y
+            elif op == "OR": 
+                return x | y
+        
+        def calculate_individual_row(row_of_values): 
+            """Calculate pandas series object based on criteria, comparison op and conditional val.
+
+            Args:
+                row_of_values (dict): takes one dictionary with row of values as defined in 
+                instance i.e. return of method get_value_set
+
+            Returns: instance of pandas.core.series.Series of single row to be chained if more rows exist.
+            """
+            match row_of_values["comparison_op"]: 
+                case "EQUAL": 
+                    return df[row_of_values["criteria"]] == df[row_of_values["conditional_val"]]
+                case "LESS": 
+                    return df[row_of_values["criteria"]] < df[row_of_values["conditional_val"]]
+                case "MORE": 
+                    return df[row_of_values["criteria"]] > df[row_of_values["conditional_val"]]
+                case "NOT EQUAL": 
+                    return df[row_of_values["criteria"]] != df[row_of_values["conditional_val"]]
+        
+        def cumulative_criteria(chain_of_pandas_series, chain_of_logical_ops): 
+            """Calculate the cumulative criteria
+
+            Args:
+                chain_of_pandas_series (list): list of pandas Series objects
+                chain_of_logical_ops (list): strings either "AND" or "OR"
+            """
+            num_of_rows = len(chain_of_pandas_series)
+            
+            if num_of_rows == 1: # no logical ops
+                return chain_of_pandas_series.pop()
+            elif num_of_rows == 2:
+                x = chain_of_pandas_series.pop(0)
+                y = chain_of_pandas_series.pop(0)
+                op = chain_of_logical_ops.pop(0)
+                return two_series_criteria(x=x, op=op, y=y)
+            else: 
+                last_row = chain_of_pandas_series.pop()
+                index = 0 # counter
+                while index < num_of_rows - 1: # length excluding last row
+                    x = chain_of_pandas_series.pop(0)
+                    y = chain_of_pandas_series.pop(0)
+                    op = chain_of_logical_ops.pop(0)
+                    chain_of_pandas_series.insert( # add back prior to re-calculating.
+                        0, two_series_criteria(x=x, op=op, y=y)
+                    )
+                    index += 1 
+                x = chain_of_pandas_series.pop(0)
+                op = chain_of_logical_ops.pop(0)
+                return two_series_criteria(x=x, op=op, y=last_row)
+        
+        rows_of_values = [] # [{"criteria": colx, "comparison_op": "EQUALS", "conditional_val": 42}, n...]
+        chain_of_logical_ops = [] # [OR, AND]
+        chain_of_pandas_series = [] # output of single row calculations
+
+        for row in rows_of_operations: # build collection of values and separate logical operators
+            rows_of_values.append(row.get_value_set())
+            chain_of_logical_ops.append(row.get_logical_operator())
+
+        for row in rows_of_values: # build chain of individual pandas series
+            chain_of_pandas_series.append(calculate_individual_row(row_of_values=row))
+
+        criteria = cumulative_criteria(chain_of_pandas_series, chain_of_logical_ops)
+        sample = df[criteria]
+        judgment_sample = [sample] 
+        judgment_sample_df = pd.concat(judgment_sample) # concat the judgment sample df into one df (caters multiple)
+        judgment_sample_df.reset_index(drop=True, inplace=True) # reset index of final judgment sample
+
+        return judgment_sample_df
+
+    def snowball(self, df, rows_of_operations): 
+        """Snowball sampling technique
+
+        Args:
+            df (pandas dataframe): currently loaded dataset.
+            rows_of_operations (list): list of all the row objects (instances)
         """
         ...
 
-    def snowball(self, df, rows_of_args): 
-        """_summary_
+    def _type_compatibility(self, type_group, df): 
+        """Check if type of column and use to align with the user input and where not appropriate warn. 
 
         Args:
-            df (_type_): _description_
-            rows_of_args (_type_): _description_
+                otherwise, only if all exists will return true. 
+            type_group (str): "numeric", "categorical", "boolean", "datetime".
+            df (pandas dataframe): pandas dataframe
+
+        Returns: Boolean value
         """
-        ...
+
+        check = []
+        all_dtypes = set()
+
+        if mode == "single": 
+            if df.dtype not in types[type_group]: 
+                return False 
+            else: 
+                return True
+        
+        for coltype in df.dtypes: 
+            all_dtypes.add(str(coltype))
+        
+        if mode == "any": 
+            for _type in all_dtypes:
+                if _type in types[type_group]:
+                    check.append(_type)
+            if len(check) >= 1:
+                return True
+            else:
+                return False
+                    
+        elif mode == "all":
+            for _type in all_dtypes:
+                if _type not in types[type_group]:
+                    return False
+            return True

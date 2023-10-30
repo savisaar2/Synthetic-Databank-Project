@@ -313,3 +313,9 @@ class DatasetModel:
         info = info.split("\n",1)[1]
         info = f"Info:\n{info}"
         return info
+    
+    def get_all_column_datatypes(self): 
+        """Method to obtain the datatype listing of the entire dataframe.
+        Returns a dictionary of column name keys and pandas data types. 
+        """
+        return {column: str(data_type) for column, data_type in self._SNAPSHOTS[-1]["Dataframe"].dtypes.items()}
