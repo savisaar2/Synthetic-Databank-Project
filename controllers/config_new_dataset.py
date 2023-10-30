@@ -20,6 +20,8 @@ class ConfigNewDatasetController:
         self.model = model
         self.view = view
         self.frame = self.view.frames["config_new_dataset"]
+        self.menu_frame = self.view.frames["menu"]
+        self.library_frame = self.view.frames["library"]
         self._bind()
 
     def _bind(self):
@@ -31,6 +33,9 @@ class ConfigNewDatasetController:
         """
         self.frame.cancel_button.bind("<Button-1>", lambda _: self.frame.hide_view(), add="+")
         self.frame.cancel_button.bind("<Button-1>", lambda _: self._delete_actions(), add="+")
+        self.frame.cancel_button.bind("<Button-1>", lambda _: self.menu_frame.disable_menu_buttons(), add="+")
+        self.frame.cancel_button.bind("<Button-1>", lambda _: self.model.DATASET.clear_all_snapshots(), add="+")
+        self.frame.cancel_button.bind("<Button-1>", lambda _: self.library_frame.dataset_status.configure(text="No Dataset Loaded", text_color="red"), add="+")
         self.frame.add_col_button.bind("<Button-1>", lambda _: self.add_action_to_model(), add="+")
         self.frame.add_col_button.bind("<Button-1>", lambda _: self.frame.add_col_to_config(), add="+")
         self.frame.confirm_button.bind("<Button-1>", lambda _: self.populate_dataset())
@@ -74,7 +79,7 @@ class ConfigNewDatasetController:
             
     def _delete_actions(self):
         self.model.config_new_dataset.action_set = []
-        
+        self.frame.col_pos = -1
         for widget in self.frame.frame_5.winfo_children():
             widget.destroy()
 

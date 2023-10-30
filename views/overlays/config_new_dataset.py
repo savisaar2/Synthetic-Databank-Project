@@ -67,7 +67,7 @@ class ConfigNewDatasetView(CTkFrame):
 
         self.frame_6 = CTkFrame(self.overlay_frame, fg_color="gray20")
         self.frame_6.pack(fill="both", padx=150, pady=(2,50))
-        self.confirm_button = CTkButton(self.frame_6, text="Confirm", corner_radius=5, border_spacing=5, anchor="center", state="disabled")
+        self.confirm_button = CTkButton(self.frame_6, text="Generate", corner_radius=5, border_spacing=5, anchor="center", state="disabled")
         self.confirm_button.pack(padx=8,pady=8, side="right")
         self.cancel_button = CTkButton(self.frame_6, text="Cancel", corner_radius=5, border_spacing=5, anchor="center")
         self.cancel_button.pack(padx=8,pady=8, side="right")

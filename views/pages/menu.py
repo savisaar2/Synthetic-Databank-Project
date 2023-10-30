@@ -42,7 +42,7 @@ class MenuView(CTkFrame):
         self.end_button = self._create_button(text="Quit", side="bottom", image="views/static/images/quit.png")
         self.accounts_button = self._create_button(text="Accounts", side="bottom", image="views/static/images/Accounts.png")
 
-    def _disable_menu_buttons(self):
+    def disable_menu_buttons(self):
         self.analyse_button.configure(state="disabled")
         self.manipulate_button.configure(state="disabled")
         self.sample_button.configure(state="disabled")
