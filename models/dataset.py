@@ -276,7 +276,11 @@ class DatasetModel:
         Returns: 
             Dictionary: specific metadata entry.
         """
-        return metadata_collection[name]
+        try:
+            return metadata_collection[name]
+        except KeyError:
+            # Handle the case where 'name' is not found in metadata_collection
+            return None
     
     def add_generated_dataset_to_snapshot(self, schedule_set, dataset_name, df):
         """Appends the successfully generated dataframe to the SNAPSHOTS list.

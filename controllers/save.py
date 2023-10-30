@@ -83,9 +83,10 @@ class SaveController:
         name = self.model.DATASET.get_dataset_name()
         loaded_dataset = self.model.DATASET.get_file_metadata(metadata_collection=metadata_repository, name=name)
         
-        self.frame.populate_metadata_widgets(
-            name=name, description=loaded_dataset["Description"], source=loaded_dataset["Source"]
-            )
+        if loaded_dataset:
+            self.frame.populate_metadata_widgets(
+                name=name, description=loaded_dataset["Description"], source=loaded_dataset["Source"]
+                )
         
     def _save_as_toggle_upon_name_modification(self): 
         """Check new name vs old name... if changed, then change button text to "Save As", otherwise 
