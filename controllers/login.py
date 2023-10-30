@@ -40,14 +40,11 @@ class LoginController:
             if authenticated:
                 self.frame.hide_view()
             else:
-                error_message = "AUTH: Invalid username or password."
-                log_message = f"AUTH - User '{username}' failed to authenticate."
+                self.exception.display_error("AUTH: Invalid username or password.")
+                self.logger.log_warning(f"AUTH - User '{username}' failed to authenticate.")
         else:
-            error_message = "AUTH: Invalid username or password."
-            log_message = f"AUTH: A nonexistent user '{username}' attempted to authenticate."
-
-        self.exception.display_error(error_message)
-        self.logger.log_warning(log_message)
+            self.exception.display_error("AUTH: Invalid username or password.")
+            self.logger.log_warning(f"AUTH: A nonexistent user '{username}' attempted to authenticate.")
 
 
     def _bind(self):
