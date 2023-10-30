@@ -58,9 +58,9 @@ class ExceptionView(CTkFrame):
         self.info_content_frame = CTkFrame(self.info_frame, fg_color="transparent")
         self.info_content_frame.pack(expand=True, padx=20, pady=20)
 
-        self.info_image = CTkImage(Image.open("views/static/images/error.png"), size=(150, 150))
+        self.info_image = CTkImage(Image.open("views/static/images/warning.png"), size=(150, 150))
 
-        self.info_image_label = CTkLabel(self.info_content_frame, text="", image=self.error_image)
+        self.info_image_label = CTkLabel(self.info_content_frame, text="", image=self.info_image)
         self.info_image_label.pack(padx=20)
 
         self.info_type = CTkLabel(self.info_content_frame, text="INFO", font=("Arial", 28, "bold"))
@@ -80,9 +80,9 @@ class ExceptionView(CTkFrame):
         self.confirm_content_frame = CTkFrame(self.confirm_frame, fg_color="transparent")
         self.confirm_content_frame.pack(expand=True, padx=20, pady=20)
 
-        self.confirm_image = CTkImage(Image.open("views/static/images/error.png"), size=(150, 150))
+        self.confirm_image = CTkImage(Image.open("views/static/images/info.png"), size=(150, 150))
 
-        self.confirm_image_label = CTkLabel(self.confirm_content_frame, text="", image=self.error_image)
+        self.confirm_image_label = CTkLabel(self.confirm_content_frame, text="", image=self.confirm_image)
         self.confirm_image_label.pack(padx=20)
 
         self.confirm_type = CTkLabel(self.confirm_content_frame, text="INFO", font=("Arial", 28, "bold"))
