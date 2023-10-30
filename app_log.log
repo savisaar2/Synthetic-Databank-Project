@@ -2909,3 +2909,8 @@ KeyError: 'Class'
 2023-10-21 15:35:30,323 - INFO - User changed view to 'analyse'.
 2023-10-21 15:35:30,510 - INFO - User changed view to 'manipulate'.
 2023-10-21 15:35:31,081 - INFO - User changed view to 'library'.
+2023-10-30 22:38:24,132 - INFO - User changed view to 'save'.
+2023-10-30 22:38:25,410 - INFO - User changed view to 'library'.
+2023-10-30 22:38:32,725 - INFO - User successfully initiated 'config new dataset' function with action set:
+2023-10-30 22:38:32,725 - INFO - {'action': 'Categorical', 'arg_a': 'company', 'arg_b': '', 'col_name': 'asdf'}
+2023-10-30 22:38:34,051 - INFO - User changed view to 'save'.

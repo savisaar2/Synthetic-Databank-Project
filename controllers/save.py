@@ -87,6 +87,11 @@ class SaveController:
             self.frame.populate_metadata_widgets(
                 name=name, description=loaded_dataset["Description"], source=loaded_dataset["Source"]
                 )
+        else:
+            self.frame.populate_metadata_widgets(
+                name=name, description="", source=""
+                )
+
         
     def _save_as_toggle_upon_name_modification(self): 
         """Check new name vs old name... if changed, then change button text to "Save As", otherwise 
