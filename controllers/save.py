@@ -35,34 +35,73 @@ class SaveController:
         Args:
             mode (str): "A type of save" or "Export". 
         """
-        if mode == "A type of save": # get the type of button. 
-            mode = self.frame.get_save_button_mode() # Separated for future use case e.g. confirmation of overwrite
-        try: 
-            name = self.frame.get_name_entry(mode=mode) # obtain metadata info from entry widgets
+        # Get the mode if it's "A type of save"
+        if mode == "A type of save":
+            mode = self.frame.get_save_button_mode()  # Separate for future use case, e.g., confirmation of overwrite
+
+        # Initialise metadata values
+        name = description = source = None
+
+        # Try to obtain metadata info from entry widgets
+        try:
+            name = self.frame.get_name_entry(mode=mode)
             description = self.frame.get_desc_entry(mode=mode)
             source = self.frame.get_source_entry(mode=mode)
-        except Exception as e: 
-            print(e)
+        except Exception as e:
+            print("Error while obtaining metadata:", e)
 
-        if mode == "Save As": 
-            self.model.DATASET.save_export_dataset(full_path=self.model.DATASET.databank_dir + name + ".csv")
-            self.model.DATASET.add_metadata(name, description, source)
-        elif mode == "Overwrite": 
-            confirm_overwrite = self.exception.display_confirm(
-                message="Are you sure you wish to overwrite a built-in dataset with modifications?"
-                )
-            if confirm_overwrite: 
-                self.model.DATASET.save_export_dataset(full_path=self.model.DATASET.databank_dir + name + ".csv")
-                self.model.DATASET.add_metadata(name, description, source)
-        elif mode == "Export": 
-            file_for_export = self.frame.show_export_dialogue(file_name=name) # Entire path including filename.
-            self.model.DATASET.save_export_dataset(full_path=file_for_export) # Export to user specified location.
-            if self.frame.get_export_metadata_checkbox_state() == 1: # Export metadata as well as txt
-                selected_dir = file_for_export.replace(name+".csv", "")
-                self.model.DATASET.export_metadata_to_file(
-                    destination_dir=selected_dir, name=name, desc=description, source=source)
+        # Execute relevant action based on mode.
+        if mode == "Save As":
+            self._handle_save_as_mode(name, description, source)
+        elif mode == "Overwrite":
+            self._handle_overwrite_mode(name, description, source)
+        elif mode == "Export":
+            self._handle_export_mode(name, description, source)
             
         self._update_databank_library()
+
+    def _handle_save_as_mode(self, name, description, source):
+        """Saves current dataset as a new file.
+
+        Args:
+            name (str): Name of dataset.
+            description (str): Description of dataset.
+            source (str): Source relevant to dataset. 
+        """
+        full_path = self.model.DATASET.databank_dir + name + ".csv"
+        self.model.DATASET.save_export_dataset(full_path=full_path)
+        self.model.DATASET.add_metadata(name, description, source)
+
+    def _handle_overwrite_mode(self, name, description, source):
+        """Overwrites existing dataset with current dataset.
+
+        Args:
+            name (str): Name of dataset.
+            description (str): Description of dataset.
+            source (str): Source relevant to dataset. 
+        """
+        confirm_overwrite = self.exception.display_confirm(
+            message="Are you sure you wish to overwrite a built-in dataset with modifications?"
+        )
+        if confirm_overwrite:
+            self._handle_save_as_mode(name, description, source)
+
+    def _handle_export_mode(self, name, description, source):
+        """Exports current dataset.
+
+        Args:
+            name (str): Name of dataset.
+            description (str): Description of dataset.
+            source (str): Source relevant to dataset. 
+        """
+        file_for_export = self.frame.show_export_dialogue(file_name=name)
+        self.model.DATASET.save_export_dataset(full_path=file_for_export)
+
+        if self.frame.get_export_metadata_checkbox_state() == 1:
+            selected_dir = file_for_export.replace(name + ".csv", "")
+            self.model.DATASET.export_metadata_to_file(
+                destination_dir=selected_dir, name=name, desc=description, source=source
+            )
 
     def _update_databank_library(self):
         data = self.model.library.get_datasets(mode="all")
@@ -97,10 +136,15 @@ class SaveController:
         """Check new name vs old name... if changed, then change button text to "Save As", otherwise 
         change back to "Save".
         """
-        name = self.model.DATASET.get_dataset_name()
-        if self.frame.get_name_entry(mode="Overwrite") == name: # no change
+        new_name = self.frame.get_name_entry(mode="Overwrite")
+        current_name = self.model.DATASET.get_dataset_name()
+
+        metadata_repository = self.model.DATASET.load_all_metadata()
+        loaded_dataset = self.model.DATASET.get_file_metadata(metadata_repository, name=new_name)
+
+        if new_name == current_name or loaded_dataset:
             self.frame.change_save_button_text(mode="Overwrite")
-        else: 
+        else:
             self.frame.change_save_button_text(mode="Save As")
 
     def _bind(self):
