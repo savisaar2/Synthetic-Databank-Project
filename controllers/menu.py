@@ -40,12 +40,21 @@ class MenuController:
         """
         Defaults button colors and sets focus to active button.
         """
-        self.frame.library_button.configure(fg_color="#336aa0")
-        self.frame.analyse_button.configure(fg_color="#336aa0")
-        self.frame.manipulate_button.configure(fg_color="#336aa0")
-        self.frame.sample_button.configure(fg_color="#336aa0")
-        self.frame.save_button.configure(fg_color="#336aa0")
-        self.frame.accounts_button.configure(fg_color="#336aa0")
+        # Define our buttons widgets.
+        buttons = [
+            self.frame.library_button,
+            self.frame.analyse_button,
+            self.frame.manipulate_button,
+            self.frame.sample_button,
+            self.frame.save_button,
+            self.frame.accounts_button,
+        ]
+
+        # Reset button colour.
+        for btn in buttons:
+            btn.configure(fg_color="#336aa0")
+
+        # Highlight selected button.
         button.configure(fg_color="#0a3556")
 
     def _confirm_quit(self):
@@ -66,4 +75,4 @@ class MenuController:
         self.frame.sample_button.bind("<Button-1>", lambda event, args="sample": self._switch_view(event, args))
         self.frame.save_button.bind("<Button-1>", lambda event, args="save": self._switch_view(event, args))
         self.frame.accounts_button.bind("<Button-1>", lambda event, args="accounts": self._switch_view(event, args))
-        self.frame.end_button.bind("<Button-1>", lambda _: self._confirm_quit())
+        self.frame.end_button.bind("<Button-1>", lambda event: self._confirm_quit())
