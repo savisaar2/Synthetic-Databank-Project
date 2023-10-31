@@ -40,6 +40,12 @@ class SampleController:
         column_headers = self.model.DATASET.get_column_headers()
         column_to_data_type_mapping = self.model.DATASET.get_all_column_datatypes()
 
+        if mode == "menus": # Rest sample widgets and clear collection of row instances
+            for widget in self.frame.algo_to_widget_set_mapping: 
+                self.frame.bulk_toggle(mode="reset", list_of_widgets=self.frame.algo_to_widget_set_mapping[widget])
+            self.frame.reset_algo_menu()
+            self.frame.reconfig_widgets(level="main", option="------") # reset
+
         column_headers.insert(0, "------") 
         self.frame.refresh_sample_widgets(mode=mode, dtypes=column_to_data_type_mapping, column_headers=column_headers)
 
