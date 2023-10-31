@@ -60,9 +60,6 @@ class SampleController:
         
         algo_selection = self.frame.get_sample_algo_menu_selection()
         
-        if algo_selection in ["Judgment", "Snowball"]: 
-            self._type_check_dataset()
-
         output = self._validate_user_input()
 
         if output != False: # passed all validation! 
@@ -144,12 +141,6 @@ class SampleController:
         else: 
             return {f"{label}": _input}
         
-    def _type_check_dataset(self): 
-        """Get all types of the columns of the dataset for the purposes of limiting user actions 
-        for the instances of judgment_snowball_row.
-        """
-        ...
-        
     def _validate_user_input(self): 
         """First step prior to generation of samples.
         Returns False if exception occurs. Otherwise returns dictionary of user inputs.
@@ -160,31 +151,31 @@ class SampleController:
         match algo_selection: 
             case "Simple Random":
                 return self._assert_property(
-                    self.frame.get_sample_size_entry, row_count=row_count, label="sample size"
+                    getter=self.frame.get_sample_size_entry, row_count=row_count, label="sample size"
                     )
             case "Stratified": 
                 return self._assert_property(
-                    self.frame.get_strat_sample_size_entry, row_count=row_count, label="sample size"
+                    getter=self.frame.get_strat_sample_size_entry, row_count=row_count, label="sample size"
                     )
             case "Systematic": 
                 return self._assert_property(
-                    self.frame.get_systematic_interval_entry, row_count=row_count, label="sampling interval"
+                    getter=self.frame.get_systematic_interval_entry, row_count=row_count, label="sampling interval"
                     )
             case "Under" | "Over":
                 return True # no validation required
             case "Cluster": 
                 return self._assert_property(
-                    self.frame.get_cluster_sample_size_entry, row_count=row_count, label="sample size"
+                    getter=self.frame.get_cluster_sample_size_entry, row_count=row_count, label="sample size"
                 )
             case "Quota": 
                 ...
             case "Judgment" | "Snowball": 
                 all_true_lock = []
                 for index, row in enumerate(self.frame.get_reference_to_rows_of_operations()): 
-                    try: 
-                        condition_value = row.convert_condition_entry_to_float()
-                    except ValueError as e: 
-                        self.exception.display_error(error=f"Row {index + 1}'s condition is not a float value.")
+                    try: # try and convert condition to same datatype as Criteria
+                        condition_value = row.convert_condition_to_criteria()
+                    except AssertionError as e: 
+                        self.exception.display_error(error=f"Row {index + 1}'s {e}")
                         return False
                     else: 
                         all_true_lock.append(True)

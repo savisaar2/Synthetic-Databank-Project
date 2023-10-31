@@ -86,7 +86,7 @@ class SampleModel():
 
         Args:
             val (str): user specified input.
-
+            custom_error_warning (str): error string for overlay display.
         Returns:
             int: value
         """
@@ -190,10 +190,24 @@ class SampleModel():
 
         Args:
             df (pandas dataframe): currently loaded dataset.
-            col (str): target column
+            col (str): stratum column
             sample_size (int): size of the sample
         """
-        ...
+        count_err = "sample size either less than 0 or greater than category count."
+        new_sample = pd.DataFrame() # empty df
+        stratum_sample_sizes = dict() #store sample sizes for each quota
+
+        category_counts = pd.Series(df[col]).value_counts().to_dict() # calc count for each category
+
+        for category, count in category_counts.items(): # 
+            while True: 
+                try: 
+                    assert sample_size > 0 and sample_size < count, count_err
+                except AssertionError as e: 
+                    ...
+                else: 
+                    stratum_sample_sizes[category] = sample_size
+                    break
 
     def judgment(self, df, rows_of_operations): 
         """Judgment sampling technique
@@ -221,13 +235,13 @@ class SampleModel():
             """
             match row_of_values["comparison_op"]: 
                 case "EQUAL": 
-                    return df[row_of_values["criteria"]] == df[row_of_values["conditional_val"]]
+                    return df[row_of_values["criteria"]] == row_of_values["conditional_val"]
                 case "LESS": 
-                    return df[row_of_values["criteria"]] < df[row_of_values["conditional_val"]]
+                    return df[row_of_values["criteria"]] < row_of_values["conditional_val"]
                 case "MORE": 
-                    return df[row_of_values["criteria"]] > df[row_of_values["conditional_val"]]
+                    return df[row_of_values["criteria"]] > row_of_values["conditional_val"]
                 case "NOT EQUAL": 
-                    return df[row_of_values["criteria"]] != df[row_of_values["conditional_val"]]
+                    return df[row_of_values["criteria"]] != row_of_values["conditional_val"]
         
         def cumulative_criteria(chain_of_pandas_series, chain_of_logical_ops): 
             """Calculate the cumulative criteria
@@ -266,7 +280,7 @@ class SampleModel():
 
         for row in rows_of_operations: # build collection of values and separate logical operators
             rows_of_values.append(row.get_value_set())
-            chain_of_logical_ops.append(row.get_logical_operator())
+            chain_of_logical_ops.append(row._get_logical_operator())
 
         for row in rows_of_values: # build chain of individual pandas series
             chain_of_pandas_series.append(calculate_individual_row(row_of_values=row))
