@@ -267,6 +267,8 @@ class ManipulateView(BaseView):
                 self.pos_4_entry_box = self._user_entry_box_template(4, 0, self._entry_box_standard_arg_a_callback,
                                                                     "Enter column name", 200)
                 self.entry_description.configure(text="Enter column name")
+            case "Missing Values" | "Duplicate Rows":
+                self.schedule_button.configure(state="normal")
             case "New":
                 self.pos_3_entry_box = self._user_entry_box_template(3, 0, self._entry_box_standard_arg_a_callback,
                                                                     "Enter column name", 200)
