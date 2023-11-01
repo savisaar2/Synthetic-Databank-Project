@@ -94,11 +94,14 @@ class SampleController:
                     ... # TODO final algo
                 case "Judgment": 
                     self._judgment(
-                        df=df, dataset_name=ds_name, rows_of_operations=self.frame.get_reference_to_rows_of_operations()
+                        df=df, dataset_name=ds_name, 
+                        rows_of_operations=self.frame.get_reference_to_rows_of_operations()
                     )
                 case "Snowball": 
                     self._showball(
-                        df=df, dataset_name=ds_name, rows_of_operations=self.frame.get_reference_to_rows_of_operations()
+                        df=df, dataset_name=ds_name, 
+                        rows_of_operations=self.frame.get_reference_to_rows_of_operations(), 
+                        sample_size=int(self.frame.get_snowball_sample_size_entry()) # guaranteed as post validation
                     )
             
             self.logger.log_info(f"Sample - generated using: {algo_selection} technique.")
@@ -170,30 +173,41 @@ class SampleController:
             case "Quota": 
                 ...
             case "Judgment" | "Snowball": 
+                if algo_selection == "Snowball": 
+                    if self._assert_property(
+                        getter=self.frame.get_snowball_sample_size_entry, row_count=row_count, label="sample size"
+                    ) == False: 
+                        return False 
+                    
                 all_true_lock = []
+                
                 for index, row in enumerate(self.frame.get_reference_to_rows_of_operations()): 
                     try: # try and convert condition to same datatype as Criteria
                         condition_value = row.convert_condition_to_criteria()
-                    except AssertionError as e: 
+                    except AssertionError as e:
                         self.exception.display_error(error=f"Row {index + 1}'s {e}")
                         return False
                     else: 
                         all_true_lock.append(True)
-                
+                    
                 if all(all_true_lock): # True
-                    return {f"{algo_selection}": condition_value}        
+                    return {f"{algo_selection}": condition_value}
     
-    def _add_generated_dataset_to_snapshot(self, df, dataset_name, description, schedule_set): 
+    def _add_generated_dataset_to_snapshot(self, df, algo, description): 
         """_summary_
 
         Args:
-            df (_type_): _description_
+            df (pandas dataframe): ...
+            algo (str): name of the sampling algorithm
+            description: arguments / conditions for algo
         """
-        ...
-        # TODO: check out generate function of manipulate to add appropriate info to DATASET > snapshots in order for proper rollback integration from sample.
-        # self.model.DATASET.add_generated_dataset_to_snapshot(
-        #     schedule_set="Sample generation: Simple Random", dataset_name=dataset_name, df=new_sample
-        #     )
+        self.model.DATASET.add_generated_dataset_to_snapshot(
+            df=df, dataset_name="Sampled Dataset",
+            schedule_set=[{
+                    "step": 1, "action": f"{algo}", "sub_action": f"{description}",
+                    "args": {"": "", "": "", "": ""}, "column": "", "outcome": "Success"
+                    }]
+            )
 
     def _simple_random(self, df, dataset_name, sample_size): 
         """Simple random sampling.
@@ -204,7 +218,9 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.simple_random(df=df, sample_size=sample_size)
-            # self._add_generated_dataset_to_snapshot(self) # TODO: add to snapshots
+            self._add_generated_dataset_to_snapshot(
+                df=new_sample, algo="Simple Sampling", description=f"Sample Size: {sample_size}"
+                )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)
@@ -220,7 +236,13 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.stratified(df=df, sample_size=sample_size, dependant_col=dependant_col)
-            # TODO: add to snapshots
+            self._add_generated_dataset_to_snapshot(
+                df=new_sample, algo="Stratified Sampling", 
+                description=f"Sample Size: {sample_size}, Dependant Column: {dependant_col}"
+                )
+        except ValueError as e: 
+            self.logger.log_exception("Sample generation failed to complete. Traceback:")
+            self.exception.display_error("Selected column either contains NaN or is a non categorical column of data.")
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)
@@ -235,7 +257,10 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.systematic(df=df, interval=interval)
-            # TODO: add to snapshots
+            self._add_generated_dataset_to_snapshot(
+                df=new_sample, algo="Systematic Sampling", 
+                description=f"Sample Interval: {interval}"
+                )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)
@@ -250,7 +275,10 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.under_or_over_sampling(df=df, target_col=target_col, mode="under")
-            # TODO: add to snapshots
+            self._add_generated_dataset_to_snapshot(
+                df=new_sample, algo="Under Sampling", 
+                description=f"Target Column: {target_col}"
+                )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)
@@ -265,7 +293,10 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.under_or_over_sampling(df=df, target_col=target_col, mode="over")
-            # TODO: add to snapshots
+            self._add_generated_dataset_to_snapshot(
+                df=new_sample, algo="Over Sampling", 
+                description=f"Target Column: {target_col}"
+                )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)
@@ -281,7 +312,10 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.cluster(df=df, sample_size=sample_size, cluster_col=cluster_col)
-            # TODO: add to snapshots
+            self._add_generated_dataset_to_snapshot(
+                df=new_sample, algo="Cluster Sampling", 
+                description=f"Sample Size: {sample_size}, Cluster Column: {cluster_col}"
+                )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)
@@ -306,23 +340,34 @@ class SampleController:
             rows_of_operations (list): List of nested row objects.
         """
         try: 
-            new_sample = self.model.sample.judgment(df=df, rows_of_operations=rows_of_operations)
-            # TODO: add to snapshots
+            new_sample = self.model.sample.judgment_or_snowball(
+                mode="Judgment", df=df, rows_of_operations=rows_of_operations
+                )
+            self._add_generated_dataset_to_snapshot(
+                df=new_sample, algo="Judgment Sampling", 
+                description="Multi-row criteria sampling."
+                )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)
 
-    def _showball(self, df, dataset_name, rows_of_operations): 
+    def _showball(self, df, dataset_name, rows_of_operations, sample_size): 
         """Snowball sampling algo
 
         Args:
             df (pandas dataframe): currently loaded dataset
             dataset_name (str): name of dataset
             rows_of_operations (list): list of nested row objects
+            sample_size (int): integer value to specify sample size.
         """
         try: 
-            new_sample = self.model.sample.snowball(df=df, rows_of_operations=rows_of_operations)
-            # TODO: add to snapshots
+            new_sample = self.model.sample.judgment_or_snowball(
+                mode="Snowball", df=df, rows_of_operations=rows_of_operations, sample_size=sample_size
+                )
+            self._add_generated_dataset_to_snapshot(
+                df=new_sample, algo="Snowball Sampling", 
+                description="Multi-row criteria sampling."
+                )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)

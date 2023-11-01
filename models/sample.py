@@ -181,7 +181,7 @@ class SampleModel():
         for cluster, proportion in cluster_proportions.items(): 
             cluster_size = int(sample_size * proportion)
             cluster_sample = df[df[cluster_col] == cluster].sample(cluster_size)
-            new_sample.concat([new_sample, cluster_sample])
+            new_sample = pd.concat([new_sample, cluster_sample])
 
         return new_sample
 
@@ -209,12 +209,15 @@ class SampleModel():
                     stratum_sample_sizes[category] = sample_size
                     break
 
-    def judgment(self, df, rows_of_operations): 
-        """Judgment sampling technique
+    def judgment_or_snowball(self, mode, df, rows_of_operations, sample_size=None): 
+        """Judgment or snowball sampling technique. Generalised as most functionality remains the same between
+        the two algorithms. Differentiated by sample size (seed) for snowball.
 
         Args:
+            mode (str): either "Judgment" or "Snowball".
             df (pandas dataframe): currently loaded dataset.
-            rows_of_operations (list): list of all the row objects (instances)
+            rows_of_operations (list): list of all the row objects (instances).
+            sample_size (int): only applicable if snowball is chosen.
         """
         def two_series_criteria(x, op, y): 
             """Returns x & y or x | y
@@ -278,26 +281,21 @@ class SampleModel():
         chain_of_logical_ops = [] # [OR, AND]
         chain_of_pandas_series = [] # output of single row calculations
 
-        for row in rows_of_operations: # build collection of values and separate logical operators
-            rows_of_values.append(row.get_value_set())
-            chain_of_logical_ops.append(row._get_logical_operator())
+        if mode == "Judgment": 
+            for row in rows_of_operations: # build collection of values and separate logical operators
+                rows_of_values.append(row.get_value_set())
+                chain_of_logical_ops.append(row._get_logical_operator())
 
-        for row in rows_of_values: # build chain of individual pandas series
-            chain_of_pandas_series.append(calculate_individual_row(row_of_values=row))
+            for row in rows_of_values: # build chain of individual pandas series
+                chain_of_pandas_series.append(calculate_individual_row(row_of_values=row))
 
-        criteria = cumulative_criteria(chain_of_pandas_series, chain_of_logical_ops)
-        sample = df[criteria]
-        judgment_sample = [sample] 
-        judgment_sample_df = pd.concat(judgment_sample) # concat the judgment sample df into one df (caters multiple)
-        judgment_sample_df.reset_index(drop=True, inplace=True) # reset index of final judgment sample
+            criteria = cumulative_criteria(chain_of_pandas_series, chain_of_logical_ops)
+            sample = df[criteria]
+            judgment_sample = [sample] 
+            judgment_sample_df = pd.concat(judgment_sample) # concat the judgment sample df into one df (caters multiple)
+            judgment_sample_df.reset_index(drop=True, inplace=True) # reset index of final judgment sample
 
-        return judgment_sample_df
-
-    def snowball(self, df, rows_of_operations): 
-        """Snowball sampling technique
-
-        Args:
-            df (pandas dataframe): currently loaded dataset.
-            rows_of_operations (list): list of all the row objects (instances)
-        """
-        ...
+            return judgment_sample_df
+        
+        elif mode == "Snowball": 
+            ...
