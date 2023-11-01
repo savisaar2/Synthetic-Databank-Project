@@ -102,13 +102,19 @@ class AnalyseController:
         Create pivot table based on selected variable (column) of data, i.e. categorical column, related values
         and the selected aggregate function. 
         """
-        pivot_data = self.model.analyse.pivot(
-            df=self.model.DATASET.get_reference_to_current_snapshot(),
-            vals=self.frame.values_option_menu.get(),
-            cat=self.frame.categories_option_menu.get(), 
-            agg=self.frame.aggfunc_option_menu.get(),
-        )
-        self.frame.populate_pivot_table(d=pivot_data)
+        try:
+            pivot_data = self.model.analyse.pivot(
+                df=self.model.DATASET.get_reference_to_current_snapshot(),
+                vals=self.frame.values_option_menu.get(),
+                cat=self.frame.categories_option_menu.get(), 
+                agg=self.frame.aggfunc_option_menu.get(),
+            )
+            self.frame.populate_pivot_table(d=pivot_data)
+        except Exception as e:
+            # Catch any other exceptions and log them
+            self.logger.log_error(f"An error occurred in _pivot: {e}")
+            # Provide a user-friendly error message
+            self.exception.display_error("An error occurred while creating the pivot table. Please check your selections and try again.")
 
     def _tabulate(self, event):
         """Facilitate tabulation of dataset using start_row, end_row values in the view
