@@ -315,9 +315,37 @@ class SampleView(BaseView):
                 case "categorical" | "boolean": 
                     self._comparison_menu.configure(values=["------", "EQUAL", "NOT EQUAL"])
 
-        def convert_condition_entry_to_float(self): 
-            value = float(self._get_condition_entry())
-            return value
+        def convert_condition_to_criteria(self): 
+            """Convert user input for condition (row instances for snowball & judgment) to match 
+            selected criteria (column of data).
+
+            Returns: 
+                Int, float, string etc., judgment_snowball_row class definition's self._pandas_datatype_groups variable
+            """
+            criteria_dtype = self._get_col_type(column=self._get_criteria())
+            condition = self._get_condition_entry().strip()
+
+            match self._get_pandas_datatype_group(criteria_dtype): 
+                case "numeric": # to be catered for "date_time"
+                    try: 
+                        if criteria_dtype in [
+                            "int64", "int32", "int16", "int8", "UInt8", "UInt16", "UInt32", "UInt64", "int64Dtype"
+                            ]:
+                            assert condition.isdigit(), "condition is not an integer value."
+                            return int(condition)
+                        elif criteria_dtype in [
+                            "float64", "float32", "complex", "float64Dtype"
+                            ]: 
+                            assert condition.isdigit(), "condition is not a float value."
+                            return float(condition)
+                    except AssertionError as e: 
+                        raise e # catch and display in controller
+                case "categorical" | "boolean": 
+                    try: # future place holder to separate different types 
+                        assert type(condition) == str, "condition is not a string value."
+                        return condition
+                    except AssertionError as e: 
+                        raise e
         
         def refresh_widgets(self, column_headers, dtypes): 
             """depending 
