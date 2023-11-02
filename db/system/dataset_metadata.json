@@ -9,7 +9,7 @@
     },
     "BankChurners": {
         "Source": "https://github.com/cmdraghici/BankChurners/blob/main/BankChurners.csv",
-        "Description": "The bank dataset with 10127 records and 32 columns\n\nCategory: Finance\n\nKey Words: "
+        "Description": "The bank dataset with 10127 records and 32 columns\n\nCategory: Finance\n\nKey Words: bank money"
     },
     "bcdata": {
         "Source": "Breast Cancer Wisconsin (Diagnostic)",
@@ -37,7 +37,7 @@
     },
     "diamonds": {
         "Source": "kaggle",
-        "Description": "Dataset contains the prices and other attributes of approx. 54,000 diamonds.\n\nCategory: Miscellaneous\n\nKey Words: "
+        "Description": "Dataset contains the prices and other attributes of approx. 54,000 diamonds.\n\nCategory: Miscellaneous\n\nKey Words: classification"
     },
     "heart_failure_clinical_records_dataset": {
         "Source": "https://archive.ics.uci.edu/dataset/519/heart+failure+clinical+records",
@@ -81,7 +81,7 @@
     },
     "titanic": {
         "Source": "data.world",
-        "Description": "Classic dataset on Titanic disaster used often for data mining tutorials and demonstrations\n\nCategory: Disaster\n\nKey Words: "
+        "Description": "Classic dataset on Titanic disaster used often for data mining tutorials and demonstrations\n\nCategory: Disaster\n\nKey Words: data mining"
     },
     "wdbc": {
         "Source": "https://datahub.io/machine-learning/wdbc#readme",
