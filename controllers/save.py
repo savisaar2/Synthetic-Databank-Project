@@ -85,7 +85,7 @@ class SaveController:
         )
         if confirm_overwrite:
             self._handle_save_as_mode(name, description, source)
-            self.frame.display_success_msg("Dataset has been written successfully.")
+            self.frame.display_save_success("Dataset has been written successfully.")
 
     def _handle_export_mode(self, name, description, source):
         """Exports current dataset.
