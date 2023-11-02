@@ -29,7 +29,7 @@ class SaveView(BaseView):
 
         # Save panel
         self.save_frame = CTkFrame(self.two_panel_tabview.tab("Save"), fg_color="transparent")
-        self.save_frame.pack(expand=True, padx=20, pady=20)
+        self.save_frame.pack(expand=True, fill="x", padx=20, pady=20)
         self.save_name_frame = CTkFrame(self.save_frame, fg_color="transparent")
         self.save_name_frame.pack(anchor="center")
         self.save_name_label = CTkLabel(self.save_name_frame, text="Name:", font=("Arial", 18))
@@ -52,15 +52,15 @@ class SaveView(BaseView):
         self.save_source_entry = CTkEntry(self.save_source_frame, corner_radius=5, font=("Arial", 16), width=300)
         self.save_source_entry.pack(side="bottom")
         self.save_button_frame = CTkFrame(self.save_frame, fg_color="transparent")
-        self.save_button_frame.pack(pady=10)
+        self.save_button_frame.pack(expand=True, fill="x", pady=10)
         self.save_button = CTkButton(
             self.save_button_frame, corner_radius=5, text="Overwrite", font=("Arial", 16), width=150, height=40
             )
-        self.save_button.pack(side="left", padx=5)
+        self.save_button.pack(expand=True, fill="x", padx=300)
 
         # Export panel
         self.export_frame = CTkFrame(self.two_panel_tabview.tab("Export"), fg_color="transparent")
-        self.export_frame.pack(expand=True, padx=20, pady=20)
+        self.export_frame.pack(expand=True, fill="x", padx=20, pady=20)
         self.export_name_frame = CTkFrame(self.export_frame, fg_color="transparent")
         self.export_name_label = CTkLabel(self.export_name_frame, text="Name:", font=("Arial", 18))
         self.export_name_label.pack(side="top", anchor="w")
@@ -86,11 +86,11 @@ class SaveView(BaseView):
         self.export_source_entry = CTkEntry(self.export_source_frame, corner_radius=5, font=("Arial", 16), width=300)
         self.export_source_entry.pack(side="bottom")
         self.export_button_frame = CTkFrame(self.export_frame, fg_color="transparent")
-        self.export_button_frame.pack(pady=10)
+        self.export_button_frame.pack(expand=True, fill="x", pady=10)
         self.export_button = CTkButton(
             self.export_button_frame, corner_radius=5, text="Export", font=("Arial", 16), width=150, height=40
             )
-        self.export_button.pack(side="left", padx=5)
+        self.export_button.pack(expand=True, fill="x", padx=300)
 
     def show_export_dialogue(self, file_name):
         """Return full path (dir and file_name).
@@ -197,3 +197,17 @@ class SaveView(BaseView):
         self.export_name_entry.insert(0, name)
         self.export_desc_entry.insert(END, description)
         self.export_source_entry.insert(0, source)
+
+    def display_save_success(self, msg):
+        message = CTkLabel(self.save_button_frame, text=msg, height=40)
+        # Place the label in the center of the save_button_frame
+        message.place(relx=0.5, rely=0.5, anchor="center")
+        # Schedule a function to destroy the label after 3000 milliseconds (3 seconds)
+        self.save_button_frame.after(3000, message.destroy)
+
+    def display_export_success(self, msg):
+        message = CTkLabel(self.export_button_frame, text=msg, height=40)
+        # Place the label in the center of the save_button_frame
+        message.place(relx=0.5, rely=0.5, anchor="center")
+        # Schedule a function to destroy the label after 3000 milliseconds (3 seconds)
+        self.export_button_frame.after(3000, message.destroy)

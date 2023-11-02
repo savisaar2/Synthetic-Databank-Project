@@ -54,8 +54,8 @@ class SaveController:
         elif mode == "Overwrite":
             self._handle_overwrite_mode(name, description, source)
         elif mode == "Export":
-            self._handle_export_mode(name, description, source)
-            
+            self._handle_export_mode(name, description, source)      
+
         self._update_databank_library()
 
     def _handle_save_as_mode(self, name, description, source):
@@ -70,6 +70,8 @@ class SaveController:
         self.model.DATASET.save_export_dataset(full_path=full_path)
         self.model.DATASET.add_metadata(name, description, source)
 
+        self.frame.display_save_success("Dataset has been written successfully.")
+
     def _handle_overwrite_mode(self, name, description, source):
         """Overwrites existing dataset with current dataset.
 
@@ -83,6 +85,7 @@ class SaveController:
         )
         if confirm_overwrite:
             self._handle_save_as_mode(name, description, source)
+            self.frame.display_success_msg("Dataset has been written successfully.")
 
     def _handle_export_mode(self, name, description, source):
         """Exports current dataset.
@@ -100,6 +103,9 @@ class SaveController:
             self.model.DATASET.export_metadata_to_file(
                 destination_dir=selected_dir, name=name, desc=description, source=source
             )
+
+        if file_for_export:
+            self.frame.display_export_success("Dataset has been exported successfully.")
 
     def _update_databank_library(self):
         """
