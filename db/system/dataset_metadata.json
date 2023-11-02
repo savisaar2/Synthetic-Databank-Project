@@ -71,6 +71,10 @@
         "Source": "https://archive.ics.uci.edu/dataset/572/taiwanese+bankruptcy+prediction",
         "Description": "The data were collected from the Taiwan Economic Journal for the years 1999 to 2009. Company bankruptcy was defined based on the business regulations of the Taiwan Stock Exchange. The dataset contians 6,819 instances and 96 features\n\nCategory: Finance\n\nKey Words: machine learning ML ml"
     },
+    "test_dataset": {
+        "Source": "Test Source",
+        "Description": "Test Description"
+    },
     "time_series_covid19_confirmed_global": {
         "Source": "HUMANITARIAN DATA EXCHANGE",
         "Description": "The dataset contains time-series data of confirmed COVID-19 cases on a global scale. Each row in the dataset typically represents a specific location (country or region), and each column represents a specific date. The values in the cells of the dataset represent the cumulative number of confirmed COVID-19 cases for each location and date. It contains time-series data of confirmed COVID-19 cases on a global scale. Each row in the dataset typically represents a specific location (country or region), and each column represents a specific date. The values in the cells of the dataset represent the cumulative number of confirmed COVID-19 cases for each location and date\n\nCategory: Health\n\nKey Words: disease covid 19 covid-19"
@@ -89,6 +93,6 @@
     },
     "World Happiness Report 2023": {
         "Source": "kaggle",
-        "Description": "The happiness scores and rankings use data from the Gallup World Poll . The columns following the happiness score estimate the extent to which each of six factors – economic production, social support, life expectancy, freedom, absence of corruption, and generosity – contribute to making life evaluations higher in each country than they are in Dystopia, a hypothetical country that has values equal to the world’s lowest national averages for each of the six factors. They have no impact on the total score reported for each country, but they do explain why some countries rank higher than others.\n\nCategory: Social\n\nKey Words: behaviour"
+        "Description": "The happiness scores and rankings use data from the Gallup World Poll . The columns following the happiness score estimate the extent to which each of six factors \u2013 economic production, social support, life expectancy, freedom, absence of corruption, and generosity \u2013 contribute to making life evaluations higher in each country than they are in Dystopia, a hypothetical country that has values equal to the world\u2019s lowest national averages for each of the six factors. They have no impact on the total score reported for each country, but they do explain why some countries rank higher than others.\n\nCategory: Social\n\nKey Words: behaviour"
     }
 }
