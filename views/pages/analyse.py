@@ -142,12 +142,23 @@ class AnalyseView(BaseView):
         self.pivot_table.configure(yscrollcommand=self.pivot_table_y_scroll.set)
         
         self.pivot_table.pack(side="top", fill="x", expand=True)
+        self.pt_reminder_frame = CTkFrame(self.pt_frame, fg_color="transparent")
+        self.pt_reminder_frame.pack(fill="both")
+        self.pivot_reminder_label = CTkLabel(
+            master=self.pt_reminder_frame, 
+            text="Remember to re-run pivot after loading a different \n" +
+                "dataset, manipulating data or running a sampling \n" +
+                "algorithm.",
+            text_color="yellow", 
+            anchor="w"
+        )
+        self.pivot_reminder_label.pack(expand=True, pady=(26, 8))
         self.pt_button_frame = CTkFrame(self.pt_frame, fg_color="transparent")
-        self.pt_button_frame.pack(side="right", fill="both")
+        self.pt_button_frame.pack(fill="both")
         self.pivot_button = CTkButton(
-            self.pt_button_frame, text="Pivot", corner_radius=5, border_spacing=5, anchor="center", state="disabled"
+            self.pt_button_frame, text="Pivot", corner_radius=5, border_spacing=5, anchor="s", state="disabled"
             )
-        self.pivot_button.pack(side="right", anchor="s", padx=(8, 8))
+        self.pivot_button.pack(side="bottom", anchor="s", padx=(8, 8), pady=(8, 8))
 
         # Placeholder - padding - invisible 3rd row
         self.place_holder_frame = CTkFrame(self.individual_cols_parent_frame, fg_color="transparent")
@@ -214,15 +225,15 @@ class AnalyseView(BaseView):
         self.tt_frame.pack(side="top", fill="both", expand=True, padx=0, pady=(10, 0))
         self.raw_table = ttk.Treeview(self.tt_frame) # stub
 
-        # Reminder label
+        # Reminder label - tabulate
         self.status_frame = CTkFrame(self.reminder_canvas, fg_color="gray20")
         self.status_frame.pack(side="bottom", fill="x", pady=(10, 10), expand=True)
-        self.sample_status_label = CTkLabel(
+        self.tabulate_status_label = CTkLabel(
             master=self.status_frame, 
             text="Remember to re-run tabulation after loading a different dataset, manipulating data or sampling.",
             text_color="yellow"
         )
-        self.sample_status_label.pack(expand=True)
+        self.tabulate_status_label.pack(expand=True)
 
     def refresh_open_menus(self, dataset_attributes):
         """Refresh, update or populate the values of various widgets on Analyse view with appropriate
