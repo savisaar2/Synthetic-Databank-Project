@@ -55,10 +55,6 @@ class SampleModel():
                 " clusters accurately represents meaningful groups in your dataset,  often based on factors" +
                 " like geography or natural associations (e.g., schools, neighbourhoods, cities). (Latpate R," + 
                 " Kshirsagar J, Gupta VK & Chandre G, 2021, Advanced sampling methods, Springer, Singapore)", 
-            "Quota": 
-                "Quota Sampling \n\nA non-random method that involves dividing the population into subgroups" +
-                " or strata and then selecting participants non-randomly based on a specific quota or predefined" + 
-                " criteria. (Wikipedia, https://en.wikipedia.org/wiki/Quota_sampling)", 
             "Judgment": 
                 "Judgment Sampling \n\nIn judgment sampling, the researcher or data collector uses their own" +
                 " judgment and expertise to select specific individuals or elements for inclusion in the sample." +
@@ -185,30 +181,6 @@ class SampleModel():
 
         return new_sample
 
-    def quota(self, df, col, sample_size): 
-        """Quota sampling technique
-
-        Args:
-            df (pandas dataframe): currently loaded dataset.
-            col (str): stratum column
-            sample_size (int): size of the sample
-        """
-        count_err = "sample size either less than 0 or greater than category count."
-        new_sample = pd.DataFrame() # empty df
-        stratum_sample_sizes = dict() #store sample sizes for each quota
-
-        category_counts = pd.Series(df[col]).value_counts().to_dict() # calc count for each category
-
-        for category, count in category_counts.items(): # 
-            while True: 
-                try: 
-                    assert sample_size > 0 and sample_size < count, count_err
-                except AssertionError as e: 
-                    ...
-                else: 
-                    stratum_sample_sizes[category] = sample_size
-                    break
-
     def judgment_or_snowball(self, mode, df, rows_of_operations, sample_size=None): 
         """Judgment or snowball sampling technique. Generalised as most functionality remains the same between
         the two algorithms. Differentiated by sample size (seed) for snowball.
@@ -281,21 +253,17 @@ class SampleModel():
         chain_of_logical_ops = [] # [OR, AND]
         chain_of_pandas_series = [] # output of single row calculations
 
-        if mode == "Judgment": 
-            for row in rows_of_operations: # build collection of values and separate logical operators
-                rows_of_values.append(row.get_value_set())
-                chain_of_logical_ops.append(row._get_logical_operator())
+        for row in rows_of_operations: # build collection of values and separate logical operators
+            rows_of_values.append(row.get_value_set())
+            chain_of_logical_ops.append(row._get_logical_operator())
 
-            for row in rows_of_values: # build chain of individual pandas series
-                chain_of_pandas_series.append(calculate_individual_row(row_of_values=row))
+        for row in rows_of_values: # build chain of individual pandas series
+            chain_of_pandas_series.append(calculate_individual_row(row_of_values=row))
 
-            criteria = cumulative_criteria(chain_of_pandas_series, chain_of_logical_ops)
-            sample = df[criteria]
-            judgment_sample = [sample] 
-            judgment_sample_df = pd.concat(judgment_sample) # concat the judgment sample df into one df (caters multiple)
-            judgment_sample_df.reset_index(drop=True, inplace=True) # reset index of final judgment sample
+        criteria = cumulative_criteria(chain_of_pandas_series, chain_of_logical_ops)
+        sample = df[criteria]
+        judgment_sample = [sample] 
+        judgment_sample_df = pd.concat(judgment_sample) # concat the judgment sample df into one df (caters multiple)
+        judgment_sample_df.reset_index(drop=True, inplace=True) # reset index of final judgment sample
 
-            return judgment_sample_df
-        
-        elif mode == "Snowball": 
-            ...
+        return judgment_sample_df

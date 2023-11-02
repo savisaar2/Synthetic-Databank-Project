@@ -63,7 +63,6 @@ class SampleController:
         output = self._validate_user_input()
 
         if output != False: # passed all validation! 
-            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S,%f")[:-7]
             df = self.model.DATASET.get_reference_to_current_snapshot()
             ds_name = self.model.DATASET.get_dataset_name()
 
@@ -77,7 +76,7 @@ class SampleController:
                         )
                 case "Systematic": 
                     self._systematic(df=df, dataset_name=ds_name, interval=output["sampling interval"])
-                case "Under":
+                case "Under": 
                     self._under_sampling(
                         df=df, dataset_name=ds_name, target_col=self.frame.get_under_target_col_menu()
                         )
@@ -90,27 +89,36 @@ class SampleController:
                         df=df, dataset_name=ds_name, sample_size=output["sample size"], 
                         cluster_col=self.frame.get_cluster_column_menu()
                     )
-                case "Quota": 
-                    ... # TODO final algo
                 case "Judgment": 
                     self._judgment(
                         df=df, dataset_name=ds_name, 
                         rows_of_operations=self.frame.get_reference_to_rows_of_operations()
                     )
                 case "Snowball": 
-                    self._showball(
+                    result = self._showball(
                         df=df, dataset_name=ds_name, 
                         rows_of_operations=self.frame.get_reference_to_rows_of_operations(), 
                         sample_size=int(self.frame.get_snowball_sample_size_entry()) # guaranteed as post validation
                     )
+                    if result == False: 
+                        return
+
+            self._finalise_generation(algo_selection=algo_selection)
             
-            self.logger.log_info(f"Sample - generated using: {algo_selection} technique.")
-            self._update_sample_status(
-                text=f"Sample generated using: {algo_selection} technique at {now}.", colour="lime"
-                )
-            self.frame.bulk_toggle(mode="reset", list_of_widgets=self.frame.algo_to_widget_set_mapping[algo_selection])
-            self.frame.reset_algo_menu()
-            self.frame.reconfig_widgets(level="main", option="------") # reset
+    def _finalise_generation(self, algo_selection):
+        """Post generation tasks
+
+        Args: 
+            algo_selection (str): name of selected algorithm.
+        """
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S,%f")[:-7]
+        self.logger.log_info(f"Sample - generated using: {algo_selection} technique.") # log successful sampling
+        self._update_sample_status(
+            text=f"Sample generated using: {algo_selection} technique at {now}.", colour="lime"
+            )
+        self.frame.bulk_toggle(mode="reset", list_of_widgets=self.frame.algo_to_widget_set_mapping[algo_selection])
+        self.frame.reset_algo_menu()
+        self.frame.reconfig_widgets(level="main", option="------") # reset
 
     def _update_sample_status(self, text, colour): 
         """Update the status of sample component to notify user of outcome.
@@ -170,8 +178,6 @@ class SampleController:
                 return self._assert_property(
                     getter=self.frame.get_cluster_sample_size_entry, row_count=row_count, label="sample size"
                 )
-            case "Quota": 
-                ...
             case "Judgment" | "Snowball": 
                 if algo_selection == "Snowball": 
                     if self._assert_property(
@@ -320,17 +326,6 @@ class SampleController:
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)
 
-    def _quota(self, df, dataset_name, col, sample_size): 
-        """Quota sampling algo
-
-        Args:
-            df (pandas dataframe): currently loaded dataset
-            dataset_name (str): name of dataset
-            col (_type_): _description_
-            sample_size (_type_): _description_
-        """
-        ...
-
     def _judgment(self, df, dataset_name, rows_of_operations): 
         """Judgment sampling algo
 
@@ -360,14 +355,35 @@ class SampleController:
             rows_of_operations (list): list of nested row objects
             sample_size (int): integer value to specify sample size.
         """
+        def finalise(): 
+            self._add_generated_dataset_to_snapshot(
+            df=new_sample, algo="Snowball Sampling", 
+            description="Multi-row criteria sampling."
+            )
+
         try: 
             new_sample = self.model.sample.judgment_or_snowball(
                 mode="Snowball", df=df, rows_of_operations=rows_of_operations, sample_size=sample_size
                 )
-            self._add_generated_dataset_to_snapshot(
-                df=new_sample, algo="Snowball Sampling", 
-                description="Multi-row criteria sampling."
+            new_sample_length = len(new_sample)
+            if new_sample_length < sample_size: 
+                add_more_rows = self.exception.display_confirm(
+                    message=f"Snowball sampling configuration produced {new_sample_length} samples. \n" +
+                    "YES to amend or add more criteria. NO to finalise."
+                    )
+                if add_more_rows: 
+                    return False
+                else: # finalise
+                    finalise()
+            else: # over sample size definition 
+                confirm_excess = self.exception.display_confirm(
+                    message=f"Snowball sampling produced {new_sample_length - sample_size} more than sample size.\n" +
+                    "YES to keep excess and finalise or NO to manually amend (e.g. remove row(s))."
                 )
+                if confirm_excess: 
+                    finalise()
+                else: 
+                    return False
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)

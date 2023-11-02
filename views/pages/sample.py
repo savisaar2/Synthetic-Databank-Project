@@ -56,7 +56,7 @@ class SampleView(BaseView):
         self.algorithm_label = CTkLabel(self.s_frame_row_1, text="Algorithm:", anchor="w")
         self.algorithm_label.pack(side="left", padx=(8, 0))
         self.sampling_algo_options = [
-            "------", "Simple Random", "Stratified", "Systematic", "Under", "Over", "Cluster", "Quota", "Judgment", 
+            "------", "Simple Random", "Stratified", "Systematic", "Under", "Over", "Cluster", "Judgment", 
             "Snowball"
             ]
         self.sampling_algo_menu = CTkOptionMenu(
@@ -108,15 +108,6 @@ class SampleView(BaseView):
             command=lambda option: self.reconfig_widgets(level="sub", option=option)
         )
 
-        # Quota - sub widgets
-        self.column_to_build_quota_label = CTkLabel(self.s_frame_row_1, text="Column to Build Quota:", anchor="w")
-        self.column_to_build_quota_menu = CTkOptionMenu(
-            self.s_frame_row_1, fg_color="gray10", width=3, values=("------",), 
-            command=lambda option: self.reconfig_widgets(level="sub", option=option)
-        )
-        self.q_sample_size_label = CTkLabel(self.s_frame_row_1, text="Sample Size:", anchor="w")
-        self.quota_sample_size_entry = CTkEntry(self.s_frame_row_1, corner_radius=5, width=50, state="disabled")
-
         # Judgment & Snowball - sub widgets
         self.js_sample_size_label = CTkLabel(self.s_frame_row_1, text="Sample Size:", anchor="w")
         self.js_sample_size_entry = CTkEntry(self.s_frame_row_1, corner_radius=5, width=50, state="disabled")
@@ -136,9 +127,7 @@ class SampleView(BaseView):
             self.stratified_dependant_col_label, self.stratified_dependant_col_menu, self.over_dependant_col_label,
             self.over_target_col_menu, self.cluster_column_label, self.cluster_column_menu, 
             self.cluster_sample_size_label, self.cluster_sample_size_entry, self.systematic_interval_entry, 
-            self.column_to_build_quota_label, self.column_to_build_quota_menu, self.q_sample_size_label, 
-            self.quota_sample_size_entry, self.js_sample_size_label, self.js_sample_size_entry, self.add_row, 
-            self.remove_row
+            self.js_sample_size_label, self.js_sample_size_entry, self.add_row, self.remove_row
             ]
         
         self.simple_widgets = [
@@ -167,11 +156,6 @@ class SampleView(BaseView):
             self.cluster_column_menu
         ]
 
-        self.quota_widgets = [
-            self.q_sample_size_label, self.quota_sample_size_entry, self.column_to_build_quota_label, 
-            self.column_to_build_quota_menu, 
-        ]
-
         self.judgment_widgets = [
             self.add_row, self.remove_row
         ]
@@ -183,13 +167,13 @@ class SampleView(BaseView):
         self.algo_to_widget_set_mapping = {
             "Simple Random": self.simple_widgets, "Stratified": self.stratified_widgets, 
             "Systematic": self.systematic_widgets, "Under": self.under_widgets, "Over": self.over_widgets,
-            "Cluster": self.cluster_widgets, "Quota": self.quota_widgets, "Judgment": self.judgment_widgets,
+            "Cluster": self.cluster_widgets, "Judgment": self.judgment_widgets,
             "Snowball": self.snowball_widgets
         }
 
         self.all_menu_option_widgets = { # hack to reset upon algo selection - needed to toggle generate button
             self.stratified_dependant_col_menu, self.under_target_col_menu, self.over_target_col_menu, 
-            self.cluster_column_menu, self.column_to_build_quota_menu, 
+            self.cluster_column_menu
         }
 
     class judgment_snowball_row: 
@@ -484,7 +468,6 @@ class SampleView(BaseView):
             self.under_target_col_menu.configure(values=column_headers)
             self.over_target_col_menu.configure(values=column_headers)
             self.cluster_column_menu.configure(values=column_headers)
-            self.column_to_build_quota_menu.configure(values=column_headers)
         elif mode == "rows": 
             if len(self._rows_of_operations) > 0: 
                 for row in self._rows_of_operations: 
@@ -551,16 +534,6 @@ class SampleView(BaseView):
         """
         return self.cluster_column_menu.get()
     
-    def get_quota_sample_size_entry(self):
-        """Quota sample size entry prop
-        """ 
-        return self.quota_sample_size_entry.get()
-
-    def get_column_to_build_quota_menu(self): 
-        """Quota column to build quota menu prop
-        """
-        return self.column_to_build_quota_menu.get()
-
     def get_snowball_sample_size_entry(self): 
         """Snowball sample size value
         """
