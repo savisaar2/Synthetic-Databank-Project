@@ -1,4 +1,4 @@
-from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkOptionMenu, CTkEntry, CTkScrollbar, CTkTabview
+from customtkinter import CTkFrame, CTkLabel, CTkButton, CTkOptionMenu, CTkEntry, CTkScrollbar, CTkTabview, CTkCanvas
 from tkinter import ttk
 from .base import BaseView
 
@@ -36,6 +36,10 @@ class AnalyseView(BaseView):
 
         self.plot_tabulate_parent_frame = CTkFrame(self.tabview.tab("Visualise / Tabulate"), fg_color="gray14")
         self.plot_tabulate_parent_frame.pack(fill="both", expand=True, padx=0, pady=(0, 0))
+
+        self.reminder_canvas = CTkCanvas(self.tabview.tab("Visualise / Tabulate"), height=6, highlightthickness=0)
+        self.reminder_canvas.configure(bg="gray14")
+        self.reminder_canvas.pack(side="left", fill="x", anchor="s", expand=True)
 
         # Descriptive Stats - Entire Dataset
         self.ds_frame = CTkFrame(self.entire_dataset_parent_frame, fg_color="transparent")
@@ -209,6 +213,16 @@ class AnalyseView(BaseView):
         self.tt_frame = CTkFrame(self.plot_tabulate_parent_frame, fg_color="gray10", height=30)
         self.tt_frame.pack(side="top", fill="both", expand=True, padx=0, pady=(10, 0))
         self.raw_table = ttk.Treeview(self.tt_frame) # stub
+
+        # Reminder label
+        self.status_frame = CTkFrame(self.reminder_canvas, fg_color="gray20")
+        self.status_frame.pack(side="bottom", fill="x", pady=(10, 10), expand=True)
+        self.sample_status_label = CTkLabel(
+            master=self.status_frame, 
+            text="Remember to re-run tabulation after loading a different dataset, manipulating data or sampling.",
+            text_color="yellow"
+        )
+        self.sample_status_label.pack(expand=True)
 
     def refresh_open_menus(self, dataset_attributes):
         """Refresh, update or populate the values of various widgets on Analyse view with appropriate
