@@ -268,7 +268,7 @@ class SampleView(BaseView):
             return {
                 "criteria": self._get_criteria(),
                 "comparison_op": self._get_comparison_operator(), 
-                "conditional_val": float(self._get_condition_entry()), # only called post validation # TODO - not necessarily float? 
+                "conditional_val": self.convert_condition_to_criteria() # post validation - guaranteed no errors
             }
         
         def _validate(self, rows): 
@@ -301,7 +301,7 @@ class SampleView(BaseView):
 
         def convert_condition_to_criteria(self): 
             """Convert user input for condition (row instances for snowball & judgment) to match 
-            selected criteria (column of data).
+            selected criteria (column of data). 
 
             Returns: 
                 Int, float, string etc., judgment_snowball_row class definition's self._pandas_datatype_groups variable

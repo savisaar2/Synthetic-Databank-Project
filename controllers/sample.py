@@ -103,16 +103,15 @@ class SampleController:
                     if result == False: 
                         return
 
-            self._finalise_generation(algo_selection=algo_selection)
+            self._post_generation_tasks(algo_selection=algo_selection)
             
-    def _finalise_generation(self, algo_selection):
+    def _post_generation_tasks(self, algo_selection): 
         """Post generation tasks
 
         Args: 
             algo_selection (str): name of selected algorithm.
         """
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S,%f")[:-7]
-        self.logger.log_info(f"Sample - generated using: {algo_selection} technique.") # log successful sampling
         self._update_sample_status(
             text=f"Sample generated using: {algo_selection} technique at {now}.", colour="lime"
             )
@@ -224,8 +223,10 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.simple_random(df=df, sample_size=sample_size)
-            self._add_generated_dataset_to_snapshot(
-                df=new_sample, algo="Simple Sampling", description=f"Sample Size: {sample_size}"
+            self._post_sampling_tasks(
+                df=new_sample, snapshot_algo_name="Simple Sampling", 
+                description=f"Sample Size: {sample_size}", algo_name="Simple Random", 
+                configs={"sample_size": sample_size}
                 )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
@@ -242,9 +243,10 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.stratified(df=df, sample_size=sample_size, dependant_col=dependant_col)
-            self._add_generated_dataset_to_snapshot(
-                df=new_sample, algo="Stratified Sampling", 
-                description=f"Sample Size: {sample_size}, Dependant Column: {dependant_col}"
+            self._post_sampling_tasks(
+                df=new_sample, snapshot_algo_name="Stratified Sampling", 
+                description=f"Sample Size: {sample_size}, Dependant Column: {dependant_col}", algo_name="Stratified", 
+                configs={"sample_size": sample_size, "dependant_col": dependant_col}
                 )
         except ValueError as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
@@ -263,9 +265,10 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.systematic(df=df, interval=interval)
-            self._add_generated_dataset_to_snapshot(
-                df=new_sample, algo="Systematic Sampling", 
-                description=f"Sample Interval: {interval}"
+            self._post_sampling_tasks(
+                df=new_sample, snapshot_algo_name="Systematic Sampling", 
+                description=f"Sample Interval: {interval}", algo_name="Systematic", 
+                configs={"interval": interval}
                 )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
@@ -281,9 +284,10 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.under_or_over_sampling(df=df, target_col=target_col, mode="under")
-            self._add_generated_dataset_to_snapshot(
-                df=new_sample, algo="Under Sampling", 
-                description=f"Target Column: {target_col}"
+            self._post_sampling_tasks(
+                df=new_sample, snapshot_algo_name="Under Sampling", 
+                description=f"Target Column: {target_col}", algo_name="Under", 
+                configs={"target_col": target_col}
                 )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
@@ -299,9 +303,10 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.under_or_over_sampling(df=df, target_col=target_col, mode="over")
-            self._add_generated_dataset_to_snapshot(
-                df=new_sample, algo="Over Sampling", 
-                description=f"Target Column: {target_col}"
+            self._post_sampling_tasks(
+                df=new_sample, snapshot_algo_name="Over Sampling", 
+                description=f"Target Column: {target_col}", algo_name="Over", 
+                configs={"target_col": target_col}
                 )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
@@ -318,9 +323,10 @@ class SampleController:
         """
         try: 
             new_sample = self.model.sample.cluster(df=df, sample_size=sample_size, cluster_col=cluster_col)
-            self._add_generated_dataset_to_snapshot(
-                df=new_sample, algo="Cluster Sampling", 
-                description=f"Sample Size: {sample_size}, Cluster Column: {cluster_col}"
+            self._post_sampling_tasks(
+                df=new_sample, snapshot_algo_name="Cluster Sampling", 
+                description=f"Sample Size: {sample_size}, Cluster Column: {cluster_col}", algo_name="Cluster", 
+                configs={"sample_size": sample_size, "cluster_col": cluster_col}
                 )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
@@ -338,9 +344,9 @@ class SampleController:
             new_sample = self.model.sample.judgment_or_snowball(
                 mode="Judgment", df=df, rows_of_operations=rows_of_operations
                 )
-            self._add_generated_dataset_to_snapshot(
-                df=new_sample, algo="Judgment Sampling", 
-                description="Multi-row criteria sampling."
+            self._post_sampling_tasks(
+                df=new_sample, snapshot_algo_name="Judgment Sampling", 
+                description="Multi-row criteria sampling", algo_name="Judgment", rows=rows_of_operations
                 )
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
@@ -355,12 +361,6 @@ class SampleController:
             rows_of_operations (list): list of nested row objects
             sample_size (int): integer value to specify sample size.
         """
-        def finalise(): 
-            self._add_generated_dataset_to_snapshot(
-            df=new_sample, algo="Snowball Sampling", 
-            description="Multi-row criteria sampling."
-            )
-
         try: 
             new_sample = self.model.sample.judgment_or_snowball(
                 mode="Snowball", df=df, rows_of_operations=rows_of_operations, sample_size=sample_size
@@ -374,26 +374,87 @@ class SampleController:
                 if add_more_rows: 
                     return False
                 else: # finalise
-                    finalise()
+                    self._post_sampling_tasks(
+                        df=new_sample, snapshot_algo_name="Snowball Sampling", 
+                        description="Multi-row criteria sampling", algo_name="Snowball", rows=rows_of_operations
+                        )
             else: # over sample size definition 
                 confirm_excess = self.exception.display_confirm(
                     message=f"Snowball sampling produced {new_sample_length - sample_size} more than sample size.\n" +
                     "YES to keep excess and finalise or NO to manually amend (e.g. remove row(s))."
                 )
                 if confirm_excess: 
-                    finalise()
+                    self._post_sampling_tasks(
+                        df=new_sample, snapshot_algo_name="Snowball Sampling", 
+                        description="Multi-row criteria sampling", algo_name="Snowball", rows=rows_of_operations
+                        )
                 else: 
                     return False
         except Exception as e: 
             self.logger.log_exception("Sample generation failed to complete. Traceback:")
             self.exception.display_error(error=e)
 
+    def _post_sampling_tasks(self, df, snapshot_algo_name, description, algo_name, configs=None, rows=None): 
+        """Add successfully generated sample to snapshots.
+        """
+        self._add_generated_dataset_to_snapshot(
+        df=df, algo=f"{snapshot_algo_name}", 
+        description=f"{description}."
+        )
+        if algo_name in ["Judgment", "Snowball"]: 
+            config_to_text = self._algo_config_to_text(algo_name=f"{algo_name}", rows=rows)
+        else: 
+            config_to_text = self._algo_config_to_text(algo_name=f"{algo_name}", configs=configs)
+        self.logger.log_info(config_to_text) # log 
+        self._display_algo_config(txt='.') 
+    
     def _get_algorithm_info(self, event):
-        """Get text description of algorithm. 
+        """Get text description of algorithm to display to user to provide guidence. 
         """
         selection = self.frame.get_sample_algo_menu_selection()
         description = self.model.sample.get_algorithm_info(selection=selection)
         self.frame.update_algorithm_description_info(text=description)
+    
+    def _algo_config_to_text(self, algo_name, configs=None, rows=None): 
+        """Returns a formated string with appropriate algorithm configurations for use in 
+        _log_algo_config and _show_algo_config.
+
+        Args: 
+            algo_name (str): name of the selected algorithm. 
+            configs (dict): cater for basic algos
+            rows (objects): cater for adv algos i.e., judgment and snowball
+        """
+        output = f"Sample - generated using: {algo_name} technique using the following configuration(s):\n"
+
+        if algo_name == "Snowball": 
+            output += f"Sample size: {self.frame.get_snowball_sample_size_entry()}\n"
+        
+        match algo_name: 
+            case "Simple Random":
+                output += f"Sample size: {configs['sample_size']}"
+            case "Stratified": 
+                output += f"Sample size: {configs['sample_size']} | Dependant column: {configs['dependant_col']}"
+            case "Systematic": 
+                output += f"Sampling interval: {configs['interval']}"
+            case "Under" | "Over": 
+                output += f"Target column: {configs['target_col']}"
+            case "Cluster": 
+                output += f"Sample size: {configs['sample_size']} | Cluster column: {configs['cluster_col']}"
+            case "Judgment" | "Snowball":
+                for row in rows:
+                    vals = row.get_value_set()
+                    logical_op = row._get_logical_operator()
+                    output += f"Criteria: {vals['criteria']} | Comparison operator: {vals['comparison_op']} | Conditional value: {vals['conditional_val']} | Logical operator: {logical_op}\n"
+
+        return output.rstrip()
+
+    def _display_algo_config(self, txt): 
+        """Update algorithm description info section with user configuration information post sample generation.
+
+        Args:
+            txt (str): return from _algo_config_to_text 
+        """
+        ...
 
     def _bind(self):
         """

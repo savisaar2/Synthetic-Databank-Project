@@ -237,7 +237,7 @@ class SampleModel():
             else: 
                 last_row = chain_of_pandas_series.pop()
                 index = 0 # counter
-                while index < num_of_rows - 1: # length excluding last row
+                while index < num_of_rows - 2: # length excluding last row plus start at index 0
                     x = chain_of_pandas_series.pop(0)
                     y = chain_of_pandas_series.pop(0)
                     op = chain_of_logical_ops.pop(0)

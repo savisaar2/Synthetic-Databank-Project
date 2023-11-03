@@ -14,7 +14,7 @@ class SaveController:
         name : View
             The application's view instance.
         """
-        self.logger = Logger()
+        self.logger = Logger() # TODO: log successful saves as / overwrites and exports! 
         self.model = model
         self.view = view
         self.frame = self.view.frames["save"]
