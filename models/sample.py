@@ -15,10 +15,6 @@ class SampleModel():
         """
         super().__init__()
         self.sample_example_descriptions = {
-            "------": 
-                "Reminder, a new snapshot is created in the process of generating a sample. To undo or" +
-                " roll-back the dataframe to a state prior to the sample generation, navigate to the Manipulation" +
-                " page's rollback section.",
             "Simple Random": 
                 "Simple Random Sampling (without replacement) \n\nInvolves randomly" +
                 " selecting individuals or elements from a population without replacement. Each member of" +

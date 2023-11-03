@@ -30,6 +30,7 @@ class SampleView(BaseView):
         self.s_frame_row_1 = CTkFrame(self.s_frame, fg_color="gray20")
         self.s_frame_row_1.pack(fill="x")
         
+        # Advanced algo area i.e., used for judgment & snowball rows
         self.advanced_algo_frame = CTkFrame(self.s_frame, fg_color="transparent") # rows of judgment & snowball 
         self.advanced_algo_frame.pack(side="top", fill="both", expand=True, pady=(5, 0))
         self.adv_algo_frame_scroll_y = CTkScrollbar(self.advanced_algo_frame, orientation="vertical")
@@ -43,9 +44,15 @@ class SampleView(BaseView):
         self.scrollable_frame = CTkFrame(self.canvas, fg_color="gray14") # target
         self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
 
+        # Sampling algo description
         self.description_frame = CTkFrame(self.s_frame, fg_color="gray10")
         self.description_frame.pack(side="bottom", fill="both", pady=(5, 0))
+        one_time_reminder = ("Reminder, a new snapshot is created in the process of generating a sample. To undo or" +
+            " roll-back the dataframe to a state prior to the sample generation, navigate to the Manipulation" +
+            " page's rollback section.")
+        self._create_textbox(frame=self.description_frame, text=one_time_reminder, height=190)
 
+        # Status 
         self.status_frame = CTkFrame(self.s_frame, fg_color="gray20")
         self.status_frame.pack(side="top", fill='both', pady=(10, 10), expand=True)
         self.sample_status_label = CTkLabel(
@@ -180,7 +187,7 @@ class SampleView(BaseView):
         """Instance of a row of widgets
         """
         def __init__(self, parent_frame, row_object_validation, rows): 
-            self._col_dtypes = dict() # used to store column headers to pandas types - used for refreshing on instantiation
+            self._col_dtypes = dict() # used to store column headers to pandas types for refreshing on instantiation
             self._pandas_datatype_groups = {
             "numeric": (
                 "int64", "int32", "int16", "int8", "float64", "float32", "complex", "UInt8", "UInt16",

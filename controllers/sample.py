@@ -406,14 +406,15 @@ class SampleController:
         else: 
             config_to_text = self._algo_config_to_text(algo_name=f"{algo_name}", configs=configs)
         self.logger.log_info(config_to_text) # log 
-        self._display_algo_config(txt='.') 
+        self._display_algo_config(text=config_to_text) 
     
     def _get_algorithm_info(self, event):
         """Get text description of algorithm to display to user to provide guidence. 
         """
         selection = self.frame.get_sample_algo_menu_selection()
-        description = self.model.sample.get_algorithm_info(selection=selection)
-        self.frame.update_algorithm_description_info(text=description)
+        if selection != "------": 
+            description = self.model.sample.get_algorithm_info(selection=selection)
+            self.frame.update_algorithm_description_info(text=description)
     
     def _algo_config_to_text(self, algo_name, configs=None, rows=None): 
         """Returns a formated string with appropriate algorithm configurations for use in 
@@ -448,13 +449,13 @@ class SampleController:
 
         return output.rstrip()
 
-    def _display_algo_config(self, txt): 
+    def _display_algo_config(self, text): 
         """Update algorithm description info section with user configuration information post sample generation.
 
         Args:
-            txt (str): return from _algo_config_to_text 
+            text (str): return from _algo_config_to_text 
         """
-        ...
+        self.frame.update_algorithm_description_info(text=text)
 
     def _bind(self):
         """

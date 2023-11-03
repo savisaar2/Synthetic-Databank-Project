@@ -14,7 +14,7 @@ class SaveController:
         name : View
             The application's view instance.
         """
-        self.logger = Logger() # TODO: log successful saves as / overwrites and exports! 
+        self.logger = Logger()
         self.model = model
         self.view = view
         self.frame = self.view.frames["save"]
@@ -71,6 +71,7 @@ class SaveController:
         self.model.DATASET.add_metadata(name, description, source)
 
         self.frame.display_save_success("Dataset has been written successfully.")
+        self.logger.log_info(f"Save/Export - Dataset {name} successfully saved.") # log 
 
     def _handle_overwrite_mode(self, name, description, source):
         """Overwrites existing dataset with current dataset.
@@ -86,6 +87,7 @@ class SaveController:
         if confirm_overwrite:
             self._handle_save_as_mode(name, description, source)
             self.frame.display_save_success("Dataset has been written successfully.")
+            self.logger.log_info(f"Save/Export - Dataset '{name}' successfully overwritten.") # log 
 
     def _handle_export_mode(self, name, description, source):
         """Exports current dataset.
@@ -106,6 +108,8 @@ class SaveController:
 
         if file_for_export:
             self.frame.display_export_success("Dataset has been exported successfully.")
+        
+        self.logger.log_info(f"Save/Export - Dataset '{name}' successfully exported to file.") # log 
 
     def _update_databank_library(self):
         """
