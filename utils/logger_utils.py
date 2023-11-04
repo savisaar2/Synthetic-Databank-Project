@@ -12,7 +12,7 @@ class Logger:
         return cls._instance
 
     def _start_logger(self):
-        log_file = "app_log.log"
+        log_file = "logs/audit.log"
         log_level = logging.DEBUG
 
         self.logger = logging.getLogger(__name__)
