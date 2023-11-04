@@ -2,6 +2,7 @@ import json
 import pandas as pd
 from os import path
 import io
+import re
 
 class DatasetModel:
     """Singleton. Working collection of datasets. _SNAPSHOTS is a list of dictionaries with keys representing 
@@ -80,7 +81,7 @@ class DatasetModel:
             full_path (str): entire path including filename.
         """
         if full_path: 
-            self._SNAPSHOTS[-1]["Dataframe"].to_csv(f"{full_path}", index=False)
+            self._SNAPSHOTS[-1]["Dataframe"].to_csv(f"{full_path + '.csv'}", index=False)
 
     def get_column_headers(self):
         """Method to obtain column names for the current dataset in _SNAPSHOTS list.
@@ -250,17 +251,17 @@ class DatasetModel:
             # Write the updated metadata to the json file
             json.dump(existing_data, json_file, indent=4)
 
-    def export_metadata_to_file(self, destination_dir, name, desc, source): 
+    def export_metadata_to_file(self, name, desc, source): 
         """_summary_
 
         Args:
-            destination_dir (_type_): chosen export location
             name (str): metadata name i.e. dataset name specified by user
             desc (str): metadata desc
             source (scr): metadata source
         """
-        with open(destination_dir + name + ".txt", "w") as file: 
-            file.write(f"Name: {name}\n")
+        file_name = re.search(r"[^/]+$", name)
+        with open(name + ".txt", "w") as file: 
+            file.write(f"Name: {file_name.group(0)}\n")
             file.write(f"Description: {desc}\n")
             file.write(f"Source: {source}")
     

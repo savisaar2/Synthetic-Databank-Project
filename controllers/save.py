@@ -66,7 +66,7 @@ class SaveController:
             description (str): Description of dataset.
             source (str): Source relevant to dataset. 
         """
-        full_path = self.model.DATASET.databank_dir + name + ".csv"
+        full_path = self.model.DATASET.databank_dir + name
         self.model.DATASET.save_export_dataset(full_path=full_path)
         self.model.DATASET.add_metadata(name, description, source)
 
@@ -97,13 +97,11 @@ class SaveController:
             description (str): Description of dataset.
             source (str): Source relevant to dataset. 
         """
-        file_for_export = self.frame.show_export_dialogue(file_name=name)
+        file_for_export = self.frame.show_export_dialogue(file_name=name) # full path
         self.model.DATASET.save_export_dataset(full_path=file_for_export)
-
         if self.frame.get_export_metadata_checkbox_state() == 1:
-            selected_dir = file_for_export.replace(name + ".csv", "")
             self.model.DATASET.export_metadata_to_file(
-                destination_dir=selected_dir, name=name, desc=description, source=source
+                name=file_for_export, desc=description, source=source
             )
 
         if file_for_export:
