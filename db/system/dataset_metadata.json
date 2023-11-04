@@ -71,10 +71,6 @@
         "Source": "https://archive.ics.uci.edu/dataset/572/taiwanese+bankruptcy+prediction",
         "Description": "The data were collected from the Taiwan Economic Journal for the years 1999 to 2009. Company bankruptcy was defined based on the business regulations of the Taiwan Stock Exchange. The dataset contians 6,819 instances and 96 features\n\nCategory: Finance\n\nKey Words: machine learning ML ml"
     },
-    "test_dataset": {
-        "Source": "Test Source",
-        "Description": "Test Description"
-    },
     "time_series_covid19_confirmed_global": {
         "Source": "HUMANITARIAN DATA EXCHANGE",
         "Description": "The dataset contains time-series data of confirmed COVID-19 cases on a global scale. Each row in the dataset typically represents a specific location (country or region), and each column represents a specific date. The values in the cells of the dataset represent the cumulative number of confirmed COVID-19 cases for each location and date. It contains time-series data of confirmed COVID-19 cases on a global scale. Each row in the dataset typically represents a specific location (country or region), and each column represents a specific date. The values in the cells of the dataset represent the cumulative number of confirmed COVID-19 cases for each location and date\n\nCategory: Health\n\nKey Words: disease covid 19 covid-19"
