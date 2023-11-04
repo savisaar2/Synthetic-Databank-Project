@@ -205,22 +205,19 @@ class LibraryController:
         self.frame.info.configure(text=info)
 
     def _remove_dataset_from_library(self):
-        selected_items = self.frame.tree_view.selection()
-
-        if not selected_items:
-            return  # No item selected, nothing to do
-
         confirmed = self.exception.display_confirm("Are you sure you want to remove this dataset?")
 
         if not confirmed:
             return  # User canceled the operation
+
+        selected_items = self.frame.tree_view.selection()
 
         item = selected_items[0]
         values = self.frame.tree_view.item(item, "values")
         name, size = values
 
         try:
-            file_path = self.model.DATASET.remove_dataset(name)
+            self.model.DATASET.remove_dataset(name)
             self.logger.log_info(f"LIBRARY - User {self.model.user.get_username()}, has removed {name} from library.")
             self.logger.log_info(f"LIBRARY - Metadata has been removed for {name} due to dataset removal invoked.")
             self._display_dataset_list(mode="all")

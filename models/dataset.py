@@ -1,8 +1,9 @@
 import json
 import pandas as pd
-from os import path
+from os import path, remove
 import io
 import re
+import threading
 
 class DatasetModel:
     """Singleton. Working collection of datasets. _SNAPSHOTS is a list of dictionaries with keys representing 
@@ -58,21 +59,25 @@ class DatasetModel:
         )
         #print("New dataset:", self._SNAPSHOTS[-1])
 
-    def load_dataset(self, file_path, dataset_name):
+    def load_dataset_in_thread(self, file_path, dataset_name):
         """Loads a csv file stored in the databank into memory i.e. _SNAPSHOTS list.
         """
-        if file_path: 
+        if file_path:
             self.clear_all_snapshots()
             df = pd.read_csv(file_path)
             self._SNAPSHOTS.append(
                 {
-                    "Name": f"{dataset_name}", 
-                    "Description": "Initial load.", 
-                    "Schedule Set": {}, 
+                    "Name": f"{dataset_name}",
+                    "Description": "Initial load.",
+                    "Schedule Set": {},
                     "Dataframe": df
                 }
             )
             #print("Loaded data set:", self._SNAPSHOTS[-1])
+
+    def load_dataset(self, file_path, dataset_name):
+        load_thread = threading.Thread(target=self.load_dataset_in_thread, args=(file_path, dataset_name))
+        load_thread.start()
 
     def save_export_dataset(self, full_path): 
         """Save / save as or export the most current dataframe in memory back to specified file (CSV) on disk.
@@ -323,3 +328,23 @@ class DatasetModel:
         Returns a dictionary of column name keys and pandas data types. 
         """
         return {column: str(data_type) for column, data_type in self._SNAPSHOTS[-1]["Dataframe"].dtypes.items()}
+    
+    def remove_dataset(self, file_name):
+        # Define the paths
+        file_path = path.join(self.databank_dir, file_name + ".csv")
+        meta_file = "db/system/dataset_metadata.json"  # Replace with the path to your JSON file
+
+        # Check if the dataset file exists before attempting to remove it
+        if path.exists(file_path):
+            remove(file_path)
+
+        # Load the JSON data from the metadata file
+        with open(meta_file, 'r') as file:
+            data = json.load(file)
+
+        # Check if the dataset exists in the metadata
+        if file_name in data:
+            del data[file_name]
+            # Save the updated JSON back to the metadata file
+            with open(meta_file, 'w') as file:
+                json.dump(data, file, indent=4)
