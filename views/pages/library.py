@@ -25,7 +25,7 @@ class LibraryView(BaseView):
         
         # Define our containers for each section.
         row_1 = self._create_frame(parent_frame=content_frame)
-        row_2 = self._create_frame(parent_frame=content_frame, pady=10)
+        row_2 = self._create_frame(parent_frame=content_frame, pady=10, color="transparent")
         self.row_3 = self._create_frame(parent_frame=content_frame)
         row_4 = self._create_frame(parent_frame=content_frame, pady=(10, 0))
 
@@ -35,15 +35,24 @@ class LibraryView(BaseView):
         self.import_button = self._create_button(row_1, "Import", "left")
         self.new_button = self._create_button(row_1, "New", "left")
 
-        self.tree_view = self._create_treeview(row_2)                                   # Render treeview on row 2.
-        self.info_scrollable = CTkScrollableFrame(master=row_2, width=320, height=220)  
-        self.info_scrollable.grid(column=2, row=0, columnspan=2, padx=(0,10))           # Render scrollable frame on row 2.
-        self.info = CTkLabel(self.info_scrollable, text="", justify="left", pady=0)
-        self.info.grid()                                                                # Render info in scrollable frame row 2.
-        self.dataset_meta = self._create_label(self.row_3, "", height=140)              # Render metadata on row 3.
+        library_frame = self._create_frame(parent_frame=row_2, fill="x", expand=False, side="left")
+        tree_frame = self._create_frame(parent_frame=library_frame, fill="x", expand=False, padx=5)
+        action_frame = self._create_frame(parent_frame=library_frame, fill="x", expand=False, padx=5)
+
+        info_frame = self._create_frame(parent_frame=row_2, fill="both", expand=True, side="left", scrollable=True)
+
+        self.tree_view = self._create_treeview(tree_frame)                                   # Render treeview on row 2.
+        self.dataset_delete_btn = self._create_button(action_frame, text="Remove", border_spacing=5, height=10)
+        self.dataset_delete_btn.lower()
+        
+        # Render info in scrollable frame row 2.
+        self.info = self._create_label(info_frame, text="", justify="left", grid=True, padx=0)
+
+        # Render metadata on row 3.
+        self.dataset_meta = self._create_label(self.row_3, "", height=170)
 
         # Render status message when dataset is loaded or not loaded into memory.
-        self.dataset_status = self._create_label(row_4, "No Dataset Loaded", height=50, font=CTkFont(size=17, weight="normal"), color="red", anchor="n", fill="x")
+        self.dataset_status = self._create_label(row_4, "No Dataset Loaded", height=50, font=CTkFont(size=17, weight="normal"), color="red", anchor="n", fill="x", pady=1)
 
     def _create_treeview(self, frame):
         """
@@ -73,19 +82,19 @@ class LibraryView(BaseView):
         style.map("Treeview", background=[("selected", "#336aa0")])
 
         # Define configure and pack the initial treeview.
-        tree_view = ttk.Treeview(frame, columns=("Name", "Size"), show="headings", selectmode="browse", height=10)
+        tree_view = ttk.Treeview(frame, columns=("Name", "Size"), show="headings", selectmode="browse", height=8)
         tree_view.heading("Name", text="Name")
         tree_view.heading("Size", text="Size")
         tree_view.column("Name", width=300, stretch=True)
         tree_view.column("Size", width=70, stretch=True)
 
         # Pack last for rendering issues.
-        tree_view.grid(padx=(10,0), pady=10, column=0, row=0)
+        tree_view.pack(side="left")
 
         # Setup vertical scrolling when treeview overflows.
         scrollbar = CTkScrollbar(frame, orientation="vertical", command=tree_view.yview)
         tree_view.configure(yscrollcommand=scrollbar.set)
-        scrollbar.grid(column=1, row=0)
+        scrollbar.pack(side="left")
 
         # Returns tree_view widget.
         return tree_view
@@ -109,24 +118,31 @@ class LibraryView(BaseView):
             source = metadata.get("Source", "")
             description = metadata.get("Description", "")
 
-            metadata_text = self._create_textbox(self.row_3, height=140, source=source, description=description)
+            metadata_text = self._create_textbox(self.row_3, height=170, source=source, description=description)
 
-    def _create_frame(self, parent_frame, padx=0, pady=0, fill="x", expand=False, color="gray20"):
+    def _create_frame(self, parent_frame, padx=0, pady=0, fill="x", expand=False, color="gray20", side=None, height=None, scrollable=False):
         """
         Renders a frame widget with specified parameters. Then returns the object 
         to the calling variable.
         """
-        frame = CTkFrame(parent_frame, fg_color=color)
-        frame.pack(fill=fill, padx=padx, pady=pady, expand=expand)
+        if scrollable:
+            frame = CTkScrollableFrame(parent_frame, fg_color=color)  
+            frame.pack(fill=fill, padx=padx, pady=pady, expand=expand, side=side)
+        else:
+            frame = CTkFrame(parent_frame, fg_color=color)
+            frame.pack(fill=fill, padx=padx, pady=pady, expand=expand, side=side)
         return frame
     
-    def _create_label(self, frame, text="Text Here", side=None, height=100, font=None, color="white", anchor="w", fill=None):
+    def _create_label(self, frame, text="Text Here", side=None, height=100, font=None, color="white", anchor="w", fill=None, justify=None, padx=20, pady=0, grid=False):
         """
         Renders a label widget with specified parameters. Then returns the object 
         to the calling variable.
         """
-        label = CTkLabel(frame, text=text, font=font, height=height, text_color=color)
-        label.pack(padx=20, anchor=anchor, side=side, fill=fill)
+        label = CTkLabel(frame, text=text, font=font, height=height, text_color=color, justify=justify)
+        if grid:
+            label.grid(padx=padx, pady=0)
+        else:
+            label.pack(padx=padx, pady=pady, anchor=anchor, side=side, fill=fill)
         return label
     
     def _create_textbox(self, frame, height, source, description):
@@ -146,11 +162,11 @@ class LibraryView(BaseView):
         entry.pack(side=side, expand=True, fill="x", padx=10)
         return entry
     
-    def _create_button(self, frame, text="Text Here", side="top"):
+    def _create_button(self, frame, text="Text Here", side="top", height=40, border_spacing=10):
         """
         Renders a button widget with specified parameters. Then returns the object 
         to the calling variable.
         """
-        button = CTkButton(frame, corner_radius=5, height=40, border_spacing=10, text=text, anchor="n")
-        button.pack(side=side, fill="x", padx=5)
+        button = CTkButton(frame, corner_radius=5, height=height, border_spacing=border_spacing, text=text, anchor="n")
+        button.pack(side=side, padx=5)
         return button

@@ -56,7 +56,7 @@ class DatasetModel:
             "Dataframe": pd.DataFrame()
             }
         )
-        print("New dataset:", self._SNAPSHOTS[-1])
+        #print("New dataset:", self._SNAPSHOTS[-1])
 
     def load_dataset(self, file_path, dataset_name):
         """Loads a csv file stored in the databank into memory i.e. _SNAPSHOTS list.
@@ -72,7 +72,7 @@ class DatasetModel:
                     "Dataframe": df
                 }
             )
-            print("Loaded data set:", self._SNAPSHOTS[-1])
+            #print("Loaded data set:", self._SNAPSHOTS[-1])
 
     def save_export_dataset(self, full_path): 
         """Save / save as or export the most current dataframe in memory back to specified file (CSV) on disk.
@@ -194,7 +194,7 @@ class DatasetModel:
 
     def append_new_snapshot(self, snapshot):
         self._SNAPSHOTS.append(snapshot)
-        print("snapshot appended!")
+        #print("snapshot appended!")
 
     def _sort_datasets_alphabetically(self, json_data):
         """
@@ -299,7 +299,7 @@ class DatasetModel:
                 "Dataframe": df
             }
         )
-        print("Generated data set:", self._SNAPSHOTS[-1]["Dataframe"])
+        #print("Generated data set:", self._SNAPSHOTS[-1]["Dataframe"])
 
     def get_dataset_info(self, file_path):
         """Reads the selected dataframe, calls the pandas.info() function and returns the dataframe info, such as

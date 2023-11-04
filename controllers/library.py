@@ -202,6 +202,31 @@ class LibraryController:
         info = self.model.DATASET.get_dataset_info(file_path)
         self.frame.info.configure(text=info)
 
+    def _remove_dataset_from_library(self):
+        selected_items = self.frame.tree_view.selection()
+
+        if not selected_items:
+            return  # No item selected, nothing to do
+
+        confirmed = self.exception.display_confirm("Are you sure you want to remove this dataset?")
+
+        if not confirmed:
+            return  # User canceled the operation
+
+        item = selected_items[0]
+        values = self.frame.tree_view.item(item, "values")
+        name, size = values
+
+        try:
+            file_path = self.model.DATASET.remove_dataset(name)
+            self.logger.log_info(f"LIBRARY - User {self.model.user.get_username()}, has removed {name} from library.")
+            self.logger.log_info(f"LIBRARY - Metadata has been removed for {name} due to dataset removal invoked.")
+            self._display_dataset_list(mode="all")
+        except Exception as e:
+            # Handle the exception, e.g., show an error message or log the error
+            self.logger.log_error(f"LIBRARY - An error occurred while removing the dataset {name}: {e}")
+
+
     def _bind(self):
         """
         Private method to establish event bindings.
@@ -212,9 +237,11 @@ class LibraryController:
         self.frame.search_input.bind("<KeyRelease>", lambda event: self._search_databank())
         self.frame.import_button.bind("<Button-1>", lambda event: self.import_overlay.show_view())
         self.frame.new_button.bind("<Button-1>", lambda event: self._create_new_dataset(), add="+")
+        self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self.frame.dataset_delete_btn.lift(), add="+")
         self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._show_metadata(), add="+")
         self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._get_dataset_info(), add="+")
         self.frame.tree_view.bind("<Double-1>", lambda event: self._load_dataset())
+        self.frame.dataset_delete_btn.bind("<Button-1>", lambda event: self._remove_dataset_from_library())
         self.import_overlay.add_file_button.bind("<Button-1>", lambda event: self._import_new_dataset())
         self.import_overlay.cancel_button.bind("<Button-1>", lambda event: self.import_overlay.hide_view())
         self.import_overlay.import_button.bind("<Button-1>", lambda event: self._import_dataset())
