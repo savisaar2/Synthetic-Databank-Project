@@ -99,6 +99,8 @@ class LibraryController:
             
             # Loads the selected item's corresponding file into memory.
             self.model.DATASET.load_dataset(file_path=file_path, dataset_name=name)
+
+            self.logger.log_info(f"LIBRARY - Dataset {name} has been loaded by user {self.model.user.get_username()}.")
             
             # Provide a visual cue.
             self.frame.dataset_status.configure(text=f"{name} has been loaded", text_color="lime")
