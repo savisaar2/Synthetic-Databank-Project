@@ -107,14 +107,17 @@ class DatasetModel:
         """
         return self._SNAPSHOTS[-1]["Dataframe"][column]
     
-    def get_dataset_name(self): 
+    def get_dataset_name(self, first_snapshot=False): 
         """Method to get current dataset's name i.e _SNAPSHOTS[-1]. 
         Should be stored here as opposed to grabbing directly from label state in Library view.
 
         Returns: 
             str: Name of loaded dataset. 
         """
-        return self._SNAPSHOTS[-1]["Name"]
+        if first_snapshot == True: # Caters for save / export - show original snap details prior to sampling / manip.
+            return self._SNAPSHOTS[0]["Name"] 
+        else: 
+            return self._SNAPSHOTS[-1]["Name"]
     
     def get_column_datatype(self, column_index):
         """Method to obtain the datatype of a defined column in the 

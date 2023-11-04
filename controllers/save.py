@@ -128,7 +128,7 @@ class SaveController:
         
         # Retrieve metadata for selected dataset.
         metadata_repository = self.model.DATASET.load_all_metadata()
-        name = self.model.DATASET.get_dataset_name()
+        name = self.model.DATASET.get_dataset_name(first_snapshot=True)
         loaded_dataset = self.model.DATASET.get_file_metadata(metadata_collection=metadata_repository, name=name)
         
         # Initialise metadata values
