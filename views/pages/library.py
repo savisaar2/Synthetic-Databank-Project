@@ -25,7 +25,7 @@ class LibraryView(BaseView):
         
         # Define our containers for each section.
         row_1 = self._create_frame(parent_frame=content_frame)
-        row_2 = self._create_frame(parent_frame=content_frame, pady=10, color="transparent")
+        row_2 = self._create_frame(parent_frame=content_frame, pady=10, expand=True, fill="x")
         self.row_3 = self._create_frame(parent_frame=content_frame)
         row_4 = self._create_frame(parent_frame=content_frame, pady=(10, 0))
 
@@ -35,12 +35,12 @@ class LibraryView(BaseView):
         self.import_button = self._create_button(row_1, "Import", "left")
         self.new_button = self._create_button(row_1, "New", "left")
 
-        library_frame = self._create_frame(parent_frame=row_2, fill="x", expand=False, side="left")
-        tree_frame = self._create_frame(parent_frame=library_frame, fill="x", expand=False, padx=5)
-        action_frame = self._create_frame(parent_frame=library_frame, fill="x", expand=False, padx=5)
+        #library_frame = self._create_frame(parent_frame=row_2, fill="x", expand=False, side="left")
+        #tree_frame = self._create_frame(parent_frame=library_frame, fill="x", expand=False, padx=5)
+        #action_frame = self._create_frame(parent_frame=library_frame, fill="x", expand=False, padx=5)
 
-        self.tree_view = self._create_treeview(tree_frame)                                   # Render treeview on row 2.
-        self.dataset_delete_btn = self._create_button(action_frame, text="Remove", border_spacing=5, height=10)
+        self.tree_view = self._create_treeview(row_2)                                   # Render treeview on row 2.
+        self.dataset_delete_btn = self._create_button(row_2, text="Remove", border_spacing=5, height=10)
         self.dataset_delete_btn.lower()
         
         # Render metadata on row 3.
@@ -80,15 +80,15 @@ class LibraryView(BaseView):
         tree_view = ttk.Treeview(frame, columns=("Name", "Size"), show="headings", selectmode="browse", height=8)
         tree_view.heading("Name", text="Name")
         tree_view.heading("Size", text="Size")
-        tree_view.column("Name", width=550, stretch=True)
-        tree_view.column("Size", width=130, stretch=True)
+        tree_view.column("Name", width=620, stretch=True)
+        tree_view.column("Size", width=100, stretch=True)
 
         # Pack last for rendering issues.
-        tree_view.pack(side="left")
+        tree_view.pack(side="left", expand=True, fill="x", padx=(10, 0))
 
         # Setup vertical scrolling when treeview overflows.
         scrollbar = CTkScrollbar(frame, orientation="vertical", command=tree_view.yview)
-        tree_view.configure(yscrollcommand=scrollbar.set)
+        tree_view.configure(yscrollcommand=scrollbar.set, padding=(0, 10))
         scrollbar.pack(side="left")
 
         # Returns tree_view widget.
