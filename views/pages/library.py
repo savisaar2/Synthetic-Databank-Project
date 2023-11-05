@@ -25,7 +25,7 @@ class LibraryView(BaseView):
         
         # Define our containers for each section.
         row_1 = self._create_frame(parent_frame=content_frame)
-        row_2 = self._create_frame(parent_frame=content_frame, pady=10, expand=True, fill="x")
+        row_2 = self._create_frame(parent_frame=content_frame, pady=10)
         self.row_3 = self._create_frame(parent_frame=content_frame)
         row_4 = self._create_frame(parent_frame=content_frame, pady=(10, 0))
 
@@ -35,11 +35,8 @@ class LibraryView(BaseView):
         self.import_button = self._create_button(row_1, "Import", "left")
         self.new_button = self._create_button(row_1, "New", "left")
 
-        #library_frame = self._create_frame(parent_frame=row_2, fill="x", expand=False, side="left")
-        #tree_frame = self._create_frame(parent_frame=library_frame, fill="x", expand=False, padx=5)
-        #action_frame = self._create_frame(parent_frame=library_frame, fill="x", expand=False, padx=5)
-
-        self.tree_view = self._create_treeview(row_2)                                   # Render treeview on row 2.
+        # Render treeview on row 2.
+        self.tree_view = self._create_treeview(row_2)                                  
         self.dataset_delete_btn = self._create_button(row_2, text="Remove", border_spacing=5, height=10)
         self.dataset_delete_btn.lower()
         
