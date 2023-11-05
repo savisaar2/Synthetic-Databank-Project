@@ -190,20 +190,6 @@ class LibraryController:
         """
         self.new_file = self.import_overlay.import_new_dataset()
 
-    def _get_dataset_info(self):
-        """Gets the dataset info of the user selected dataset in the library view and displays info to the UI."""
-        selected_items = self.frame.tree_view.selection()
-
-        if not selected_items:
-            return  # No item selected, nothing to do
-
-        item = selected_items[0]
-        values = self.frame.tree_view.item(item, "values")
-        name, size = values
-        file_path = self.model.library.databank_dir + name + ".csv"
-        info = self.model.DATASET.get_dataset_info(file_path)
-        self.frame.info.configure(text=info)
-
     def _remove_dataset_from_library(self):
         confirmed = self.exception.display_confirm("Are you sure you want to remove this dataset?")
 
@@ -238,7 +224,6 @@ class LibraryController:
         self.frame.new_button.bind("<Button-1>", lambda event: self._create_new_dataset(), add="+")
         self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self.frame.dataset_delete_btn.lift(), add="+")
         self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._show_metadata(), add="+")
-        self.frame.tree_view.bind("<<TreeviewSelect>>", lambda event: self._get_dataset_info(), add="+")
         self.frame.tree_view.bind("<Double-1>", lambda event: self._load_dataset())
         self.frame.dataset_delete_btn.bind("<Button-1>", lambda event: self._remove_dataset_from_library())
         self.import_overlay.add_file_button.bind("<Button-1>", lambda event: self._import_new_dataset())

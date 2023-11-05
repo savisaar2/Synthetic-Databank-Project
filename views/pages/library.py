@@ -8,7 +8,7 @@ class LibraryView(BaseView):
         Initialise the Library view of the application.
 
         This class represents the LibraryView page of the application.
-        It renders the interactive widgets on the frontend of the application.
+        It renders the interactive widgets on the frontend of    the application.
 
         Parameters
         ----------
@@ -39,15 +39,10 @@ class LibraryView(BaseView):
         tree_frame = self._create_frame(parent_frame=library_frame, fill="x", expand=False, padx=5)
         action_frame = self._create_frame(parent_frame=library_frame, fill="x", expand=False, padx=5)
 
-        info_frame = self._create_frame(parent_frame=row_2, fill="both", expand=True, side="left", scrollable=True)
-
         self.tree_view = self._create_treeview(tree_frame)                                   # Render treeview on row 2.
         self.dataset_delete_btn = self._create_button(action_frame, text="Remove", border_spacing=5, height=10)
         self.dataset_delete_btn.lower()
         
-        # Render info in scrollable frame row 2.
-        self.info = self._create_label(info_frame, text="", justify="left", grid=True, padx=0)
-
         # Render metadata on row 3.
         self.dataset_meta = self._create_label(self.row_3, "", height=170)
 
@@ -85,8 +80,8 @@ class LibraryView(BaseView):
         tree_view = ttk.Treeview(frame, columns=("Name", "Size"), show="headings", selectmode="browse", height=8)
         tree_view.heading("Name", text="Name")
         tree_view.heading("Size", text="Size")
-        tree_view.column("Name", width=300, stretch=True)
-        tree_view.column("Size", width=70, stretch=True)
+        tree_view.column("Name", width=550, stretch=True)
+        tree_view.column("Size", width=130, stretch=True)
 
         # Pack last for rendering issues.
         tree_view.pack(side="left")
