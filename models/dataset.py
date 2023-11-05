@@ -3,7 +3,6 @@ import pandas as pd
 from os import path, remove
 import io
 import re
-import threading
 
 class DatasetModel:
     """Singleton. Working collection of datasets. _SNAPSHOTS is a list of dictionaries with keys representing 
@@ -59,7 +58,7 @@ class DatasetModel:
         )
         #print("New dataset:", self._SNAPSHOTS[-1])
 
-    def load_dataset_in_thread(self, file_path, dataset_name):
+    def load_dataset(self, file_path, dataset_name):
         """Loads a csv file stored in the databank into memory i.e. _SNAPSHOTS list.
         """
         if file_path:
@@ -74,10 +73,6 @@ class DatasetModel:
                 }
             )
             #print("Loaded data set:", self._SNAPSHOTS[-1])
-
-    def load_dataset(self, file_path, dataset_name):
-        load_thread = threading.Thread(target=self.load_dataset_in_thread, args=(file_path, dataset_name))
-        load_thread.start()
 
     def save_export_dataset(self, full_path): 
         """Save / save as or export the most current dataframe in memory back to specified file (CSV) on disk.
@@ -135,7 +130,7 @@ class DatasetModel:
             dtype: Datatype of defined column in current dataset's dataframe.
         """
         column_data_type = self.get_column_data(column_index)
-        return column_data_type.dtypes
+        return column_data_type.compute().dtypes
 
     def rollback(self, index):
         """Method to move a user defined dataset at specifed index within
@@ -327,7 +322,7 @@ class DatasetModel:
         """Method to obtain the datatype listing of the entire dataframe.
         Returns a dictionary of column name keys and pandas data types. 
         """
-        return {column: str(data_type) for column, data_type in self._SNAPSHOTS[-1]["Dataframe"].dtypes.items()}
+        return {column: str(data_type) for column, data_type in self._SNAPSHOTS[-1]["Dataframe"].compute().dtypes.items()}
     
     def remove_dataset(self, file_name):
         # Define the paths
