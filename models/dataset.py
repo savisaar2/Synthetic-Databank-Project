@@ -130,7 +130,7 @@ class DatasetModel:
             dtype: Datatype of defined column in current dataset's dataframe.
         """
         column_data_type = self.get_column_data(column_index)
-        return column_data_type.compute().dtypes
+        return column_data_type.dtypes
 
     def rollback(self, index):
         """Method to move a user defined dataset at specifed index within
@@ -322,7 +322,7 @@ class DatasetModel:
         """Method to obtain the datatype listing of the entire dataframe.
         Returns a dictionary of column name keys and pandas data types. 
         """
-        return {column: str(data_type) for column, data_type in self._SNAPSHOTS[-1]["Dataframe"].compute().dtypes.items()}
+        return {column: str(data_type) for column, data_type in self._SNAPSHOTS[-1]["Dataframe"].dtypes.items()}
     
     def remove_dataset(self, file_name):
         # Define the paths
