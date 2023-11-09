@@ -35,9 +35,12 @@ class LibraryView(BaseView):
         self.import_button = self._create_button(row_1, "Import", "left")
         self.new_button = self._create_button(row_1, "New", "left")
 
+        tree_frame = self._create_frame(parent_frame=row_2)
+        action_frame = self._create_frame(parent_frame=row_2)
+
         # Render treeview on row 2.
-        self.tree_view = self._create_treeview(row_2)                                  
-        self.dataset_delete_btn = self._create_button(row_2, text="Remove", border_spacing=5, height=10)
+        self.tree_view = self._create_treeview(tree_frame)                                  
+        self.dataset_delete_btn = self._create_button(action_frame, text="Remove", border_spacing=5, height=10)
         self.dataset_delete_btn.lower()
         
         # Render metadata on row 3.
