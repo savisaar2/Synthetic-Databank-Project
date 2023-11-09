@@ -40,7 +40,7 @@ class LibraryView(BaseView):
 
         # Render treeview on row 2.
         self.tree_view = self._create_treeview(tree_frame)                                  
-        self.dataset_delete_btn = self._create_button(action_frame, text="Remove", border_spacing=5, height=10)
+        self.dataset_delete_btn = self._create_button(action_frame, text="Remove", border_spacing=5, height=10, pady=(0, 10))
         self.dataset_delete_btn.lower()
         
         # Render metadata on row 3.
@@ -157,11 +157,11 @@ class LibraryView(BaseView):
         entry.pack(side=side, expand=True, fill="x", padx=10)
         return entry
     
-    def _create_button(self, frame, text="Text Here", side="top", height=40, border_spacing=10):
+    def _create_button(self, frame, text="Text Here", side="top", height=40, border_spacing=10, pady=0):
         """
         Renders a button widget with specified parameters. Then returns the object 
         to the calling variable.
         """
         button = CTkButton(frame, corner_radius=5, height=height, border_spacing=border_spacing, text=text, anchor="n")
-        button.pack(side=side, padx=5)
+        button.pack(side=side, pady=pady, padx=5)
         return button
